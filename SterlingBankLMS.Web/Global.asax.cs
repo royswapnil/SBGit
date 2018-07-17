@@ -25,7 +25,7 @@ namespace SterlingBankLMS.Web
         protected void Application_Start()
         {
 
-           // Migrations.Configuration.InitializeDb();
+           Migrations.Configuration.InitializeDb();
 
             var binder = new ModelBinder();
             binder.ParseAdditionalParameters = Parser;
