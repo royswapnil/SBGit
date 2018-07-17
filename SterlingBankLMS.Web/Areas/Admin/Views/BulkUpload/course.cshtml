@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Course Bulk Upload";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="banner1 bkCyanBlue">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>Bulk Course Upload</span>
+</div>
+
+    <div class="formBox1 fullForm bulkfile" style="margin-top:60px;">
+        <label for="">Upload Bulk Training Records</label>
+
+        <div class="bg bg-warning" style="
+    border: 1px solid;
+    padding: 10px;
+    margin: 20px 0;
+    font-weight: bold;
+">
+            <p>Download the upload template below</p>
+
+            <a style="
+    display: block;
+    margin-top: 10px;
+" href="~/Content/excel/course_template.xlsx">Click to download template</a>
+
+            <p>Please ensure you clear the template data before editing as it only serves as an example on how to populate the excel</p>
+         
+        </div>
+
+
+        <input type="file" name="file" />
+        <button type="button" class="bkTorBlue uploadFile btnSmall" style="float:right;margin-top: -32px;margin-right: 2px;"><i class="fa fa-upload"></i>Upload</button>
+    </div>
+  
+
+
+@section scripts{
+
+    <script src="~/Content/PageJs/Admin_UploadBulk.js"></script>
+
+}
+
+
+
+
+
+

@@ -1,0 +1,133 @@
+﻿
+<script id="TrainingPeriodTemplate" type="x-tmpl-mustache">
+
+    {{#array}}
+    <div class="row period-row" data-id="{{Id}}">
+        <div class="col-sm-6" >
+            <div class="form-group">
+                <label for="">Days</label>
+                <select class="select2 form-control" multiple>
+                    <option></option>
+                    <option value="0">Sunday</option>
+                    <option value="1">Monday</option>
+                    <option value="2">Tuesday</option>
+                    <option value="3">Wednesday</option>
+                    <option value="4">Thursday</option>
+                    <option value="5">Friday</option>
+                    <option value="6">Saturday</option>
+                </select>
+            </div>
+
+        </div>
+
+
+        <div class="col-sm-6">
+
+
+            <div class="col-sm-12">
+                <label for="time">Time</label>
+            </div>
+
+
+            <div class="col-sm-5 no-padding">
+
+                <div class="input-group bootstrap-timepicker">
+                    <input type="text" value="{{StartTime}}" class="form-control timepicker">
+                    <span class="input-group-addon">
+                        <i class="fa fa-clock-o"></i>
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="col-sm-1" style="text-align: center; padding: 6px;">
+                <span>TO</span>
+            </div>
+
+            <div class="col-sm-5 no-padding">
+
+                <div class="input-group bootstrap-timepicker">
+                    <input type="text" value="{{EndTime}}" class="form-control timepicker">
+                    <span class="input-group-addon">
+                        <i class="fa fa-clock-o"></i>
+                    </span>
+                </div>
+
+            </div>
+            <div class="col-sm-1" style="text-align: center; padding: 6px;">
+                <a class="fa fa-trash red deletePeriod" href="javascript:void"></a>
+            </div>
+
+
+
+
+        </div>
+    </div>
+    {{/array}}
+
+    {{^array}}
+    <div class="row period-row" data-id="0">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="">Every</label>
+                <select class="select2 form-control" multiple>
+                    <option></option>
+                    <option value="0">Sunday</option>
+                    <option value="1">Monday</option>
+                    <option value="2">Tuesday</option>
+                    <option value="3">Wednesday</option>
+                    <option value="4">Thursday</option>
+                    <option value="5">Friday</option>
+                    <option value="6">Saturday</option>
+                </select>
+            </div>
+
+        </div>
+
+
+        <div class="col-sm-6">
+
+
+            <div class="col-sm-12">
+                <label for="time">Time</label>
+            </div>
+
+
+            <div class="col-sm-5 no-padding">
+
+                <div class="input-group bootstrap-timepicker">
+                    <input type="text" class="form-control timepicker">
+                    <span class="input-group-addon">
+                        <i class="fa fa-clock-o"></i>
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="col-sm-1" style="text-align: center; padding: 6px;">
+                <span>TO</span>
+            </div>
+
+            <div class="col-sm-5 no-padding">
+
+                <div class="input-group bootstrap-timepicker">
+                    <input type="text" class="form-control timepicker">
+                    <span class="input-group-addon">
+                        <i class="fa fa-clock-o"></i>
+                    </span>
+                </div>
+
+            </div>
+            <div class="col-sm-1" style="text-align: center; padding: 6px;">
+                <a class="fa fa-trash red deletePeriod" href="javascript:void"></a>
+            </div>
+
+
+
+
+        </div>
+    </div>
+    {{/array}}
+    
+</script>
+

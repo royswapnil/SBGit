@@ -1,0 +1,77 @@
+﻿.tab-content {
+    background: #fff;
+    width: 100%;
+    padding: 20px 0px 20px 0px;
+}
+
+.tabs {
+    width: 100%;
+}
+
+.tab {
+    display: none;
+    width: 100%;
+}
+
+    .tab.active {
+        display: block;
+        width: 100%;
+    }
+
+.tab-links li a {
+    color: #444;
+}
+
+
+table.records {
+    width: 100%;
+    font-size: 13px;
+}
+
+.records thead {
+    width: 100%;
+    color: #444;
+    font-weight: bold;
+    font-size: 13px;
+    background: #f0f3f5;
+    border-top: 0px solid transparent;
+}
+
+    .records thead tr, .records thead tr td {
+        background: transparent;
+    }
+
+.records tbody {
+    width: 100%;
+}
+
+.records tr {
+    width: 100%;
+    background: #fff;
+}
+
+    .records tr td {
+        padding: 10px;
+        background: #fff;
+    }
+
+        .records tr td:nth-child(1) {
+            width: 10%;
+        }
+
+        .records tr td:nth-child(2) {
+            width: 70%;
+        }
+
+        .records tr td:nth-child(3) {
+            width: 20%;
+        }
+
+.records tbody tr {
+    margin-top: 0px;
+    border-bottom: 2px solid #f0f3f5;
+}
+
+    .records tbody tr td a button {
+        margin-top: -5px;
+    }

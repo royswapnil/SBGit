@@ -1,0 +1,95 @@
+﻿@model SupportFAQPageModel
+@{
+    ViewBag.Title = "Get Support";
+    Layout = "~/Areas/Common/Views/Shared/_CommonLayout.cshtml";
+    var breadCrumb = Model.TopSectionAd == null ? "/Content/img/support (1).jpg" : Model.TopSectionAd.FileUrl;
+}
+
+<style>
+    .searchArea {
+        background: #354c98;
+    }
+
+    .searchbox.white input::placeholder {
+        color: #fff;
+    }
+</style>
+<div class="wrapper">
+
+
+    <div class="breadcrum" style="background-image: url('@breadCrumb');">
+        <div class="col8">
+
+        </div>
+
+        <div class="col4">
+            <div class="headcrum">@CurrentUser.Function.ToUpper()</div>
+            <div class="bodycrum"><i class="material-icons">room</i> <i>@CurrentUser.BranchName.ToUpper()</i></div>
+            <div class="bodycrum"><i style="font-size: 12px;margin-top: 3px;">Staff ID: </i> <b>@CurrentUser.StaffId</b></div>
+
+        </div>
+    </div>
+
+
+    <div class="searchArea">
+        <div class="searchbox white">
+            <input type="text" placeholder="Search Courses" style="margin-top:0px;color:#fff;"/>
+            <i class="material-icons" style="color:#fff;">search</i>
+        </div>
+    </div>
+
+
+    <div class="content">
+        <div class="col9">
+
+            <div class="bigHead" id="temp1">Frequently Asked Questions</div>
+            <div class="underline"></div>
+
+          
+                @foreach (var item in Model.FaqList)
+                {
+                    <div class="hider">
+                        <div class="hiderHead">
+                            <i class="material-icons">keyboard_arrow_down</i>
+                           @item.Title
+                        </div>
+                        <div class="hiderBody">
+                            <p style="font-weight: bold;">
+                               @Html.Raw(item.Description)
+                            </p>
+                        </div>
+                    </div>
+                }
+
+
+            <div class="bigHead red">Didn't find what you're looking for?</div>
+            <div class="bigHead" style="margin-top: 0px;">report a problem below</div>
+
+
+            <form class="report" id="FormSupport" method="post" enctype="multipart/form-data">
+
+                <label for="">Subject:</label>
+                <input name="TicketTitle" type="text">
+
+                <label for=""><span>Describe the problem you encountered here</span> <i class="red">(max: 750 characters)</i></label>
+                <textarea name="TicketDescription" id="" maxlength="750" cols="30" rows="10"></textarea>
+
+                <label for=""><span>Upload a screenshot</span> <i class="red">(only image file types allowed)</i></label>
+                <input name="ImageUpload" type="file">
+
+                <button type="submit" class="btnBlue btnMid">Report</button>
+            </form>
+
+        </div>
+        @Html.Action("employeesidebar", "home")
+
+
+    </div>
+</div>
+@section Scripts{
+    <script src="~/Content/js/jquery.validate.min.js"></script>
+    <script src="~/Content/js/additional-methods.min.js"></script>
+    <script src="~/Content/js/CustomValidation.js"></script>
+<script src="~/Content/PageJs/Common_Support.js"></script>
+}
+

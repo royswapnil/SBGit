@@ -1,0 +1,644 @@
+﻿.praise {
+    float: left;
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.resultP {
+    float: left;
+    width: 80%;
+    margin-left: 10%;
+}
+
+.clamp {
+    float: left;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    font-size: 13px;
+}
+
+.leftC, .rightC {
+    float: left;
+    width: 50%;
+    font-weight: bold;
+}
+
+.leftC {
+    padding-left: 20px;
+    color: #0091d9;
+}
+
+.rightC {
+    padding-left: 20px;
+}
+
+.pestImg {
+    width: 100%;
+    float: left;
+    font-size: 15px;
+    color: #444;
+}
+
+    .pestImg i {
+        float: left;
+        margin-right: 10px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+.sest {
+    background: #fff;
+    padding: 20px;
+    float: left;
+    background: rgba(0,0,0,0.01);
+    width: 100%;
+}
+
+.botm {
+    float: left;
+    width: 100%;
+    background: #0091d9;
+    padding: 15px;
+    height: 60px;
+    margin-top: 1px;
+}
+
+    .botm button {
+        float: right;
+    }
+
+.nani {
+    float: left;
+    padding: 5px;
+    border-bottom: 1px solid #0091d9;
+    font-size: 16px;
+    width: 100%;
+    font-weight: bold;
+    color: #0091d9;
+}
+
+.correcty, .wrong {
+    font-size: 14px;
+    color: #0091d9;
+    width: 100%;
+    float: left;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.wrong {
+    color: #444;
+}
+
+.sest sup {
+    float: left;
+    width: 100%;
+    color: #ccc;
+    font-size: 11px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.sest span {
+    margin-bottom: 20px;
+    font-size: 17px;
+}
+
+.sest button {
+    margin-top: 50px;
+    /*margin-left: 40%;*/
+}
+
+.quiz-next-btn {
+    margin-left: 40%;
+}
+
+.sest textarea {
+    float: left;
+    width: 100%;
+    height: 70px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    font-size: 13px;
+}
+
+.sest label {
+    font-size: 12px;
+}
+
+.quizArea {
+    float: left;
+    width: 100%;
+}
+
+.barb {
+    float: left;
+    width: 100%;
+    background: #424242;
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+    .barb span {
+        width: 100%;
+        text-align: center;
+        color: #fff;
+        float: left;
+        font-size: 32px;
+        font-weight: bold;
+    }
+
+    .barb strong {
+        width: 100%;
+        float: left;
+        color: #354c98;
+        font-size: 52px;
+        margin-top: 50px;
+        text-align: center;
+        font-weight: bolder;
+    }
+
+    .barb p {
+        width: 100%;
+        float: left;
+        color: #fff;
+        font-size: 17px;
+        margin-top: 30px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .barb button {
+        float: none;
+        margin-top: 20px;
+    }
+
+.hightlight {
+    background: #0091d9;
+    color: #fff;
+    height: 50px;
+    padding-top: 15px;
+}
+
+.vTopic {
+    font-size: 17px;
+}
+
+.vLike span {
+    font-size: 17px;
+}
+
+.vLike i {
+    margin-left: 50px;
+    font-size: 17px;
+}
+
+.startExam button {
+    margin-top: 30px;
+}
+
+.nid {
+    width: 100%;
+    text-align: center;
+}
+
+    .nid i {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nid span {
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+.startExam p {
+    margin-top: 27px;
+    float: left;
+}
+
+.startExam {
+    z-index: 100;
+    background: #fff;
+    width: 100%;
+    margin-top: 20px;
+    box-sizing: border-box;
+    padding: 4%;
+    font-size: 14px;
+}
+
+    .startExam h2 {
+        width: 100%;
+        text-align: center;
+        color: #0091d9;
+        margin-bottom: 30px;
+    }
+
+.quizForm label {
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+    .quizForm label input {
+        margin-right: 12px;
+        margin-top: 5px;
+    }
+
+    .quizForm label select {
+        font-weight: normal;
+    }
+
+.quizQues span {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.menuTab {
+    display: none;
+}
+
+.col2 {
+    display: none;
+}
+
+.courseMenu {
+    width: 21%;
+    top: 50px;
+    padding-bottom: 100px;
+    padding-top: 50px;
+    float: left;
+    position: fixed;
+    z-index: 9;
+    height: 100vh;
+    background: #444;
+    overflow-y: auto;
+    margin-left: 0px;
+    transition: all 0.5s ease-out;
+    -webkit-transition: all 0.5s ease-out;
+    border-bottom: 50px solid;
+}
+
+    .courseMenu.pop {
+        transition: all 0.5s ease-out;
+        -webkit-transition: all 0.5s ease-out;
+        margin-left: 0px;
+    }
+
+.courseMod {
+    width: 100%;
+    float: left;
+    height: 60px;
+    overflow-y: hidden;
+    margin-bottom: 5px;
+    transition: all 0.5s ease-out;
+    -webkit-transition: all 0.5s ease-out;
+    background: #333;
+}
+
+    .courseMod.drop {
+        height: auto;
+        transition: all 0.5s ease-out;
+        -webkit-transition: all 0.5s ease-out;
+    }
+
+.hitman {
+    width: 100%;
+    float: left;
+    height: 60px;
+    padding: 20px;
+    cursor: pointer;
+    color: #ddd;
+    background: #333;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.courseMod.drop .hitman {
+    border-left: 2px solid #4286f4;
+}
+
+    .courseMod.drop .hitman .cercu {
+        background: #4285f4;
+        border: none;
+    }
+
+.Lessona {
+    width: 100%;
+    float: left;
+}
+
+.nextLesson {
+    width: 100%;
+    padding: 20px 25px 20px 30px;
+    color: #fff;
+    float: left;
+}
+
+    .nextLesson span {
+        font-size: 14px;
+        font-weight: normal;
+        margin-right: 10px;
+        float: left;
+    }
+
+    .nextLesson i {
+        font-size: 14px;
+        margin-top: 3px;
+        margin-right: 10px;
+        float: left;
+    }
+
+    .nextLesson b {
+        font-size: 14px;
+        float: left;
+    }
+
+
+.lessonTab {
+    width: 100%;
+    padding: 13px 10px 13px 20px;
+    font-size: 12px;
+    cursor: pointer;
+    float: left;
+    border-bottom: 0.5px solid #444;
+}
+
+.Module {
+    width: 16%;
+    text-align: center;
+    color: #ccc;
+    background: #444;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    padding: 4px;
+    font-weight: bold;
+    float: left;
+}
+
+.lessonTab.active .Module {
+    background: #4286f4;
+    color: #fff;
+    float: left;
+}
+
+.module {
+    width: 16%;
+    text-align: center;
+    color: #ddd;
+    background: #444;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    padding: 4px;
+    font-weight: bold;
+    float: left;
+}
+
+.lessonTab.active .module {
+    background: #4286f4;
+    color: #fff;
+    float: left;
+}
+
+.moduleTp {
+    width: 84%;
+    padding: 4px 10px;
+    float: left;
+}
+
+.moduleT {
+    font-weight: bold;
+    color: #666;
+    float: left;
+    width: 100%;
+}
+
+.lessonTab.active .moduleT {
+    color: #4286f4;
+}
+
+    .lessonTab.active .moduleT i {
+        color: #4286f4;
+    }
+
+.moduleT i {
+    color: #bbb;
+    text-align: right;
+    float: left;
+    font-size: 12px;
+    width: 100%;
+}
+
+.closer {
+    float: right;
+    color: #444;
+    text-align: center;
+    height: 30px;
+    width: 30px;
+    font-weight: bold;
+    background: #AB192D;
+    color: #fff;
+    box-sizing: border-box;
+    padding-top: 4px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+    display: none;
+}
+
+.close {
+    margin-left: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cercu {
+    float: left;
+    width: 20px;
+    height: 20px;
+    border: 4px solid #444;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-top: -3px;
+}
+
+.open {
+    float: left;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #444;
+    color: #fff;
+    position: fixed;
+    margin-top: 100px;
+    z-index: 1;
+    font-size: 30px;
+    box-sizing: border-box;
+    padding: 5px;
+    cursor: pointer;
+}
+
+span.hold {
+    font-size: 13px;
+    width: 70%;
+}
+
+
+
+@media(max-width: 1000px) {
+
+    .courseMenu {
+        width: 300px;
+        margin-left: -300px;
+        transition: all 0.5s ease-out;
+        -webkit-transition: all 0.5s ease-out;
+        z-index: 2;
+        top: 20px;
+    }
+
+    .col99.sanya {
+        width: 100%;
+        float: left;
+    }
+
+    .courseMenu.pop {
+        margin-left: 0px;
+        transition: all 0.5s ease-out;
+        -webkit-transition: all 0.5s ease-out;
+    }
+
+    .closer {
+        display: block;
+    }
+}
+
+.rating {
+    width: 50%;
+    margin-left: 25%;
+}
+
+.topper {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px;
+    font-weight: bold;
+    border-bottom: 1px solid #4286f4;
+    font-size: 17px;
+    color: #4286f4;
+}
+
+.winning {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.ratingss {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 20% 10px 20%;
+    background: #4286f4;
+}
+
+    .ratingss i {
+        color: #fff;
+        font-size: 27px;
+        width: 18%;
+        text-align: center;
+        cursor: pointer;
+    }
+
+        .ratingss i:hover {
+            color: #F4CC00;
+        }
+
+.reviewBox {
+    margin-top: 20px;
+    box-sizing: border-box;
+    padding: 0 10% 0 10%;
+}
+
+    .reviewBox textarea {
+        height: 100px;
+        font-size: 14px;
+    }
+
+    .reviewBox button {
+        float: right;
+        background: #4286f4;
+        color: #fff;
+    }
+
+
+@media (max-width: 480px) {
+    .rating {
+        width: 100%;
+        margin-left: 0%;
+    }
+}
+
+.shaggy {
+    margin-left: 18%;
+}
+
+@media (max-width: 999px) {
+    .shaggy {
+        width: 120%;
+        margin-left: -18%;
+        left: 0;
+    }
+}
+
+@media (max-width: 500px) {
+    .shaggy {
+        width: 100%;
+        margin-left: 0%;
+    }
+}
+
+.videoTab {
+    min-height: 100vh !important;
+}
+
+.video-js-responsive-container.vjs-hd {
+    padding-top: 56.25%;
+}
+
+.video-js-responsive-container.vjs-sd {
+    padding-top: 75%;
+}
+
+.video-js-responsive-container {
+    width: 100%;
+    position: relative;
+}
+
+    .video-js-responsive-container .video-js {
+        height: 100% !important;
+        width: 100% !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+/*Did this for fixed width*/
+.video-js .vjs-tech {
+    position: absolute;
+    top: 60px !important;
+    height: 80% !important;
+}
+
+.hideviewcomments 
+{
+    display: none;
+}

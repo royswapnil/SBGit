@@ -1,0 +1,41 @@
+﻿
+<script id="CertificateList" type="x-tmpl-mustache">
+    {{#array}}
+    <div class="hider">
+        <div class="hiderHead">
+            <i class="material-icons">keyboard_arrow_down</i>
+            {{Name}}
+        </div>
+        <div class="hiderBody">
+            <div class="halves">
+                <div class="slab">
+                    <div class="slabL">Started: </div>
+                    <div class="slabR">{{DateStartedFormat}}</div>
+                </div>
+
+                <div class="slab">
+                    <div class="slabL">Completed: </div>
+                    <div class="slabR">{{DateCompletedFormat}}</div>
+                </div>
+
+                <div class="slab">
+                    <div class="slabL">Original Due Date: </div>
+                    <div class="slabR">{{DueDateFormat}}</div>
+                </div>
+            </div>
+            <div class="halves">
+                <a class="btnBlack btnHerd" target="_blank" href="/Common/Certificate/GenerateCertificatePDf/{{Id}}">View/Generate Ceritificate</a>
+                <sup>NB: Certificate will be generated in pdf</sup>
+            </div>
+        </div>
+    </div>
+
+    {{/array}}
+
+    {{^array}}
+    <div class="nofloat" style="margin-bottom:20px">
+        No data found
+    </div>
+    {{/array}}
+</script>
+

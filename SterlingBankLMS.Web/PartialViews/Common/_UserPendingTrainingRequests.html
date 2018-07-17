@@ -1,0 +1,54 @@
+﻿<script id="UserPendingTrainingRequests" type="x-tmpl-mustache">
+    {{#array}}
+    <article class="list-item" data-Id="{{Id}}">
+        <div class="user-card-row">
+            <div class="tbl-row">
+
+                <div class="tbl-cell">
+                    <p class="user-card-row-name status-online"><a href="#">{{TrainingName}}</a></p>
+                    <p class="user-card-row-status"><i class="fa fa-calendar"></i> Request Made: {{CreatedDateFormat}}</p>
+                </div>
+                <div class="tbl-cell">
+                    <p class="user-card-row-name status-online"><label class="label label-primary {{TrainingApprovalEnumName}}">{{TrainingApprovalFormat}}</label></p>
+                </div>
+                {{#IsApproval}}
+                <div class="tbl-cell">
+                    <p class="user-card-row-name status-online">{{FirstName}} {{LastName}}</p>
+                </div>
+
+                <div class="tbl-cell action-row">
+                  
+
+                    <div class="action-comment" style="">
+                        <textarea class="form-control" placeholder="Insert Comments" style="margin-bottom: 10px;"></textarea>
+                    </div>
+                    <div class="action-button">
+                        <button class="btn btnSmaller btn-success" data-type="1">
+                            Approve <i class="fa fa-check"></i>
+                        </button>
+
+                        <button class="btn btnSmaller btn-danger" data-type="2">
+                            Reject <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                {{/IsApproval}}
+            </div>
+        </div>
+    </article>
+    {{/array}}
+
+    {{^array}}
+    <article class="list-item empty">
+        <div class="user-card-row">
+            <div class="tbl-row">
+
+                <div class="tbl-cell">
+                    <p class="user-card-row-name status-online">No data found</p>
+                </div>
+
+            </div>
+        </div>
+    </article>
+    {{/array}}
+</script>

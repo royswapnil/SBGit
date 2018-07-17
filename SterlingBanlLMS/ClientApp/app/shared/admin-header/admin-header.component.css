@@ -1,0 +1,11 @@
+﻿.menuTab1 ul {
+    padding: 0;
+    width:100%
+}
+
+    .menuTab1 ul li {
+        width: 100%;
+    }
+.menuTab1 .link-active .pageTab1 {
+    background: #AB192D;
+}

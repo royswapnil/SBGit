@@ -1,0 +1,256 @@
+﻿@{
+    /**/
+
+    ViewBag.Title = "AuditTrail";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+}
+<link href="~/Content/css/select2.min.css" rel="stylesheet" />
+<link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />
+<link href="~/Content/css/datepicker.css" rel="stylesheet" />
+
+<style>
+    .ui-datepicker, .ui-datepicker div, .ui-datepicker span,
+    .ui-datepicker input, .ui-datepicker textarea,
+    .ui-datepicker button, .ui-datepicker ul,
+    .ui-datepicker li, .ui-datepicker i, .ui-datepicker h1,
+    .ui-datepicker h2, .ui-datepicker h3, .ui-datepicker h4,
+    .ui-datepicker h5, .ui-datepicker h6, .ui-datepicker textarea, .ui-datepicker sup,
+    .ui-datepicker video, .ui-datepicker table, .ui-datepicker tr, .ui-datepicker td, .ui-datepicker th, .ui-datepicker tbody,
+    .ui-datepicker thead {
+        float: none;
+    }
+
+    .tanHP {
+        background: #fff;
+        border-radius: 0;
+    }
+
+    .searchT {
+        border: 1px solid #eee;
+    }
+
+    .pinA select {
+        border: 1px solid #ddd;
+    }
+
+    .pinA span {
+        font-weight: bold;
+        margin-top: 3px;
+    }
+
+
+
+    .counter {
+        padding: 10px;
+        float: right;
+        font-size: 15px;
+        background: #ddd;
+        width: 100%;
+    }
+
+        .counter i {
+            background: #fff;
+            color: #000;
+        }
+
+    .alert.alert-danger, .alert.alert-success, .alert.alert-info, .alert.alert-warning {
+        width: 70%;
+        margin-top: 20px;
+    }
+
+    .formArea {
+        width: 100%;
+        margin-top: 20px;
+        padding-bottom: 60px;
+        float: left;
+    }
+
+    .formBox1 .label {
+        width: 100%;
+        margin-bottom: 10px;
+        font-weight: bold;
+        font-size: 13px;
+        float: left;
+    }
+
+    .formBox1 input, .formBox1 textarea, .formBox1 select {
+        width: 100%;
+        height: 30px;
+        padding: 5px;
+        font-size: 15px;
+        border: 1px solid rgba(0, 0, 0, 0.39);
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        float: left;
+    }
+
+    .formBox1 textarea {
+        height: 100px;
+    }
+
+    .formBox1 button {
+        background: #760f91;
+        border: none;
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        color: #fff;
+        height: 30px;
+        width: 120px;
+        margin-top: -30px;
+        float: right;
+    }
+
+    .bDGreen {
+        border-bottom: 3px solid #2fbf71;
+    }
+
+    .bkGreen {
+        background: #2fbf71;
+    }
+
+    .bkRed {
+        background: #ab192d;
+    }
+
+    jconfirm div {
+        float: none !important;
+    }
+
+    .jconfirm .jconfirm-holder {
+        margin: 0 40%;
+    }
+
+    .jconfirm-content {
+        padding-top: 20px;
+    }
+
+        .jconfirm-content div {
+            font-weight: 700;
+        }
+
+    .jconfirm-type-orange .jconfirm-content div {
+        color: red;
+    }
+
+    .jconfirm.jconfirm-light .jconfirm-box {
+        padding: 20px 25px 10px 25px;
+    }
+
+    .jconfirm .jconfirm-box-container.jconfirm-no-transition {
+        margin: 0px;
+        width: 100%;
+    }
+
+    .Pending {
+        color: #E68618;
+    }
+
+    .Approved {
+        color: #38C64E;
+    }
+
+    .Rejected {
+        color: #DA3024;
+    }
+
+    .NotSeen {
+        color: #E68618;
+    }
+
+    .Yes {
+        color: #38C64E;
+    }
+
+    .No {
+        color: #DA3024;
+    }
+</style>
+
+<div class="banner1 bkPurple">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>Audit trail</span>
+</div>
+
+<div class="content1">
+    <div class="boxHead1">
+        <div class="boxHeader1 bDCyanBlue">Audit Trial</div>
+    </div>
+    <div class="boxBody1">
+
+        <form id="auditTrial" action="" class="row">
+
+            <div class="col-md-3">
+                <label for="">Filter by user</label>
+                <input type="text" id="user" class="form-control">
+            </div>
+
+            <div class="col-md-3">
+                <label for="">Filter by entity type</label>
+                <select class="select2 form-control" id="selectEntities" multiple>
+                    <option></option>
+                </select>
+                @*@Html.DropDownList("EntityType", new SelectList((IEnumerable<SelectListItem>)ViewBag.ddlentitylist, "Value", "Text"),"Select", new { id = "ddlEntityType", @class = " select2 form-control", @multiple = "multiple" })*@
+            </div>
+
+            <div class="col-md-3">
+                <label for="">Filter by type</label>
+                <select name="" id="ddlOperationType" class="form-control">
+                    <option value="0">Select</option>
+                    <option value="1">Delete</option>
+                    <option value="2">Insert</option>
+                    <option value="3">Update</option>
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <label for="">filter by start date</label>
+                <input type="text" class="form-control datepicker" id="AuditStartDate" name="StartDate" />
+            </div>
+
+            <div class="col-md-3">
+                <label for="">filter by end Date</label>
+                <input type="text" class="form-control datepicker" id="AuditEndDate" name="EndDate" />
+            </div>
+
+            <div class="underlineBtn">
+                <button id="btnGenerate" type="button" class="nextBtn btnMedium bkSkyBlue" style="margin-top: 30px;">Generate</button>
+            </div>
+
+
+            <div class="tableRanch">
+                <table id="tblAuditList">
+                    <thead>
+                        <tr>
+                            <td>Seq ID</td>
+                            <td>Date</td>
+                            <td>User Name</td>
+                            <td>Alias Name</td>
+                            <td>Column Name</td>
+                            <td>Operation</td>
+                            <td>Before Update</td>
+                            <td>After Update</td>
+                        </tr>
+                    </thead>
+                    <tr class="empty">
+                        <td colspan="7">
+                            Fetching Data <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+<script src="~/Content/js/datatables.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="~/Content/PageJs/AuditTrailListing.js"></script>
+<script src="~/Content/js/bootstrap-datepicker.min.js"></script>
+<script src="~/Content/js/select2.min.js"></script>
+}
+
+

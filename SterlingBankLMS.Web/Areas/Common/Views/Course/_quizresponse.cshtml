@@ -1,0 +1,18 @@
+﻿<span ng-bind-html="vm.currentQuestion.Question"></span>
+
+<div ng-class="{'correcty':vm.quizResponse.IsCorrect,'wrong':!vm.quizResponse.IsCorrect}" ng-cloak="">
+    <strong>Your answer: </strong>
+    {{vm.quizResponse.YourAnswer}}
+</div>
+
+<div class="pestImg" ng-if="vm.quizResponse.IsCorrect" ng-cloak="">
+    <i class="material-icons" style="color: green;">check</i>
+    Is Correct
+</div>
+
+<div class="pestImg" ng-if="(!vm.quizResponse.IsCorrect)" ng-cloak="">
+    <i class="material-icons" style="color: #f53131;">close</i>Is Incorrect
+</div>
+
+<button class="btn btnMedium btnBlack" ng-click="vm.gotoNextQuestion()" ng-show="vm.hasNext()">Next Question</button>
+<button class="btn btnMedium btnBlack" ng-show="vm.isLast()" ng-click="vm.finishQuiz()">Finish</button>

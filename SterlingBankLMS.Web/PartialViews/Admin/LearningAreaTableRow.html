@@ -1,0 +1,23 @@
+﻿<script id="LearningAreaTableRow" type="x-tmpl-mustache">
+    {{#array}}
+    <tr data-id="{{LearningArea.Id}}">
+        <td>{{LearningArea.Name}}</td>
+        <td>{{CourseCount}}</td>
+
+        <td class="action-buttons">
+            <button class="table-edit btnSmaller btnBlue" href="javascript:;"> <i class="fa fa-edit table-icon" style=""></i> Edit	</button>
+            <!--<button href="javascript:;"><img class="table-icon" src="~/Content/img/icons/view.png" /> <span>View Courses &emsp;</span></button>-->
+            <button class="table-delete btnSmaller btnRed" href="javascript:;"><i class="fa fa-trash table-icon" style=""></i> <span class="deleteLA">Delete</span></button>
+        </td>
+        <td></td>
+    </tr>
+    {{/array}}
+
+    {{^array}}
+    <tr class="empty">
+        <td colspan="5">
+            No data found. Click Add New to create a new learning area.
+        </td>
+    </tr>
+    {{/array}}
+</script>

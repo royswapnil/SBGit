@@ -1,0 +1,896 @@
+﻿
+@{
+    ViewBag.Title = "Support Dashboard";
+    Layout = "~/Areas/Technology/Views/Shared/_TechLayout.cshtml";
+}
+
+<link href="~/Content/css/training.css" rel="stylesheet" />
+<link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+
+
+<style>
+</style>
+<style>
+    .tanHP {
+        background: #fff;
+        border-radius: 0;
+    }
+
+    .searchT {
+        border: 1px solid #eee;
+    }
+
+    .pinA select {
+        border: 1px solid #ddd;
+    }
+
+    .pinA span {
+        font-weight: bold;
+        margin-top: 3px;
+    }
+
+
+    table.courselist {
+        width: 100%;
+        font-size: 13px;
+        border: 1px solid #eaeaea !important;
+    }
+
+    .courselist thead {
+        width: 100%;
+        color: #19535f;
+        font-weight: bold;
+        font-size: 13px;
+        border-top: 0px solid transparent;
+        background: #ddd;
+        font-weight: bold;
+        font-size: 13px;
+        border-bottom: 2px solid #28A7BE;
+    }
+
+    .courselist tbody {
+        width: 100%;
+    }
+
+    .courselist tr {
+        width: 100%;
+    }
+
+    .courselist tbody tr:last-child {
+        border: none;
+    }
+
+    .courselist tr td {
+        padding: 10px;
+    }
+
+        .courselist tr td:nth-child(1) {
+            width: 10% !important;
+        }
+
+        .courselist tr td:nth-child(2) {
+            width: 35% !important;
+        }
+
+    .courselist tbody tr td:nth-child(1) {
+        border-right: 2px solid #f0f3f5;
+    }
+
+    .courselist tbody tr td:nth-child(2) {
+        border-right: 2px solid #f0f3f5;
+    }
+
+    .courselist tbody tr td:nth-child(3) {
+        border-right: 2px solid #f0f3f5;
+    }
+
+    .courselist tbody tr td:nth-child(4) {
+        border-right: 2px solid #f0f3f5;
+    }
+
+    .courselist tr td a {
+        color: #00d7ff;
+    }
+
+    .courselist tr td:nth-child(3) {
+        width: 20% !important;
+    }
+
+    .courselist tr td:nth-child(4), .courselist tr td:nth-child(5), .courselist tr td:nth-child(6) {
+        width: 15% !important;
+    }
+
+    .courselist tr td:nth-child(7) {
+        width: 10% !important;
+    }
+
+    .courselist tbody tr {
+        margin-top: 0px;
+        border-bottom: 2px solid #f0f3f5;
+    }
+
+        .courselist tbody tr td a button {
+            margin: 0;
+        }
+
+    .counter {
+        padding: 10px;
+        float: right;
+        font-size: 15px;
+        background: #ddd;
+        width: 100%;
+    }
+
+        .counter i {
+            background: #fff;
+            color: #000;
+        }
+
+    .alert.alert-danger, .alert.alert-success, .alert.alert-info, .alert.alert-warning {
+        width: 70%;
+        margin-top: 20px;
+    }
+
+    .formArea {
+        width: 100%;
+        margin-top: 20px;
+        padding-bottom: 60px;
+        float: left;
+    }
+
+    .formBox1 .label {
+        width: 100%;
+        margin-bottom: 10px;
+        font-weight: bold;
+        font-size: 13px;
+        float: left;
+    }
+
+    .formBox1 input, .formBox1 textarea, .formBox1 select {
+        width: 100%;
+        height: 30px;
+        padding: 5px;
+        font-size: 15px;
+        border: 1px solid rgba(0, 0, 0, 0.39);
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        float: left;
+    }
+
+    .formBox1 textarea {
+        height: 100px;
+    }
+
+    .formBox1 button {
+        background: #760f91;
+        border: none;
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        color: #fff;
+        height: 30px;
+        width: 120px;
+        margin-top: -30px;
+        float: right;
+    }
+
+    .bDGreen {
+        border-bottom: 3px solid #2fbf71;
+    }
+
+    .bkGreen {
+        background: #2fbf71;
+    }
+
+    .bkRed {
+        background: #ab192d;
+    }
+</style>
+
+<style>
+    .success {
+        color: #fff !important;
+    }
+
+    .bDGreen {
+        border-bottom: 3px solid #2fbf71;
+    }
+
+    .bulkfile {
+        background: rgba(22, 96, 136, 0.2);
+        padding: 30px;
+        padding-right: 45%;
+    }
+
+        .bulkfile button {
+            background: #166088;
+        }
+
+    .formBox1 label {
+        width: 100%;
+        margin-bottom: 10px;
+        font-weight: bold;
+        font-size: 13px;
+        float: left;
+    }
+
+    label i {
+        font-style: italic;
+        color: #ccc;
+        font-size: 12px;
+        padding-left: 20px;
+        float: none;
+    }
+
+    .halfForm .halfForm {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+    form.report {
+        padding: 0px;
+        margin-top: 60px;
+        width: 100%;
+        margin-left: 0%;
+        border: 0px solid transparent;
+    }
+
+        form.report input {
+            width: 100%;
+            height: 35px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 15px;
+        }
+
+    .Pending {
+        color: #E68618;
+    }
+
+    .Approved {
+        color: #38C64E;
+    }
+
+    .Rejected {
+        color: #DA3024;
+    }
+
+    .NotSeen {
+        color: #E68618;
+    }
+
+    .Yes {
+        color: #38C64E;
+    }
+
+    .No {
+        color: #DA3024;
+    }
+
+    .jconfirm .jconfirm-box-container.jconfirm-no-transition {
+        margin: 0px;
+        width: 100%;
+    }
+
+    .Pending {
+        color: #E68618;
+    }
+
+    .Closed {
+        padding: 5px 10px 5px 10px;
+        -webkit-border-radius: 5px;
+        font-size: 13px;
+        border: none;
+        float: left;
+        color: #2fbf71;
+    }
+
+    .Escalate {
+        padding: 5px 10px 5px 10px;
+        -webkit-border-radius: 5px;
+        font-size: 13px;
+        border: none;
+        float: left;
+        color: #f4b942;
+    }
+
+    .New {
+        padding: 5px 10px 5px 10px;
+        -webkit-border-radius: 5px;
+        font-size: 13px;
+        border: none;
+        float: left;
+        color: #0A9CB7;
+    }
+
+    .Open {
+        padding: 5px 10px 5px 10px;
+        -webkit-border-radius: 5px;
+        font-size: 13px;
+        border: none;
+        float: left;
+        color: #ab192d;
+    }
+
+    .NotSeen {
+        color: #E68618;
+    }
+
+    .Yes {
+        color: #38C64E;
+    }
+
+    .No {
+        color: #DA3024;
+    }
+</style>
+<div class="banner1 bkDarkBlue">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>Information Technology</span>
+</div>
+
+
+
+
+<div class="content1" style="background: #fff;">
+
+    <div class="boxHead1">
+        <div class="boxHeader1 bDSkyBlue">Dashboard</div>
+    </div>
+
+
+</div>
+
+<div class="content1" style="background: #f0f3f5;padding-top: 20px;">
+
+    <div class="block4">
+        <div class="lad bkTorBlue">
+            <i class="material-icons">work</i>
+        </div>
+        <div class="lady">
+            <sup>TOTAL </sup>
+            <span>@ViewBag.TotalTickets</span>
+        </div>
+
+    </div>
+    <div class="block4">
+        <div class="lad bkYellow">
+            <i class="material-icons">check_circle</i>
+        </div>
+        <div class="lady">
+            <sup>ESCALATED </sup>
+            <span>@ViewBag.EscalatedTickets</span>
+        </div>
+    </div>
+    <div class="block4">
+        <div class="lad bkGreen">
+            <i class="material-icons">lock</i>
+        </div>
+        <div class="lady">
+            <sup>TREATED </sup>
+            <span>@ViewBag.TreatedTickets</span>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="content1" style="padding-top: 30px;" id="DashboardTable">
+
+    <div class="boxHead1">
+        <div class="boxHeader1">Recent Tickets</div>
+    </div>
+
+    <div class="boxBody1">
+
+        <div class="tableRanch">
+            <table class="courselist" id="TicketTable">
+                <thead>
+                    <tr>
+                        <td>Ticket ID</td>
+                        <td>Title</td>
+                        <td>Updated</td>
+                        <td>Status</td>
+                        <td>ScreenShots</td>
+                    </tr>
+                </thead>
+                <tr class="empty">
+                    <td colspan="5">
+                        Fetching Data <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="content1" id="TicketDetails" style="display:none">
+
+    <div class="msgBody">
+
+        <div class="msgShow">
+            <div class="empty1" style="display:none">
+                Fetching Messages <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+            </div>
+
+
+            <div class="forwardBox" style="display:none;">
+                <form>
+                    <div class="formArea">
+                        <div class="formBox1 fullForm">
+                            <label for="">To:</label>
+                            <input type="text" id="ToFoward">
+
+                        </div>
+                        <div class="formBox1 fullForm">
+                            <label for="">Subject:</label>
+                            <input type="text" id="SubjectForward">
+                        </div>
+                        <div class="formBox1 fullForm">
+
+                            <label for="">Message:</label>
+                            <textarea> </textarea>
+                        </div>
+                        <div class="underlineBtn">
+                            <button class="btnMedium bkSkyBlue replySend">Forward Message</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div id="TicketModal" class="modal fade" style="float:none">
+
+    <div class="modal-dialog modal-admin modal-lg">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" style="float:none;" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body ticket_alert" style="float:none;">
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .msgShow {
+        width: 100%;
+        float: left;
+        height: 100%;
+        overflow-y: auto;
+        font-size: 15px;
+    }
+
+    span.Open {
+        color: #ab192d;
+    }
+
+    span.Closed {
+        color: #2fbf71;
+    }
+
+    span.Escalate {
+        color: #f4b942;
+    }
+
+    .material-icons.Closed {
+        color: #2fbf71;
+    }
+
+    .material-icons.Open {
+        color: #ab192d;
+    }
+
+    .material-icons.Escalate {
+        color: #f4b942;
+    }
+
+    .msgTab.New {
+        border-left: 3px solid #354c98
+    }
+
+    label#New {
+        font-weight: bolder;
+    }
+
+    .msgNote#New:not(p) {
+        color: #0A9CB7;
+        font-weight: bolder;
+    }
+</style>
+
+
+@section Scripts{
+
+    <script src="~/Content/js/datatables.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            //Load the Budget table
+
+            var jqTable = $('#TicketTable').DataTable({
+                dom: '<"tanHead tanHP"f>rt<"counter"lip>',
+                processing: true,
+                "autoWidth": false,
+                serverSide: true,
+                ajax: {
+                    "url": '/api/support/GetTicketForTech',
+                    "type": "GET"
+                },
+                'language': {
+                    'search': '',
+                    'searchPlaceholder': 'Search...'
+                },
+                "fnDrawCallback": function (oSettings) {
+                },
+                "order": [],
+                columns: [
+                    {
+                        bSortable: true,
+                        "render": function (d, r, data) {
+                            return data.TicketIdFormat + '';
+                        }
+                    },
+
+                    {
+                        "render": function (d, r, data) {
+                            return '<a href="/Technology/TechSupport/SingleTechTicketDetails?ticketId=' + data.TicketId + '&status=' + data.TicketStatusFormat + '" data-id="' + data.TicketId + '" data-status="' + data.TicketStatusFormat + '">' + data.TicketTitle + '</a> ';
+                        }
+                    },
+
+                    {
+                        bSortable: false,
+                        "render": function (d, i, data) {
+
+                            return data.ModifiedDateFormat + ' ' + data.ModifiedTimeFormat + '';
+                        }
+                    },
+                    {
+                        bSortable: false,
+                        "render": function (d, i, data) {
+
+                            return '<label id="" title="' + data.TicketTitle + '" ticket="' + data.TicketId + '" class="' + data.TicketStatusFormat + '">' + data.TicketStatusFormat + '</label>';
+                        }
+                    },
+                    {
+                        bSortable: false,
+                        className: "action-buttons",
+                        "render": function (d, i, data) {
+                            if (data.ScreenshotFormat === null)
+                                return "No Screenshot"
+
+                            else
+                                return '<a class="table-view btnSmaller bkPurple" href="' + data.ScreenshotFormat + '" target="_blank"> <i class="fa fa-eye table-icon" style=""></i> View Screenshoots </a>';
+
+
+                        }
+                    }
+
+                ]
+            });
+
+            jqTable.on('draw', function () {
+
+                $('.tableRanch').find('input[type="search"]').addClass('searchT');
+                // reset();
+            });
+
+            $("#TicketTable").on("click", ".ticketDetails", function (evt) {
+                evt.preventDefault();
+                var $ticketId = $(this).attr("data-id");
+                var $status = $(this).attr('data-status');
+                $('#DashboardTable').fadeOut();
+                $('#TicketDetails').fadeIn();
+                $('.empty1').show();
+
+                $.ajax({
+                    url: "/api/support/GetTicketDetails",
+                    data: { ticketId: $ticketId, status: $status },
+                    type: "GET",
+                    success: function (data) {
+                        $('.msgShow').html('');
+                        $('.msgShow').append(
+                            '<div class="msgTitle">New: ' + data.Result.TicketTitle + '<span class="' + data.Result.TicketStatusFormat + '"> (' + data.Result.TicketStatusFormat + ' Ticket)</span></div>' +
+                            '<div class="msgIcon">' +
+                            '<i class="material-icons">reply</i>' +
+                            '<i class="material-icons">delete</i>' +
+                            '<select name="" id="assignTo" class="assn" data-id="' + data.Result.TicketId + '" data-status="' + data.Result.TicketStatusFormat + '">' +
+                            '<option value= "">Assign to</option>' +
+                            '<option value= "close">Mark as Closed</option>' +
+                            '</select >' +
+                            '</div>' +
+                            '<div class="msgSender">' +
+                            data.Result.NameEmailFormat + '<br> to Admin ' +
+                            '</div>' +
+                            '<div class="timeSent">' + data.Result.Timeago + '</div>' +
+                            '<div class="msgRead">' +
+                            data.Result.TicketDescription +
+                            '</div>' +
+                            '<div class="msgFooter">' +
+                            'Click here to <a href="" data-id="' + data.Result.TicketId + '" class="msgReply">Reply</a> or <a href="" data-id="' + data.Result.TicketId + '" class="msgForward">Forward</a> or <a href="#" id="goBack">Go back</a>' +
+                            '</div>'
+
+                        )
+
+                        $('.empty1').hide();
+                    }
+
+                });
+
+            });
+
+            $('.msgShow').on('change', '#assignTo', function () {
+                var $selected = $(this).val();
+                var $id = $(this).attr('data-id');
+                var $status = $(this).attr('data-status');
+
+                if (!parseInt($id) && parseInt($id) <= 0) {
+                    return;
+                }
+                if ($selected == '') {
+                    ShowNotie({ HasError: true, Message: "Please select from the list" });
+                    return;
+                }
+                
+                if ($selected == 'close') {
+                    var $confirm = ShowConfirm();
+                    $confirm.onAction = function (btnName) {
+
+                        if (btnName == "cancel") {
+                            return false;
+                        }
+                        else {
+                            $.ajax({
+                                url: '/api/support/CloseSingleTicket',
+                                type: 'GET',
+                                data: { id: $id },
+                                success: function (data) {
+                                    if (!data.HasError) {
+                                        ShowNotie(data);
+                                        window.location.reload();
+                                    }
+                                    else {
+                                        ShowNotie(data);
+                                    }
+                                }
+                            });
+                        }
+
+                    }
+                }
+
+            })
+
+            $('.msgShow').on('click', '.msgReply', function (e) {
+                e.preventDefault();
+                var $id = $(this).attr('data-id');
+                $.ajax({
+                    url: "/api/support/ShowMsgReply",
+                    data: { id: $id },
+                    type: "GET",
+                    success: function (data) {
+                        if (!data.HasError) {
+                            $('.msgShow').append(
+                                '<form>' +
+                                '<div class="formArea" style="display:block;">' +
+                                '<input type="hidden" id="TicketId" value="' + data.Result.TicketId + '"/>' +
+                                '<div class="formBox1 fullForm">' +
+                                '<label for="">To:</label>' +
+                                '<input type="text" id="To" value="' + data.Result.Email + '" >' +
+                                '</div>' +
+                                '<div class="formBox1 fullForm">' +
+                                '<label for="">Subject:</label>' +
+                                '<input type="text"id="Subject" value="RE: ' + data.Result.TicketTitle + '" ">' +
+                                '</div>' +
+                                '<div class="formBox1 fullForm">' +
+                                '<label for="">Message:</label>' +
+                                '<textarea> </textarea>' +
+                                '</div>' +
+                                '<div class="underlineBtn">' +
+                                '<button class="btnMedium bkSkyBlue replySend">Send</button>' +
+                                '</div>' +
+                                '</div>' +
+                                '</form>'
+                            )
+                        }
+                        BindHtmlEditor($('textarea'), data.Result.TicketDescription);
+                    }
+                });
+            });
+
+            $('.msgShow').on('click', '.msgForward', function (e) {
+                e.preventDefault();
+                var $id = $(this).attr('data-id');
+                $.ajax({
+                    url: "/api/support/ShowMsgReply",
+                    data: { id: $id },
+                    type: "GET",
+                    success: function (data) {
+                        if (!data.HasError) {
+                            $('.msgShow').html(
+                                '<form>' +
+                                '<div class="formArea" style="display:block;">' +
+                                '<input type="hidden" id="TicketId" value="' + data.Result.TicketId + '"/>' +
+                                '<div class="formBox1 fullForm">' +
+                                '<label for="">Forward To:</label>' +
+                                '<input type="text" id="To">' +
+                                '</div>' +
+                                '<div class="formBox1 fullForm">' +
+                                '<label for="">Subject:</label>' +
+                                '<input type="text"id="Subject" value="RE: ' + data.Result.TicketTitle + '" ">' +
+                                '</div>' +
+                                '<div class="formBox1 fullForm">' +
+                                '<label for="">Message:</label>' +
+                                '<textarea> </textarea>' +
+                                '</div>' +
+                                '<div class="underlineBtn">' +
+                                '<button class="btnMedium bkRed" id="goBack">Go back</button>' +
+                                '<button class="btnMedium bkSkyBlue replySend">Forward</button>' +
+                                '</div>' +
+                                '</div>' +
+                                '</form>'
+                            )
+                        }
+                        BindHtmlEditor($('textarea'), data.Result.TicketDescription);
+
+                    }
+                });
+            });
+
+
+            $('.msgShow').on('click', '.replySend', function (e) {
+                e.preventDefault();
+                var $button = $(this);
+                var prev = $button.html();
+                $button.html('Processing <i class="fa fa-circle-o-notch fa-spin nofloat"></i>');
+                $button.attr('disabled', 'disabled');
+                var $msg = $('textarea').val();
+                var $to = $('#To').val();
+                var $subject = $('#Subject').val();
+                var $id = $('#TicketId').val();
+
+                if ($msg === "") {
+                    ShowNotie({ HasError: true, Message: "Please enter the Message" });
+                    $button.html(prev);
+                    $button.removeAttr('disabled');
+                    return;
+                }
+                var $data = { Message: $msg, To: $to, Subject: $subject, TicketId: $id };
+                $.ajax({
+                    url: '/api/support/ReplyTicket',
+                    contentType: "application/json; charset=UTF-8",
+                    type: 'POST',
+                    data: JSON.stringify($data),
+                    success: function (data) {
+                        ShowNotie(data);
+                        $button.html('').html('Send');
+                        $button.attr('disabled', false);
+                    }
+
+                });
+            });
+
+
+            $('#TicketDetails').on('click', '#goBack', function () {
+                $('#TicketDetails').fadeOut();
+                $('#DashboardTable').fadeIn();
+            });
+
+            $("#TicketTable").on("click", "#ticketbutton", function (evt) {
+                evt.preventDefault();
+                var ticketId = $(this).attr("ticket");
+                var buttonvalue = $(this).attr('class');
+                var ticketTitle = $(this).attr('title');
+                $(".ticketbutton_alert").html("Fetching data ...<br> Please wait...");
+                $("#TicketButtonModal").modal("show");
+                $.ajax({
+                    type: "GET",
+                    url: "/Admin/SupportManagement/_ChangeTicketStatus",
+                    data: { ticketId: ticketId, buttonvalue: buttonvalue, ticketTitle: ticketTitle },
+                    success: function (data) {
+                        if (data.ButtonValue === "New") {
+                            console.log("Ticket title:" + data.Title);
+
+                            $('input[name="TicketTitle"]').val(data.Title);
+                            $('.btnApprove').attr("id", data.Id);
+                            $('.btnReject').attr("id", data.Id);
+                            $('#Closed').hide();
+                            $('#Open').hide();
+                            $('#New').show();
+                            $("#TicketButtonModal").show();
+                        } else if (data.ButtonValue === "Open") {
+                            $('.btnApprove').attr("id", data.Id);
+                            $('#Closed').hide();
+                            $('#New').hide();
+                            $('#Open').show();
+                            $("#TicketButtonModal").show();
+                        }
+                        else {
+                            $('#New').hide();
+                            $('#Open').hide();
+                            $('#Closed').show();
+                            $("#TicketButtonModal").show();
+                        }
+                        $(".ticketbutton_alert").html('');
+                        $("#TicketButtonModal").show();
+                    }
+
+                });
+
+            });
+
+            $(".btnApprove").click(function (e) {
+                e.preventDefault();
+                var ticketId = $(this).attr('id');
+
+                var $button = $(this);
+                var prev = $button.html();
+
+                if (!parseInt(ticketId) && parseInt(ticketId) <= 0) {
+                    return;
+                }
+
+                $button.attr('disabled', 'disabled');
+                $button.find('i').removeClass('fa-check');
+                $button.find('i').addClass('fa-circle-o-notch fa-spin');
+
+                $.ajax({
+                    cache: false,
+                    async: true,
+                    type: "GET",
+                    url: "/api/support/MarkTicketClosed?ticketId=" + ticketId,
+
+                    success: function (data) {
+                        $(".btnApprove").hide();
+                        $(".btnReject").hide();
+                        ShowNotie(data);
+                        $("#textstatus").empty().html(data.Result)
+                        $button.find('i').addClass('fa-check');
+                        $button.find('i').removeClass('fa-circle-o-notch fa-spin');
+
+                    }
+
+                });
+            });
+
+            $(".btnReject").click(function (e) {
+                e.preventDefault();
+                var ticketId = $(this).attr('id');
+
+                var $button = $(this);
+                var prev = $button.html();
+
+                if (!parseInt(ticketId) && parseInt(ticketId) <= 0) {
+                    return;
+                }
+
+                $button.attr('disabled', 'disabled');
+                $button.find('i').removeClass('fa-check');
+                $button.find('i').addClass('fa-circle-o-notch fa-spin');
+
+                $.ajax({
+                    cache: false,
+                    async: true,
+                    type: "GET",
+                    url: "/api/support/MarkTicketOpen?ticketId=" + ticketId,
+
+                    success: function (data) {
+                        $(".btnApprove").hide();
+                        $(".btnReject").hide();
+                        $("#textstatus").empty().html(data.Result)
+                        ShowNotie(data);
+                        $button.find('i').addClass('fa-check');
+                        $button.find('i').removeClass('fa-circle-o-notch fa-spin');
+                    }
+
+                });
+            })
+        });
+    </script>
+}

@@ -1,0 +1,89 @@
+﻿<style>
+    .success {
+        color: #fff !important;
+    }
+
+    .bDGreen {
+        border-bottom: 3px solid #2fbf71;
+    }
+
+    .bulkfile {
+        background: rgba(22, 96, 136, 0.2);
+        padding: 30px;
+        padding-right: 45%;
+    }
+
+        .bulkfile button {
+            background: #166088;
+        }
+
+    .formBox1 label {
+        width: 100%;
+        margin-bottom: 10px;
+        font-weight: bold;
+        font-size: 13px;
+        float: left;
+    }
+
+    label i {
+        font-style: italic;
+        color: #ccc;
+        font-size: 12px;
+        padding-left: 20px;
+        float: none;
+    }
+
+    .halfForm .halfForm {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+    form.report {
+        padding: 0px;
+        margin-top: 60px;
+        width: 100%;
+        margin-left: 0%;
+        border: 0px solid transparent;
+    }
+
+        form.report input {
+            width: 100%;
+            height: 35px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 15px;
+        }
+</style>
+@{
+    IFormatProvider currencyFormat = new System.Globalization.CultureInfo("HA-LATN-NG");
+}
+<form class="report">
+    <div class="fullForm">
+        <label>Department Name:</label>
+        <input type="text" disabled="disabled" value="@ViewBag.DeptName" />
+    </div>
+
+
+    <div class="fullForm">
+        <label>Department Budget:</label>
+        <input type="text" disabled="disabled" value="@string.Format(currencyFormat,"{0:c}",ViewBag.Budget)" />
+    </div>
+
+    <div class="fullForm">
+        <label>Amount Spent:</label>
+        <input type="text" disabled="disabled" value="@string.Format(currencyFormat,"{0:c}",ViewBag.AmountSpent)" />
+    </div>
+
+    <div class="fullForm">
+        <label>Amount Remaining:</label>
+        <input type="text" disabled="disabled" value="@string.Format(currencyFormat,"{0:c}",ViewBag.AmountRemaining)" />
+    </div>
+
+    <a href="@Url.Action("TrainingRequest","ManageTraining",new { area="Admin"})">
+        <button class="btn bkSkyBlue " style="margin-bottom: 10px; float:right;">
+            Back <i class="fa fa-backward"></i>
+        </button>
+    </a>
+</form>
+

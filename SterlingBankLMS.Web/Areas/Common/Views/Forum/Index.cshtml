@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "Forums";
+    Layout = "~/Areas/Common/Views/Shared/_CommonLayout.cshtml";
+}
+
+@section head {
+    <style>
+        .searchArea {
+            background: #f3f3f3;
+        }
+        .breadcrum {
+            background: url('/Content/img/course_img.jpg');
+        }
+        .view-more {
+            float: none;
+            clear: both;
+        }
+            .view-more .btnLong {
+                width: 100%;
+                text-align: center;
+                float: none;
+                padding: 10px 20px;
+                border-radius: 0;
+                font-weight: bold;
+            }
+
+        h5.courseTitle {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .text p.courseDesc {
+            font-weight: normal;
+            min-height: 110px;
+        }
+
+        .courseItem h5.courseArea {
+            margin: 0;
+            left: 0;
+            position: absolute;
+            background: rgb(171, 25, 45);
+            padding: 3px 5px;
+            color: #fff;
+            font-size: 9px;
+            z-index: 5;
+            top: 0px;
+        }
+
+        .courseDate {
+            font-size: 11px;
+            margin: 5px 0;
+        }
+    </style>
+}
+<div class="wrapper">
+
+    <div class="breadcrum">
+        <div class="col8">
+            <div class="headcrum">Employee Dashboard</div>
+            <div class="bodycrum">Description</div>
+        </div>
+
+        <div class="col4">
+
+            <div class="headcrum">@CurrentUser.Function.ToUpper()</div>
+            <div class="bodycrum"><i class="material-icons">room</i> <i>@CurrentUser.BranchName.ToUpper()</i></div>
+            <div class="bodycrum"><i style="font-size: 12px;margin-top: 3px;">Staff ID: </i> <b>@CurrentUser.StaffId</b></div>
+        </div>
+    </div>
+
+
+    <div class="searchArea">
+        <div class="searchbox">
+            <form action="/common/course/searchCourse" method="get">
+                <input type="text" placeholder="Search Courses" name="search" />
+                <button type="submit"><i class="material-icons" style="cursor:pointer">search</i></button>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="content">
+    </div>
+</div>
+

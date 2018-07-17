@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    IEnumerable<SterlingBankLMS.Data.Models.Entities.ForumCategory> Model_Category = ViewBag.Categories;
+}
+
+<link href="~/Content/css/bootstrap.css" rel="stylesheet" />
+
+<div class="banner1 bkSkyBlue">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>Manage Forums</span>
+</div>
+
+<div class="row" style="padding-top:70px">
+    <div class="col-md-12 col-lg-12 col-xl-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    @if (!string.IsNullOrEmpty(ViewBag.SuccessMsg))
+                    {
+                        <div class="alert alert-success">@ViewBag.SuccessMsg</div>
+                    }
+                    @if (!string.IsNullOrEmpty(ViewBag.ErrorMsg))
+                    {
+                        <div class="alert alert-success">@ViewBag.ErrorMsg</div>
+                    }
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <a href="javascript:{0}" id="add_category_btn" class="btn btn-success">Add Forum Category</a>
+                        <a href="javascript:{0}" id="remove_category_btn" class="btn btn-danger hide">Close Form</a>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr><th>Forum Categories</th></tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var n in Model_Category)
+                                {
+                                    <tr>
+                                        <td>
+                                            <span class="btn btn-blue" style="cursor:pointer" onclick="getTopic('@n.Id')">@n.CategoryName</span>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="hide" id="add_cat_form">
+                            <form action="/Admin/Forum/Add_category" method="post">
+                                <div class="form-group">
+                                    <label>Category Name</label>
+                                    <input type="text" class="form-control" name="cat_name" placeholder="Enter Category Name" required />
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <input type="text" class="form-control" name="desc" placeholder="Enter Description" required />
+                                </div>
+                                <button type="submit" class="btn btn-success">Add Category</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Content/PageJs/Admin_Forum.js"></script>
+}

@@ -1,0 +1,25 @@
+﻿
+<script id="TrainingList" type="x-tmpl-mustache">
+    {{#array}}
+
+    <div class="event-list-item {{#Requested}}bg-danger{{/Requested}} {{#Ongoing}}bg-success{{/Ongoing}}" 
+         data-desc="{{Description}}" data-vendor="{{Vendor}}" data-category="{{TrainingCategoryName}}"
+         data-type="{{TrainingTypeName}}" data-location="{{LocationPlace}}" data-start="{{StartDateFormat}}"
+         data-end="{{EndDateFormat}}" data-title="{{Name}}" data-id="{{Id}}" data-requested="{{Requested}}" data-ongoing="{{Ongoing}}">
+        <div>
+            <span class="title">{{Name}}</span>
+
+            <div>
+                <span class="date">{{StartDateFormat}} to {{EndDateFormat}}</span>
+             <div class="period-holder">
+
+                {{#Periods}}
+                 <label class="label label-primary period-label">{{DayName}}: {{StartTime}} to {{EndTime}}</label> 
+                 {{/Periods}}         
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/array}}
+</script>

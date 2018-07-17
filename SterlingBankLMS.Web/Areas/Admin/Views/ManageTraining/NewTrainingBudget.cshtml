@@ -1,0 +1,150 @@
+﻿@{
+    ViewBag.Title = "New Training Budget";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<link href="~/Content/css/select2.min.css" rel="stylesheet" />
+<style>
+    .bDGreen {
+        border-bottom: 3px solid #2fbf71;
+    }
+
+    .bkGreen {
+        background: #2fbf71;
+    }
+
+    .alert.alert-danger, .alert.alert-success, .alert.alert-info, .alert.alert-warning {
+        width: 70%;
+    }
+</style>
+<div class="banner1 bkPurple">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>Manage Training</span>
+</div>
+
+<div class="content1">
+    <div class="boxHead1">
+        <div class="boxHeader1 bDGreen">Add New Budget</div>
+    </div>
+
+    <div class="boxHead1" style="border-bottom:none">
+
+        <a class="btn bkPurple" href="@Url.Action("TrainingBudget","ManageTraining",new { area="Admin"})" style="float: right; margin: 15px;">
+            View Budgets <i class="fa fa-tasks"></i>
+        </a>
+    </div>
+
+    <div class="boxBody1" style="padding:0">
+
+
+        <div class="formArea formArea1">
+            <form id="formBudget">
+                <div class="formBox1 fullForm">
+                    <label for="">Group Name:</label>
+                    @Html.DropDownList("GroupId", null, "--Select Group--", htmlAttributes: new { @class = "form-control " })
+                </div>
+
+                <div class="formBox1 fullForm">
+                    <label for="">Region Name:</label>
+                    @Html.DropDownList("RegionId", null, "--Select Region--", htmlAttributes: new { @class = "form-control " })
+                </div>
+
+                <div class="formBox1 fullForm">
+                    <label for="">Budget(&#8358;):</label>
+                    <input type="text" class="form-control" name="Budget" id="Budget" />
+                </div>
+
+                <div class="underlineBtn">
+                    <button class="nextBtn btnMedium bkGreen" type="submit">Add and Save</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Content/js/additional-methods.min.js"></script>
+    <script src="~/Content/js/CustomValidation.js"></script>
+    <script src="~/Content/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#GroupId').select2({ 'width': '100%' });
+            $('#RegionId').select2({ 'width': '100%' });
+            //disable letter inputs, allowing only number inputs
+            $("input[id*='Budget']").keydown(function (event) {
+
+                if (event.shiftKey == true) {
+                    event.preventDefault();
+                }
+
+                if ((event.keyCode >= 48 && event.keyCode <= 57) ||
+                    (event.keyCode >= 96 && event.keyCode <= 105) ||
+                    event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 ||
+                    event.keyCode == 39 || event.keyCode == 46 || event.keyCode == 190) {
+
+                } else {
+                    event.preventDefault();
+                }
+
+                if ($(this).val().indexOf('.') !== -1 && event.keyCode == 190)
+                    event.preventDefault();
+            });
+
+            $("#formBudget").validate({
+                ignore: [],
+                rules: {
+                    Budget: { required: true },
+                    GroupId: 'dropdown',
+                },
+
+                errorPlacement: function ($error, $element) {
+                    $error.addClass('errorHolder');
+                    $element.closest('.formBox1').find('label:first').after($error);
+                },
+                submitHandler: function (form) {
+
+                    var $button = $(form).find(':submit');
+                    var prev = $button.html();
+                    $button.attr('disabled', 'disabled');
+                    $button.html('Processing <i class="fa fa-circle-o-notch fa-spin pull-right"></i>');
+
+                    var formData = new FormData(form);
+                    $.ajax({
+                        cache: false,
+                        async: true,
+                        type: "POST",
+                        url: "/Admin/ManageTraining/NewTrainingBudget",
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (data) {
+                            if (!data.HasError) {
+                                ShowNotie(data);
+                                $button.html('').html('Add and Save');
+                                $button.attr('disabled', false);
+                                $('#Budget').val('');
+                            }
+                            else {
+                                $button.html('').html('Add and Save');
+                                $button.attr('disabled', false);
+                                ShowNotie(data);
+                            }
+
+                        },
+
+                        error: function (data) {
+                            ShowNotie({ HasError: true, Message: "An error occurred when processing your request" });
+                        },
+                        complete: function (data) {
+                            $button.removeAttr('disabled');
+                            $button.html(prev);
+                        }
+                    });
+
+                }
+            });
+
+        })
+    </script>
+}

@@ -1,0 +1,45 @@
+﻿<div class="viewArea">
+    <div class="quizArea">
+        <div class="sest quesSelect">
+            <div class="nani">
+                Course Review
+            </div>
+            <br/>
+            <form ng-submit="vm.submitReview($event,'@Url.Content("~/api/courselearningarea/submitcoursereview")')" ng-cloak="">
+                @*<div class="">
+                    <label>Rating</label>
+                    <select name="Rating" required>
+                        <option value="">Rate Course</option>
+                        <option value="1">1 star</option>
+                        <option value="2">2 stars</option>
+                        <option value="3">3 stars</option>
+                        <option value="4">4 stars</option>
+                        <option value="5">5 stars</option>
+                    </select>
+                </div>
+                <textarea name="Review" required cols="30" rows="10" placeholder="Type your review here..."></textarea>
+                <button type="submit" class="btnBlue btnMedium">Submit</button>*@
+
+                <div class="startExam" style="height: auto;">
+
+                    <div class="rating">
+                        <div class="topper">Tell us what you think about the course</div>
+                        <div class="winning">Rate</div>
+                        <div class="ratingss">
+                            <input type="number" name="Rating" value="0" hidden class="starB">
+                            <i class="material-icons som1">star</i>
+                            <i class="material-icons som2">star</i>
+                            <i class="material-icons som3">star</i>
+                            <i class="material-icons som4">star</i>
+                            <i class="material-icons som5">star</i>
+                        </div>
+                        <div class="reviewBox">
+                            <textarea name="Review"  cols="30" rows="10" placeholder="Review"></textarea>
+                            <button type="submit" class="btn">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

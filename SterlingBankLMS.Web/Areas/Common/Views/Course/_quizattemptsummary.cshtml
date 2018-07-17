@@ -1,0 +1,25 @@
+﻿<div class="resultP" ng-init="vm.getQuizSummary()">
+    @*<div class="clamp">
+        <div class="leftC">Last Attempt Score:</div>
+        <div class="rightC" ng-bind="vm.quizSummary.Score"></div>
+    </div>*@
+    <div class="clamp">
+        <div class="leftC">Maximum Score:</div>
+        <div class="rightC" ng-bind="vm.quizSummary.MaxScore"></div>
+    </div>
+
+    <div class="clamp">
+        <div class="leftC">Total Questions:</div>
+        <div class="rightC" ng-bind="vm.quizSummary.Questions"></div>
+    </div>
+    <div class="clamp">
+        <div class="leftC">Accuracy:</div>
+        <div class="rightC" ng-bind="vm.quizSummary.computeAccuracy()"></div>
+    </div>
+    <div class="clamp">
+        <div class="leftC">Attempt(s):</div>
+        <div class="rightC" ng-bind="vm.quizSummary.TotalAttempts"></div>
+    </div>
+</div>
+<button class="btn btnMedium btnBlack quiz-next-btn" ng-click="vm.retakeQuiz()" ng-show="vm.quizSummary.CanRetake">Retake Quiz</button>
+<button class="btn btnMedium btnBlack quiz-next-btn" ng-click="nextLesson()" ng-show="hasNextLesson()">Next Lesson</button>

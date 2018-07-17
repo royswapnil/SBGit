@@ -1,0 +1,705 @@
+﻿@using SterlingBankLMS.Web.Utilities
+@using SterlingBankLMS.Data.Models.Enums
+@model ManagePageModel
+
+@{
+    ViewBag.Title = "Assign Training";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<link href="~/Content/css/select2.min.css" rel="stylesheet" />
+@*<link href="~/Content/css/training.css" rel="stylesheet" />*@
+
+
+<div class="banner1 bkTorBlue">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>Training Management</span>
+</div>
+
+<style>
+    .tanBody .radio {
+        font-size: 13px;
+        margin-top: -2px;
+    }
+
+    .counter {
+        padding: 10px;
+        float: none;
+        font-size: 15px;
+        background: #fbfbfb;
+        width: 100%;
+        margin-top: 0;
+        border: 1px solid #ddd;
+        border-top: none;
+    }
+
+    .table {
+        margin-bottom: 0;
+    }
+
+    .jconfirm .jconfirm-box-container.jconfirm-no-transition {
+        margin: 0px;
+        width: 100%;
+    }
+</style>
+<link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="content1">
+
+    <div class="boxHead1">
+        <div class="boxHeader1 bDOrange">Assign Training</div>
+    </div>
+
+    <div class="boxBody1">
+        <span style="color: blue; width: 100%;font-size: 12px;margin-top:20px">Select training(s) to assign below:</span>
+
+        <div class="tanHead">
+            <input type="text" class="searchT" placeholder="search trainings...">
+
+        </div>
+
+
+        <div id="CourseList" class="tanBody tanBodyS">
+
+        </div>
+
+
+        @*<div class="tanHead" style="background: rgba(22, 96, 136, 0.39);border:1px solid #166088;">
+            <form>
+                <input type="text" class="searchT" name="q" placeholder="search training..." />
+                <button type="submit" style="padding: 3px;border-radius: 0;font-size: 11px;background: rgba(0,0,0,0.5);">
+                <i class="material-icons" style="cursor:pointer;    font-size: 18px; margin-top: 3px;margin-left: 2px;">search</i>
+                </button>
+            </form>
+            <div class="pinA">
+                    <span>Filter training by:</span>
+                    <select id="SelectTrainingArea">
+                        <option value="0">Select Training Area</option>
+                    </select>
+                </div>
+        </div>*@
+
+
+        @*<div class="tanBody tanBodyS">
+            @{
+                List<SterlingBankLMS.Core.DTO.AssignedTrainingModel> training = ViewBag.TrainingName;
+                foreach (var item in training)
+                {
+                    <div class="leftOff check" style="margin-bottom: -22px;">
+                        <label class="containers">
+                            @item.TrainingName
+                            <input type="checkbox" name="trainingName" data-id="@item.TrainingId">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+
+                }
+            }
+
+        </div>*@
+
+
+
+        <span style="color:blue; width: 100%;font-size: 12px;margin-top: 20px;float:left">Specify training group from the dropdown below:</span>
+
+        <div class="tanBody" style="height: auto;overflow-y: auto;margin-top: 15px;">
+            <div class="toggleSelectPanel">
+                <select id="mainSelect" class="toggleSelect select11">
+                    <option value="0">Selection Type</option>
+                    <option value="group">Group</option>
+                    <option value="gender">Gender</option>
+                    <option value="grade">Grade</option>
+                    <option value="role">Role</option>
+                    <option value="indv">Individuals</option>
+                    <option value="region">Region</option>
+                    <option value="training">Saved Training Group</option>
+                </select>
+            </div>
+            <div class="toggleSelectPanel">
+                <select id="toggleSelect1" class="toggleSelect select2" disabled>
+                    <option>Choose a selection type</option>
+                </select>
+            </div>
+
+            <div class="toggleSelectPanel" style="display:none">
+                <select id="toggleSelect2" class="toggleSelect select2" disabled></select>
+            </div>
+
+            <div class="toggleAddPanel">
+                <a href="javascript:void" id="addTrainingGroup" class="btn btn-inline btn-secondary-outline addLearningGroup"><i class="fa fa-plus green"></i></a>
+            </div>
+
+            @*<button class="btn1 btnMedium btnWhiteBlue pullRight">Save Training group</button>*@
+
+            <div class="trainingGroupTagPanel bordered-section" style="display:none">
+                <div class="saveBox">
+                    
+                    <button class="nextBtn btnMedium btnGrey" style="margin-bottom:15px" id="showTrainingGroupUsers">Show targetted Users</button>
+                    <div class="group-input">
+                        <div class="trainingInfo" style="padding: 10px;font-size: 14px;background: #555146!important;color: #fff;margin-bottom: 10px;display:none">
+                            <i class="fa fa-info"></i> Assign new trainings to this training group or add new filter tags and save as a new training group
+                        </div>
+                        <input type="text" name="Name" id="TrainingGroupName" class="form-control" placeholder="Enter new training group name here...">
+                        <div class="group-append">
+                            <button id="saveTrainingGroup" class="bordered noMarg">Save as new training group</button>
+                            <input type="hidden" value="0" id="TrainingGroupId" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="underlineBtn">
+        <button class="nextBtn btnMedium btnBlue" id="AssignTraining"> &emsp; Assign Training to Training Group &emsp; </button>
+    </div>
+</div>
+
+<div class="selectBoxes" style=" display:none">
+    <select data-type="@((int)TrainingGroupTagType.Group)" class="dummyGroup" data-next="department" data-next-type="@((int)TrainingGroupTagType.Department)"></select>
+    <select data-type="@((int)TrainingGroupTagType.Gender)" class="dummyGender">
+        <option value="0">Select a gender</option>
+        @{
+            var options = MvcUtilities.GenerateEnumSelectList(typeof(Gender), null);
+            foreach (var option in options)
+            {
+                <option value="@option.Value">@option.Text</option>
+            }
+        }
+    </select>
+    <select data-type="@((int)TrainingGroupTagType.Grade)" class="dummyGrade"></select>
+    <select data-type="@((int)TrainingGroupTagType.Role)" class="dummyRole"></select>
+    <select data-type="@((int)TrainingGroupTagType.Individual)" class="dummyIndv"></select>
+    <select data-type="@((int)TrainingGroupTagType.Region)" class="dummyRegion"></select>
+    <select class="dummyTrainingGroup" data-type="0" @(Model.Id != null ? "data-selected=" + Model.Id.ToString()  : "")></select>
+</div>
+<!-- Modal -->
+<div id="modalUsers" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width:70%">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Training Group Users</h4>
+            </div>
+            <div class="modal-body">
+                <h4>
+                    Total Users : <span id="TrainingGroupUserCount"></span>
+                </h4>
+                <table id="table_users" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <td>First Name</td>
+                            <td>Last Name</td>
+                            <td>Department</td>
+                            <td>Branch</td>
+                            <td>Region</td>
+                            <td>Grade</td>
+                            <td>Gender</td>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+  <script src="~/Content/js/bootstrap.min.js"></script>
+    <script src="~/Content/js/datatables.min.js"></script>
+    <script src="~/Content/js/select2.min.js"></script>
+    <script>
+
+        var htmlTagsTemplate = '<span data-id="0" data-AssoId="{TagId}" data-type="{TypeId}">' +
+            '<i class="fa fa-times-circle-o removeTag"></i><small>{TagName}</small>' +
+            '</span>';
+        $(document).ready(function () {
+            $('#toggleSelect1').select2();
+            $('#toggleSelect1').select2();
+
+            $('#mainSelect').on('change', function (e, selectedId) {
+                $('#toggleSelect1').removeAttr('data-next');
+                $('#toggleSelect1').removeAttr('data-next-type');
+                $('#toggleSelect2').attr('disabled', 'disabled');
+                $('#toggleSelect2').closest('.toggleSelectPanel').hide();
+
+                var selected = $(this).val();
+                if (selected == "0" && selectedId == undefined)
+                    return;
+
+                var url = ''
+                var dummyClass = '';
+                var bindClass = '';
+                var emptyoption = '';
+
+                switch (selected) {
+                    case "group":
+                        url = '/api/organization/GetGroups';
+                        dummyClass = 'dummyGroup';
+                        emptyoption = 'Select a group';
+                        break;
+                    case "gender": url = '';
+                        dummyClass = 'dummyGender';
+                        break;
+                    case "grade":
+                        url = '/api/organization/GetGrades';
+                        dummyClass = 'dummyGrade';
+                        emptyoption = 'Select a grade';
+                        break;
+                    case "role":
+                        url = '/api/organization/GetRoles';
+                        dummyClass = 'dummyRole';
+                        emptyoption = 'Select a role';
+                        break;
+                    case "indv":
+                        url = '/api/Employee/GetActiveEmployees';
+                        dummyClass = 'dummyIndv';
+                        emptyoption = 'Select individuals';
+                        break;
+                    case "region":
+                        url = '/api/organization/GetRegion';
+                        dummyClass = 'dummyRegion';
+                        emptyoption = 'Select a region';
+                        break;
+                    case "training":
+                        url = '/api/LearningGroup/GetLearnerGroup';
+                        dummyClass = 'dummyTrainingGroup';
+                        emptyoption = 'Select a training group';
+                        break;
+
+                }
+
+                // if fetched bind from page else get from server
+                if ($('.' + dummyClass).find('option').length > 0) {
+                    $('#toggleSelect1').html($('.' + dummyClass).html());
+                    $('#toggleSelect1').removeAttr('disabled');
+                    $('#toggleSelect1').select2();
+                    $('#toggleSelect1').attr('data-type', $('.' + dummyClass).attr('data-type'));
+                    if (selected == 'training')
+                        bindSavedLearnerTags($('.' + dummyClass));
+                }
+                else {
+                    $.get(url, function (data) {
+                        $('.' + dummyClass).html('<option value="0">' + emptyoption + '</option>');
+                        data.Result.forEach(function (option) {
+
+                            if (selected == 'indv') {
+                                $('.' + dummyClass).append('<option value="' + option.Id + '">' + option.FirstName + ', ' + option.LastName + '(' + option.StaffId + ')' + '</option>');
+                            }
+                          
+                            else {
+                                $('.' + dummyClass).append('<option value="' + option.Id + '">' + option.Name + '</option>');
+                            }
+
+                            if (selected == 'training') {
+
+                                $('.' + dummyClass).find('option:last').data('tag', JSON.parse(option.TagFormat));
+                            }
+
+                        });
+
+                        $('#toggleSelect1').html($('.' + dummyClass).html());
+                        if (selected == 'training')
+                            bindSavedLearnerTags($('.' + dummyClass));
+
+                        if (selected == 'training' && selectedId != undefined) {
+                         
+                            $('.dummyTrainingGroup').removeAttr('data-selected');
+                            $('#toggleSelect1 option[value="' + selectedId + '"]').prop('selected', true);
+                            $('#addTrainingGroup').click();
+                        }
+
+                        $('#toggleSelect1').removeAttr('disabled');
+                        $('#toggleSelect1').select2();
+                        $('#toggleSelect1').attr('data-type', $('.' + dummyClass).attr('data-type'));
+                    });
+
+                }
+                if ($('.' + dummyClass)[0].hasAttribute('data-next')) {
+                    $('#toggleSelect1').attr('data-next', $('.' + dummyClass).attr('data-next'));
+                    $('#toggleSelect1').attr('data-next-type', $('.' + dummyClass).attr('data-next-type'));
+                }
+            });
+
+            // if available select extra filter option : right now works for Group Departments
+
+            $('#toggleSelect1').on('change', function () {
+
+                var $elem = $(this);
+
+                if ($elem[0].hasAttribute("data-next")) {
+                    $('#toggleSelect2').html('<option value="0">Select a ' + $elem.attr('data-next') + '</option>');
+                    var group = { Id: $elem.val() };
+                    $.get('/api/organization/GetDepartmentByGroupId', group, function (data) {
+
+                        data.Result.forEach(function (option) {
+                            $('#toggleSelect2').append('<option value="' + option.Id + '">' + option.Name + '</option>');
+                        });
+                    });
+                    $('#toggleSelect2').removeAttr('disabled');
+                    $('#toggleSelect2').attr('data-showing', $elem.attr('data-next'));
+                    $('#toggleSelect2').attr('data-type', $elem.attr('data-next-type'));
+                    $('#toggleSelect2').select2({ 'width': '100%' });
+                    $('#toggleSelect2').closest('.toggleSelectPanel').show();
+                }
+
+
+            });
+
+            /// add new training group tags
+
+            $('#addTrainingGroup').on('click', function () {
+
+
+
+                if ($('#mainSelect').val() == "0") {
+                    ShowNotie({ HasError: true, Message: "Please select a type" });
+                    return;
+                }
+
+                if ($('#toggleSelect1').val() == "0") {
+                    return ShowNotie({ HasError: true, Message: "Please select a " + $('#mainSelect').val() });
+                }
+
+
+                //// if training group add from data tags in dom not from text
+
+                if ($('#mainSelect').val() == "training") {
+                    var tagsObject = $('#toggleSelect1 option[value="' + $('#toggleSelect1').val() + '"]').data('tag');
+
+                    /// if no tags added set training group Id for possible assignment using old saved group
+                    if (!$('.trainingGroupTagPanel span').length)
+                        $('#TrainingGroupId').val($('#toggleSelect1').val());
+
+                    tagsObject.forEach(function (tag) {
+
+                        if (!$('.trainingGroupTagPanel span[data-assoId="' + tag.TagValue + '"][data-type="' + tag.TagType + '"]').length) {
+                            console.log("Tags:" + tag.TagValue + " Types: " + tag.TagType);
+                            /// if a gender exists don't add multiple
+                            if (tag.TagType == 2 && $('.trainingGroupTagPanel span[data-type="' + tag.TagType + '"]').length > 0) {
+                                return;
+                            }
+                            else {
+                                var htmlString = htmlTagsTemplate.replace('{TagId}', tag.TagValue).replace('{TagName}', tag.Name).replace('{TypeId}', tag.TagType);
+                                $('.trainingGroupTagPanel .saveBox').before(htmlString);
+                                if ($('#TrainingGroupId').val() != "0" && $('#TrainingGroupId').val() != $('#toggleSelect1').val()) {
+                                    $('#TrainingGroupId').val("0");
+                                }
+                            }
+
+
+                        }
+
+                    });
+                }
+                else {
+
+                    var tag1 = $('#mainSelect option[value="' + $('#mainSelect').val() + '"]').text();
+                    var tag2 = $('#toggleSelect1 option[value="' + $('#toggleSelect1').val() + '"]').text().trim().replace(/\s/g, "_");
+                    var tagType = $('#toggleSelect1').attr('data-type');
+                    var tagAssoId = $('#toggleSelect1').val();
+
+                    ////if gender dont allow multiple
+                    if ($('#mainSelect').val() == "gender") {
+                        if ($('.trainingGroupTagPanel span[data-type="' + tagType + '"]').length > 0) {
+                            return ShowNotie({ HasError: true, Message: "Gender has been added" });
+                        }
+                    }
+
+                    var parentTag1 = String(tag1 + "_" + tag2).trim();
+
+                    if (!$('.trainingGroupTagPanel span[data-assoId="' + tagAssoId + '"][data-type="' + tagType + '"]').length) {
+                        var htmlString = htmlTagsTemplate.replace('{TagId}', tagAssoId).replace('{TagName}', parentTag1).replace('{TypeId}', tagType);
+                        $('.trainingGroupTagPanel .saveBox').before(htmlString);
+                        /// set always for fresh learner group set
+                        $('#TrainingGroupId').val('0');
+                    }
+
+
+
+                    if ($('#toggleSelect2').parent().is(':visible') && $('#toggleSelect2').val() != "0") {
+                        var tag1 = $('#toggleSelect2').attr('data-showing');
+                        upperCaseStart = tag1.substr(0, 1).toUpperCase();
+                        tag1 = upperCaseStart + tag1.substr(1, tag1.length - 1);
+                        var tag2 = $('#toggleSelect2 option[value="' + $('#toggleSelect2').val() + '"]').text().trim().replace(/\s/g, "_");
+                        var tagType = $('#toggleSelect2').attr('data-type');
+                        var tagAssoId = $('#toggleSelect2').val();
+
+                        var parentTag1 = String(tag1 + "_" + tag2).trim();
+
+                        if (!$('.trainingGroupTagPanel span[data-assoId="' + tagAssoId + '"][data-type="' + tagType + '"]').length) {
+                            var htmlString = htmlTagsTemplate.replace('{TagId}', tagAssoId).replace('{TagName}', parentTag1).replace('{TypeId}', tagType);
+                            $('.trainingGroupTagPanel .saveBox').before(htmlString);
+                            /// set always for fresh learner group set
+                            $('#TrainingGroupId').val('0');
+                        }
+
+                    }
+                }
+
+                $('.trainingGroupTagPanel').show();
+                clearTrainingPanel();
+            });
+
+            /// Save a Training group
+
+            $('#saveTrainingGroup').on('click', function () {
+                $('.saveBox .messageText').remove();
+                var $button = $(this);
+                var prev = $button.html();
+                $button.html('Processing <i class="fa fa-circle-o-notch fa-spin nofloat"></i>');
+                $button.attr('disabled', 'disabled');
+                var groupName = $('#TrainingGroupName').val().trim();
+
+                if (groupName.length == 0) {
+                    var output = LoadPageError({ HasError: true, Message: "Training group name is required" });
+                    $('.saveBox').append(output);
+                    $button.html(prev);
+                    $button.removeAttr('disabled');
+                    return;
+                }
+
+                if ($('.trainingGroupTagPanel span').length == 0) {
+                    var output = LoadPageError({ HasError: true, Message: "You must add at least one tag" });
+                    $('.saveBox').append(output);
+                    $button.html(prev);
+                    $button.removeAttr('disabled');
+                    return;
+                }
+
+                var tagArray = [];
+                $('.trainingGroupTagPanel span').each(function (i, item) {
+                    var tagObj = { Id: 0, Name: $(item).find('small').text().trim(), TagType: parseInt($(item).attr('data-type')), TagValue: parseInt($(item).attr('data-AssoId')) };
+                    tagArray.push(tagObj);
+                });
+
+                var group = { Id: $('#TrainingGroupId').val(), Name: groupName, Tags: tagArray }
+
+                $.ajax({
+                    cache: false,
+                    async: true,
+                    type: "POST",
+                    url: "/api/LearningGroup/SaveLearnerGroup",
+                    data: group,
+                    success: function (data) {
+                        $('#TrainingGroupId').val(data.Result.Id);
+                        ShowNotie(data)
+                        $('.saveBox').append(output);
+                        var newOption = '<option value="' + data.Result.Id + '">' + data.Result.Name + '</option>';
+                        $('#dummyTrainingGroup option').length ? $('#dummyTrainingGroup').append(newOption) : $('#dummyTrainingGroup').html(newOption);
+
+                    },
+
+                    error: function (data) {
+                        var message = data.status == 400 ? data.responseJSON.Message : data.statusText;
+                        ShowNotie({ HasError: true, Message: message });
+                        $('.saveBox .messageText').replaceWith(output);
+                    },
+                    complete: function (data) {
+                        $button.removeAttr('disabled');
+                        $button.html(prev);
+                    }
+                });
+
+
+
+            });
+
+            //// assign courses to training group
+
+            $('#AssignTraining').on('click', function () {
+                $('.saveBox .messageText').remove();
+                var $button = $(this);
+                var prev = $button.html();
+                $button.html('Processing <i class="fa fa-circle-o-notch fa-spin nofloat"></i>');
+                $button.attr('disabled', 'disabled');
+
+
+                if (!$('#CourseList input:checkbox:checked').length) {
+                    ShowNotie({ HasError: true, Message: "No Training selected" });
+                    $button.html(prev);
+                    $button.removeAttr('disabled');
+                    return;
+                }
+
+                if (!parseInt($('#TrainingGroupId').val()) || parseInt($('#TrainingGroupId').val() == 0)) {
+                    ShowNotie({ HasError: true, Message: "No Training Group selected" });
+                    $button.html(prev);
+                    $button.removeAttr('disabled');
+                    return;
+                }
+
+                var trainings = [];
+                $('#CourseList input:checkbox:checked').each(function (i, item) {
+                    var training = {
+                        TrainingId: $(item).attr('data-id'),
+                        LearningGroupId: parseInt($('#TrainingGroupId').val()),
+                    }
+                    trainings.push(training);
+                });
+                
+                $.ajax({
+                    cache: false,
+                    async: true,
+                    type: "POST",
+                    url: "/api/LearningGroup/AssignTrainingToTrainingGroup",
+                    data: { '': trainings },
+                    success: function (data) {
+                        ShowNotie(data);
+                    },
+
+                    error: function (data) {
+                        ShowNotie(data);
+                    },
+                    complete: function (data) {
+                        $button.removeAttr('disabled');
+                        $button.html(prev);
+                    }
+                });
+
+                
+            });
+
+            /// remove Tag
+
+            $('.trainingGroupTagPanel').on('click', '.removeTag', function () {
+                var $elem = $(this);
+                if ($elem.closest('span').attr('data-id') == "0") {
+                    $elem.closest('span').remove();
+                }
+            });
+
+
+            //// show users affected by tags
+            $('#showTrainingGroupUsers').on('click', function () {
+                var $button = $(this);
+                var prev = $button.html();
+                $button.attr("disabled", "disabled");
+                $button.html('Processing <i class="fa fa-circle-o-notch fa-spin nofloat"></i>');
+                var tagArray = [];
+                $('.trainingGroupTagPanel span').each(function (i, item) {
+                    var tagObj = {
+                        Id: 0, Name: $(item).find('small').text().trim(),
+                        TagType: parseInt($(item).attr('data-type')),
+                        TagValue: parseInt($(item).attr('data-AssoId'))
+                    };
+                    tagArray.push(tagObj);
+
+                });
+                if (!tagArray.length) {
+                    ShowNotie({ HasError: true, Message: "You must add at least one tag" });
+                    return;
+                }
+
+                if ($.fn.DataTable.isDataTable('#table_users')) {
+                    $('#table_users').DataTable().destroy();
+                }
+                $('#table_users tbody').empty();
+                $('#table_users').data("tags", tagArray);
+                console.log(tagArray)
+                console.log("Data:" + $('#table_users').data('tags'))
+                $('#table_users').DataTable({
+                    dom: '<"tanHead tanHP"f>rt<"counter"lip>',
+                    serverSide: true,
+                    ajax: {
+                        "url": '/api/LearningGroup/GetLearningGroupUsers',
+                        "data": function (d) {
+                            d.AdditionalParameters = JSON.stringify($('#table_users').data("tags"));
+                        },
+                        "type": "GET"
+                    },
+                    'language': {
+                        'search': '',
+                        'searchPlaceholder': 'Search...'
+                    },
+                    "fnDrawCallback": function (oSettings) {
+                        $('#TrainingGroupUserCount').html(oSettings.json.recordsTotal);
+                        $('#modalUsers').modal('show');
+
+                    },
+                    "order": [],
+                    columns: [
+                        { data: "FirstName" },
+                        { data: "LastName" },
+                        { data: "Department" },
+                        { data: "Branch" },
+                        { data: "Location" },
+                        { data: "Grade" },
+                        { data: "Sex" }
+                    ]
+                });
+                $button.html(prev);
+                $button.removeAttr("disabled");
+
+            });
+
+            var selectedId = $('.dummyTrainingGroup').attr('data-selected');
+            if (selectedId != undefined) {
+                if (parseInt(selectedId) && parseInt(selectedId) > 0) {
+
+                    $('#mainSelect').val("training").trigger('change', selectedId);
+                }
+
+            }
+        });
+
+
+        /// search for exams
+        $(document).on("keypress", ".searchT", function (e) {
+            if (e.which == 13) {
+                var data = { search: $('.searchT').val() }
+                $('#CourseList').html('<div class="leftOff loading"> <strong class="containers">Fetching Data...</strong></div>');
+                $.get("/api/LearningGroup/SearchTrainingToAssignByName", data, function (trainings) {
+
+                    if (trainings.Result.length == 0) {
+                        $('#CourseList').find('.loading strong').html('No results found');
+                        return;
+                    }
+                    trainings.Result.forEach(function (training) {
+
+                        $('#CourseList').append('<div class="leftOff">' +
+                            '<sup></sup>' +
+                            ' <label class="containers" >' + training.Name +
+                            '<input type= "checkbox" data-id="' + training.Id + '"> ' +
+                            '<span class="checkmark"></span > ' +
+                            '</label>' +
+                            '</div>');
+                        $('#CourseList').find('.loading').remove();
+                    });
+
+
+                });
+                // $('#SelectLearningArea option:first').prop('selected', true);
+            }
+        });
+
+        function clearTrainingPanel() {
+            $('#mainSelect option:first').prop('selected', true);
+            $('#toggleSelect1 option:first').prop('selected', true);
+            $('#toggleSelect1').select2();
+            $('#toggleSelect2').html('');
+            $('#toggleSelect2').parent().hide();
+
+            $('#toggleSelect1').html('<option value="0">Choose a selection type</option>');
+            $('#toggleSelect1').attr('disabled', 'disbaled');
+            $('#toggleSelect1').select2();
+            $('#toggleSelect1').removeAttr('data-type');
+            $('#toggleSelect1').removeAttr('data-next');
+            $('#toggleSelect1').removeAttr('data-next-type');
+
+        }
+        function bindSavedLearnerTags($elem) {
+
+            $('#toggleSelect1 option').each(function (i, item) {
+                var val = $(item).attr('value');
+                var tagObj = $elem.find(' option[value="' + val + '"]').data('tag');
+                $(item).data('tag', tagObj);
+            });
+
+        }
+    </script>
+
+}

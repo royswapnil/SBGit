@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8BF09689-8972-4C0E-9BBF-E0B18CC4EF51}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>SterlingBankLMS.Core</RootNamespace>
+    <AssemblyName>SterlingBankLMS.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging|AnyCPU'">
+    <OutputPath>bin\Staging\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Redis, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Redis.1.2.6\lib\net46\StackExchange.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Z.EntityFramework.Plus.EF6, Version=1.7.14.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Z.EntityFramework.Plus.EF6.1.7.14\lib\net45\Z.EntityFramework.Plus.EF6.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Caching\Extensions.cs" />
+    <Compile Include="Caching\ICacheManager.cs" />
+    <Compile Include="Caching\MemoryCacheManager.cs" />
+    <Compile Include="DTO\AdvertDto.cs" />
+    <Compile Include="DTO\AssignedCourseDto.cs" />
+    <Compile Include="DTO\AssignedTrainingModel.cs" />
+    <Compile Include="DTO\BranchDto.cs" />
+    <Compile Include="DTO\CertificateDto.cs" />
+    <Compile Include="DTO\ClaSurveyDto.cs" />
+    <Compile Include="DTO\ClaSurveyQuestionDto.cs" />
+    <Compile Include="DTO\ClaSurveyQuestionOptionDto.cs" />
+    <Compile Include="DTO\CompletedModuleDto.cs" />
+    <Compile Include="DTO\CourseDetailDto.cs" />
+    <Compile Include="DTO\CourseDto.cs" />
+    <Compile Include="DTO\CourseModuleNameDto.cs" />
+    <Compile Include="DTO\CourseProgressDto.cs" />
+    <Compile Include="DTO\DepartmentBudgetDto.cs" />
+    <Compile Include="DTO\DropdownListDto.cs" />
+    <Compile Include="DTO\EmployeeCertificateDto.cs" />
+    <Compile Include="DTO\EmployeeDto.cs" />
+    <Compile Include="DTO\EmployeeTrainingRecordDto.cs" />
+    <Compile Include="DTO\ExaminationDto.cs" />
+    <Compile Include="DTO\ExaminationResponseDto.cs" />
+    <Compile Include="DTO\LearningAreaDto.cs" />
+    <Compile Include="DTO\LearningGroupDto.cs" />
+    <Compile Include="DTO\LearningGroupUserDto.cs" />
+    <Compile Include="DTO\LessonDto.cs" />
+    <Compile Include="DTO\LessonNameDto.cs" />
+    <Compile Include="DTO\ClaCourseDto.cs" />
+    <Compile Include="DTO\ClaLessonDto.cs" />
+    <Compile Include="DTO\ClaModuleDto.cs" />
+    <Compile Include="DTO\MakerCheckerDto.cs" />
+    <Compile Include="DTO\NotificationDto.cs" />
+    <Compile Include="DTO\OrganizationDto.cs" />
+    <Compile Include="DTO\QuizOptionDto.cs" />
+    <Compile Include="DTO\QuizQuestionDto.cs" />
+    <Compile Include="DTO\QuizResponseDto.cs" />
+    <Compile Include="DTO\QuizSummaryScoreDto.cs" />
+    <Compile Include="DTO\ReportDto.cs" />
+    <Compile Include="DTO\SurveyDto.cs" />
+    <Compile Include="DTO\SurveyOptionDto.cs" />
+    <Compile Include="DTO\SurveyQuestionDto.cs" />
+    <Compile Include="DTO\TemplateDto.cs" />
+    <Compile Include="DTO\TicketDto.cs" />
+    <Compile Include="DTO\TrainingCalendarDto.cs" />
+    <Compile Include="DTO\TrainingDto.cs" />
+    <Compile Include="DTO\TrainingRequestDto.cs" />
+    <Compile Include="DTO\TrainingVideoDto.cs" />
+    <Compile Include="DTO\UserCertificateDto.cs" />
+    <Compile Include="DTO\UserCourseCompletedLessonDto.cs" />
+    <Compile Include="DTO\UserCourseStatusDto.cs" />
+    <Compile Include="DTO\UserDto.cs" />
+    <Compile Include="DTO\UserCourseDto.cs" />
+    <Compile Include="DTO\WatchedLessonDto.cs" />
+    <Compile Include="Factories\BranchFactory.cs" />
+    <Compile Include="Factories\CertificateFactory.cs" />
+    <Compile Include="DTO\UserExamDto.cs" />
+    <Compile Include="Factories\CommentsFactory.cs" />
+    <Compile Include="Factories\CourseLikeFactory.cs" />
+    <Compile Include="Factories\DepartmentBudgetFactory.cs" />
+    <Compile Include="Factories\ExaminationAttemptFactory.cs" />
+    <Compile Include="Factories\UserExaminationFactory.cs" />
+    <Compile Include="Factories\ExaminationFactory.cs" />
+    <Compile Include="Factories\ExaminationQuestionFactory.cs" />
+    <Compile Include="Factories\ExaminationQuizResponseFactory.cs" />
+    <Compile Include="Factories\FAQFactory.cs" />
+    <Compile Include="Factories\ForumFactory.cs" />
+    <Compile Include="Factories\AdvertFactory.cs" />
+    <Compile Include="Factories\CourseFactory.cs" />
+    <Compile Include="Factories\GradeFactory.cs" />
+    <Compile Include="Factories\GroupFactory.cs" />
+    <Compile Include="Factories\LearningGroupFactory.cs" />
+    <Compile Include="Factories\LessonFactory.cs" />
+    <Compile Include="Factories\DepartmentFactory.cs" />
+    <Compile Include="Factories\LearningAreaFactory.cs" />
+    <Compile Include="Factories\LessonProgressFactory.cs" />
+    <Compile Include="Factories\LinemanagerFactory.cs" />
+    <Compile Include="Factories\MailExemptedUsersFactory.cs" />
+    <Compile Include="Factories\MailsFactory.cs" />
+    <Compile Include="Factories\MessageQueueFactory.cs" />
+    <Compile Include="Factories\ModuleFactory.cs" />
+    <Compile Include="Factories\NotificationFactory.cs" />
+    <Compile Include="Factories\NotificationHubFactory.cs" />
+    <Compile Include="Factories\OrganizationFactory.cs" />
+    <Compile Include="Factories\QuizQuestionFactory.cs" />
+    <Compile Include="Factories\QuizResponseFactory.cs" />
+    <Compile Include="Factories\RegionFactory.cs" />
+    <Compile Include="Factories\ReportFactory.cs" />
+    <Compile Include="Factories\SupportFactory.cs" />
+    <Compile Include="Factories\SurveyFactory.cs" />
+    <Compile Include="Factories\SurveyQuestionFactory.cs" />
+    <Compile Include="Factories\SurveyResponseFactory.cs" />
+    <Compile Include="Factories\SurveyTemplateFactory.cs" />
+    <Compile Include="Factories\TicketFactory.cs" />
+    <Compile Include="Factories\TrainingBudgetExpenditureFactory.cs" />
+    <Compile Include="Factories\TrainingFactory.cs" />
+    <Compile Include="Factories\TrainingRequestFactory.cs" />
+    <Compile Include="Factories\TrainingVideoFactory.cs" />
+    <Compile Include="Factories\UserCertificateFactory.cs" />
+    <Compile Include="Factories\CourseReviewFactory.cs" />
+    <Compile Include="Factories\UserCourseFactory.cs" />
+    <Compile Include="Factories\UserFactory.cs" />
+    <Compile Include="Factories\UserLessonQuizFactory.cs" />
+    <Compile Include="Factories\UserSurveyFactory.cs" />
+    <Compile Include="Factories\UserTrainingFactory.cs" />
+    <Compile Include="Helper\AppHelper.cs" />
+    <Compile Include="Helper\CollectionHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SterlingBankLMS.Data\SterlingBankLMS.Data.csproj">
+      <Project>{7fc465b8-d02f-4c86-9935-6efac91c2f5f}</Project>
+      <Name>SterlingBankLMS.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,675 @@
+﻿@model SterlingBankLMS.Core.DTO.DepartmentBudgetDto
+@using Vereyon.Web
+@{
+    ViewBag.Title = "Training Budget";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+}
+<link href="~/Content/css/select2.min.css" rel="stylesheet" />
+
+<div class="banner1 bkPurple">
+    <i class="material-icons menuBtn1">menu</i>
+    <span class="changetext">Manage Training Budget</span>
+    <div id="tt" style="text-align:center; display:none;">
+        <strong></strong><span class="header"></span>
+    </div>
+</div>
+
+
+<div class="content1">
+
+    <div class="boxHead1" style="border-bottom:none">
+        <a href="@Url.Action("TrainingBudget","ManageTraining",new { area="Admin"})">
+            <button class="btn bkSkyBlue goback" style="margin-bottom: 10px; display:none;">
+                Back To List
+            </button>
+        </a>
+        
+
+        <a href="@Url.Action("NewTrainingBudget","ManageTraining",new { area="Admin"})">
+            <button class="btn bkSkyBlue addNewBudget" style="margin-bottom: 10px;float: right;">
+                Add New Budget <i class="fa fa-plus"></i>
+            </button>
+        </a>
+
+        <a href="#">
+            <button class="btn bkSkyBlue addNewExpenditure" style="margin-bottom: 10px;float: right; display:none;">
+                Add New Expenditure <i class="fa fa-plus"></i>
+            </button>
+        </a>
+
+    </div>
+    
+        <div class="boxBody1" style="padding:0">
+
+            <div id="BudgetTablePanel">
+
+                <div class="tableRanch">
+
+                    <table id="BudgetTable" class="courselist">
+                        <thead>
+                            <tr>
+                                <td>Group</td>
+                                <td>Region</td>
+                                <td>Amount Allocated</td>
+                                <td>Amount Remaining</td>
+                                <td>Year</td>
+                                <td>Expenditure</td>
+                                <td>Action</td>
+                            </tr>
+                        </thead>
+                        <tr class="empty">
+                            <td colspan="7">
+                                Fetching Data <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+
+            </div>
+
+            <div id="ExpenditureTablePanel" style="display:none;">
+
+                <div class="tableRanch">
+
+                    <table id="ExpenditureTable" class="courselist">
+                        <thead>
+                            <tr>
+                                <td>Training Name</td>
+                                <td>Training Date</td>
+                                <td>Training Location</td>
+                                <td>Number of Participant</td>
+                                <td>Amount Spent</td>
+                            </tr>
+                        </thead>
+                        <tr class="empty">
+                            <td colspan="5">
+                                Fetching Data <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+
+            </div>
+            <div id="NewExpenditure" style="display:none;">
+
+                <div class="formArea formArea1">
+                    <form id="formExpenditure">
+
+                        <input name="DepartmentBudgetId" id="DepartmentBudgetId" type="hidden" />
+                        <input name="GroupId" id="GroupId" type="hidden" />
+                        <input name="RegionId" id="RegionId" type="hidden" />
+                        <div class="formBox1 halfForm">
+                            <label for="">Training Name:</label>
+                            <select id="TrainingId" name="TrainingId" class="select2"></select>
+                        </div>
+                        <div class="formBox1 halfForm">
+                            <label for="">Amount Spent(&#8358;):</label>
+                            @Html.EditorFor(model => model.AmountSpent, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+
+                        <div class="formBox1 halfForm">
+                            <label for="">Number of Participant</label>
+                            <input type="text" id="NumberOfParticipants" name="NumberOfParticipants" class="form-control" />
+                        </div>
+
+                        
+                        <div class="formBox1 halfForm">
+                            <label for="">Outstanding:</label>
+                            <input type="text" id="AmountRemaining" class="form-control" readonly />
+                        </div>
+
+                        <div class="underlineBtn">
+                            <button class="nextBtn btnMedium bkGreen" type="submit">Save Expenditure</button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+
+            <div id="BudgetUpdatePanel" style="display:none;">
+
+                <div class="formArea formArea1">
+                    <form id="formBudget">
+
+                        <input name="Id" id="Id" type="hidden" />
+                        <div class="formBox1 halfForm">
+                            <label for="">Group Name:</label>
+                            <select id="GroupId1" name="GroupId" class="select2">
+                                <option>Select a Group</option>
+                            </select>
+                        </div>
+                        <div class="formBox1 halfForm">
+                            <label for="">Region Name:</label>
+                            <select id="RegionId1" name="RegionId" class="select2">
+                                <option>Select a Group</option>
+                            </select>
+                        </div>
+
+                        <div class="formBox1 halfForm">
+                            <label for="">Budget(&#8358;):</label>
+                            @Html.EditorFor(model => model.Budget, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+
+                        <div class="formBox1 halfForm">
+                            <label for="">Year</label>
+                            <input type="text" id="Year" name="Year" class="form-control" />
+                        </div>
+
+                        <div class="formBox1 halfForm">
+                            <label for="">Amount Spent :</label>
+                            <input type="text" id="AmountSpent1" class="form-control" readonly />
+                        </div>
+                        <div class="formBox1 halfForm">
+                            <label for="">Outstanding:</label>
+                            <input type="text" id="AmountRemaining1" class="form-control" readonly />
+                        </div>
+
+                        <div class="underlineBtn">
+                            <button class="nextBtn btnMedium bkGreen" type="submit">Update</button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+</div>
+
+
+@section Scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Content/js/additional-methods.min.js"></script>
+    <script src="~/Content/js/CustomValidation.js"></script>
+    <script src="~/Content/js/datatables.min.js"></script>
+    <script src="~/Content/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            //Load the Budget table
+
+
+            var jqTable = $('#BudgetTable').DataTable({
+                dom: '<"tanHead tanHP"f>rt<"counter"lip>',
+                "autoWidth": false,
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    "url": '/api/ManageTraining/GetBudget',
+                    "type": "GET"
+                },
+                'language': {
+                    'search': '',
+                    'searchPlaceholder': 'Search...'
+                },
+                "fnDrawCallback": function (oSettings) {
+                },
+                "order": [],
+                columns: [
+                    {
+                        bSortable: true,
+                        "render": function (d, i, data) {
+
+                            return data.GroupName;
+                        }
+                    },
+                    {
+                        bSortable: true,
+                        "render": function (d, i, data) {
+
+                            return data.RegionName;
+                        }
+                    },
+                    {
+                        "render": function (d, r, data) {
+                            return data.BudgetFormat;
+                        }
+                    },
+                    {
+                        "render": function (d, i, data) {
+                            return data.AmountRemainingFormat;
+                        }
+                    },
+
+                    {
+                        bSortable: true,
+                        "render": function (d, r, data) {
+                            return data.Year;
+                        }
+                    },
+                    {
+                        bSortable: false,
+                        className: "action-buttons",
+                        "render": function (d, i, data) {
+
+                            return '<button class="table-configure btnSmaller bkGreen" href="javascript:;"> <i class="fa fa-cog table-icon" style=""></i> Configure	</button>' +
+
+                                '<input type="hidden"data-year="' + data.Year + '" data-groupName="' + data.GroupName + '" data-regionName="' + data.RegionName + '" data-group="' + data.GroupId + '" data-region="' + data.RegionId + '" value="' + data.Id + '"/>';
+                        }
+                    },
+                    {
+                        bSortable: false,
+                        className: "action-buttons",
+                        "render": function (d, i, data) {
+
+                            return '<button class="table-view btnSmaller bkPurple" href="javascript:;"> <i class="fa fa-edit table-icon" style=""></i> View/Edit	</button>' +
+
+                                '<input type="hidden" value="' + data.Id + '"/>';
+                        }
+                    }
+                ]
+            });
+
+            jqTable.on('draw', function () {
+
+                $('.tableRanch').find('input[type="search"]').addClass('searchT');
+                // reset();
+            });
+
+            //disable letter inputs, allowing only number inputs
+            $("input[id*='Budget']").keydown(function (event) {
+
+                if (event.shiftKey == true) {
+                    event.preventDefault();
+                }
+
+                if ((event.keyCode >= 48 && event.keyCode <= 57) ||
+                    (event.keyCode >= 96 && event.keyCode <= 105) ||
+                    event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 ||
+                    event.keyCode == 39 || event.keyCode == 46 || event.keyCode == 190) {
+
+                } else {
+                    event.preventDefault();
+                }
+
+                if ($(this).val().indexOf('.') !== -1 && event.keyCode == 190)
+                    event.preventDefault();
+            });
+            $("input[id*='AmountSpent']").keydown(function (event) {
+
+                if (event.shiftKey == true) {
+                    event.preventDefault();
+                }
+
+                if ((event.keyCode >= 48 && event.keyCode <= 57) ||
+                    (event.keyCode >= 96 && event.keyCode <= 105) ||
+                    event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 ||
+                    event.keyCode == 39 || event.keyCode == 46 || event.keyCode == 190) {
+
+                } else {
+                    event.preventDefault();
+                }
+
+                if ($(this).val().indexOf('.') !== -1 && event.keyCode == 190)
+                    event.preventDefault();
+            });
+
+            $("input[id*='Year']").keydown(function (event) {
+
+                if (event.shiftKey == true) {
+                    event.preventDefault();
+                }
+
+                if ((event.keyCode >= 48 && event.keyCode <= 57) ||
+                    (event.keyCode >= 96 && event.keyCode <= 105) ||
+                    event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 ||
+                    event.keyCode == 39 || event.keyCode == 46 || event.keyCode == 190) {
+
+                } else {
+                    event.preventDefault();
+                }
+
+                if ($(this).val().indexOf('.') !== -1 && event.keyCode == 190)
+                    event.preventDefault();
+            });
+            $("input[id*='NumberOfParticipants']").keydown(function (event) {
+
+                if (event.shiftKey == true) {
+                    event.preventDefault();
+                }
+
+                if ((event.keyCode >= 48 && event.keyCode <= 57) ||
+                    (event.keyCode >= 96 && event.keyCode <= 105) ||
+                    event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 ||
+                    event.keyCode == 39 || event.keyCode == 46 || event.keyCode == 190) {
+
+                } else {
+                    event.preventDefault();
+                }
+
+                if ($(this).val().indexOf('.') !== -1 && event.keyCode == 190)
+                    event.preventDefault();
+            });
+
+
+            $("#BudgetTable tbody").on("click", "td.action-buttons button.table-view", function () {
+                $.get('/api/ManageTraining/GetGroupNames', function (data) {
+
+                    data.Result.forEach(function (option) {
+                        $('#GroupId1').append('<option value="' + option.Id + '">' + option.Name + '</option>');
+                    });
+                    $('#GroupId1').select2({ 'width': '100%' });
+                });
+
+                $.get('/api/ManageTraining/GetRegionNames', function (data) {
+
+                    data.Result.forEach(function (option) {
+                        $('#RegionId1').append('<option value="' + option.Id + '">' + option.Name + '</option>');
+                    });
+                    $('#RegionId1').select2({ 'width': '100%' });
+                });
+
+                var tr = $(this).closest("tr");
+                var id = $(this).closest("td").find('input').val();
+                $('.content1 .messageText').remove();
+                var $button = $(this);
+                var prev = $button.html();
+
+                if (!parseInt(id) && parseInt(id) <= 0) {
+                    return;
+                }
+
+                $button.attr('disabled', 'disabled');
+                $button.find('i').removeClass('fa-edit');
+                $button.find('i').addClass('fa-circle-o-notch fa-spin');
+
+                $.ajax({
+                    cache: false,
+                    async: true,
+                    type: "Get",
+                    url: "/api/ManageTraining/GetGroupBudget",
+                    data: { Id: id },
+                    success: function (data) {
+                        // Bind Budget Form
+                        if (!data.HasError) {
+                            window.location.href = "#updatebudget?group=" + data.Result.GroupName + "&region=" + data.Result.RegionName;
+                            $('#Budget').val(data.Result.Budget);
+                            $('#Year').val(data.Result.Year);
+                            $('#AmountSpent1').val(data.Result.AmountSpentFormat);
+                            $('#AmountRemaining1').val(data.Result.AmountRemainingFormat);
+                            $('#RegionId1').find('option[value="' + data.Result.RegionId + '"]').prop('selected', true);
+                            $('#GroupId1').find('option[value="' + data.Result.GroupId + '"]').prop('selected', true);
+                            $('.changetext').html("View/Update Training");
+                            $('#Id').val(data.Result.Id);
+                            $('.content1').css("background", "#ffffff");
+                            $('#RegionId1').select2({ 'width': '100%' });
+                            $('#GroupId1').select2({ 'width': '100%' });
+                            $button.removeAttr('disabled');
+                            $button.html(prev);
+                            $('#BudgetTablePanel').fadeOut();
+                            $('.addNewBudget').hide();
+                            $('.goback').show();
+                            $('#BudgetUpdatePanel').fadeIn();
+                        }
+                        else {
+                            ShowNotie(data)
+                        }
+
+                    },
+                    error: function (data) {
+                        ShowNotie(data);
+                        $button.removeAttr('disabled');
+                        $button.html(prev);
+                    }
+                });
+
+
+            });
+
+            $("#formBudget").validate({
+                ignore: [],
+                rules: {
+                    Year: { required: true },
+                    budget: { required: true },
+                    GroupId: 'dropdown',
+                },
+
+                errorPlacement: function ($error, $element) {
+                    $error.addClass('errorHolder');
+                    $element.closest('.formBox1').find('label:first').after($error);
+                },
+                submitHandler: function (form) {
+
+                    var $button = $(form).find(':submit');
+                    var prev = $button.html();
+                    $button.attr('disabled', 'disabled');
+                    $button.html('Processing <i class="fa fa-circle-o-notch fa-spin pull-right"></i>');
+
+                    var formData = new FormData(form);
+                    console.log(formData);
+                    $.ajax({
+                        cache: false,
+                        async: true,
+                        type: "POST",
+                        url: "/api/ManageTraining/UpdateTrainingBudget",
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (data) {
+                            if (!data.HasError) {
+                                ShowNotie(data);
+                                $button.html('').html('Update');
+                                $button.attr('disabled', false);
+                            }
+                            else {
+                                $button.html('').html('Update');
+                                $button.attr('disabled', false);
+                                ShowNotie(data);
+                            }
+
+                        },
+
+                        error: function (data) {
+                            ShowNotie({ HasError: true, Message: "An error occurred when processing your request" });
+                        },
+                        complete: function (data) {
+                            $button.removeAttr('disabled');
+                            $button.html(prev);
+                        }
+                    });
+
+                }
+            });
+
+            $("#BudgetTable tbody").on("click", "td.action-buttons button.table-configure", function (e) {
+                e.preventDefault();
+                var tr = $(this).closest("tr");
+                var $id = $(this).closest("td").find('input').val();
+                var $groupId = $(this).closest('td').find('input').attr('data-group');
+                var $regionId = $(this).closest('td').find('input').attr('data-region');
+                var $groupName = $(this).closest('td').find('input').attr('data-groupName');
+                var $regionName = $(this).closest('td').find('input').attr('data-regionName');
+                var $year = $(this).closest('td').find('input').attr('data-year');
+
+                $('.content1 .messageText').remove();
+                var $button = $(this);
+                var prev = $button.html();
+
+                if (!parseInt($id) && parseInt($id) <= 0) {
+                    return;
+                }
+                if (!parseInt($groupId) && parseInt($groupId) <= 0) {
+                    return;
+                } if (!parseInt($regionId) && parseInt($regionId) <= 0) {
+                    return;
+                }
+
+                $button.attr('disabled', 'disabled');
+                $button.find('i').removeClass('fa-cog');
+                $button.find('i').addClass('fa-circle-o-notch fa-spin');
+                $('#BudgetTablePanel').fadeOut();
+                $('#ExpenditureTablePanel').fadeIn();
+                $('.addNewBudget').hide();
+                $('.addNewExpenditure').show();
+                $('.addNewExpenditure').attr('data-budgetId', $id);
+                $('.addNewExpenditure').attr('data-groupId', $groupId);
+                $('.addNewExpenditure').attr('data-regionId', $regionId);
+                $('.addNewExpenditure').attr('data-groupName', $groupName);
+                $('.addNewExpenditure').attr('data-regionName', $regionName);
+                $('.addNewExpenditure').prop('data-year', $year);
+                $('.goback').show();
+                var data = { GroupId: $groupId, RegionId: $regionId }
+                var jqTable = $('#ExpenditureTable').DataTable({
+                    dom: '<"tanHead tanHP"f>rt<"counter"lip>',
+                    "autoWidth": false,
+                    processing: true,
+                    serverSide: true,
+                    ajax: {
+                        "url": '/api/ManageTraining/GetGroupExpenditures',
+                        "type": "GET",
+                        "data": function (d) {
+                            d.AdditionalParameters = JSON.stringify(data);
+                        },
+                    },
+                    'language': {
+                        'search': '',
+                        'searchPlaceholder': 'Search...'
+                    },
+                    "fnDrawCallback": function (oSettings) {
+                        $('#tt').show();
+                        $('.header').html('(' + $('.addNewExpenditure').attr('data-groupName') + '/' + $('.addNewExpenditure').attr('data-regionName')+')')
+                        //$('.header').html('(' + oSettings.json.data[0].GroupName + '/' + oSettings.json.data[0].RegionName + ')');
+                        $('.changetext').html('Training Expenditure for ' + $('.addNewExpenditure').prop('data-year'));
+                        //$('.addNewExpenditure').attr('data-budgetId', oSettings.json.data[0].DepartmentBudgetId)
+                        //$('.addNewExpenditure').attr('data-groupId', oSettings.json.data[0].GroupId);
+                        //$('.addNewExpenditure').attr('data-regionId', oSettings.json.data[0].RegionId)
+                        window.location.href = "#updateexpenditure?group=" + $('.addNewExpenditure').attr('data-groupName') + "&region=" + $('.addNewExpenditure').attr('data-regionName');
+                    },
+                    "order": [],
+                    columns: [
+                        {
+                            bSortable: true,
+                            "render": function (d, i, data) {
+
+                                return data.TrainingName;
+                            }
+                        },
+                        {
+                            bSortable: true,
+                            "render": function (d, i, data) {
+
+                                return data.TrainingDateFormat;
+                            }
+                        },
+                        {
+                            "render": function (d, r, data) {
+                                return data.TrainingLocationFormat;
+                            }
+                        },
+                        {
+                            "render": function (d, i, data) {
+                                return data.NumberOfParticipants;
+                            }
+                        },
+
+                        {
+                            bSortable: true,
+                            "render": function (d, r, data) {
+                                return data.AmountExpendedFormat;
+                            }
+                        }
+                    ]
+                });
+
+                jqTable.on('draw', function () {
+
+                    $('.tableRanch').find('input[type="search"]').addClass('searchT');
+                    // reset();
+                });
+            });
+
+            $('.addNewExpenditure').on('click', function (e) {
+                e.preventDefault();
+                var $budgetId = $(this).attr('data-budgetId');
+                var $groupId = $(this).attr('data-groupId');
+                var $regionId = $(this).attr('data-regionId');
+                var $regionName = $(this).attr('data-regionName');
+                var $groupName = $(this).attr('data-groupName');
+                var $year = $(this).prop('data-year');
+                window.location.href = "#saveexpenditure?group=" + $groupName + "&region=" + $regionName;
+                $('#RegionId').val($regionId);
+                $('#GroupId').val($groupId);
+                $('#DepartmentBudgetId').val($budgetId);
+                var $button = $(this);
+                var prev = $button.html();
+                $button.attr('disabled', 'disabled');
+                $button.find('i').removeClass('fa-plus');
+                $button.find('i').addClass('fa-circle-o-notch fa-spin');
+
+                $.get('/api/ManageTraining/GetTrainingNames', function (data) {
+                    $('#TrainingId').html('<option value="0">Select a training </option>');
+                    data.Result.forEach(function (option) {
+                        $('#TrainingId').append('<option value="' + option.Id + '">' + option.Name + '</option>');
+                    });
+                    $('#TrainingId').select2({ 'width': '100%' });
+                });
+                $('#ExpenditureTablePanel').fadeOut();
+                $('#NewExpenditure').fadeIn();
+                $('.changetext').html('New Expenditure ' + $year);
+                $('.header').html('(' + $groupName + '/' + $regionName + ')')
+                $('.expBack').show();
+                $('.addNewExpenditure').hide();
+            });
+
+            $("#formExpenditure").validate({
+                ignore: [],
+                rules: {
+                    NumberOfParticipants: { required: true },
+                    AmountSpent: { required: true },
+                    TrainingId: 'dropdown',
+                },
+
+                errorPlacement: function ($error, $element) {
+                    $error.addClass('errorHolder');
+                    $element.closest('.formBox1').find('label:first').after($error);
+                },
+                submitHandler: function (form) {
+
+                    var $button = $(form).find(':submit');
+                    var prev = $button.html();
+                    $button.attr('disabled', 'disabled');
+                    $button.html('Processing <i class="fa fa-circle-o-notch fa-spin pull-right"></i>');
+
+                    var formData = new FormData(form);
+                    console.log(formData);
+                    $.ajax({
+                        cache: false,
+                        async: true,
+                        type: "POST",
+                        url: "/api/ManageTraining/SaveNewExpenditure",
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (data) {
+                            if (!data.HasError) {
+                                $('#AmountRemaining').val(data.Result);
+                                ShowNotie(data);
+                                $button.html('').html('Save Expenditure');
+                                $button.attr('disabled', false);
+                            }
+                            else {
+                                $button.html('').html('Save Expenditure');
+                                $button.attr('disabled', false);
+                                ShowNotie(data);
+                            }
+
+                        },
+
+                        error: function (data) {
+                            ShowNotie({ HasError: true, Message: "An error occurred when processing your request" });
+                        },
+                        complete: function (data) {
+                            $button.removeAttr('disabled');
+                            $button.html(prev);
+                        }
+                    });
+
+                }
+            });
+
+        })
+    </script>
+}

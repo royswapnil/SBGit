@@ -1,0 +1,83 @@
+﻿<emp-header></emp-header>
+<div class="wrapper">
+    <div class="breadcrum" style="background-image: url('/Content/img/course_catalog (1).jpg')">
+        <div class="col8">
+            <div class="headcrum"></div>
+            <div class="bodycrum"></div>
+        </div>
+
+        <div class="col4">
+            <div class="headcrum">Customer Service Representative</div>
+            <div class="bodycrum">
+                <i class="material-icons">room</i>  <i>Marina, Lagos</i>
+            </div>
+            <div class="bodycrum">
+                <i style="font-size: 12px;margin-top: 3px;">Staff ID: </i>  <b>001558</b>
+            </div>
+        </div>
+    </div>
+
+    <div class="searchArea" style="background: #993d61;">
+        <div class="searchbox">
+            <input type="text" placeholder="Search Courses" /> <i class="material-icons">search</i>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="col12">
+            <div class="long">
+                <div class="line borderBottomPink">Course Catalog</div>
+            </div>
+
+            <div class="change">
+                <div class="holder">
+                    <span>SORT BY</span>
+                    <select>
+                        <option value="">All departments</option>
+                        <option value="">course length</option>
+                        <option value="">certificate type</option>
+                    </select>
+                </div>
+
+                <div class="holder">
+                    <span> &emsp; OR</span>
+                    <select>
+                        <option value="">Learning areas</option>
+                        <option value="">course length</option>
+                        <option value="">certificate type</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 col-md-offset-3 indloading" role="alert" *ngIf="indLoading"><img src="../../Content/img/loading.gif" width="32" height="32" /> Loading...</div>
+            <!-- Course Item -->
+            <div class="col44 courseItem" *ngFor="let item of courses | paginate:{itemsPerPage:4, currentPage:p}">
+                <a [routerLink]="['/course',item.Id]" [queryParams]="{}">
+                    <div class="courseImg" [style.background-image]="'url('+item.ImageUrl+')'"><i class="material-icons">visibility</i></div>
+                </a>
+                <div class="text">
+                    <a [routerLink]="['/course',item.Id]" [queryParams]="{}"><h5 class="pink">{{item.CourseName|slice:0:50}}</h5></a>
+                    <p>
+                        {{item.CourseDescription|slice:0:180}}
+                        <br>
+                        <br> <i>Available till: </i>  <b> &nbsp; {{item.DueDate| date:'dd-MM-yyyy'}}</b>
+                    </p>
+                </div>
+                <div class="stars">
+                    <i class="material-icons unmark">star</i>
+                    <i class="material-icons unmark">star</i>
+                    <i class="material-icons mark">star_half</i>
+                    <i class="material-icons mark">star</i>
+                    <i class="material-icons mark">star</i>
+                </div>
+
+            </div>
+            <!-- End of Course Item -->
+            <!-- Course Item -->
+            <div class="col-md-6 col-md-offset-3" style="margin-top:40px">
+                <pagination-controls (pageChange)="p=$event"></pagination-controls>
+            </div>
+        </div>
+        
+    </div>
+</div>
+<emp-footer></emp-footer>

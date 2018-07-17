@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="002b6bf1e7db46009bab76bbe594ce3f" Name="Diagram1">
+        <EntityTypeShape EntityType="SterlingBankDb.SBLMSMay15Model.AspNetUser" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SterlingBankDb.SBLMSMay15Model.Comment" Width="1.5" PointX="7.5" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="SterlingBankDb.SBLMSMay15Model.Post" Width="1.5" PointX="5.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SterlingBankDb.SBLMSMay15Model.User" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <AssociationConnector Association="SterlingBankDb.SBLMSMay15Model.User_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="SterlingBankDb.SBLMSMay15Model.FK_dbo_Comments_dbo_Posts_PostId" ManuallyRouted="false" />
+        <AssociationConnector Association="SterlingBankDb.SBLMSMay15Model.FK_dbo_Comments_dbo_User_CreatedById" ManuallyRouted="false" />
+        <AssociationConnector Association="SterlingBankDb.SBLMSMay15Model.FK_dbo_Comments_dbo_User_LastModifiedById" ManuallyRouted="false" />
+        <AssociationConnector Association="SterlingBankDb.SBLMSMay15Model.FK_dbo_Comments_dbo_User_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="SterlingBankDb.SBLMSMay15Model.FK_dbo_Posts_dbo_User_CreatedById" ManuallyRouted="false" />
+        <AssociationConnector Association="SterlingBankDb.SBLMSMay15Model.FK_dbo_Posts_dbo_User_LastModifiedById" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

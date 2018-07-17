@@ -1,0 +1,353 @@
+﻿
+@{
+    ViewBag.Title = "All Users";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link href="~/Content/css/royal.css" rel="stylesheet" />
+<link href="~/Content/css/tags_editor.min.css" rel="stylesheet" />
+<link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />
+<link href="~/Content/css/datepicker.css" rel="stylesheet" />
+<style>
+    .row {
+        margin-bottom:15px;
+    }
+</style>
+<div class="banner1 bkRed">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>User Management</span>
+</div>
+
+
+
+
+<div class="content1" style="background: #fff;min-height: 90vh;">
+
+    <div class="boxHead1">
+        <div class="boxHeader1 bDSkyBlue text">All Users</div>
+    </div>
+
+    <div class="pinA addNewUser" style="float: right;">
+        <button class="bkTorBlue pull-right" style="margin:0">Add new User <i class="fa fa-cogs"></i></button>
+    </div>
+
+    <div class="pinA viewUserTable" style="float: right; display:none">
+        <button class="bkTorBlue pull-right no-margin" style="margin:0">View Users <i class="fa fa-tasks"></i></button>
+    </div>
+    <div class="boxBody1" style="margin-top:-10px;">
+        <div id="UserTablePanel">
+            <div class="tableRanch">
+                <table class="courselist" id="UserTable">
+                    <thead>
+                        <tr>
+                            <td>Employee Name</td>
+                            <td>Date Of Employment</td>
+                            <td>Email</td>
+                            <td>Roles</td>
+                            <td>Status</td>
+                        </tr>
+                    </thead>
+                    <tr class="empty">
+                        <td colspan="6">
+                            Fetching Data <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+
+        <div class="addUserPanel" style="display:none">
+
+            <div class="profile">
+
+                <div class="col-sm-10 col-sm-offset-1">
+                    <span class="hint">Create a brand new user and add to the LMS</span>
+                </div>
+
+                <div class="errorHolder nofloat"></div>
+                <form id="UserForm" method="post">
+
+                  
+
+                        <div class="col-sm-10 col-sm-offset-1">
+                   
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2">First Name:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="FirstName" id="FirstName" class="form-control">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2">Last Name:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="LastName" id="LastName" class="form-control">
+                                    </div>
+
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2">Gender:</label>
+                                    <div class="col-sm-8">
+                                        <select name="Gender" id="Gender" class="form-control">
+                                            <option value="0">Please Select Gender</option>
+                                            <option value="1">Male</option>
+                                            <option value="2">Female</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2">Date of Employment:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="DateOfEmployment" id="DateOfEmployment" class="form-control">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2">Email Address:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="Email" class="form-control">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            @*<div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2">Password:</label>
+                                    <div class="col-sm-8">
+                                        <input type="password" name="Password" id="Password" class="form-control">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2">Confirm Password:</label>
+                                    <div class="col-sm-8">
+                                        <input type="password" name="ConfirmPassword" id="ConfirmPassword" class="form-control">
+                                    </div>
+
+                                </div>
+                            </div>*@
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2">Send User notification:</label>
+                                    <div class="col-sm-8">
+                                        <label class="containers">
+                                            &emsp;Send the new user an email about their account.
+                                            <input type="checkbox" class="form-control">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2">Select Roles:</label>
+                                    <div class="col-sm-8">
+                                        <select name="RoleName" id="RoleName" class="form-control">
+                                            <option value="0">Select Roles</option>
+
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    <div class="underlineBtn">
+                        <button class="nextBtn btnMedium bkSkyBlue" type="submit">Add User</button>
+                    </div>
+                </form>
+            </div>
+
+
+
+        </div>
+    </div>
+
+</div>
+@section Scripts{
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Content/js/jquery.validate.min.js"></script>
+    <script src="~/Content/js/additional-methods.min.js"></script>
+    <script src="~/Content/js/CustomValidation.js"></script>
+    <script src="~/Content/js/datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            //Load the Budget table
+
+            var jqTable = $('#UserTable').DataTable({
+                dom: '<"tanHead tanHP"f>rt<"counter"lip>',
+                "autoWidth": false,
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    "url": '/api/user/getallusers',
+                    "type": "GET"
+                },
+                'language': {
+                    'search': '',
+                    'searchPlaceholder': 'Search...'
+                },
+                "fnDrawCallback": function (oSettings) {
+                },
+                "order": [],
+                columns: [
+                    {
+                        bSortable: true,
+                        "render": function (d, r, data) {
+                            return data.NameFormat;
+                        }
+                    },
+
+                    {
+                        "render": function (d, r, data) {
+                            return data.DateFormat;
+                        }
+                    },
+                    {
+                        "render": function (d, i, data) {
+
+                            return data.Email + '';
+                        }
+                    },
+                    {
+                        "render": function (d, r, data) {
+                            return data.RoleName;
+                        }
+                    },
+
+                    {
+                        bSortable: false,
+                        "render": function (d, i, data) {
+
+                            return data.ActiveFormat;
+                        }
+                    },
+                ]
+            });
+
+            jqTable.on('draw', function () {
+
+                $('.tableRanch').find('input[type="search"]').addClass('searchT');
+                // reset();
+            });
+
+            $.get('/api/user/getroles', function (data) {
+                for (var x = 0; x < data.Result.length; x++) {
+                    $('#RoleName').append('<option value=' + data.Result[x].Id + '>' + data.Result[x].Name + '</option>');
+                }
+            })
+
+            $('.addNewUser').on('click', function (e) {
+                e.preventDefault();
+                $('#UserTablePanel').fadeOut();
+                $('.text').empty().html("Add New User");
+                $('.addUserPanel').fadeIn();
+                $(this).hide();
+                $('.viewUserTable').show();
+                window.location.href = '#addnewuser';
+            });
+
+            $('.viewUserTable').on('click', function (e) {
+                e.preventDefault();
+                $('.text').empty().html("All Users");
+                $('.addUserPanel').fadeOut();
+                $('#UserTablePanel').fadeIn();
+                $(this).hide();
+                $('.addNewUser').show();
+                window.location.href = '';
+            })
+
+            $("#UserForm").validate({
+                ignore: [],
+                rules: {
+                    FirstName: { required: true },
+                    LastName: { required: true },
+                    RoleName: "dropdown",
+                    Gender: 'dropdown',
+                    DateOfEmployment: { required: true,  },
+                    Email: { required: true, email: true },
+                    //Password: { required: true, minlength: 6 },
+                    //ConfirmPassword: { equalTo: "[name='Password']", minlength: 6 }
+
+                },
+                errorPlacement: function ($error, $element) {
+                    $error.addClass('errorHolder');
+                    $element.closest('.form-group').find('label:first').after($error);
+                },
+                submitHandler: function (form) {
+
+                    var $button = $(form).find(':submit');
+                    var prev = $button.html();
+                    $button.attr('disabled', 'disabled');
+                    $button.html('Processing <i class="fa fa-circle-o-notch fa-spin pull-right"></i>');
+
+                    var formData = new FormData(form);
+                    $.ajax({
+                        cache: false,
+                        async: true,
+                        type: "POST",
+                        url: "/api/user/SaveUser",
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (data) {
+                            if (!data.HasError) {
+                                ShowNotie(data);
+                                $('.addUserPanel').fadeOut();
+                                $('#UserTablePanel').fadeIn();
+                                window.location.reload();
+                            }
+                            else {
+
+                                ShowNotie(data);
+                            }
+
+                        },
+
+                        error: function (data) {
+                            ShowNotie({ HasError: true, Message: "An error occurred when processing your request" });
+                        },
+                        complete: function (data) {
+                            $button.removeAttr('disabled');
+                            $button.html(prev);
+                        }
+                    });
+
+                }
+            });
+
+            $('#DateOfEmployment').datepicker({
+                yearRange: "-119:+0",
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd-MM-yy'
+
+            });
+
+        });
+    </script>
+}

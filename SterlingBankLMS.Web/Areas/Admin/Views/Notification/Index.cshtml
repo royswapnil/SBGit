@@ -1,0 +1,504 @@
+﻿
+@model IEnumerable<SterlingBankLMS.Core.DTO.NotificationDto>
+@{
+    ViewBag.Title = "Manage Notifications";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+    .jconfirm .jconfirm-box-container.jconfirm-no-transition {
+        margin: 0px;
+        width: 100%;
+    }
+
+    .form-group.mail-setup {
+        border: 1px solid #ccc;
+        padding: 2px 10px;
+        margin-bottom: 26px;
+    }
+</style>
+<div class="banner1 bkDarkBlue">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>Notification Center</span>
+</div>
+
+
+
+
+<div class="content1" style="background: #fff;">
+
+    <div class="boxHead1">
+        <div class="boxHeader1 bDOrange">Notification Center</div>
+    </div>
+
+    <button class="bkGreen checkedboxes" style="float:right;margin-top: 15px;">Save Changes</button>
+
+</div>
+
+
+<div class="content1" style="padding-top: 10px; background: #f0f3f5;">
+
+
+    <div class="boxBody1">
+
+        <div class="tableRanch">
+            <table class="Notification">
+                <thead>
+                    <tr>
+                        <td>ALL NOTIFICATIONS</td>
+                        <td>EMP</td>
+                        <td>L & D</td>
+                        <td>HR</td>
+                        <td>MGT</td>
+                        <td>IT</td>
+                        <td>MESSAGE</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr class="NotInputs" data-id="@item.Id" data-type="@((int)item.NotificationType)">
+                            <td>@item.NotficationFormat</td>
+                            <td>@Html.CheckBoxFor(model => item.IsForEmployee, item.MailSetupDisabled ?  (object)new { @class = item.NotficationFormat, @disabled = "disabled"} :  (object)new { @class = item.NotficationFormat })</td>
+                            <td>@Html.CheckBoxFor(model => item.IsForLD, item.MailSetupDisabled ? (object)new { @class = item.NotficationFormat, @disabled = "disabled" } : (object)new { @class = item.NotficationFormat })</td>
+                            <td>@Html.CheckBoxFor(model => item.IsForHR, item.MailSetupDisabled ? (object)new { @class = item.NotficationFormat, @disabled = "disabled" } : (object)new { @class = item.NotficationFormat })</td>
+                            <td>@Html.CheckBoxFor(model => item.IsForManagement, item.MailSetupDisabled ? (object)new { @class = item.NotficationFormat, @disabled = "disabled" } : (object)new { @class = item.NotficationFormat })</td>
+                            <td>@Html.CheckBoxFor(model => item.IsForIT, item.MailSetupDisabled ? (object)new { @class = item.NotficationFormat, @disabled = "disabled" } : (object)new { @class = item.NotficationFormat })</td>
+                            <td><button class="btn1 btnMedium bkGreen editMsg" data-id="@item.Id"><i class="fa fa-edit"></i>Configure Messages</button></td>
+                        </tr>
+
+                    }
+                </tbody>
+
+
+
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="MsgModal" class="modal fade" style="float:none">
+
+    <div class="modal-dialog modal-admin modal-lg" style="width:60%">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <span style="display:inline-block">Configure Message: <span id="NotificationType"></span></span>
+                <button type="button" class="close" style="float:right;" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+
+            <div class="modal-body" style="float:none;">
+                <div class="col-sm-12" style="padding:10px 30px">
+
+                    <div class="row">
+                        <div class="bordered-section learningGroupTagPanel " style=" padding: 10px 30px; margin: 0; margin-bottom: 30px;">
+                            <h5 style="margin: 0;float: right;font-weight:bold">
+                                Applicable Tags
+                            </h5>
+                            <div id="TagsPanel" style="width:80%">
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group mail-setup">
+                                <label for="">Can Ignore Mail?</label>
+                                <div class="checkbox" style="display: inline-block;margin-top: 5px;margin-left: 5px;">
+                                    <input type="checkbox" id="CanIgnoreMail" name="CanIgnoreMail">
+                                    <label><small class="red"></small></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group mail-setup">
+                                <label for="">Send Mail?</label>
+                                <div class="checkbox" style="display: inline-block;margin-top: 5px;margin-left: 5px;">
+                                    <input type="checkbox" id="IsMail" name="IsMail">
+                                    <label><small class="red"></small></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group mail-setup">
+                                <label for="">Send Notification?</label>
+                                <div class="checkbox" style="display: inline-block;margin-top: 5px;margin-left: 5px;">
+                                    <input type="checkbox" id="IsNotification" name="IsNotification">
+                                    <label><small class="red"></small></label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group mail-subject">
+                            <label for=""> Mail Subject</label>
+                            <input type="text" class="form-control" id="Subject" name="Subject" />
+                        </div>
+                        <div class="form-group noty-message">
+                            <label for="">Notification Message</label>
+                            <textarea name="Notification" id="NotificationMessage"></textarea>
+                        </div>
+                        <div class="form-group mail-message">
+                            <label for="">Mail Message</label>
+                            <textarea id="MailMessage"></textarea>
+                        </div>
+
+                      
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <input type="hidden" value="0" id="NotificationID" />
+                <button class="submitBtn btnMedium bkGreen" type="button"><i class="fa fa-edit"></i>Update Message</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+
+        var tagFormat = '<span title="{info}" data-tag="{tag}"><small>{name}</small><i class="add-tag fa fa-plus green" style="margin-left: 4px;"></i></span>';
+        var clicked;
+
+        function validateReplaceTags(text) {
+            var myPattern = new RegExp(/{\w+}/g);
+            var allowedTags = JSON.parse(localStorage.getItem("AllowedReplaceTags"));
+            var matches = text.match(myPattern);
+            var isValid = true;
+            var returnTags = [];
+
+            for (var i = 0; i < matches.length; i++) {
+
+                if (jQuery.inArray(matches[i], allowedTags) == -1)
+                    isValid = false;
+                else
+                    returnTags.push(matches[i]);
+            }
+
+            var returnObj = {
+                HasError: !isValid,
+                TagsUsed: returnTags
+            };
+
+            return returnObj;
+
+
+        }
+
+        function removeDuplicates(arr) {
+            let unique_array = []
+            for (let i = 0; i < arr.length; i++) {
+                if (unique_array.indexOf(arr[i]) == -1) {
+                    unique_array.push(arr[i])
+                }
+            }
+            return unique_array
+        }
+
+        $(document).mousedown(function (e) {
+            clicked = $(e.target);
+        });
+
+        // when 'clicky == null' on blur, we know it was not caused by a click
+        // but maybe by pressing the tab key
+        $(document).mouseup(function (e) {
+            clicked = null;
+        });
+
+
+
+        $(document).ready(function () {
+            $(".checkedboxes").on("click", function (e) {
+                e.preventDefault();
+
+                var notifications = [];
+
+                $('.NotInputs').each(function (i, item) {
+                    var obj = new Object();
+                    obj.Id = $(item).attr("data-id");
+                    obj.NotificationType = $(item).attr("data-type");
+                    obj.IsForEmployee = $(item).find('input[name="item.IsForEmployee"]').is(':checked');
+                    obj.IsForLD = $(item).find('input[name="item.IsForLD"]').is(':checked');
+                    obj.IsForHR = $(item).find('input[name="item.IsForHR"]').is(':checked');
+                    obj.IsForManagement = $(item).find('input[name="item.IsForManagement"]').is(':checked');
+                    obj.IsForIT = $(item).find('input[name="item.IsForIT"]').is(':checked');
+                    obj.IsForAll = $(item).find('input[name="item.IsForAll"]').is(':checked');
+                    notifications.push(obj);
+
+                });
+
+                $.ajax({
+                    url: "/api/notification/SaveNotifications",
+                    type: "POST",
+                    data: { notifications: notifications },
+                    success: function (data) {
+                        ShowNotie(data);
+                    }
+                })
+            });
+
+            $(".editMsg").on("click", function (evt) {
+                var $button = $(this);
+                var id = $(this).attr("data-id");
+                var prev = $button.html();
+                DestroyHtmlEditor($('#MailMessage'));
+                DestroyHtmlEditor($('#NotificationMessage'));
+                $('#NotificationID').val('0');
+                $('#NotificationType').html('');
+                $('#MsgModal').find('label.error').remove();
+                localStorage.removeItem('AllowedReplaceTags');
+                $button.attr('disabled', 'disabled');
+                $button.html('fetching <i class="fa fa-circle-o-notch fa-spin"></i>');
+
+                $.ajax({
+                    type: "GET",
+                    url: "/api/notification/GetNotification",
+                    data: { id: id },
+                    success: function (data) {
+
+                        $('#MailMessage').val(data.Result.MailMessage);
+                        $('#NotificationMessage').val(data.Result.NotificationMessage);
+                        $('#Subject').val(data.Result.MailSubject);
+                        $('#NotificationID').val(data.Result.Id);
+                        $('#NotificationType').html(data.Result.NotficationFormat);
+
+                        if (data.Result.MailSetupDisabled)
+                            $('.mail-setup').hide();
+                        else
+                            $('.mail-setup').show();
+
+                        $('#CanIgnoreMail').prop('checked', data.Result.CanIgnoreMail);
+
+                        data.Result.IsNotification ? $('.noty-message').show() : $('.noty-message').hide();
+                        data.Result.IsMail ? $('.mail-message,.mail-subject').show() : $('.mail-message,.mail-subject').hide();
+                        data.Result.CanIgnoreMail  ? $('#TagsPanel span[data-tag="{IgnoreMail}"]').show() : $('#TagsPanel span[data-tag="{IgnoreMail}"]').hide();
+
+
+                        $('#IsMail').prop('checked', data.Result.IsMail);
+                        $('#IsNotification').prop('checked', data.Result.IsNotification);
+                        
+                        BindHtmlEditor($('#MailMessage'), data.Result.MailMessage);
+                        BindHtmlEditor($('#NotificationMessage'), data.Result.NotificationMessage);
+
+
+                        $('#TagsPanel').html('');
+                        var tags = [];
+                        for (var i = 0; i < data.Result.ReplacementTags.length; i++) {
+                            var tagFormatTemplate = tagFormat;
+                            tagFormatTemplate = tagFormatTemplate.replace("{tag}", data.Result.ReplacementTags[i].ReplaceTag)
+                                .replace("{name}", data.Result.ReplacementTags[i].Name)
+                                .replace("{info}", data.Result.ReplacementTags[i].Information);
+
+                            tags.push(data.Result.ReplacementTags[i].ReplaceTag);
+                            $('#TagsPanel').append(tagFormatTemplate);
+                        }
+
+                        localStorage.setItem("AllowedReplaceTags", JSON.stringify(tags));
+
+                        $("#MsgModal").modal("show");
+                    },
+                    error: function (data) {
+                        var message = data.status == 400 ? data.responseJSON.Message : data.statusText;
+                        ShowNotie({ HasError: true, Message: message });
+                    },
+                    complete: function (data) {
+                        $button.html(prev);
+                        $button.removeAttr('disabled');
+                    }
+
+                });
+
+            });
+
+
+            $('#NotificationMessage,#MailMessage').on('summernote.blur', function (e) {
+                var $elem = $(e.target);
+
+                if ($(clicked).hasClass('add-tag')) {
+                    var html = $elem.val();
+                    var tag = $(clicked).parent().attr('data-tag');
+                    html = html + " " + tag;
+                    BindHtmlEditor($elem, html);
+                    $elem.summernote('focus')
+
+                }
+
+            });
+
+
+
+            $("#Subject").blur(function (e) {
+                var $elem = $(e.target);
+                if ($elem.attr('id') == 'Subject') {
+                    console.log(clicked);
+                    console.log($elem);
+                    if ($(clicked).hasClass('add-tag')) {
+                        var html = $elem.val();
+                        var tag = $(clicked).parent().attr('data-tag');
+                        html = html + " " + tag;
+
+                        $elem.val(html);
+
+                        $elem.focus();
+                    }
+                }
+
+
+
+            });
+
+            $('.submitBtn').on('click', function () {
+
+                /// check for incorrect tags
+                var $button = $(this);
+                $('#MsgModal').find('label.error').remove();
+                var subject = $('#Subject').val();
+                var notificationMessage = $('#NotificationMessage').val();
+                var mailMessage = $('#MailMessage').val();
+                var usedTags = [];
+                var isValid = true;
+
+                if ($('#IsMail').is(':checked')) {
+                    if (subject.trim() == '') {
+                        $('#Subject').closest('.form-group').find('label:first').after('<label class="error errorHolder">Mail subject is required</label>');
+                        isValid = false;
+                    }
+                    else {
+                        var subjectTags = validateReplaceTags(subject);
+                        if (subjectTags.HasError) {
+                            isValid = false;
+                            $('#Subject').closest('.form-group').find('label:first').after('<label class="error errorHolder">Please verify incorrect tag(s) used</label>');
+                        }
+                        else {
+                            usedTags = usedTags.concat(subjectTags.TagsUsed);
+                        }
+
+                    }
+
+                    if (mailMessage.trim() == '') {
+                        $('#MailMessage').closest('.form-group').find('label:first').after('<label class="error errorHolder">Mail subject is required</label>');
+                        isValid = false;
+                    }
+                    else {
+                        var mailTags = validateReplaceTags(mailMessage);
+                        if (mailTags.HasError) {
+                            isValid = false;
+                            $('#MailMessage').closest('.form-group').find('label:first').after('<label class="error errorHolder">Please verify incorrect tag(s) used</label>');
+                        }
+                        else {
+                            usedTags = usedTags.concat(mailTags.TagsUsed);
+                        }
+                    }
+
+                }
+
+                if ($('#IsNotification').is(':checked')) {
+                    if (notificationMessage.trim() == '') {
+                        $('#NotificationMessage').closest('.form-group').find('label:first').after('<label class="error errorHolder">Mail subject is required</label>');
+                        isValid = false;
+                    }
+                    else {
+                        var notificationTags = validateReplaceTags(notificationMessage);
+                        if (notificationTags.HasError) {
+                            isValid = false;
+                            $('#NotificationMessage').closest('.form-group').find('label:first').after('<label class="error errorHolder">Please verify incorrect tag(s) used</label>');
+                        }
+                        else {
+                            usedTags = usedTags.concat(notificationTags.TagsUsed);
+                        }
+                    }
+                }
+
+                var returnTags = [];
+                let unique_array = []
+                for (let i = 0; i < usedTags.length; i++) {
+                    if (unique_array.indexOf(usedTags[i]) == -1) {
+                        unique_array.push(usedTags[i]);
+                        returnTags.push({ ReplaceTag: usedTags[i] })
+                    }
+                };
+
+                if (isValid) {
+                    $button.attr('disabled', 'disabled');
+                    var prev = $button.html();
+                    $button.html('Processing <i class="fa fa-circle-o-notch fa-spin"></i>');
+                    var dataObj = {
+                        Id: $('#NotificationID').val(),
+                        MailMessage: mailMessage,
+                        MailSubject: subject,
+                        NotificationMessage: notificationMessage,
+                        IsMail: $('#IsMail').is(':checked'),
+                        IsNotification: $('#IsNotification').is(':checked'),
+                        CanIgnoreMail: $('#CanIgnoreMail').is(':checked'),
+                        ReplacementTags: returnTags
+                    }
+
+                    if (!parseInt(dataObj.Id) && parseInt(dataObj.Id) <= 0) {
+                        ShowNotie({ HasError: true, Message: "Invalid request" });
+                        $button.removeAttr('disabled');
+                        $button.html(prev);
+                        return;
+                    }
+
+                    $.ajax({
+                        url: "/api/notification/UpdateNotificationMessage",
+                        data: dataObj,
+                        type: "POST",
+                        success: function (data) {
+                            ShowNotie(data);
+                            $("#MsgModal").modal("hide");
+                        },
+                        error: function (data) {
+                            var message = data.status == 400 ? data.responseJSON.Message : data.statusText;
+                            ShowNotie({ HasError: true, Message: message });
+                        },
+                        complete: function (data) {
+                            $button.removeAttr('disabled');
+                            $button.html(prev);
+                        }
+
+                    });
+
+                }
+
+
+
+
+            });
+
+            $('#IsMail').on('change', function () {
+                $('#IsMail').is(':checked') ? $('.mail-message,.mail-subject').show() : $('.mail-message,.mail-subject').hide();
+            });
+
+            $('#IsNotification').on('change', function () {
+                $('#IsNotification').is(':checked') ? $('.noty-message').show() : $('.noty-message').hide();
+            });
+
+            $('#CanIgnoreMail').on('change', function () {
+                $('#CanIgnoreMail').is(':checked') ? $('#TagsPanel span[data-tag="{IgnoreMail}"]').show() : $('#TagsPanel span[data-tag="{IgnoreMail}"]').hide();
+            });
+
+           
+
+        })
+
+
+
+
+    </script>
+}

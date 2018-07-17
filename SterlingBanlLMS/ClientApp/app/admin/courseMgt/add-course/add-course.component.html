@@ -1,0 +1,259 @@
+﻿<div class="pallete1">
+
+    <div class="banner1 bkPurple">
+        <i class="material-icons menuBtn1">menu</i>
+        <span>Add a Course</span>
+    </div>
+
+
+    <div class="content1">
+
+
+        <div class="boxBody1">
+
+            <div class="progress1">
+
+                <div class="tabloid active">
+                    <div class="podb">1</div>
+                    <span>Course details</span>
+                </div>
+
+                <div class="tabloid">
+                    <div class="podb">2</div>
+                    <span>Upload Course Material</span>
+                </div>
+
+                <div class="tabloid">
+                    <div class="podb">3</div>
+                    <span>Finish</span>
+                </div>
+
+
+                <div class="progressLine1">
+                    <div class="progressIndicator1"></div>
+                </div>
+
+            </div>
+
+
+            <form novalidate  [formGroup]="courseForm" #formDir="ngForm" (ngSubmit)="login(courseForm.value)">
+                <div class="formArea formArea1">
+
+                    <div class="formBox1 fullForm">
+                        <label for="">Course Title:</label>
+                        <input type="text" placeholder="" formControlName="courseTitle" />
+                    </div>
+
+                    <div class="formBox1 halfForm">
+                        <label for="">Course Description:</label>
+                        <textarea name="" id="" placeholder="750 characters max..." formControlName="courseDescription"></textarea>
+                    </div>
+
+                    <div class="formBox1 halfForm">
+                        <label for="">Available Till:</label>
+                        <input type="date" placeholder="" formControlName="availableDate" />
+                    </div>
+
+                    <div class="formBox1 halfForm">
+                        <label for="">Select Learning Area</label>
+                        <select name="" id="">
+                            <option value="">Communication</option>
+                            <option value="">Statistics</option>
+                            <option value="">Finances</option>
+                        </select>
+                    </div>
+
+
+                    <div class="formBox1 halfForm">
+                        <label for="">Upload Course Image <i>.png, .jpg, .bmp</i></label>
+                        <input type="file" placeholder="" />
+
+                        <button>Upload Image</button>
+                    </div>
+
+                    <div class="formBox1 fullForm">
+                        <label for="">Enter course overview below</label>
+                        <textarea name="" id="" cols="30" rows="10" formControlName="courseOverview"></textarea>
+                    </div>
+
+
+                    <div class="formBox1 fullForm">
+                        <label for="">Enter Instructional Objectives</label>
+                        <textarea name="" id="" cols="30" rows="10" formControlName="instructionalObj"></textarea>
+                    </div>
+
+                    <div class="underlineBtn">
+                        <button class="nextBtn btn1 btnMedium btnDarkPink">Save and Continue</button>
+                    </div>
+
+
+
+                </div>
+
+
+
+                <div class="formArea formArea2">
+
+                    <div class="formBox1 fullForm">
+                        <label for="">Course Title:</label>
+                        <input type="text" placeholder="" value="The title given before" disabled />
+                    </div>
+
+
+                    <div class="formBox1 fullForm">
+                        <label for="">Select Module: <i>Select Module:	(Select module name from the dropdown below OR create a new module by typing in the field next to the dropdown)</i></label>
+
+                        <div class="formBox1 halfForm">
+                            <select name="" id="">
+                                <option value="INtorduction">Introduction</option>
+                            </select>
+                        </div>
+
+
+                        <div class="formBox1 halfForm">
+                            <input type="text" placeholder="Enter new module name here..." />
+                            <button>Create Module</button>
+                        </div>
+                    </div>
+
+
+                    <div class="formBox1 fullForm">
+                        <label for="">Enter topic name<i>(Enter topic name for this course below)</i></label>
+                        <input type="text" placeholder="">
+                    </div>
+
+
+                    <div class="formBox1 halfForm">
+                        <label for="">Content Type<i>(Select content type for this course )</i></label>
+                        <select name="" id="" class="typeUpload">
+                            <option value="Text" class="textPart">Text Material</option>
+                            <option value="Video" class="vidPart">Video Material</option>
+                            <option value="Quiz" class="quizPart">quiz</option>
+                        </select>
+                    </div>
+
+
+                    <div class="formBox1 halfForm relay4">
+                        <label for="">Add Content<i>(Choose how you want to add content to this topic)</i></label>
+                       
+                            <input type="radio" name="upload" class="fab3" checked><span class="radio">Upload a file</span>
+                            <input type="radio" name="upload" class="fab4"><span class="radio">Use a Text Editor</span>
+
+                        
+                    </div>
+
+
+                    <div class="formBox1 halfForm">
+
+                        <div class="relay relay1">
+                            <label for="">Formats allowed are: <i>xls, .pdf, .docx, .pptx, .csv</i></label>
+                            <input type="file" name="" id="">
+                            <button>Upload</button>
+                        </div>
+
+
+                        <div class="relay relay2">
+                            <label for="">Format allowed are:<i>mp4, webm, avi, flv</i></label>
+                            <input type="file" name="" id="">
+                            <button>Upload</button>
+                        </div>
+
+                        <div class="relay relay3">
+                            <label for="">Input your text</label>
+                            <textarea name="" id="" cols="30" rows="10"></textarea>
+                        </div>
+
+                    </div>
+
+
+                    <div class="formBox1 fullForm">
+                        <button class="endBtn">Add Topic</button>
+                    </div>
+
+
+                    <div class="boxHead1">
+                        <div class="boxHeader1 bDPurple">Uploaded Content</div>
+                    </div>
+
+                    <div class="boxBody1">
+
+                        <div class="courseSlate">
+
+                            <div class="topicNm"><i class="material-icons typei">slideshow</i>Topic 1</div>
+                            <div class="topicMod">Module 1</div>
+                            <div class="topicAction">
+                                <i class="material-icons">edit</i>
+                                <i class="material-icons">visibility</i>
+                                <i class="material-icons" style="color:red;">close</i>
+                            </div>
+                        </div>
+
+                        <div class="courseSlate">
+
+                            <div class="topicNm"><i class="material-icons typei">description</i>Topic 1</div>
+                            <div class="topicMod">Module 1</div>
+                            <div class="topicAction">
+                                <i class="material-icons">edit</i>
+                                <i class="material-icons">visibility</i>
+                                <i class="material-icons" style="color:red;">close</i>
+                            </div>
+                        </div>
+
+
+                        <div class="courseSlate">
+
+                            <div class="topicNm"><i class="material-icons typei">slideshow</i>Topic 1</div>
+                            <div class="topicMod">Module 1</div>
+                            <div class="topicAction">
+                                <i class="material-icons">edit</i>
+                                <i class="material-icons">visibility</i>
+                                <i class="material-icons" style="color:red;">close</i>
+                            </div>
+                        </div>
+
+
+                        <div class="courseSlate">
+
+                            <div class="topicNm"><i class="material-icons typei">description</i>Topic 1</div>
+                            <div class="topicMod">Module 1</div>
+                            <div class="topicAction">
+                                <i class="material-icons">edit</i>
+                                <i class="material-icons">visibility</i>
+                                <i class="material-icons" style="color:red;">close</i>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="underlineBtn">
+                        <button class="backBtn btn1 btnMedium btnGrey" style="margin-right: 20px;">Back</button>
+                        <button class="nextBtn btn1 btnMedium btnDarkPink">Save and Continue</button>
+                    </div>
+
+
+
+                </div>
+
+
+
+
+
+                <div class="formArea formArea3">
+
+                    <div class="notyClass">You have successfully added a newcourse</div>
+
+                    <button class="endNote" type="submit" [disabled]='!courseForm.valid'>Create new Course</button>
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
+<admin-header></admin-header>
+
+<admin-footer></admin-footer>

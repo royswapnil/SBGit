@@ -1,0 +1,1493 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9FB0BBE7-9D11-4848-8434-5F50EFD4B51F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SterlingBankLMS.Web</RootNamespace>
+    <AssemblyName>SterlingBankLMS.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <UseGlobalApplicationHostFile>True</UseGlobalApplicationHostFile>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication>
+    </IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>
+    </IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
+    <ApplicationInsightsResourceId>/subscriptions/2a68a9d1-ef00-41c5-a40d-f873365555cf/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/SterlingBankLMS.Web</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/2a68a9d1-ef00-41c5-a40d-f873365555cf/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/SterlingBankLMS.Web</ApplicationInsightsAnnotationResourceId>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.2.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DataTables.AspNet.Core, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DataTables.AspNet.Core.2.0.2\lib\net45\DataTables.AspNet.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DataTables.AspNet.WebApi2, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DataTables.AspNet.WebApi2.2.0.2\lib\net45\DataTables.AspNet.WebApi2.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FastMember, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FastMember.1.3.0\lib\net45\FastMember.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.0.5.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.0.5\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.3\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.3\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.WebApi.Extensions.Compression.Server, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Extensions.Compression.Server.2.0.6\lib\net45\Microsoft.AspNet.WebApi.Extensions.Compression.Server.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IO.RecyclableMemoryStream.1.1.0.0\lib\net45\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.4.12\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="MultipartDataMediaFormatter, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MultipartDataMediaFormatter.V2.2.0.0\lib\net45\MultipartDataMediaFormatter.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector, Version=4.0.12.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.4.0.12\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.Web, Version=4.0.12.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.Integration.Web.4.0.12\lib\net40\SimpleInjector.Integration.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.Web.Mvc, Version=4.0.12.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.Integration.Web.Mvc.4.0.12\lib\net40\SimpleInjector.Integration.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.WebApi, Version=4.0.12.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.Integration.WebApi.4.0.12\lib\net45\SimpleInjector.Integration.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Redis, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Redis.1.2.6\lib\net46\StackExchange.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http.Extensions.Compression.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Extensions.Compression.Server.2.0.6\lib\net45\System.Net.Http.Extensions.Compression.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Cors, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.4\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.4\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Cors, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.4\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Vereyon.Web.FlashMessage, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vereyon.Web.FlashMessage.1.0.1\lib\net40\Vereyon.Web.FlashMessage.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Api\AdvertController.cs" />
+    <Compile Include="Api\BaseApiController.cs" />
+    <Compile Include="Api\CertificateController.cs" />
+    <Compile Include="Api\CourseController.cs" />
+    <Compile Include="Api\CourseLearningAreaController.cs" />
+    <Compile Include="Api\EmployeeController.cs" />
+    <Compile Include="Api\EmployeeDashboardController.cs" />
+    <Compile Include="Api\ExamController.cs" />
+    <Compile Include="Api\FAQController.cs" />
+    <Compile Include="Api\FileUploadController.cs" />
+    <Compile Include="Api\GeneralHrController.cs" />
+    <Compile Include="Api\LearningGroupController.cs" />
+    <Compile Include="Api\NotificationController.cs" />
+    <Compile Include="Api\OrganizationController.cs" />
+    <Compile Include="Api\ReportManagementApiController.cs" />
+    <Compile Include="Api\SupportController.cs" />
+    <Compile Include="Api\SurveyController.cs" />
+    <Compile Include="Api\TrainingController.cs" />
+    <Compile Include="Api\UserController.cs" />
+    <Compile Include="Api\UserExaminationController.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\Filters\AntiForgeryErrorFilter.cs" />
+    <Compile Include="App_Start\Filters\AuthenticateUnauthorizeFilter.cs" />
+    <Compile Include="App_Start\Filters\RedirectAuthenticatedResult.cs" />
+    <Compile Include="App_Start\Filters\ValidateAntiForgeryTokenAttribute.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\Startup.Automapper.cs" />
+    <Compile Include="App_Start\Startup.SimpleInjector.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdvertsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BulkUploadController.cs" />
+    <Compile Include="Areas\Admin\Controllers\EmployeeRecordsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ExaminationController.cs" />
+    <Compile Include="Areas\Admin\Controllers\FAQController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ForumController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LearningGroupController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManageCourseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NotificationController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrganizationManagementController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ReportManagementController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SupportManagementController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManageTrainingController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SurveyController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserManagementController.cs" />
+    <Compile Include="Areas\Admin\Models\CourseTable.cs" />
+    <Compile Include="Areas\Common\Controllers\CertificateController.cs" />
+    <Compile Include="Areas\Common\Controllers\ExaminationController.cs" />
+    <Compile Include="Areas\Common\Controllers\TrainingController.cs" />
+    <Compile Include="Areas\Common\Models\AspNetUser.cs">
+      <DependentUpon>SBLMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Common\Models\Comment.cs">
+      <DependentUpon>SBLMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Common\Models\Post.cs">
+      <DependentUpon>SBLMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Common\Models\SBLMSModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SBLMSModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Common\Models\SBLMSModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SBLMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Common\Models\SBLMSModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SBLMSModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Common\Models\User.cs">
+      <DependentUpon>SBLMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\HumanResources\Controllers\GeneralMgtController.cs" />
+    <Compile Include="ExcelHelper\ExcelManager.cs" />
+    <Compile Include="ExcelHelper\ExcelManagerExceptions.cs" />
+    <Compile Include="ExcelHelper\ExcelReaderCellAttribute.cs" />
+    <Compile Include="ExcelHelper\ExcelReaderEventArgs.cs" />
+    <Compile Include="ExcelHelper\ExcelReaderSheet.cs" />
+    <Compile Include="ExcelModels\CourseExcelModel.cs" />
+    <Compile Include="Hubs\SbLMSHub.cs" />
+    <Compile Include="Infrastructure\SoapClient\Extensions\SoapClientExtensions.cs" />
+    <Compile Include="Infrastructure\SoapClient\ISoapClient.cs" />
+    <Compile Include="Infrastructure\SoapClient\IXElementSerializer.cs" />
+    <Compile Include="Infrastructure\SoapClient\SoapClient.cs" />
+    <Compile Include="Infrastructure\SoapClient\SoapVersion.cs" />
+    <Compile Include="Infrastructure\SoapClient\XElementSerializer.cs" />
+    <Compile Include="Areas\HumanResources\Controllers\EmployeeRecordsController.cs" />
+    <Compile Include="Areas\HumanResources\HumanResourcesAreaRegistration.cs" />
+    <Compile Include="Areas\Management\ManagementAreaRegistration.cs" />
+    <Compile Include="Areas\Technology\Controllers\TechSupportController.cs" />
+    <Compile Include="Areas\Technology\Controllers\UserRoleMgtController.cs" />
+    <Compile Include="Areas\Technology\TechnologyAreaRegistration.cs" />
+    <Compile Include="Migrations\Seed\BudgetExpenditure.cs" />
+    <Compile Include="Models\SbNotificationService.cs" />
+    <Compile Include="Utilities\DataEncoder.cs" />
+    <Compile Include="Utilities\AdvertPageLocation.cs" />
+    <Compile Include="Utilities\Enums\AdLocation.cs" />
+    <Compile Include="Utilities\Enums\CourseFilter.cs" />
+    <Compile Include="Utilities\Enums\UploadType.cs" />
+    <Compile Include="Utilities\MailReplaceTagsConstants.cs" />
+    <Compile Include="ViewModels\AdBannerModel.cs" />
+    <Compile Include="ViewModels\AdvertModel.cs" />
+    <Compile Include="ViewModels\AllReport.cs" />
+    <Compile Include="ViewModels\AssignedExamModel.cs" />
+    <Compile Include="ViewModels\AuditTrackerModel.cs" />
+    <Compile Include="ViewModels\BulkUploadModel.cs" />
+    <Compile Include="ViewModels\CatalogCourseModel.cs" />
+    <Compile Include="ViewModels\CertificateUploadModel.cs" />
+    <Compile Include="ViewModels\CommentBulkActionModel.cs" />
+    <Compile Include="ViewModels\CommentEditActionModel.cs" />
+    <Compile Include="ViewModels\CommentMessageModel.cs" />
+    <Compile Include="ViewModels\EmployeeExcelUploadModel.cs" />
+    <Compile Include="ViewModels\Posts.cs" />
+    <Compile Include="ViewModels\PostsVM.cs" />
+    <Compile Include="ViewModels\UserExamModel.cs" />
+    <Compile Include="ViewModels\ClaExamOptionModel.cs" />
+    <Compile Include="ViewModels\ClaExamQuestionModel.cs" />
+    <Compile Include="ViewModels\ClaExamResponseModel.cs" />
+    <Compile Include="ViewModels\ClaLessonModel.cs" />
+    <Compile Include="ViewModels\ClaQuizQuestionModel.cs" />
+    <Compile Include="ViewModels\ClaQuizResponseModel.cs" />
+    <Compile Include="ViewModels\ClaSurveyModel.cs" />
+    <Compile Include="ViewModels\ClaSurveyOptionModel.cs" />
+    <Compile Include="ViewModels\ClaSurveyQuestionModel.cs" />
+    <Compile Include="ViewModels\CourseCataloguePageModel.cs" />
+    <Compile Include="ViewModels\CourseReviewModel.cs" />
+    <Compile Include="ViewModels\EmployeeListModel.cs" />
+    <Compile Include="ViewModels\EmployeeSideBarModel.cs" />
+    <Compile Include="ViewModels\ExpenditureModel.cs" />
+    <Compile Include="ViewModels\FAQModel.cs" />
+    <Compile Include="ViewModels\LikeDislikeModel.cs" />
+    <Compile Include="ViewModels\ManagePageModel.cs" />
+    <Compile Include="ViewModels\NotificationReplaceTags.cs" />
+    <Compile Include="ViewModels\PasswordResetModel.cs" />
+    <Compile Include="ViewModels\SupportFAQPageModel.cs" />
+    <Compile Include="ViewModels\SurveyModel.cs" />
+    <Compile Include="ViewModels\SurveyPageModel.cs" />
+    <Compile Include="ViewModels\SurveyRespsonseModel.cs" />
+    <Compile Include="ViewModels\SurveyTemplateModel.cs" />
+    <Compile Include="ViewModels\TicketModel.cs" />
+    <Compile Include="ViewModels\EmployeeProfileModel.cs" />
+    <Compile Include="ViewModels\ExaminationModel.cs" />
+    <Compile Include="ViewModels\SearchResponse.cs" />
+    <Compile Include="Areas\Common\CommonAreaRegistration.cs" />
+    <Compile Include="Areas\Common\Controllers\CourseController.cs" />
+    <Compile Include="Areas\Common\Controllers\ForumController.cs" />
+    <Compile Include="Areas\Common\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Common\Controllers\ProfileController.cs" />
+    <Compile Include="Areas\Common\Controllers\SupportController.cs" />
+    <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Auth\ApplicationSignInManager.cs" />
+    <Compile Include="Infrastructure\Auth\TokenAuthorizationServerProvider.cs" />
+    <Compile Include="Infrastructure\Logger\CastleLogger.cs" />
+    <Compile Include="Infrastructure\Logger\CastleLoggerFactory.cs" />
+    <Compile Include="Infrastructure\Logger\ILogger.cs" />
+    <Compile Include="Infrastructure\Logger\LoggerExtensions.cs" />
+    <Compile Include="Infrastructure\Logger\NLogExceptionHandler.cs" />
+    <Compile Include="Infrastructure\Logger\NLogger.cs" />
+    <Compile Include="Infrastructure\Logger\NLoggerFactory.cs" />
+    <Compile Include="Infrastructure\Messaging\Email\Mail.cs" />
+    <Compile Include="Infrastructure\Messaging\Email\MailerConfig.cs" />
+    <Compile Include="Infrastructure\Messaging\Email\MailerService.cs" />
+    <Compile Include="Infrastructure\Messaging\Email\IMailerService.cs" />
+    <Compile Include="Infrastructure\Services\AuthenticationService.cs" />
+    <Compile Include="Infrastructure\Services\IAuthenticationService.cs" />
+    <Compile Include="Infrastructure\Services\PermissionService.cs" />
+    <Compile Include="Infrastructure\Services\SterlingActiveDirectoryService.cs" />
+    <Compile Include="Infrastructure\Services\WorkContext.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\Seed\PermissionSeed.cs" />
+    <Compile Include="Migrations\TrainingSeed.cs" />
+    <Compile Include="Models\Map\ApplicationUserMap.cs" />
+    <Compile Include="Models\IdentityModels\Permission.cs" />
+    <Compile Include="Models\Map\PermissionMap.cs" />
+    <Compile Include="Utilities\AjaxErrorHandler.cs" />
+    <Compile Include="Utilities\BaseWebPage.cs" />
+    <Compile Include="Utilities\Extensions\CollectionExtensions.cs" />
+    <Compile Include="Utilities\Extensions\SearchExtension.cs" />
+    <Compile Include="Utilities\FileUploader.cs" />
+    <Compile Include="Utilities\MvcUtilities.cs" />
+    <Compile Include="Infrastructure\Auth\ApplicationRoleManager.cs" />
+    <Compile Include="Infrastructure\Auth\ApplicationUserManager.cs" />
+    <Compile Include="Infrastructure\Auth\ApplicationUserStore.cs" />
+    <Compile Include="Infrastructure\Auth\CurrentUserClaims.cs" />
+    <Compile Include="Infrastructure\Auth\RefreshTokenServerProvider.cs" />
+    <Compile Include="Infrastructure\DataContext\IdentityResources.cs" />
+    <Compile Include="Infrastructure\DataContext\SterlingBankLmsContext.cs" />
+    <Compile Include="Infrastructure\DataContext\WebApplicationContext.cs" />
+    <Compile Include="Infrastructure\Services\IUserAccountService.cs" />
+    <Compile Include="Infrastructure\Services\IUserRoleService.cs" />
+    <Compile Include="Infrastructure\Services\UserAccountService.cs" />
+    <Compile Include="Infrastructure\Services\UserRoleService.cs" />
+    <Compile Include="Migrations\Seed\OurDBSeed.cs" />
+    <Compile Include="Migrations\Seed\UserSeed.cs" />
+    <Compile Include="Models\IdentityModels\ApplicationRole.cs" />
+    <Compile Include="Models\IdentityModels\ApplicationUser.cs" />
+    <Compile Include="Models\IdentityModels\UserClaim.cs" />
+    <Compile Include="Models\IdentityModels\UserLogin.cs" />
+    <Compile Include="Models\IdentityModels\UserRole.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\AppConstants.cs" />
+    <Compile Include="Utilities\CommonHelper.cs" />
+    <Compile Include="Utilities\Extensions\MappingExtensions.cs" />
+    <Compile Include="Utilities\Extensions\StringExtensions.cs" />
+    <Compile Include="Utilities\Extensions\ValidationExtensions.cs" />
+    <Compile Include="Utilities\HttpClientHelper.cs" />
+    <Compile Include="Utilities\PermissionProvider.cs" />
+    <Compile Include="ViewModels\ApiResult.cs" />
+    <Compile Include="ViewModels\AssignedCourseModel.cs" />
+    <Compile Include="ViewModels\BaseModel.cs" />
+    <Compile Include="ViewModels\BaseValidatableModel.cs" />
+    <Compile Include="ViewModels\CourseDetailModel.cs" />
+    <Compile Include="ViewModels\CourseLmaDetailsModel.cs" />
+    <Compile Include="ViewModels\CourseModel.cs" />
+    <Compile Include="ViewModels\CourseModuleNameModel.cs" />
+    <Compile Include="ViewModels\CourseProgressModel.cs" />
+    <Compile Include="ViewModels\EmployeeCertificateModel.cs" />
+    <Compile Include="ViewModels\EmployeeHomePageModel.cs" />
+    <Compile Include="ViewModels\EmployeeTrainingRecordModel.cs" />
+    <Compile Include="ViewModels\GenderModel.cs" />
+    <Compile Include="ViewModels\GetNameModel.cs" />
+    <Compile Include="ViewModels\GradeModel.cs" />
+    <Compile Include="ViewModels\GroupModel.cs" />
+    <Compile Include="ViewModels\LessonContentModel.cs" />
+    <Compile Include="ViewModels\ClaCourseModel.cs" />
+    <Compile Include="ViewModels\LearningGroupModel.cs" />
+    <Compile Include="ViewModels\ClaModuleModel.cs" />
+    <Compile Include="ViewModels\LessonNameModel.cs" />
+    <Compile Include="ViewModels\ModuleModel.cs" />
+    <Compile Include="ViewModels\DropdownListModel.cs" />
+    <Compile Include="ViewModels\EmployeeDetailsModel.cs" />
+    <Compile Include="ViewModels\EmployeeModel.cs" />
+    <Compile Include="ViewModels\LearningAreaModel.cs" />
+    <Compile Include="ViewModels\LoginModel.cs" />
+    <Compile Include="ViewModels\ModuleLessonModel.cs" />
+    <Compile Include="ViewModels\NotificationModel.cs" />
+    <Compile Include="ViewModels\PermissionModel.cs" />
+    <Compile Include="ViewModels\QuizQuestionModel.cs" />
+    <Compile Include="ViewModels\QuizQuestionOptionModel.cs" />
+    <Compile Include="ViewModels\RegionModel.cs" />
+    <Compile Include="ViewModels\ReplyTicketModel.cs" />
+    <Compile Include="ViewModels\RolePermissionModel.cs" />
+    <Compile Include="ViewModels\TicketBulkActionModel.cs" />
+    <Compile Include="ViewModels\TicketMessageModel.cs" />
+    <Compile Include="ViewModels\TrainingModel.cs" />
+    <Compile Include="ViewModels\UpcomingTrainingModel.cs" />
+    <Compile Include="ViewModels\UserCourseProgressModel.cs" />
+    <Compile Include="ViewModels\UserCourseStatusModel.cs" />
+    <Compile Include="ViewModels\UserDeptCountModel.cs" />
+    <Compile Include="ViewModels\CourseExaminationModel.cs" />
+    <Compile Include="ViewModels\UserModel.cs" />
+    <Compile Include="ViewModels\UserTrainingModel.cs" />
+    <Compile Include="ViewModels\ValidateAD.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\cdc.sql" />
+    <Content Include="App_Data\EmailTemplates\resetpassword.html" />
+    <Content Include="App_Data\tempuser.sql" />
+    <Content Include="App_Data\dbo.sql" />
+    <Content Include="App_Data\kenny.sql" />
+    <Content Include="Areas\Admin\Views\UserManagement\AllUsers.cshtml" />
+    <Content Include="Areas\Common\Models\SBLMSModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SBLMSModel.edmx</DependentUpon>
+      <LastGenOutput>SBLMSModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Common\Models\SBLMSModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SBLMSModel.edmx</DependentUpon>
+      <LastGenOutput>SBLMSModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Common\Views\Course\coursedetails.cshtml" />
+    <Content Include="Areas\Common\Views\Course\courselearningarea.cshtml" />
+    <Content Include="Areas\Common\Views\Course\courses.cshtml" />
+    <Content Include="Areas\Common\Views\Course\emp_certificate.cshtml" />
+    <Content Include="Areas\Common\Views\Course\videos.cshtml" />
+    <Content Include="Areas\Common\Views\Course\_document.cshtml" />
+    <Content Include="Areas\Common\Views\Course\_quiz.cshtml" />
+    <Content Include="Areas\Common\Views\Course\_quizquestion.cshtml" />
+    <Content Include="Areas\Common\Views\Course\_quizresponse.cshtml" />
+    <Content Include="Areas\Common\Views\Course\_startquiz.cshtml" />
+    <Content Include="Areas\Common\Views\Course\_text.cshtml" />
+    <Content Include="Areas\Common\Views\Course\_video.cshtml" />
+    <Content Include="Areas\Common\Views\Course\_MyComments.cshtml" />
+    <Content Include="Content\css\bootstrap-theme.css" />
+    <Content Include="Content\css\datepicker.css" />
+    <Content Include="Content\css\bootstrap-timepicker.css" />
+    <Content Include="Content\css\font\VideoJS.svg" />
+    <Content Include="Content\css\fullcalendar.min.css" />
+    <Content Include="Content\css\rateit.css" />
+    <Content Include="Content\css\star-rating.min.css" />
+    <Content Include="Content\css\summernote.css" />
+    <Content Include="Content\EntityXml\spexeccdc.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\img\404.png" />
+    <Content Include="Content\img\500.png" />
+    <Content Include="Content\img\cert.jpg" />
+    <Content Include="Content\img\no-preview-available.png" />
+    <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\ng-rateit.min.js" />
+    <Content Include="Content\js\require.js" />
+    <Content Include="Content\js\bootstrap-timepicker.min.js" />
+    <Content Include="Content\js\fullcalendar.min.js" />
+    <Content Include="Content\css\video-js.min.css" />
+    <Content Include="Content\js\video.min.js" />
+    <Content Include="Content\js\vjs-video.min.js" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\PageJs\Admin_AssignExam.js" />
+    <Content Include="Content\PageJs\Admin_AssignSurvey.js" />
+    <Content Include="Content\js\serializeJson.js" />
+    <Content Include="Content\PageJs\Admin_AuditTrailListing.js" />
+    <Content Include="Content\PageJs\Admin_Banner.js" />
+    <Content Include="Content\PageJs\Admin_FAQ.js" />
+    <Content Include="Content\PageJs\Admin_LearningGroup.js" />
+    <Content Include="Content\PageJs\Admin_Survey.js" />
+    <Content Include="Content\PageJs\Admin_SurveyTemplate.js" />
+    <Content Include="Content\PageJs\Admin_UploadBulk.js" />
+    <Content Include="Content\PageJs\AllReports.js" />
+    <Content Include="Content\PageJs\AuditTrailListing.js" />
+    <Content Include="Content\PageJs\Common_Examination.js" />
+    <Content Include="Content\PageJs\Common_TrainingCalendar.js" />
+    <Content Include="Content\PageJs\Common_Support.js" />
+    <Content Include="Content\PageJs\Admin_TrainingCalendar.js" />
+    <Content Include="Content\js\summernote.min.js" />
+    <Content Include="Content\PageJs\GenerateReport.js" />
+    <Content Include="Content\Site.css" />
+    <Content Include="PartialViews\Admin\AdvertTableRow.html" />
+    <Content Include="PartialViews\Admin\AdBannerRow.html" />
+    <Content Include="PartialViews\Admin\FAQContent.html" />
+    <Content Include="PartialViews\Common\_AllTraining.html" />
+    <Content Include="PartialViews\Common\_UserPendingTrainingRequests.html" />
+    <Content Include="PartialViews\Admin\TrainingPeriodTemplate.html" />
+    <Content Include="PartialViews\Common\_certificateList.html" />
+    <Content Include="Areas\Common\Views\Certificate\index.cshtml" />
+    <Content Include="Areas\Common\Views\Certificate\GenerateCertificatePDf.cshtml" />
+    <Content Include="App_Browsers\qt.browser" />
+    <Content Include="Areas\Admin\Views\Survey\index.cshtml" />
+    <Content Include="Areas\Admin\Views\Survey\template.cshtml" />
+    <Content Include="Areas\Admin\Views\SupportManagement\NewMessage.cshtml" />
+    <Content Include="Areas\Admin\Views\SupportManagement\TicketDetails.cshtml" />
+    <Content Include="Areas\Technology\Views\web.config" />
+    <Content Include="Areas\Management\Views\web.config" />
+    <Content Include="Areas\HumanResources\Views\web.config" />
+    <Content Include="Areas\HumanResources\Views\Shared\_HRLayout.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageTraining\NewExpenditure.cshtml" />
+    <Content Include="Areas\HumanResources\Views\EmployeeRecords\ListEmployees.cshtml" />
+    <Content Include="Areas\HumanResources\Views\EmployeeRecords\ProfileDetails.cshtml" />
+    <Content Include="Areas\HumanResources\Views\EmployeeRecords\NewEmployee.cshtml" />
+    <Content Include="Areas\HumanResources\Views\EmployeeRecords\NewEmployeeCertificate.cshtml" />
+    <Content Include="Areas\Technology\Views\Shared\_TechLayout.cshtml" />
+    <Content Include="Areas\Technology\Views\TechSupport\Dashboard.cshtml" />
+    <Content Include="Areas\Technology\Views\TechSupport\NewMessages.cshtml" />
+    <Content Include="Areas\Technology\Views\TechSupport\TechTickets.cshtml" />
+    <Content Include="Areas\Technology\Views\UserRoleMgt\AllUsers.cshtml" />
+    <Content Include="Areas\Technology\Views\UserRoleMgt\CreateRole.cshtml" />
+    <Content Include="Areas\Admin\Views\Adverts\Banner.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageTraining\Calendar.cshtml" />
+    <Content Include="Areas\Common\Views\Course\examination.cshtml" />
+    <Content Include="Areas\HumanResources\Views\GeneralMgt\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ReportManagement\GenerateReport.cshtml" />
+    <Content Include="Areas\Admin\Views\ReportManagement\AuditTrail.cshtml" />
+    <Content Include="Areas\Common\Views\Training\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ReportManagement\AllReports.cshtml" />
+    <Content Include="Areas\Admin\Views\SupportManagement\SingleTicketDetails.cshtml" />
+    <Content Include="Areas\Technology\Views\TechSupport\SingleTechTicketDetails.cshtml" />
+    <Content Include="Areas\Common\Views\Training\Calendar.cshtml" />
+    <Content Include="Areas\Admin\Views\FAQ\index.cshtml" />
+    <Content Include="Areas\Common\Views\Course\_exam.cshtml" />
+    <Content Include="Areas\Common\Views\Course\_examquestion.cshtml" />
+    <Content Include="Areas\Common\Views\Course\_examsummary.cshtml" />
+    <Content Include="Areas\Common\Views\Course\_finishcourse.cshtml" />
+    <Content Include="Areas\Common\Views\Course\learninghistory.cshtml" />
+    <Content Include="Areas\Common\Views\Course\_quizattemptsummary.cshtml" />
+    <Content Include="Areas\Common\Views\Course\_review.cshtml" />
+    <Content Include="Areas\Common\Views\Course\_startexam.cshtml" />
+    <Content Include="Areas\Common\Views\Course\_survey.cshtml" />
+    <Content Include="Areas\Common\Views\Course\_surveyquestion.cshtml" />
+    <Content Include="Areas\HumanResources\Views\GeneralMgt\BulkUploads.cshtml" />
+    <Content Include="Areas\HumanResources\Views\EmployeeRecords\EmployeeBulkUpload.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageTraining\TrainingBulkUpload.cshtml" />
+    <Content Include="Areas\Common\Views\Course\_completecourse.cshtml" />
+    <Content Include="Areas\HumanResources\Views\EmployeeRecords\UpdateNewEmployees.cshtml" />
+    <Content Include="Areas\Admin\Views\OrganizationManagement\AllOrganization.cshtml" />
+    <Content Include="Areas\Admin\Views\Survey\Assign.cshtml" />
+    <Content Include="Areas\Admin\Views\Examination\Assign.cshtml" />
+    <Content Include="Areas\Common\Views\Course\_finishsurvey.cshtml" />
+    <Content Include="Content\css\animate.css" />
+    <Content Include="Content\css\bootstrap-datepicker.min.css" />
+    <Content Include="Content\css\employee-profile.css" />
+    <Content Include="3rdParties\MultipartDataMediaFormatter.dll" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\common-layout.css" />
+    <Content Include="Content\css\font-awesome.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\froala_editor.min.css" />
+    <Content Include="Content\css\froala_style.min.css" />
+    <Content Include="Content\css\dark.min.css" />
+    <Content Include="Content\css\gray.min.css" />
+    <Content Include="Content\css\red.min.css" />
+    <Content Include="Content\css\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\css\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\css\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\css\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\css\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\css\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\css\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\css\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\css\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\css\jquery-confirm.css" />
+    <Content Include="Content\css\jquery-ui.min.css" />
+    <Content Include="Content\css\l&amp;d.css" />
+    <Content Include="Content\css\main.css" />
+    <Content Include="Content\css\notie.min.css" />
+    <Content Include="Content\css\pagination.css" />
+    <Content Include="Content\css\royal.css" />
+    <Content Include="Content\css\select2.min.css" />
+    <Content Include="Content\css\Site.css" />
+    <Content Include="Content\css\support.css" />
+    <Content Include="Content\css\tags_editor.min.css" />
+    <Content Include="Content\css\toastr.css" />
+    <Content Include="Content\css\toastr.min.css" />
+    <Content Include="Content\css\training.css" />
+    <Content Include="Content\img\video_thumbnail.png" />
+    <Content Include="Content\img\cert.jpg" />
+    <Content Include="Content\js\angular-sanitize.min.js" />
+    <Content Include="Content\js\angular-ui-router.min.js" />
+    <Content Include="Content\js\bootstrap-datepicker.min.js" />
+    <Content Include="Content\js\datatables.min.js" />
+    <Content Include="Content\js\jquery-confirm.js" />
+    <Content Include="Content\js\jquery-ui-sortable.min.js" />
+    <Content Include="Content\js\jquery.caret.min.js" />
+    <Content Include="Content\js\jquery.tag-editor.min.js" />
+    <Content Include="Content\js\lodash.min.js" />
+    <Content Include="Content\js\ng-infinite-scroll.min.js" />
+    <Content Include="Content\js\notie.min.js" />
+    <Content Include="Content\js\webviewer\lib\html5\AnnotationEdit.css" />
+    <Content Include="Content\js\webviewer\lib\html5\AnnotationEdit.js" />
+    <Content Include="Content\js\webviewer\lib\html5\annotationHandler.js" />
+    <Content Include="Content\js\webviewer\lib\html5\BaseReaderControl.js" />
+    <Content Include="Content\js\webviewer\lib\html5\ControlUtils.js" />
+    <Content Include="Content\js\webviewer\lib\html5\CoreControls.js" />
+    <Content Include="Content\js\webviewer\lib\html5\CoreWorker.js" />
+    <Content Include="Content\js\webviewer\lib\html5\DecryptWorker.js" />
+    <Content Include="Content\js\webviewer\lib\html5\defaultScriptExtension.js" />
+    <Content Include="Content\js\webviewer\lib\html5\defaultStyleExtension.css" />
+    <Content Include="Content\js\webviewer\lib\html5\docViewer.css" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Actions.Action.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Actions.Dispatcher.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Actions.GoTo.Dest.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Actions.GoTo.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Actions.Hide.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Actions.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Actions.JavaScript.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Actions.Named.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Actions.ResetForm.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Actions.SubmitForm.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Actions.URI.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.Annotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.BoxControlHandle.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.BoxSelectionModel.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.ButtonWidgetAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.CalloutControlHandle.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.CalloutSelectionModel.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.CaretAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.CheckButtonWidgetAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.ChoiceWidgetAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.Color.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.ControlHandle.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.EllipseAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.Font.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.Forms.Field.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.Forms.FieldManager.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.Forms.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.FreeHandAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.FreeTextAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.FreeTextSelectionModel.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.HTMLAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.IPathAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.LineAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.LineControlHandle.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.LineSelectionModel.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.Link.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.ListWidgetAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.MarkupAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.PathControlHandle.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.PathSelectionModel.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.Point.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.PolygonAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.PolygonControlHandle.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.PolygonSelectionModel.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.PolylineAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.PopupAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.RadioButtonWidgetAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.Rect.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.RectangleAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.SelectionAlgorithm.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.SelectionModel.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.SignatureWidgetAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.StampAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.StickyAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.TextHighlightAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.TextMarkupAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.TextSelectionModel.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.TextSquigglyAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.TextStrikeoutAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.TextUnderlineAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.TextWidgetAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.WidgetAnnotation.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Annotations.WidgetFlags.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\BaseReaderControl.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\classes.list.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\CoreControls.AnnotationManager.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\CoreControls.Bookmark.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\CoreControls.DisplayMode.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\CoreControls.DisplayModeManager.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\CoreControls.Document.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\CoreControls.DocumentViewer.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\CoreControls.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\img\glyphicons-halflings-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\img\glyphicons-halflings.png" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\index.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\MobileReaderControl.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\namespaces.list.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\PartRetrievers.AndroidContentPartRetriever.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\PartRetrievers.AzurePartRetriever.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\PartRetrievers.ExternalPdfPartRetriever.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\PartRetrievers.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\PartRetrievers.HttpPartRetriever.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\PartRetrievers.IOSPartRetriever.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\PartRetrievers.LocalPartRetriever.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\PartRetrievers.LocalPdfPartRetriever.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\PartRetrievers.RangeStreamingPartRetriever.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\PartRetrievers.StreamingPartRetriever.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\PartRetrievers.WinRTPartRetriever.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\quicksearch.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\ReaderControl.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\scripts\docstrap.lib.js" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\scripts\fulltext-search-ui.js" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\scripts\fulltext-search.js" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\scripts\lunr.min.js" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\scripts\prettify\Apache-License-2.0.txt" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\scripts\prettify\jquery.min.js" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\scripts\prettify\lang-css.js" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\scripts\prettify\prettify.js" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\scripts\sunlight.js" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\scripts\toc.js" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\styles\darkstrap.css" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\styles\prettify-tomorrow.css" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\styles\site.cerulean.css" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\styles\site.cosmo.css" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\styles\site.cyborg.css" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\styles\site.darkly.css" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\styles\site.darkstrap.css" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\styles\site.dibs-bootstrap.css" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\styles\site.flatly.css" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\styles\site.journal.css" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\styles\site.lumen.css" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\styles\site.paper.css" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\styles\site.readable.css" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\styles\site.sandstone.css" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\styles\site.simplex.css" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\styles\site.slate.css" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\styles\site.spacelab.css" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\styles\site.superhero.css" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\styles\site.united.css" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\styles\site.yeti.css" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\styles\sunlight.dark.css" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\styles\sunlight.default.css" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Tools.AnnotationEditTool.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Tools.AnnotationSelectTool.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Tools.ArrowCreateTool.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Tools.CalloutCreateTool.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Tools.EllipseCreateTool.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Tools.FreeHandCreateTool.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Tools.FreeTextCreateTool.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Tools.GenericAnnotationCreateTool.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Tools.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Tools.LineCreateTool.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Tools.PanTool.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Tools.PolygonCloudCreateTool.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Tools.PolygonCreateTool.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Tools.PolylineCreateTool.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Tools.RectangleCreateTool.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Tools.SignatureCreateTool.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Tools.StampCreateTool.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Tools.StickyCreateTool.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Tools.TextAnnotationCreateTool.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Tools.TextHighlightCreateTool.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Tools.TextSelectTool.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Tools.TextSquigglyCreateTool.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Tools.TextStrikeoutCreateTool.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Tools.TextTool.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Tools.TextUnderlineCreateTool.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\Tools.Tool.html" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\WebViewerInterface.html" />
+    <Content Include="Content\js\webviewer\lib\html5\external\Autolinker.min.js" />
+    <Content Include="Content\js\webviewer\lib\html5\external\context.js" />
+    <Content Include="Content\js\webviewer\lib\html5\external\context.standalone.css" />
+    <Content Include="Content\js\webviewer\lib\html5\external\decode.min.js" />
+    <Content Include="Content\js\webviewer\lib\html5\external\drop\css\drop-theme-arrows-bounce-dark.css" />
+    <Content Include="Content\js\webviewer\lib\html5\external\drop\css\drop-theme-arrows-bounce.css" />
+    <Content Include="Content\js\webviewer\lib\html5\external\drop\css\drop-theme-arrows.css" />
+    <Content Include="Content\js\webviewer\lib\html5\external\drop\css\drop-theme-basic.css" />
+    <Content Include="Content\js\webviewer\lib\html5\external\drop\css\drop-theme-hubspot-popovers.css" />
+    <Content Include="Content\js\webviewer\lib\html5\external\drop\css\extras\drop-twitter-bootstrap.css" />
+    <Content Include="Content\js\webviewer\lib\html5\external\drop\drop.js" />
+    <Content Include="Content\js\webviewer\lib\html5\external\drop\drop.min.js" />
+    <Content Include="Content\js\webviewer\lib\html5\external\drop\js\drop.js" />
+    <Content Include="Content\js\webviewer\lib\html5\external\fastclick.js" />
+    <Content Include="Content\js\webviewer\lib\html5\external\FileSaver.min.js" />
+    <Content Include="Content\js\webviewer\lib\html5\external\i18next-1.6.0.min.js" />
+    <Content Include="Content\js\webviewer\lib\html5\external\images\glyphicons_072_bookmark.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\images\loading.gif" />
+    <Content Include="Content\js\webviewer\lib\html5\external\images\treeview-default-line.gif" />
+    <Content Include="Content\js\webviewer\lib\html5\external\images\treeview-default.gif" />
+    <Content Include="Content\js\webviewer\lib\html5\external\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery-3.2.1.min.js" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery-migrate-3.0.0.min.js" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery-ui\jquery-ui-1.11.1.custom.js" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery-ui\jquery-ui-1.11.1.custom.min.js" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery-ui\themes\cloud\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery-ui\themes\cloud\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery-ui\themes\cloud\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery-ui\themes\cloud\images\ui-bg_glass_65_CBE6EF_1x400.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery-ui\themes\cloud\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery-ui\themes\cloud\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery-ui\themes\cloud\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery-ui\themes\cloud\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery-ui\themes\cloud\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery-ui\themes\cloud\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery-ui\themes\cloud\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery-ui\themes\cloud\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery-ui\themes\cloud\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery-ui\themes\cloud\jquery-ui-1.11.1.custom.css" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery-ui\themes\cloud\jquery-ui-1.11.1.custom.min.css" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.cookie.js" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.doubletap.js" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.flexibleArea.js" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\ajax-loader.gif" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\action-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\action-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\alert-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\alert-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\arrow-d-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\arrow-d-l-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\arrow-d-l-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\arrow-d-r-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\arrow-d-r-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\arrow-d-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\arrow-l-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\arrow-l-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\arrow-r-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\arrow-r-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\arrow-u-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\arrow-u-l-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\arrow-u-l-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\arrow-u-r-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\arrow-u-r-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\arrow-u-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\audio-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\audio-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\back-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\back-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\bars-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\bars-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\bullets-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\bullets-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\calendar-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\calendar-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\camera-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\camera-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\carat-d-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\carat-d-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\carat-l-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\carat-l-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\carat-r-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\carat-r-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\carat-u-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\carat-u-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\check-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\check-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\clock-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\clock-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\cloud-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\cloud-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\comment-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\comment-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\delete-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\delete-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\edit-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\edit-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\eye-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\eye-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\forbidden-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\forbidden-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\forward-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\forward-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\gear-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\gear-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\grid-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\grid-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\heart-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\heart-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\home-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\home-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\info-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\info-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\location-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\location-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\lock-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\lock-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\mail-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\mail-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\minus-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\minus-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\navigation-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\navigation-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\phone-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\phone-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\plus-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\plus-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\power-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\power-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\recycle-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\recycle-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\refresh-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\refresh-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\search-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\search-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\shop-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\shop-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\star-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\star-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\tag-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\tag-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\user-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\user-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\video-black.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\images\icons-png\video-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\jquery.mobile-1.4.4.min.css" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\jquery.mobile-1.4.4.min.js" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\jquery.mobile.custom.structure.min.css" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\jquery.mobile.custom.theme.min.css" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mobile\jquery.mobile.icons-1.4.4.min.css" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.mousewheel.js" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.treeview.css" />
+    <Content Include="Content\js\webviewer\lib\html5\external\jquery.treeview.js" />
+    <Content Include="Content\js\webviewer\lib\html5\external\modernizr.custom.js" />
+    <Content Include="Content\js\webviewer\lib\html5\external\moment.min.js" />
+    <Content Include="Content\js\webviewer\lib\html5\external\pako_inflate.min.js" />
+    <Content Include="Content\js\webviewer\lib\html5\external\Promise.js" />
+    <Content Include="Content\js\webviewer\lib\html5\external\rawinflate.js" />
+    <Content Include="Content\js\webviewer\lib\html5\external\touchr.js" />
+    <Content Include="Content\js\webviewer\lib\html5\external\turn.js" />
+    <Content Include="Content\js\webviewer\lib\html5\external\xdomain.js" />
+    <Content Include="Content\js\webviewer\lib\html5\KeyRequest.css" />
+    <Content Include="Content\js\webviewer\lib\html5\legal.txt" />
+    <Content Include="Content\js\webviewer\lib\html5\MobileReaderControl.css" />
+    <Content Include="Content\js\webviewer\lib\html5\MobileReaderControl.html" />
+    <Content Include="Content\js\webviewer\lib\html5\MobileReaderControl.js" />
+    <Content Include="Content\js\webviewer\lib\html5\mobileSetup.js" />
+    <Content Include="Content\js\webviewer\lib\html5\NotesPanel.js" />
+    <Content Include="Content\js\webviewer\lib\html5\office\OfficeWorker.js" />
+    <Content Include="Content\js\webviewer\lib\html5\office\WebOfficeWorker.gz.js" />
+    <Content Include="Content\js\webviewer\lib\html5\office\WebOfficeWorkerWasm.br.js" />
+    <Content Include="Content\js\webviewer\lib\html5\pdf\pdfnet.res" />
+    <Content Include="Content\js\webviewer\lib\html5\pdf\PDFNetC.gz.js" />
+    <Content Include="Content\js\webviewer\lib\html5\pdf\PDFNetCWasm.br.js" />
+    <Content Include="Content\js\webviewer\lib\html5\pdf\PDFReaderControl.css" />
+    <Content Include="Content\js\webviewer\lib\html5\pdf\PDFReaderControl.js" />
+    <Content Include="Content\js\webviewer\lib\html5\pdf\PDFworker.js" />
+    <Content Include="Content\js\webviewer\lib\html5\pdf\ResizableWorker.js" />
+    <Content Include="Content\js\webviewer\lib\html5\ReaderControl.css" />
+    <Content Include="Content\js\webviewer\lib\html5\ReaderControl.html" />
+    <Content Include="Content\js\webviewer\lib\html5\ReaderControl.js" />
+    <Content Include="Content\js\webviewer\lib\html5\ReaderControlConfig.js" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\1px.png" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\checkmark.png" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\color_none.png" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\dist\jstree.js" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\dist\jstree.min.js" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\dist\themes\default-dark\32px.png" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\dist\themes\default-dark\40px.png" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\dist\themes\default-dark\style.css" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\dist\themes\default-dark\style.min.css" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\dist\themes\default-dark\throbber.gif" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\dist\themes\default\32px.png" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\dist\themes\default\40px.png" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\dist\themes\default\style.css" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\dist\themes\default\style.min.css" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\dist\themes\default\throbber.gif" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\dragginghand.cur" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\dragginghand.png" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\hand.cur" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\hand.png" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\icons\css\controls.css" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\icons\css\customicons.css" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\icons\css\glyphicons.css" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\icons\css\style.css" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\icons\fonts\custom.svg" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\icons\fonts\glyphicons-regular.svg" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\icons\images\glyphicons-white.png" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\icons\images\glyphicons-white.svg" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\icons\images\glyphicons.png" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\icons\images\glyphicons.svg" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\icon_credits.txt" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\minus.png" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\minus_circle.png" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\ok_circle.png" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\plus.png" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\user.png" />
+    <Content Include="Content\js\webviewer\lib\html5\WebViewerInterface.js" />
+    <Content Include="Content\js\webviewer\lib\WebViewer.js" />
+    <Content Include="Content\js\webviewer\lib\WebViewer.min.js" />
+    <Content Include="Content\PageCss\course_learning_area.css" />
+    <Content Include="Content\PageCss\Employee_Dashboard.css" />
+    <Content Include="Content\PageJs\Admin_Advert.js" />
+    <Content Include="Content\PageJs\Admin_AssignCourse.js" />
+    <Content Include="Content\PageJs\Admin_ExaminationManagement.js" />
+    <Content Include="Content\PageJs\Admin_Forum.js" />
+    <Content Include="Content\PageJs\Common_Certificate.js" />
+    <Content Include="Content\PageJs\Common_Layout.js" />
+    <Content Include="Content\PageJs\Course_Learning_Area.js" />
+    <Content Include="Content\PageJs\Employee_Adverts.js" />
+    <Content Include="Content\PageJs\ListTraining.js" />
+    <Content Include="Content\PageJs\NewTraining.js" />
+    <Content Include="Content\js\PageObjects.js" />
+    <Content Include="PartialViews\Admin\ExamQuestions.html" />
+    <Content Include="PartialViews\Admin\ExamTableRow.html" />
+    <Content Include="PartialViews\Admin\ManageCourseModules.html" />
+    <Content Include="Content\js\additional-methods.min.js" />
+    <Content Include="Content\js\CustomValidation.js" />
+    <Content Include="Content\js\froala_editor.min.js" />
+    <Content Include="Content\js\moment.min.js" />
+    <Content Include="Content\js\pagination.min.js" />
+    <Content Include="Content\js\select2.min.js" />
+    <Content Include="Content\js\angular.min.js" />
+    <Content Include="Content\js\httpservice.js" />
+    <Content Include="Content\PageJs\Admin_CourseManagement.js" />
+    <Content Include="PartialViews\Admin\CourseTableRow.html" />
+    <Content Include="Content\PageJs\staffmanagement.js" />
+    <Content Include="PartialViews\Admin\LearningAreaTableRow.html" />
+    <Content Include="Content\img\back.jpg" />
+    <Content Include="Content\img\banner.png" />
+    <Content Include="Content\img\c1.jpg" />
+    <Content Include="Content\img\c2.jpg" />
+    <Content Include="Content\img\c3.jpg" />
+    <Content Include="Content\img\calendar %281%29.jpg" />
+    <Content Include="Content\img\certificate %281%29.jpg" />
+    <Content Include="Content\img\course_catalog %281%29.jpg" />
+    <Content Include="Content\img\course_img.jpg" />
+    <Content Include="Content\img\details %281%29.jpg" />
+    <Content Include="Content\img\fm.jpg" />
+    <Content Include="Content\img\icons\edit%402x.png" />
+    <Content Include="Content\img\icons\edit%403x.png" />
+    <Content Include="Content\img\icons\edit.png" />
+    <Content Include="Content\img\icons\view%402x.png" />
+    <Content Include="Content\img\icons\view%403x.png" />
+    <Content Include="Content\img\icons\view.png" />
+    <Content Include="Content\img\img1.jpg" />
+    <Content Include="Content\img\img10.jpg" />
+    <Content Include="Content\img\img2.jpg" />
+    <Content Include="Content\img\img3.png" />
+    <Content Include="Content\img\img4jpg.jpg" />
+    <Content Include="Content\img\img5.jpg" />
+    <Content Include="Content\img\img6.jpg" />
+    <Content Include="Content\img\img7.jpg" />
+    <Content Include="Content\img\img8.jpg" />
+    <Content Include="Content\img\img9.jpg" />
+    <Content Include="Content\img\loader.gif" />
+    <Content Include="Content\img\loading.gif" />
+    <Content Include="Content\img\login.jpg" />
+    <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\podcast %281%29.jpg" />
+    <Content Include="Content\img\profile %281%29.jpg" />
+    <Content Include="Content\img\retro.png" />
+    <Content Include="Content\img\sbsc.png" />
+    <Content Include="Content\img\slide.png" />
+    <Content Include="Content\img\support %281%29.jpg" />
+    <Content Include="Content\js\jquery.js" />
+    <Content Include="Content\js\jquery.validate.min.js" />
+    <Content Include="Content\js\main.js" />
+    <Content Include="Content\js\mustache.js" />
+    <Content Include="Content\PageJs\Admin_LearningAreaView.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\fonts\iconfont\codepoints" />
+    <Content Include="Content\fonts\iconfont\MaterialIcons-Regular.eot" />
+    <Content Include="Content\fonts\iconfont\MaterialIcons-Regular.ttf" />
+    <Content Include="Content\fonts\iconfont\MaterialIcons-Regular.woff" />
+    <Content Include="Content\fonts\iconfont\MaterialIcons-Regular.woff2" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\Ubuntu-L.ttf" />
+    <Content Include="Areas\Common\Views\web.config" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Employee\Views\web.config" />
+    <Content Include="Areas\Common\Views\Shared\_CommonLayout.cshtml" />
+    <Content Include="Areas\Common\Views\Home\index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageCourse\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageCourse\LearningArea.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageCourse\AddCourse.cshtml" />
+    <Content Include="Areas\Admin\Views\EmployeeRecords\listemployees.cshtml" />
+    <Content Include="Areas\Common\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Common\Views\Home\UploadStaffDetails.cshtml" />
+    <Content Include="Areas\Common\Views\Profile\index.cshtml" />
+    <Content Include="Areas\Common\Views\Support\index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Areas\Admin\Views\EmployeeRecords\profiledetails.cshtml" />
+    <Content Include="nlog.config" />
+    <Content Include="Content\css\toastr.less" />
+    <Content Include="Content\css\toastr.scss" />
+    <Content Include="Areas\Admin\Views\ManageTraining\ListTraining.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageTraining\Index.cshtml" />
+    <Content Include="Areas\Common\Views\Forum\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageTraining\NewTrainingBudget.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageTraining\TrainingBudget.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageTraining\TrainingRequest.cshtml" />
+    <Content Include="Areas\Admin\Views\Forum\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Adverts\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SupportManagement\Dashboard.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageTraining\ListTrainingVideo.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageTraining\NewTrainingVideo.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageTraining\_GetDeptDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageTraining\_GetTrainingDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageTraining\_GetTrainingRequestDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\SupportManagement\_GetTicketDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\SupportManagement\_ChangeTicketStatus.cshtml" />
+    <Content Include="Areas\Admin\Views\SupportManagement\Ticket.cshtml" />
+    <Content Include="Areas\Admin\Views\Notification\Index.cshtml" />
+    <Content Include="Content\PageCss\common.css" />
+    <Content Include="Content\videos\topic1.WEBM" />
+    <Content Include="Areas\Admin\Views\ManageCourse\Assign.cshtml" />
+    <Content Include="Areas\Common\Views\Home\employeesidebar.cshtml" />
+    <Content Include="Areas\Admin\Views\UserManagement\CreateRole.cshtml" />
+    <Content Include="Areas\Admin\Views\UserManagement\index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageTraining\AssignTraining.cshtml" />
+    <Content Include="Areas\Admin\Views\ReportManagement\NewReport.cshtml" />
+    <Content Include="Areas\Admin\Views\Examination\index.cshtml" />
+    <Content Include="Content\js\webviewer\lib\html5\.htaccess" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\js\webviewer\lib\html5\doc\symbols\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\js\webviewer\lib\html5\office\WebOfficeWorker.gz.js.mem" />
+    <Content Include="Content\js\webviewer\lib\html5\office\WebOfficeWorker.nmf" />
+    <Content Include="Content\js\webviewer\lib\html5\office\WebOfficeWorker.pexe" />
+    <Content Include="Content\js\webviewer\lib\html5\office\WebOfficeWorkerSubzero.nmf" />
+    <Content Include="Content\js\webviewer\lib\html5\office\WebOfficeWorkerWasm.br.wasm" />
+    <Content Include="Content\js\webviewer\lib\html5\pdf\PDFNetC.gz.js.mem" />
+    <Content Include="Content\js\webviewer\lib\html5\pdf\PDFNetCWasm.br.wasm" />
+    <Content Include="Content\js\webviewer\lib\html5\pdf\PDFWorker.nmf" />
+    <Content Include="Content\js\webviewer\lib\html5\pdf\PDFWorker.pexe" />
+    <Content Include="Content\js\webviewer\lib\html5\pdf\PDFWorkerSubzero.nmf" />
+    <Content Include="Content\js\webviewer\lib\html5\pdf\SimpleWorker.nmf" />
+    <Content Include="Content\js\webviewer\lib\html5\pdf\SimpleWorker.pexe" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\i18n\translation-de.json" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\i18n\translation-en.json" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\i18n\translation-es.json" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\i18n\translation-fr.json" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\i18n\translation-gl.json" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\i18n\translation-pt_br.json" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\i18n\translation-ru.json" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\icons\fonts\custom.eot" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\icons\fonts\custom.ttf" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\icons\fonts\custom.woff" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\icons\fonts\glyphicons-regular.eot" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\icons\fonts\glyphicons-regular.otf" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\icons\fonts\glyphicons-regular.ttf" />
+    <Content Include="Content\js\webviewer\lib\html5\Resources\icons\fonts\glyphicons-regular.woff" />
+    <Content Include="Content\css\font\summernote.eot" />
+    <Content Include="Content\css\font\summernote.ttf" />
+    <Content Include="Content\css\font\summernote.woff" />
+    <Content Include="Areas\Common\Views\Course\_startsurvey.cshtml" />
+    <Content Include="Content\fonts\OpenSans-Bold.ttf" />
+    <Content Include="Content\fonts\OpenSans-BoldItalic.ttf" />
+    <Content Include="Content\fonts\OpenSans-ExtraBold.ttf" />
+    <Content Include="Content\fonts\OpenSans-ExtraBoldItalic.ttf" />
+    <Content Include="Content\fonts\OpenSans-Italic.ttf" />
+    <Content Include="Content\fonts\OpenSans-Light.ttf" />
+    <Content Include="Content\fonts\OpenSans-LightItalic.ttf" />
+    <Content Include="Content\fonts\OpenSans-Regular.ttf" />
+    <Content Include="Content\fonts\OpenSans-SemiBold.ttf" />
+    <Content Include="Content\fonts\OpenSans-SemiBoldItalic.ttf" />
+    <Content Include="Areas\Admin\Views\BulkUpload\course.cshtml" />
+    <Content Include="Areas\Admin\Views\LearningGroup\Index.cshtml" />
+    <Content Include="Content\css\font\VideoJS.eot" />
+    <Content Include="Content\css\font\VideoJS.ttf" />
+    <Content Include="Content\css\font\VideoJS.woff" />
+    <Content Include="Content\excel\course_template.xlsx" />
+    <Content Include="Content\excel\EmpSampleExcel.xlsx" />
+    <Content Include="Content\excel\LMSTrainingSample.xlsx" />
+    <Content Include="Areas\Admin\Views\ReportManagement\UserCourseProgress.cshtml" />
+    <Content Include="Areas\Admin\Views\ReportManagement\UserExamProgress.cshtml" />
+    <Content Include="Areas\Common\Views\Examination\index.cshtml" />
+    <Content Include="Areas\Common\Views\Examination\examination.cshtml" />
+    <Content Include="Areas\Common\Views\Examination\_examsummary.cshtml" />
+    <Content Include="Areas\Common\Views\Examination\_examquestion.cshtml" />
+    <Content Include="Areas\Common\Views\Course\_comments.cshtml" />
+    <Content Include="Areas\Admin\Views\ReportManagement\ApproveComments.cshtml" />
+    <EntityDeploy Include="Areas\Common\Models\SBLMSModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SBLMSModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Areas\Common\Models\SBLMSModel.edmx.diagram">
+      <DependentUpon>SBLMSModel.edmx</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\file system.pubxml" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.3.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.3.min.js" />
+    <Content Include="Scripts\jquery.timeago.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Authentication\login.cshtml" />
+    <Content Include="Views\Shared\_layout.cshtml" />
+    <Content Include="Views\Authentication\forgotpassword.cshtml" />
+    <Content Include="Views\Authentication\accessdenied.cshtml" />
+    <Content Include="Views\Error\pagenotfound.cshtml" />
+    <Content Include="Views\Authentication\Passwordresetstatus.cshtml" />
+    <Content Include="Views\Error\servererror.cshtml" />
+    <Content Include="Views\Error\badrequest.cshtml" />
+    <Content Include="Views\Authentication\resetpassword.cshtml" />
+    <Content Include="Views\Authentication\mailexempt.cshtml" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <None Include="SterlingBankLMS.Web.wpp.targets" />
+    <None Include="Web.Staging.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Employee\Controllers\" />
+    <Folder Include="Areas\Employee\Views\Course\" />
+    <Folder Include="Areas\Employee\Views\Shared\" />
+    <Folder Include="Areas\HumanResources\Models\" />
+    <Folder Include="Areas\Management\Controllers\" />
+    <Folder Include="Areas\Management\Models\" />
+    <Folder Include="Areas\Management\Views\Shared\" />
+    <Folder Include="Areas\Technology\Models\" />
+    <Folder Include="Content\Chunks\" />
+    <Folder Include="Content\docs\" />
+    <Folder Include="Content\excel\1\" />
+    <Folder Include="Helpers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SterlingBankLMS.Core\SterlingBankLMS.Core.csproj">
+      <Project>{8bf09689-8972-4c0e-9bbf-e0b18cc4ef51}</Project>
+      <Name>SterlingBankLMS.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SterlingBankLMS.Data\SterlingBankLMS.Data.csproj">
+      <Project>{7fc465b8-d02f-4c86-9935-6efac91c2f5f}</Project>
+      <Name>SterlingBankLMS.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>46365</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:46365/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

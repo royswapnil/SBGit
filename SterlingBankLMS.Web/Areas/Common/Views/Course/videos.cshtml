@@ -1,0 +1,218 @@
+﻿
+@{
+    ViewBag.Title = "My Videos";
+    Layout = "~/Areas/Common/Views/Shared/_CommonLayout.cshtml";
+}
+<style>
+    .searchArea {
+        background: #0a9cb7;
+    }
+    .courseItem1 {
+         border-bottom: 2px solid #0a9cb7 !important;
+         margin-bottom: 20px;
+    }
+    .searchbox.white input::placeholder {
+        color: #fff;
+    }
+</style>
+
+<div class="wrapper">
+
+    <div class="breadcrum" style="background-image: url('/Content/img/podcast (1).jpg');">
+        <div class="col8">
+            <div class="headcrum"></div>
+            <div class="bodycrum"></div>
+        </div>
+
+        <div class="col4">
+            <div class="headcrum">@CurrentUser.Function.ToUpper()</div>
+            <div class="bodycrum"><i class="material-icons">room</i> <i>@CurrentUser.BranchName.ToUpper()</i></div>
+            <div class="bodycrum"><i style="font-size: 12px;margin-top: 3px;">Staff ID: </i> <b>@CurrentUser.StaffId</b></div>
+        </div>
+
+    </div>
+
+    <div class="searchArea">
+        <div class="searchbox white">
+            <form ng-submit="vm.search()">
+                <input type="text" placeholder="Search Courses" ng-model="vm.search.keywords" style="color:#fff;" /> <i class="material-icons" style="color:#fff;">search</i>
+            </form>
+        </div>
+    </div>
+
+    <div class="content">
+
+        <div class="col12">
+
+            <div class="change">
+
+                <div class="holder">
+                    <span>SORT BY</span>
+                    <select>
+                        <option value="">All departments</option>
+                        <option value="">course length</option>
+                        <option value="">certificate type</option>
+                    </select>
+                </div>
+
+                <div class="holder">
+                    <span>OR</span>
+                    <select>
+                        <option value="">Learning areas</option>
+                        <option value="">course length</option>
+                        <option value="">certificate type</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="boxes1">
+
+                <!-- Course Item -->
+                <div class="col44 courseItem1">
+                    <a href="video">
+                        <div class="coursePlay"><i class="material-icons">play_circle_filled</i></div>
+                    </a>
+                    <div class="text">
+                        <a href="video"><h5 class="blue">Strategic Business Analysis</h5></a>
+                        <p> <b>21 Feb, 18</b></p>
+                    </div>
+
+                </div>
+                <!-- End of Course Item -->
+                <!-- Course Item -->
+                <div class="col44 courseItem1">
+                    <a href="video">
+                        <div class="coursePlay"><i class="material-icons">play_circle_filled</i></div>
+                    </a>
+                    <div class="text">
+                        <a href="video"><h5 class="blue">Strategic Business Analysis</h5></a>
+                        <p> <b>21 Feb, 18</b></p>
+                    </div>
+
+                </div>
+                <!-- End of Course Item -->
+                <!-- Course Item -->
+                <div class="col44 courseItem1">
+                    <a href="video">
+                        <div class="coursePlay"><i class="material-icons">play_circle_filled</i></div>
+                    </a>
+                    <div class="text">
+                        <a href="video"><h5 class="blue">Strategic Business Analysis</h5></a>
+                        <p> <b>21 Feb, 18</b></p>
+                    </div>
+
+                </div>
+                <!-- End of Course Item -->
+                <!-- Course Item -->
+                <div class="col44 courseItem1">
+                    <a href="video">
+                        <div class="coursePlay"><i class="material-icons">play_circle_filled</i></div>
+                    </a>
+                    <div class="text">
+                        <a href="video"><h5 class="blue">Strategic Business Analysis</h5></a>
+                        <p> <b>21 Feb, 18</b></p>
+                    </div>
+
+                </div>
+                <!-- End of Course Item -->
+                <!-- Course Item -->
+                <div class="col44 courseItem1">
+                    <a href="video">
+                        <div class="coursePlay"><i class="material-icons">play_circle_filled</i></div>
+                    </a>
+                    <div class="text">
+                        <a href="video"><h5 class="blue">Strategic Business Analysis</h5></a>
+                        <p> <b>21 Feb, 18</b></p>
+                    </div>
+
+                </div>
+                <!-- End of Course Item -->
+                <!-- Course Item -->
+                <div class="col44 courseItem1">
+                    <a href="video">
+                        <div class="coursePlay"><i class="material-icons">play_circle_filled</i></div>
+                    </a>
+                    <div class="text">
+                        <a href="video"><h5 class="blue">Strategic Business Analysis</h5></a>
+                        <p> <b>21 Feb, 18</b></p>
+                    </div>
+
+                </div>
+                <!-- End of Course Item -->
+                <!-- Course Item -->
+                <div class="col44 courseItem1">
+                    <a href="video">
+                        <div class="coursePlay"><i class="material-icons">play_circle_filled</i></div>
+                    </a>
+                    <div class="text">
+                        <a href="video"><h5 class="blue">Strategic Business Analysis</h5></a>
+                        <p> <b>21 Feb, 18</b></p>
+                    </div>
+
+                </div>
+                <!-- End of Course Item -->
+                <!-- Course Item -->
+                <div class="col44 courseItem1">
+                    <a href="video">
+                        <div class="coursePlay"><i class="material-icons">play_circle_filled</i></div>
+                    </a>
+                    <div class="text">
+                        <a href="video"><h5 class="blue">Strategic Business Analysis</h5></a>
+                        <p> <b>21 Feb, 18</b></p>
+                    </div>
+
+                </div>
+                <!-- End of Course Item -->
+                <!-- Course Item -->
+                <div class="col44 courseItem1">
+                    <a href="video">
+                        <div class="coursePlay"><i class="material-icons">play_circle_filled</i></div>
+                    </a>
+                    <div class="text">
+                        <a href="video"><h5 class="blue">Strategic Business Analysis</h5></a>
+                        <p> <b>21 Feb, 18</b></p>
+                    </div>
+
+                </div>
+                <!-- End of Course Item -->
+                <!-- Course Item -->
+                <div class="col44 courseItem1">
+                    <a href="video">
+                        <div class="coursePlay"><i class="material-icons">play_circle_filled</i></div>
+                    </a>
+                    <div class="text">
+                        <a href="video"><h5 class="blue">Strategic Business Analysis</h5></a>
+                        <p> <b>21 Feb, 18</b></p>
+                    </div>
+
+                </div>
+                <!-- End of Course Item -->
+                <!-- Course Item -->
+                <div class="col44 courseItem1">
+                    <a href="video">
+                        <div class="coursePlay"><i class="material-icons">play_circle_filled</i></div>
+                    </a>
+                    <div class="text">
+                        <a href="video"><h5 class="blue">Strategic Business Analysis</h5></a>
+                        <p> <b>21 Feb, 18</b></p>
+                    </div>
+
+                </div>
+                <!-- End of Course Item -->
+                <!-- Course Item -->
+                <div class="col44 courseItem1">
+                    <a href="video">
+                        <div class="coursePlay"><i class="material-icons">play_circle_filled</i></div>
+                    </a>
+                    <div class="text">
+                        <a href="video"><h5 class="blue">Strategic Business Analysis</h5></a>
+                        <p><b>21 Feb, 18</b></p>
+                    </div>
+
+                </div>
+                <!-- End of Course Item -->
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,381 @@
+﻿
+@{
+    ViewBag.Title = "New Employee";
+    Layout = "~/Areas/HumanResources/Views/Shared/_HRLayout.cshtml";
+}
+
+
+<link href="~/Content/css/select2.min.css" rel="stylesheet" />
+<link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />
+<link href="~/Content/css/datepicker.css" rel="stylesheet" />
+<style>
+    .row {
+        margin-bottom: 15px;
+    }
+</style>
+<div class="banner1 bkCyanBlue">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>Employee Management</span>
+</div>
+
+
+
+
+<div class="content1" style="background: #fff;min-height: 90vh;">
+
+    <div class="boxHead1">
+        <div class="boxHeader1 bDSkyBlue text">Add Employee</div>
+    </div>
+
+    <div class="pinA viewUserTable" style="float: right; display:none">
+        <button class="bkTorBlue pull-right no-margin" style="margin:0">View Employee <i class="fa fa-tasks"></i></button>
+    </div>
+    <div class="boxBody1" style="margin-top:-10px;">
+
+        <div class="addEmployeePanel">
+
+            <div class="profile">
+
+                <div class="errorHolder nofloat"></div>
+
+                <div class="formArea formArea1">
+                    <form id="EmployeeForm">
+                        <div class="formBox1 halfForm">
+                            <label for="">First Name</label>
+                            <input type="text" id="FirstName" name="FirstName" class="form-control" />
+                        </div>
+
+                        <div class="formBox1 halfForm">
+                            <label for="">Last Name</label>
+                            <input type="text" id="LastName" name="LastName" class="form-control" />
+                        </div>
+
+                        <div class="formBox1 halfForm">
+                            <label>Gender:</label>
+                            <select name="Gender" id="Gender" class="form-control">
+                                <option value="0">Please Select Gender</option>
+                                <option value="1">Male</option>
+                                <option value="2">Female</option>
+                            </select>
+                        </div>
+                        <div class="formBox1 halfForm">
+                            <label for="">Staff Id</label>
+                            <input type="text" id="StaffId" name="StaffId" class="form-control" />
+                        </div>
+                        <div class="formBox1 halfForm">
+                            <label for="">Date Of Birth</label>
+                            <input type="text" id="DateOfBirth" name="DateOfBirth" class="form-control" />
+                        </div>
+                        <div class="formBox1 halfForm">
+                            <label for="">Date of Employment</label>
+                            <input type="text" id="DateOfEmployment" name="DateOfEmployment" class="form-control" />
+                        </div>
+
+                        <div class="formBox1 halfForm">
+                            <label for="">Email Address</label>
+                            <input type="text" id="Email" name="Email" class="form-control" />
+                        </div>
+
+                        @*<div class="formBox1 halfForm">
+            <label for="">Password</label>
+            <input type="password" id="Password" name="Password" class="form-control" />
+        </div>
+
+        <div class="formBox1 halfForm">
+            <label for="">Confirm Password</label>
+            <input type="password" id="ConfirmPassword" name="ConfirmPassword" class="form-control" />
+        </div>*@
+                        <div class="formBox1 halfForm">
+                            <label for=""> Phone Number</label>
+                            <input type="text" id="Phone" name="Phone" class="form-control" />
+                        </div>
+                        <div class="formBox1 fullForm">
+                            <label for="">Address</label>
+                            <textarea name="Address" id="Address" rows="7"></textarea>
+                        </div>
+                        <div class="formBox1 fullForm">
+                            <label for=""> Functions</label>
+                            <input type="text" id="Function" name="Function" class="" />
+                        </div>
+                        <div class="formBox1 halfForm">
+                            <label>Select Role:</label>
+                            <select name="RoleId" id="RoleId" class="">
+                                <option value="0">Select Roles</option>
+                            </select>
+                        </div>
+
+                        <div class="formBox1 halfForm">
+                            <label> Grade:</label>
+                            <select name="Grade" id="Grade" class="">
+                                <option value="0">Select Grade</option>
+                            </select>
+                        </div>
+                        <div class="formBox1 halfForm">
+                            <label> Group:</label>
+                            <select name="Group" id="Group" class="form-control">
+                                <option value="0">Select Group</option>
+                            </select>
+                        </div>
+                        <div class="formBox1 halfForm">
+                            <label> Department:</label>
+                            <select name="Department" id="Department" class="form-control"></select>
+                        </div>
+                        <div class="formBox1 halfForm">
+                            <label> Branch:</label>
+                            <select name="Branch" id="Branch" class="form-control">
+                                <option value="0">Select Branch</option>
+                            </select>
+                        </div>
+                        <div class="formBox1 halfForm">
+                            <label> Region:</label>
+                            <select name="Region" id="Region" class="form-control">
+                                <option value="0">Select Region</option>
+                            </select>
+                        </div>
+                        <div class="formBox1 halfForm">
+                            <label for=""> Line Manager StaffId</label>
+                            <input type="text" id="LineManagerStaffId" name="LineManagerStaffId" class="" />
+                        </div>
+
+                        <div class="formBox1 halfForm">
+                            &emsp;Set Lock out date for external users
+                            <input type="checkbox" class="form-control" name="Lock">
+                            <span class="checkmark"></span>
+                        </div>
+                        <div class="formBox1 halfForm" style="display:none" id="SecurityLock">
+                            <label for=""> Lock Out Date</label>
+                            <input type="text" id="LockOutDate" name="LockOutDate" class="" />
+                        </div>
+
+                        <div class="underlineBtn">
+                            <button class="nextBtn btnMedium bkSkyBlue" type="submit">Save New Employee</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Content/js/jquery.validate.min.js"></script>
+    <script src="~/Content/js/additional-methods.min.js"></script>
+    <script src="~/Content/js/CustomValidation.js"></script>
+    <script src="~/Content/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('input[name="Lock"]').change(function () {
+
+                if ($(this).is(":checked")) {
+                    $("#SecurityLock").show();
+                }
+                else {
+                    $("#SecurityLock").hide();
+                }
+            })
+
+            $.get('/api/user/getroles', function (data) {
+                for (var x = 0; x < data.Result.length; x++) {
+                    $('#RoleId').append('<option value=' + data.Result[x].Id + '>' + data.Result[x].Name + '</option>');
+                }
+                $('#RoleId').select2({ 'width': '100%' });
+            })
+
+            
+            $.get('/api/organization/GetBranches', function (data) {
+
+                data.Result.forEach(function (option) {
+                    $('#Branch').append('<option value="' + option.Id + '">' + option.Name + '</option>');
+                });
+                $('#Branch').select2({ 'width': '100%' });
+            });
+            $.get('/api/organization/GetGrades', function (data) {
+
+                data.Result.forEach(function (option) {
+                    $('#Grade').append('<option value="' + option.Id + '">' + option.Name + '</option>');
+                });
+                $('#Grade').select2({ 'width': '100%' });
+            });
+
+            $.get('/api/organization/GetGroups', function (data) {
+
+                data.Result.forEach(function (option) {
+                    $('#Group').append('<option value="' + option.Id + '">' + option.Name + '</option>');
+                });
+                $('#Group').select2({ 'width': '100%' });
+            });
+
+            $.get('/api/organization/GetRegion', function (data) {
+
+                data.Result.forEach(function (option) {
+                    $('#Region').append('<option value="' + option.Id + '">' + option.Name + '</option>');
+                });
+                $('#Region').select2({ 'width': '100%' });
+            });
+            $.get('/api/organization/GetDepartmentNames', function (data) {
+                data.Result.forEach(function (option) {
+                    $('#Department').append('<option value="' + option.Id + '">' + option.Name + '</option>');
+                });
+                $('#Department').select2({ 'width': '100%' });
+            });
+
+            $('#Group').on('change', function () {
+                var $selected = { Id: $(this).val() };
+                $('#Department').html('<option value="">Select department</option>')
+
+                $.get('/api/organization/GetDepartmentByGroupId', $selected, function (data) {
+                    data.Result.forEach(function (option) {
+                        $('#Department').append('<option value="' + option.Id + '">' + option.Name + '</option>');
+                    });
+                    $('#Department').select2({ 'width': '100%' });
+                });
+            })
+
+            $("#EmployeeForm").validate({
+                ignore: [],
+                rules: {
+                    FirstName: { required: true },
+                    LastName: { required: true },
+                    StaffId: { required: true },
+                    Function: { required: true },
+                    RoleName: "dropdown",
+                    Gender: 'dropdown',
+                    Group: 'dropdown',
+                    Grade: 'dropdown',
+                    Branch: 'dropdown',
+                    Region: 'dropdown',
+                    LineManagerStaffId: { required: true },
+                    DateOfEmployment: { required: true, },
+                    DateOfBirth: { required: true, },
+                    Email: { required: true, email: true },
+                    //Password: { required: true, minlength: 6 },
+                    //ConfirmPassword: { equalTo: "[name='Password']", minlength: 6 }
+
+                },
+                message: {
+                    Password: {
+                        required: "Password is a required field",
+                        minlength: jQuery.validator.format("At least {0} characters is required!")
+                    }
+
+                },
+                errorPlacement: function ($error, $element) {
+                    $error.addClass('errorHolder');
+                    $element.closest('.formBox1').find('label:first').after($error);
+                },
+                submitHandler: function (form) {
+
+                    var $button = $(form).find(':submit');
+                    var prev = $button.html();
+                    $button.attr('disabled', 'disabled');
+                    $button.html('Processing <i class="fa fa-circle-o-notch fa-spin pull-right"></i>');
+
+                    var formData = new FormData(form);
+                    $.ajax({
+                        cache: false,
+                        async: true,
+                        type: "POST",
+                        url: "/api/Employee/SaveNewEmployee",
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (data) {
+                            if (!data.HasError) {
+                                ShowNotie(data);
+                                $button.html('').html('Save Employee');
+                                $button.attr('disabled', false);
+                                $('#FirstName').val('');
+                                $('#LastName').val('');
+                                $('#StaffId').val('');
+                                $('#Email').val('');
+                                $('#Address').val('');
+                                $('#Function').val('');
+                                $('#DateOfBirth').val('');
+                                $('#DateOfEmployment').val('');
+                                $('#Branch').val([]);
+                                $('#Phone').val('');
+                                $('#LineManagerStaffId').val(data.Result);
+                            }
+                            else {
+
+                                ShowNotie(data);
+                                $button.html('').html('Save Employee');
+                                $button.attr('disabled', false);
+                                
+                            }
+
+                        },
+
+                        error: function (data) {
+                            ShowNotie({ HasError: true, Message: "An error occurred when processing your request" });
+                        },
+                        complete: function (data) {
+                            $button.removeAttr('disabled');
+                            $button.html(prev);
+                        }
+                    });
+
+                }
+            });
+
+            $("input[id*='StaffId']").keydown(function (event) {
+
+                if (event.shiftKey == true) {
+                    event.preventDefault();
+                }
+
+                if ((event.keyCode >= 48 && event.keyCode <= 57) ||
+                    (event.keyCode >= 96 && event.keyCode <= 105) ||
+                    event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 ||
+                    event.keyCode == 39 || event.keyCode == 46 || event.keyCode == 190) {
+
+                } else {
+                    event.preventDefault();
+                }
+
+                if ($(this).val().indexOf('.') !== -1 && event.keyCode == 190)
+                    event.preventDefault();
+            });
+            $("input[id*='Phone']").keydown(function (event) {
+
+                if (event.shiftKey == true) {
+                    event.preventDefault();
+                }
+
+                if ((event.keyCode >= 48 && event.keyCode <= 57) ||
+                    (event.keyCode >= 96 && event.keyCode <= 105) ||
+                    event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 ||
+                    event.keyCode == 39 || event.keyCode == 46 || event.keyCode == 190) {
+
+                } else {
+                    event.preventDefault();
+                }
+
+                if ($(this).val().indexOf('.') !== -1 && event.keyCode == 190)
+                    event.preventDefault();
+            });
+            $('#DateOfBirth').datepicker({
+                yearRange: "-119:+0",
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd/mm/yy'
+
+            });
+            $('#DateOfEmployment').datepicker({
+                yearRange: "-119:+0",
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd/mm/yy'
+
+            });
+
+            $('#LockOutDate').datepicker({
+                yearRange: "-119:+0",
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd/mm/yy'
+
+            });
+        });
+    </script>
+}

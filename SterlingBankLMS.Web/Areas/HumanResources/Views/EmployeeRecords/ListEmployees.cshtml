@@ -1,0 +1,783 @@
+﻿
+@{
+    ViewBag.Title = "ListEmployees";
+    Layout = "~/Areas/HumanResources/Views/Shared/_HRLayout.cshtml";
+}
+<link href="~/Content/css/select2.min.css" rel="stylesheet" />
+<link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />
+<link href="~/Content/css/datepicker.css" rel="stylesheet" />
+<style>
+    .ui-datepicker, .ui-datepicker div, .ui-datepicker span,
+    .ui-datepicker input, .ui-datepicker textarea,
+    .ui-datepicker button, .ui-datepicker ul,
+    .ui-datepicker li, .ui-datepicker i, .ui-datepicker h1,
+    .ui-datepicker h2, .ui-datepicker h3, .ui-datepicker h4,
+    .ui-datepicker h5, .ui-datepicker h6, .ui-datepicker textarea, .ui-datepicker sup,
+    .ui-datepicker video, .ui-datepicker table, .ui-datepicker tr, .ui-datepicker td, .ui-datepicker th, .ui-datepicker tbody,
+    .ui-datepicker thead {
+        float: none;
+    }
+
+    .tanHP {
+        background: #fff;
+        border-radius: 0;
+    }
+
+    .searchT {
+        border: 1px solid #eee;
+    }
+
+    .pinA select {
+        border: 1px solid #ddd;
+    }
+
+    .pinA span {
+        font-weight: bold;
+        margin-top: 3px;
+    }
+
+
+    table.courselist {
+        width: 100%;
+        font-size: 13px;
+        border: 1px solid #eaeaea !important;
+    }
+
+    .courselist thead {
+        width: 100%;
+        color: #19535f;
+        font-weight: bold;
+        font-size: 13px;
+        border-top: 0px solid transparent;
+        background: #ddd;
+        font-weight: bold;
+        font-size: 13px;
+        border-bottom: 2px solid #28A7BE;
+    }
+
+    .courselist tbody {
+        width: 100%;
+    }
+
+    .courselist tr {
+        width: 100%;
+    }
+
+    .courselist tbody tr:last-child {
+        border: none;
+    }
+
+    .courselist tr td {
+        padding: 10px;
+    }
+
+        .courselist tr td:nth-child(1) {
+            width: 10% !important;
+        }
+
+        .courselist tr td:nth-child(2) {
+            width: 20% !important;
+        }
+
+        .courselist tr td:nth-child(3) {
+            width: 25% !important;
+        }
+
+    .courselist tbody tr td:nth-child(1) {
+        border-right: 2px solid #f0f3f5;
+    }
+
+    .courselist tbody tr td:nth-child(2) {
+        border-right: 2px solid #f0f3f5;
+    }
+
+    .courselist tbody tr td:nth-child(3) {
+        border-right: 2px solid #f0f3f5;
+    }
+
+    .courselist tbody tr td:nth-child(4) {
+        border-right: 2px solid #f0f3f5;
+    }
+
+    .courselist tr td a {
+        color: #00d7ff;
+    }
+
+    .courselist tr td:nth-child(4), .courselist tr td:nth-child(5), .courselist tr td:nth-child(6) {
+        width: 20% !important;
+    }
+
+    .courselist tr td:nth-child(7) {
+        width: 15% !important;
+    }
+
+    .courselist tbody tr {
+        margin-top: 0px;
+        border-bottom: 2px solid #f0f3f5;
+    }
+
+        .courselist tbody tr td a button {
+            margin: 0;
+        }
+
+    .counter {
+        padding: 10px;
+        float: right;
+        font-size: 15px;
+        background: #ddd;
+        width: 100%;
+    }
+
+        .counter i {
+            background: #fff;
+            color: #000;
+        }
+
+    .alert.alert-danger, .alert.alert-success, .alert.alert-info, .alert.alert-warning {
+        width: 70%;
+        margin-top: 20px;
+    }
+
+    .formArea {
+        width: 100%;
+        margin-top: 20px;
+        padding-bottom: 60px;
+        float: left;
+    }
+
+    .formBox1 .label {
+        width: 100%;
+        margin-bottom: 10px;
+        font-weight: bold;
+        font-size: 13px;
+        float: left;
+    }
+
+    .formBox1 input, .formBox1 textarea, .formBox1 select {
+        width: 100%;
+        height: 30px;
+        padding: 5px;
+        font-size: 15px;
+        border: 1px solid rgba(0, 0, 0, 0.39);
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        float: left;
+    }
+
+    .formBox1 textarea {
+        height: 100px;
+    }
+
+    .formBox1 button {
+        background: #760f91;
+        border: none;
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        color: #fff;
+        height: 30px;
+        width: 120px;
+        margin-top: -30px;
+        float: right;
+    }
+
+    .bDGreen {
+        border-bottom: 3px solid #2fbf71;
+    }
+
+    .bkGreen {
+        background: #2fbf71;
+    }
+
+    .bkRed {
+        background: #ab192d;
+    }
+
+    jconfirm div {
+        float: none !important;
+    }
+
+    .jconfirm .jconfirm-holder {
+        margin: 0 40%;
+    }
+
+    .jconfirm-content {
+        padding-top: 20px;
+    }
+
+        .jconfirm-content div {
+            font-weight: 700;
+        }
+
+    .jconfirm-type-orange .jconfirm-content div {
+        color: red;
+    }
+
+    .jconfirm.jconfirm-light .jconfirm-box {
+        padding: 20px 25px 10px 25px;
+    }
+
+    .jconfirm .jconfirm-box-container.jconfirm-no-transition {
+        margin: 0px;
+        width: 100%;
+    }
+
+    .Pending {
+        color: #E68618;
+    }
+
+    .Approved {
+        color: #38C64E;
+    }
+
+    .Rejected {
+        color: #DA3024;
+    }
+
+    .NotSeen {
+        color: #E68618;
+    }
+
+    .Yes {
+        color: #38C64E;
+    }
+
+    .No {
+        color: #DA3024;
+    }
+</style>
+<div class="banner1 bkCyanBlue">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>Employee Records</span>
+</div>
+
+<div class="content1" style="min-height: 90vh;" ng-controller="employeelisting as vm">
+
+    <div class="boxHead1" ng-init="vm.loadEmployee('@Url.Content("~/api/employee/getemployees")')">
+        <div class="boxHeader1 bDCyanBlue">Employee List</div>
+    </div>
+    <div class="boxHead1" style="border-bottom:none">
+        <a href="@Url.Action("ListEmployees","EmployeeRecords",new { area="HumanResources"})">
+            <button class="btn bkSkyBlue goback" style="margin-bottom: 10px; display:none;">
+                Back To List
+            </button>
+        </a>
+    </div>
+    <div class="boxBody1">
+        <div id="EmployeeTablePanel">
+            <div class="tanHead tanHP" style="background: #fff;border-bottom:0px solid transparent;">
+                <form ng-submit="vm.filterSearch()" style="width:100%">
+                    <input type="text" ng-model="vm.search.keywords" class="searchT" placeholder="Employee Search ...">
+                    <div class="pinA">
+                        <span>Filter by:</span>
+                        @Html.DropDownList("group", null, "All Groups", new { ng_model = "vm.search.group", ng_change = "vm.filterSearch()", convert_to_number = "" })
+                    </div>
+                </form>
+            </div>
+
+            <div class="tableRanch">
+                <table class="courselist employeeTable">
+                    <thead>
+                        <tr>
+                            <td>Staff ID</td>
+                            <td>Name</td>
+                            <td>Group</td>
+                            <td>Branch</td>
+                            <td>Action</td>
+                        </tr>
+                    </thead>
+
+                    <tbody id="staff-list" ng-repeat="staff in vm.staffs">
+                        <tr>
+                            <td>{{staff.StaffId}}</td>
+                            <td><a href="~/humanresources/employeerecords/profiledetails/{{staff.Id}}">{{staff.FirstName}} {{staff.LastName}}</a></td>
+                            <td>{{staff.Group || 'No Group'}}</td>
+                            <td>{{staff.Branch || 'No Branch'}}</td>
+                            <td>
+                                <a class="btn1 bkSkyBlue" href='~/humanresources/employeerecords/profiledetails/{{staff.Id}}'><i class="fa fa-eye"></i> View Details</a>
+                                <a class="btn1 bkGreen" href='#' data-userId="{{staff.Id}}" id="UpdateDetails" style="margin-left:10px"><i class="fa fa-edit"></i>Update Details</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="counter">
+                <span>View </span>
+                <select ng-model="vm.search.pageSize" ng-change="vm.filterSearch()" convert-to-number="">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+
+                <span>{{vm.lowerBoundCount}} to {{vm.upperBoundCount}} of {{vm.total}}</span>
+
+                <a href="javascript:;" ng-show="vm.hasPrevious" ng-click="vm.previousPage()"><i class="material-icons">keyboard_arrow_left</i></a>
+                <a href="javascript:;" ng-show="vm.hasNext" ng-click="vm.nextPage()"> <i class="material-icons">keyboard_arrow_right</i></a>
+            </div>
+        </div>
+
+        <div class="UpdateEmployeePanel" style="display:none;">
+
+            <div class="profile">
+
+                <div class="errorHolder nofloat"></div>
+
+                <div class="formArea formArea1">
+                    <form id="EmployeeFormUpdate">
+                        <input name="Id" id="Id" type="hidden" />
+                        <div class="formBox1 halfForm">
+                            <label for="">First Name</label>
+                            <input type="text" id="FirstName" name="FirstName" class="form-control" />
+                        </div>
+
+                        <div class="formBox1 halfForm">
+                            <label for="">Last Name</label>
+                            <input type="text" id="LastName" name="LastName" class="form-control" />
+                        </div>
+
+                        <div class="formBox1 halfForm">
+                            <label>Gender:</label>
+                            <select name="Gender" id="Gender" class="form-control">
+                                <option value="0">Please Select Gender</option>
+                                <option value="1">Male</option>
+                                <option value="2">Female</option>
+                            </select>
+                        </div>
+                        <div class="formBox1 halfForm">
+                            <label for="">Staff Id</label>
+                            <input type="text" id="StaffId" name="StaffId" class="form-control" />
+                        </div>
+                        <div class="formBox1 halfForm">
+                            <label for="">Date Of Birth</label>
+                            <input type="text" id="DateOfBirth" name="DateOfBirth" class="form-control" />
+                        </div>
+                        <div class="formBox1 halfForm">
+                            <label for="">Date of Employment</label>
+                            <input type="text" id="DateOfEmployment" name="DateOfEmployment" class="form-control" />
+                        </div>
+
+                        <div class="formBox1 halfForm">
+                            <label for="">Email Address</label>
+                            <input type="text" id="Email" name="Email" class="form-control" />
+                        </div>
+
+                        @*<div class="formBox1 halfForm">
+                            <label for="">Password</label>
+                            <input type="password" id="Password" name="Password" class="form-control" />
+                        </div>
+
+                        <div class="formBox1 halfForm">
+                            <label for="">Confirm Password</label>
+                            <input type="password" id="ConfirmPassword" name="ConfirmPassword" class="form-control" />
+                        </div>*@
+                        <div class="formBox1 halfForm">
+                            <label for=""> Phone Number</label>
+                            <input type="text" id="Phone" name="Phone" class="form-control" />
+                        </div>
+                        <div class="formBox1 fullForm">
+                            <label for="">Address</label>
+                            <textarea name="Address" id="Address" rows="7"></textarea>
+                        </div>
+                        <div class="formBox1 fullForm">
+                            <label for=""> Functions</label>
+                            <input type="text" id="Function" name="Function" class="" />
+                        </div>
+                        <div class="formBox1 halfForm">
+                            <label>Select Role:</label>
+                            <select name="RoleId" id="RoleId1" class="">
+                                <option value="0">Select Roles</option>
+                            </select>
+                        </div>
+
+                        <div class="formBox1 halfForm">
+                            <label> Grade:</label>
+                            <select name="Grade" id="Grade" class="">
+                                <option value="0">Select Grade</option>
+                            </select>
+                        </div>
+                        <div class="formBox1 halfForm">
+                            <label> Group:</label>
+                            <select name="Group" id="Group" class="form-control">
+                                <option value="0">Select Group</option>
+                            </select>
+                        </div>
+                        <div class="formBox1 halfForm">
+                            <label> Department:</label>
+                            <select name="Department" id="Department" class="form-control"></select>
+                        </div>
+                        <div class="formBox1 halfForm">
+                            <label> Branch:</label>
+                            <select name="Branch" id="Branch" class="form-control">
+                                <option value="0">Select Branch</option>
+                            </select>
+                        </div>
+                        <div class="formBox1 halfForm">
+                            <label> Region:</label>
+                            <select name="Region" id="Region" class="form-control">
+                                <option value="0">Select Region</option>
+                            </select>
+                        </div>
+                        <div class="formBox1 fullForm">
+                            <label for=""> Line Manager StaffId</label>
+                            <input type="text" id="LineManagerStaffId" name="LineManagerStaffId" class="" />
+                        </div>
+
+                        <div class="underlineBtn">
+                            <button class="nextBtn btnMedium bkSkyBlue" type="submit">Update Employee Record</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/content/js/angular.min.js"></script>
+    <script src="~/Content/js/httpservice.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Content/js/jquery.validate.min.js"></script>
+    <script src="~/Content/js/additional-methods.min.js"></script>
+    <script src="~/Content/js/CustomValidation.js"></script>
+    <script src="~/Content/js/select2.min.js"></script>
+    <script>
+        angular.module('sterlinglms', ['requestSvc'])
+            .config(function ($httpProvider) {
+                $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+            }).directive("convertToNumber", function () {
+                return {
+                    restrict: "A",
+                    require: "ngModel",
+                    link: function (scope, element, attrs, ngModel) {
+                        ngModel.$parsers.push(function (val) {
+                            return val ? parseInt(val, 10) : "";
+                        });
+                        ngModel.$formatters.push(function (val) {
+                            return val ? "" + val : "";
+                        });
+                    }
+                };
+            }).controller('employeelisting', ['httpRequestSvc', '$scope', function (http, scope) {
+                var cacheUrl, vm = this, def = 1;
+                vm.search = { pageIndex: def, pageSize: 10 };
+
+                vm.loadEmployee = function (url) {
+                    cacheUrl = url;
+                    updateStaffList(url, vm.search);
+                }
+
+                vm.nextPage = function () {
+                    if (vm.hasNext)
+                        vm.search.pageIndex++;
+                    updateStaffList(cacheUrl, vm.search);
+                }
+
+                vm.previousPage = function () {
+                    if (vm.hasPrevious) {
+                        vm.search.pageIndex--;
+                        updateStaffList(cacheUrl, vm.search);
+                    }
+                }
+
+                vm.filterSearch = function () {
+                    updateStaffList(cacheUrl, vm.search);
+                    resetPage();
+                }
+
+                function resetPage() {
+                    vm.search.pageIndex = def;
+                }
+
+                function updateUpperBoundCount(index, size, total) {
+                    if (total < size)
+                        return total;
+
+                    return index <= 0 ? (def * size) : size * index;
+                }
+
+                function updateLowerBoundCount(index, size, total) {
+                    if (total <= 0)
+                        return total;
+
+                    return (size * (index - def)) + def;
+                }
+
+                function updateStaffList(url, data) {
+                    http.get(url, data).then(function (response) {
+
+                        vm.staffs = response.Result.Records;
+                        vm.total = response.Result.Total;
+
+                        vm.hasNext = vm.total > (vm.search.pageIndex * vm.search.pageSize);
+                        vm.hasPrevious = vm.search.pageIndex > def;
+
+                        vm.lowerBoundCount = updateLowerBoundCount(data.pageIndex, data.pageSize, vm.total);
+                        vm.upperBoundCount = updateUpperBoundCount(data.pageIndex, data.pageSize, vm.total);
+
+                    }).catch(function (err) {
+
+                        alert('an error occurred.');
+                    });
+                }
+            }]);
+
+        angular.element(function () {
+            angular.bootstrap(document, ['sterlinglms']);
+        });
+
+
+        $(document).ready(function () {
+            $('.employeeTable').on('click', '#UpdateDetails', function (e) {
+                e.preventDefault();
+                $.get('/api/user/getroles', function (data) {
+                    for (var x = 0; x < data.Result.length; x++) {
+                        $('#RoleId1').append('<option value=' + data.Result[x].Id + '>' + data.Result[x].Name + '</option>');
+                    }
+                    $('#RoleId1').select2({ 'width': '100%' });
+                })
+
+                $.get('/api/organization/GetBranches', function (data) {
+
+                    data.Result.forEach(function (option) {
+                        $('#Branch').append('<option value="' + option.Id + '">' + option.Name + '</option>');
+                    });
+                    $('#Branch').select2({ 'width': '100%' });
+                });
+                $.get('/api/organization/GetGrades', function (data) {
+
+                    data.Result.forEach(function (option) {
+                        $('#Grade').append('<option value="' + option.Id + '">' + option.Name + '</option>');
+                    });
+                    $('#Grade').select2({ 'width': '100%' });
+                });
+
+                $.get('/api/organization/GetGroups', function (data) {
+
+                    data.Result.forEach(function (option) {
+                        $('#Group').append('<option value="' + option.Id + '">' + option.Name + '</option>');
+                    });
+                    $('#Group').select2({ 'width': '100%' });
+                });
+
+                $.get('/api/organization/GetRegion', function (data) {
+
+                    data.Result.forEach(function (option) {
+                        $('#Region').append('<option value="' + option.Id + '">' + option.Name + '</option>');
+                    });
+                    $('#Region').select2({ 'width': '100%' });
+                });
+                $.get('/api/organization/GetDepartmentNames', function (data) {
+                    data.Result.forEach(function (option) {
+                        $('#Department').append('<option value="' + option.Id + '">' + option.Name + '</option>');
+                    });
+                    $('#Department').select2({ 'width': '100%' });
+                });
+
+                $('#Group').on('change', function () {
+                    var $selected = { Id: $(this).val() };
+                    $('#Department').html('<option value="0">Select department</option>')
+
+                    $.get('/api/organization/GetDepartmentByGroupId', $selected, function (data) {
+                        data.Result.forEach(function (option) {
+                            $('#Department').append('<option value="' + option.Id + '">' + option.Name + '</option>');
+                        });
+                        $('#Department').select2({ 'width': '100%' });
+                    });
+                })
+
+                var $id = $(this).attr('data-userId');
+                var $button = $(this);
+                var prev = $button.html();
+
+                if (!parseInt($id) && parseInt($id) <= 0) {
+                    return;
+                }
+
+                $button.attr('disabled', 'disabled');
+                $button.find('i').removeClass('fa-edit');
+                $button.find('i').addClass('fa-circle-o-notch fa-spin');
+
+                $.ajax({
+                    url: '/api/Employee/GetEmployeeDetailsUpdate',
+                    type: 'GET',
+                    data: { id: $id },
+                    success: function (data) {
+                        if (!data.HasError) {
+                            $('#Group').val(data.Result.Group);
+                            $('#FirstName').val(data.Result.FirstName);
+                            $('#LastName').val(data.Result.LastName);
+                            $('#StaffId').val(data.Result.StaffId);
+                            $('textarea[name="Address"]').val(data.Result.Address);
+                            $('#Function').val(data.Result.Function);
+                            $('#DateOfBirth').val(data.Result.DateOfBirthFormat);
+                            $('#DateOfEmployment').val(data.Result.DateOfEmploymentFormat);
+                            $('#Email').val(data.Result.Email);
+                            $('#Phone').val(data.Result.Phone);
+                            $('#LineManagerStaffId').val(data.Result.LineManagerStaffId);
+                            $('#Gender').find('option[value="' + data.Result.Gender + '"]').prop('selected', true);
+                            $('#RoleId1').find('option[value="' + data.Result.RoleId + '"]').prop('selected', true);
+                            $('#Branch').find('option[value="' + data.Result.Branch + '"]').prop('selected', true);
+                            $('#Department').find('option[value="' + data.Result.Department + '"]').prop('selected', true);
+                            $('#Region').find('option[value="' + data.Result.Region + '"]').prop('selected', true);
+                            $('#Group').find('option[value="' + data.Result.Group + '"]').prop('selected', true);
+                            $('#Grade').find('option[value="' + data.Result.Grade + '"]').prop('selected', true);
+                            $('#Id').val(data.Result.Id);
+
+                            $('#RoleId1').select2({ 'width': '100%' });
+                            $('#Branch').select2({ 'width': '100%' });
+                            $('#Department').select2({ 'width': '100%' });
+                            $('#Region').select2({ 'width': '100%' });
+                            $('#Group').select2({ 'width': '100%' });
+                            $('#Grade').select2({ 'width': '100%' });
+                            window.location.href = "#updateemployee?name=" + data.Result.FirstName + ', ' + data.Result.LastName;
+                            $('#EmployeeTablePanel').fadeOut();
+                            $('.UpdateEmployeePanel').fadeIn();
+                            $('.goback').show();
+                            $button.removeAttr('disabled');
+                            $button.html(prev);
+
+
+                        }
+                        else {
+                            ShowNotie(data);
+                            $button.removeAttr('disabled');
+                            $button.html(prev);
+                        }
+                    }
+                });
+
+            });
+
+            $("#EmployeeFormUpdate").validate({
+                ignore: [],
+                rules: {
+                    FirstName: { required: true },
+                    LastName: { required: true },
+                    StaffId: { required: true },
+                    StaffId: { required: true },
+                    Function: { required: true },
+                    RoleId: "dropdown",
+                    Gender: 'dropdown',
+                    Group: 'dropdown',
+                    Grade: 'dropdown',
+                    Branch: 'dropdown',
+                    Region: 'dropdown',
+                    LineManagerStaffId: { required: true },
+                    DateOfEmployment: { required: true, },
+                    DateOfBirth: { required: true, },
+                    Email: { required: true, email: true },
+                    //Password: {  minlength: 6 },
+                    //ConfirmPassword: { equalTo: "[name='Password']", minlength: 6 }
+
+                },
+                message: {
+                    Password: {
+                        required: "Password is a required field",
+                        minlength: jQuery.validator.format("At least {0} characters is required!")
+                    }
+
+                },
+                errorPlacement: function ($error, $element) {
+                    $error.addClass('errorHolder');
+                    $element.closest('.formBox1').find('label:first').after($error);
+                },
+                submitHandler: function (form) {
+
+                    var $button = $(form).find(':submit');
+                    var prev = $button.html();
+                    $button.attr('disabled', 'disabled');
+                    $button.html('Processing <i class="fa fa-circle-o-notch fa-spin pull-right"></i>');
+
+                    var formData = new FormData(form);
+                    $.ajax({
+                        cache: false,
+                        async: true,
+                        type: "POST",
+                        url: "/api/Employee/UpdateNewEmployee",
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (data) {
+                            if (!data.HasError) {
+                                ShowNotie(data);
+                                $button.html('').html('Update New Employee');
+                                $button.attr('disabled', false);
+                                
+                            }
+                            else {
+
+                                ShowNotie(data);
+                                $button.html('').html('Update New Employee');
+                                $button.attr('disabled', false);
+
+                            }
+
+                        },
+
+                        error: function (data) {
+                            ShowNotie({ HasError: true, Message: "An error occurred when processing your request" });
+                        },
+                        complete: function (data) {
+                            $button.removeAttr('disabled');
+                            $button.html(prev);
+                        }
+                    });
+
+                }
+            });
+
+
+            $("input[id*='StaffId']").keydown(function (event) {
+
+                if (event.shiftKey == true) {
+                    event.preventDefault();
+                }
+
+                if ((event.keyCode >= 48 && event.keyCode <= 57) ||
+                    (event.keyCode >= 96 && event.keyCode <= 105) ||
+                    event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 ||
+                    event.keyCode == 39 || event.keyCode == 46 || event.keyCode == 190) {
+
+                } else {
+                    event.preventDefault();
+                }
+
+                if ($(this).val().indexOf('.') !== -1 && event.keyCode == 190)
+                    event.preventDefault();
+            });
+            $("input[id*='Phone']").keydown(function (event) {
+
+                if (event.shiftKey == true) {
+                    event.preventDefault();
+                }
+
+                if ((event.keyCode >= 48 && event.keyCode <= 57) ||
+                    (event.keyCode >= 96 && event.keyCode <= 105) ||
+                    event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 ||
+                    event.keyCode == 39 || event.keyCode == 46 || event.keyCode == 190) {
+
+                } else {
+                    event.preventDefault();
+                }
+
+                if ($(this).val().indexOf('.') !== -1 && event.keyCode == 190)
+                    event.preventDefault();
+            });
+            $('#DateOfBirth').datepicker({
+                yearRange: "-119:+0",
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd/mm/yy'
+
+            });
+            $('#DateOfEmployment').datepicker({
+                yearRange: "-119:+0",
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd/mm/yy'
+
+            });
+        })
+
+    </script>
+}

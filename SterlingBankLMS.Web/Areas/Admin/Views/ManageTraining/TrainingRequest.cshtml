@@ -1,0 +1,541 @@
+﻿
+@{
+    ViewBag.Title = "Training Requests";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    IFormatProvider currencyFormat = new System.Globalization.CultureInfo("HA-LATN-NG");
+}
+
+@*<link href="~/Content/css/training.css" rel="stylesheet" />*@
+<style>
+    .tanHP {
+        background: #fff;
+        border-radius: 0;
+    }
+
+    .searchT {
+        border: 1px solid #eee;
+    }
+
+    .pinA select {
+        border: 1px solid #ddd;
+    }
+
+    .pinA span {
+        font-weight: bold;
+        margin-top: 3px;
+    }
+
+
+    table.courselist {
+        width: 100%;
+        font-size: 13px;
+        border: 1px solid #eaeaea !important;
+    }
+
+    .courselist thead {
+        width: 100%;
+        color: #19535f;
+        font-weight: bold;
+        font-size: 13px;
+        border-top: 0px solid transparent;
+        background: #ddd;
+        font-weight: bold;
+        font-size: 13px;
+        border-bottom: 2px solid #28A7BE;
+    }
+
+    .courselist tbody {
+        width: 100%;
+    }
+
+    .courselist tr {
+        width: 100%;
+    }
+
+    .courselist tbody tr:last-child {
+        border: none;
+    }
+
+    .courselist tr td {
+        padding: 10px;
+    }
+
+        .courselist tr td:nth-child(1) {
+            width: 15% !important;
+        }
+
+        .courselist tr td:nth-child(2) {
+            width: 25% !important;
+        }
+
+    .courselist tbody tr td:nth-child(1) {
+        border-right: 2px solid #f0f3f5;
+    }
+
+    .courselist tbody tr td:nth-child(2) {
+        border-right: 2px solid #f0f3f5;
+    }
+
+    .courselist tbody tr td:nth-child(3) {
+        border-right: 2px solid #f0f3f5;
+    }
+
+    .courselist tbody tr td:nth-child(4) {
+        border-right: 2px solid #f0f3f5;
+    }
+
+    .courselist tbody tr td:nth-child(5) {
+        border-right: 2px solid #f0f3f5;
+    }
+
+    .courselist tbody tr td:nth-child(6) {
+        border-right: 2px solid #f0f3f5;
+    }
+
+    .courselist tr td a {
+        color: #00d7ff;
+    }
+
+    .courselist tr td:nth-child(4) {
+        width: 15% !important;
+    }
+
+    .courselist tr td:nth-child(3), .courselist tr td:nth-child(5), .courselist tr td:nth-child(6) {
+        width: 10% !important;
+    }
+
+    .courselist tr td:nth-child(7) {
+        width: 15% !important;
+    }
+
+    .courselist tbody tr {
+        margin-top: 0px;
+        border-bottom: 2px solid #f0f3f5;
+    }
+
+        .courselist tbody tr td a button {
+            margin: 0;
+        }
+
+    .counter {
+        padding: 10px;
+        float: right;
+        font-size: 15px;
+        background: #ddd;
+        width: 100%;
+    }
+
+        .counter i {
+            background: #fff;
+            color: #000;
+        }
+
+    .alert.alert-danger, .alert.alert-success, .alert.alert-info, .alert.alert-warning {
+        width: 70%;
+        margin-top: 20px;
+    }
+
+    .formArea {
+        width: 100%;
+        margin-top: 20px;
+        padding-bottom: 60px;
+        float: left;
+    }
+
+    .formBox1 .label {
+        width: 100%;
+        margin-bottom: 10px;
+        font-weight: bold;
+        font-size: 13px;
+        float: left;
+    }
+
+    .formBox1 input, .formBox1 textarea, .formBox1 select {
+        width: 100%;
+        height: 30px;
+        padding: 5px;
+        font-size: 15px;
+        border: 1px solid rgba(0, 0, 0, 0.39);
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        float: left;
+    }
+
+    .formBox1 textarea {
+        height: 100px;
+    }
+
+    .formBox1 button {
+        background: #760f91;
+        border: none;
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        color: #fff;
+        height: 30px;
+        width: 120px;
+        margin-top: -30px;
+        float: right;
+    }
+
+    .bDGreen {
+        border-bottom: 3px solid #2fbf71;
+    }
+
+    .bkGreen {
+        background: #2fbf71;
+    }
+
+    .bkRed {
+        background: #ab192d;
+    }
+
+    jconfirm div {
+        float: none !important;
+    }
+
+    .jconfirm .jconfirm-holder {
+        margin: 0 40%;
+    }
+
+    .jconfirm-content {
+        padding-top: 20px;
+    }
+
+        .jconfirm-content div {
+            font-weight: 700;
+        }
+
+    .jconfirm-type-orange .jconfirm-content div {
+        color: red;
+    }
+
+    .jconfirm.jconfirm-light .jconfirm-box {
+        padding: 20px 25px 10px 25px;
+    }
+
+    .jconfirm .jconfirm-box-container.jconfirm-no-transition {
+        margin: 0px;
+        width: 100%;
+    }
+
+    .Pending {
+        color: #E68618;
+    }
+
+    .Approved {
+        color: #38C64E;
+    }
+
+    .Rejected {
+        color: #DA3024;
+    }
+
+    .NotSeen {
+        color: #E68618;
+    }
+
+    .Yes {
+        color: #38C64E;
+    }
+
+    .No {
+        color: #DA3024;
+    }
+
+    .modal-body * {
+        float: none;
+    }
+</style>
+
+<link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+<div class="banner1 bkTorBlue">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>Training Requests</span>
+</div>
+
+
+
+
+<div class="content1">
+
+    <div class="boxHead1">
+        <div class="boxHeader1 bDPurple">Training Requests</div>
+    </div>
+
+    <div class="boxBody1" style="padding:0">
+
+
+
+        <div class="tableRanch">
+            <table class="courselist" id="RequestTable">
+                <thead>
+                    <tr>
+                        <td>Requester</td>
+                        <td>Training Name Requested</td>
+                        <td>Date Of Request</td>
+                        <td>Department</td>
+                        <td>Status</td>
+                        <td>Action</td>
+                    </tr>
+                </thead>
+                <tr class="empty">
+                    <td colspan="6">
+                        Fetching Data <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="TrainingModal" class="modal fade" style="float:none">
+
+    <div class="modal-dialog modal-admin modal-lg">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" style="float:none;" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <div class="boxHead1">
+                    <div class="boxHeader1 bDPurple" style="float:none">Training Details</div>
+                </div>
+            </div>
+            <div class="modal-body training_alert" style="float:none;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="myModal" class="modal fade" style="float:none">
+
+    <div class="modal-dialog modal-admin modal-lg">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" style="float:none;" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <div class="boxHead1">
+                    <div class="boxHeader1 bDPurple" style="float:none">Department Details</div>
+                </div>
+            </div>
+            <div class="modal-body jp_alert" style="float:none;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="viewModal" class="modal fade" style="float:none;">
+
+    <div class="modal-dialog modal-admin modal-lg">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" style="float:none;" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body view_alert" style="float:none;">
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script src="~/Content/js/datatables.min.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            //Load the Budget table
+
+            var jqTable = $('#RequestTable').DataTable({
+                dom: '<"tanHead tanHP"f>rt<"counter"lip>',
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    "url": '/api/ManageTraining/GetTrainingRequest',
+                    "type": "GET"
+                },
+                'language': {
+                    'search': '',
+                    'searchPlaceholder': 'Search...'
+                },
+                "fnDrawCallback": function (oSettings) {
+                },
+                "order": [],
+                columns: [
+                    {
+                        bSortable: true,
+                        "render": function (d, r, data) {
+                            return data.NameFormat + '<br/><br/>';
+                        }
+                    },
+
+                    {
+                        "render": function (d, r, data) {
+                            return '<a href="#" class="trainingdetails" name="' + data.TrainingId + '">' + data.TrainingName + '</a> <br/><br/>';
+                        }
+                    },
+                    {
+                        "render": function (d, i, data) {
+
+                            return data.CreatedDateFormat + '';
+                        }
+                    },
+                    {
+                        "render": function (d, r, data) {
+                            return '<a href="#" class="deptdetails" name="' + data.DepartmentId + '">' + data.DepartmentName + '</a> <br/><br/>';
+                        }
+                    },
+
+                    {
+                        bSortable: false,
+                        className: "action-buttons",
+                        "render": function (d, i, data) {
+
+                            return '<label class="' + data.TrainingApprovalFormat + '">' + data.TrainingApprovalFormat + '</label>';
+                        }
+                    },
+                    {
+                        bSortable: false,
+                        className: "action-buttons",
+                        "render": function (d, i, data) {
+
+                            return '<button class="table-view btnSmaller bkGreen" href="javascript:;" style="display:inline-block;"> <i class="fa fa-eye table-icon" style=""></i> <span class="">View</span> </button>' +
+                                '<input type="hidden" value="' + data.Id + '"/>';
+
+                        }
+                    }
+                ]
+            });
+
+            jqTable.on('draw', function () {
+
+                $('.tableRanch').find('input[type="search"]').addClass('searchT');
+                // reset();
+            });
+
+            $("#RequestTable").on("click", ".deptdetails", function (evt) {
+                evt.preventDefault();
+                var deptId = $(this).attr("name");
+                $(".jp_alert").html("Fetching data ...<br> Please wait...");
+                $("#myModal").modal("show");
+                $.ajax({
+                    type: "GET",
+                    url: "/Admin/ManageTraining/_GetDeptDetails?deptId=" + deptId,
+                    success: function (data) {
+                        $(".jp_alert").html(data);
+                        $("#myModal").show();
+                    }
+
+                });
+
+            });
+
+            $("#RequestTable").on("click", ".trainingdetails", function (evt) {
+                evt.preventDefault();
+                var trainingId = $(this).attr("name");
+                $(".training_alert").html("Fetching data ...<br> Please wait...");
+                $("#TrainingModal").modal("show");
+                $.ajax({
+                    type: "GET",
+                    url: "/Admin/ManageTraining/_GetTrainingDetails?trainingId=" + trainingId,
+                    success: function (data) {
+                        $(".training_alert").html(data);
+                        $("#TrainingModal").show();
+                    }
+
+                });
+
+            });
+
+            $("#RequestTable tbody").on("click", "td.action-buttons button.table-view", function (e) {
+                e.preventDefault();
+                var tr = $(this).closest("tr");
+
+                //var trainingName = $(this).closest("td").find('input').attr('name');
+                //var amtPerStaff = $(this).closest("td").find('input').attr('id');
+                //var status = $(this).closest("td").find('input').attr('format');
+                //var id = $(this).closest("td").find('input').attr('training');
+                //var line = $(this).closest("td").find('input').attr('line');
+                //var $reason = $(this).closest("td").find('input').attr('reason');
+
+                $('.content1 .messageText').remove();
+
+                var $button = $(this);
+                var prev = $button.html();
+
+                var requestId = $(this).closest("td").find('input').val();
+
+                if (!parseInt(requestId) && parseInt(requestId) <= 0) {
+                    return;
+                }
+
+
+                $button.attr('disabled', 'disabled');
+                $button.find('i').removeClass('fa-eye');
+                $button.find('i').addClass('fa-circle-o-notch fa-spin');
+
+                $.ajax({
+                    type: "GET",
+                    url: "/Admin/ManageTraining/_GetTrainingRequestDetails",
+                    data: { Id: requestId },
+                    success: function (data) {
+                        $(".view_alert").html(data);
+                        $("#viewModal").modal("show");
+                        $("#viewModal").show();
+                        $button.find('i').removeClass('fa-circle-o-notch fa-spin');
+                        $button.find('i').addClass('fa-eye');
+                        $button.removeAttr('disabled');
+                    }
+
+                });
+            });
+
+
+            ///Approve Reject Training 
+            $("body").on('click', '.btnAction', function () {
+                var $button = $(this);
+                var $confirm = ShowConfirm();
+                $confirm.onAction = function (btnName) {
+
+                    if (btnName == "cancel")
+                        return;
+
+                  
+                    var type = parseInt($button.attr('data-type'));
+
+                    var myObject = new Object();
+                    myObject.IsApproval = type == 1 ? true : false;
+                    myObject.Comments = $button.parent().find('textarea').val();
+                    myObject.Id = $button.attr('data-id');
+
+                    var prev = $button.html();
+                    $button.attr('disabled', 'disabled');
+                    $button.html('Processing <i class="fa-circle-o-notch fa-spin"></i>');
+
+                    $.ajax({
+                        cache: false,
+                        async: true,
+                        type: "POST",
+                        url: "/api/ManageTraining/AdminApproveOrRejectTrainingRequest",
+                        data: myObject,
+                        success: function (data) {
+                            ShowNotie(data);
+                            $button.parent().remove();
+                            $("#textstatus").html(myObject.IsApproval ? "Approved by Admin" : "Rejected by Admin");
+                        },
+
+                        error: function (data) {
+                            $button.html(prev);
+                            $button.removeAttr('disabled');
+                            var message = data.status == 400 ? data.responseJSON.Message : data.statusText;
+                            ShowNotie({ HasError: true, Message: message });
+                        }
+                    });
+                }
+
+            });
+        });
+    </script>
+}

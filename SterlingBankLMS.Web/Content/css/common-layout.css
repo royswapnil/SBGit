@@ -1,0 +1,56 @@
+﻿
+.sack .link-active .pageTab {
+    border: 2px solid #666;
+}
+
+
+.sack ul {
+    padding: 0;
+}
+
+    .sack ul li {
+        width: 100%;
+    }
+
+
+.sack .link-active .pageTab .tabing {
+    background: #961c1d;
+}
+
+
+/*.pageTab:nth-child(1) .tabing {
+        background: #961c1d;
+    }*/
+.pageTab:nth-child(2) {
+    border: 2px solid #666;
+}
+
+    .pageTab:nth-child(2) .tabing {
+        background: #961c1d;
+    }
+
+.pageTab:nth-child(3) {
+    border: 2px solid #666;
+}
+
+    .pageTab:nth-child(3) .tabing {
+        background: #961c1d;
+    }
+
+@media(max-width: 500px) {
+    .pageTab:nth-child(2) {
+        border: 0px solid transparent;
+    }
+
+        .pageTab:nth-child(2) .tabing {
+            background: transparent;
+        }
+}
+
+/*.link-active a,
+.link-active a:hover,
+.link-active a:focus {
+    background-color: #4189C7;
+    color: white;
+}*/
+

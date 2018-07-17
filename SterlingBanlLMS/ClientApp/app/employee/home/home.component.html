@@ -1,0 +1,223 @@
+﻿<emp-header></emp-header>
+
+<div class="wrapper">
+
+    <div class="breadcrum">
+        <div class="col8">
+            <div class="headcrum">Employee Dashboard</div>
+            <div class="bodycrum">Description</div>
+        </div>
+
+        <div class="col4">
+            <div class="headcrum">Customer Service Representative</div>
+            <div class="bodycrum"><i class="material-icons">room</i> <i>Marina, Lagos</i></div>
+            <div class="bodycrum"><i style="font-size: 12px;margin-top: 3px;">Staff ID: </i> <b>001558</b></div>
+        </div>
+    </div>
+
+
+    <div class="searchArea">
+        <div class="searchbox">
+            <input type="text" placeholder="Search Courses" />
+            <i class="material-icons">search</i>
+        </div>
+    </div>
+
+
+
+
+    <div class="content">
+        <div class="col9">
+
+
+
+            <div class="boxed">
+                <div class="long">
+                    <div class="line borderBottomBlue">
+                        Assigned Courses
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 col-md-offset-3 indloading" role="alert" *ngIf="indLoading"><img src="../../Content/img/loading.gif" width="32" height="32" /> Loading...</div>
+                <div class="col33 courseItem" *ngFor="let item of assignedCourses">
+                    <div class="courseImg" [style.background-image]="'url('+item.ImageUrl+')'"><i class="material-icons">visibility</i></div>
+                    <div class="text">
+                        <a [routerLink]="['/course',item.Id]" [queryParams]="{}"><h5 class="blue">{{item.CourseName}}</h5></a>
+                        <p>
+                            {{item.CourseDescription | slice:0:200}}
+                            <br><br>
+                            <i>Due Date: </i> <b>{{item.DueDate| date:'dd-MM-yyyy'}}</b>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+            <button class="btnLong btnBlue">View all</button>
+
+
+
+
+
+            <div class="boxed">
+                <div class="long">
+                    <div class="line borderBottomRed">
+                        Recommended Courses
+                    </div>
+                </div>
+                <div class="col-md-6 col-md-offset-3 indloading" role="alert" *ngIf="indLoading"><img src="../../Content/img/loading.gif" width="32" height="32" /> Loading...</div>
+                <div class="col33 courseItem" *ngFor="let item of recommendedCourses">
+                    <img class="courseImg" src="{{item.ImageUrl}}"><i class="material-icons">visibility</i>
+                    <div class="text">
+                        <a [routerLink]="['/course',item.Id]"><h5 class="blue">{{item.CourseName}}</h5></a>
+                        <p>
+                            {{item.CourseDescription|slice:0:200}}
+                            <br><br>
+                            <i>Due Date: </i> <b>{{item.DueDate| date:'dd-MM-yyyy'}}</b>
+                        </p>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <button class="btnLong btnBlue">View all</button>
+
+
+            <button class="btnLarge btnRed btnCurve">View Course Catalog</button>
+            <div class="long">
+                <div class="line borderBottomOrange">
+                    Learning Progress
+                </div>
+
+                <i class="material-icons">keyboard_arrow_down</i>
+            </div>
+
+
+            <div class="hideTab">
+
+                <h4>Social Enterprise: Growing a Sustainable Business</h4>
+                <div class="load">
+                    <div class="loader">
+                        <div class="peg range"><div class="loading" style="background: #b1eddc;width:100%;"></div></div>
+                        <div class="peg loadInfo">100% - Completed</div>
+                    </div>
+                    <div class="pen">
+                        <button class="btnBlue btnReach">View Reports</button>
+                    </div>
+                </div>
+
+
+                <h4>Mergers and Acquisitions: Accounting Principles</h4>
+                <div class="load">
+                    <div class="loader">
+                        <div class="peg range"><div class="loading" style="background: #f7daad;width:47%;"></div></div>
+                        <div class="peg loadInfo">47% - In Progress</div>
+                    </div>
+                    <div class="pen">
+                        <button class="btnBlue btnReach">Continue Learning</button>
+                    </div>
+                </div>
+
+
+
+                <h4>Successful Negotiations: Essential Strategies and Skills</h4>
+                <div class="load">
+                    <div class="loader">
+                        <div class="peg range"><div class="loading" style="background: #f97575;width:25%;"></div></div>
+                        <div class="peg loadInfo">25% - In Progress</div>
+                    </div>
+                    <div class="pen">
+                        <button class="btnBlue btnReach">Continue Learning</button>
+                    </div>
+                </div>
+            </div>
+
+
+            </div>
+            <div class="col2">
+
+
+                <div class="pod">
+                    <div class="line borderBottomGrey">
+                        Coming Up  <button class="btnBlue"><i class="material-icons">event</i> <span>View Calendar</span></button>
+                    </div>
+
+                    <div class="podBlock">
+                        <div class="podItem">
+                            <div class="coupon"><i class="material-icons blue">event</i></div>
+                            <div class="list">
+                                <span class="blue">General Staff Shop</span>
+                                <i>Jan 10, 2018</i>
+                            </div>
+                        </div>
+
+                        <div class="podItem">
+                            <div class="coupon"><i class="material-icons blue">event</i></div>
+                            <div class="list">
+                                <span class="blue">Live Podcast</span>
+                                <i>Jan 10, 2018</i>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="space"></div>
+                <div class="pod">
+                    <div class="line borderBottomGrey">Quick Notification</div>
+
+
+                    <div class="podBlock">
+                        <div class="podItem">
+                            <div class="coupon"><span class="redBackground">05</span></div>
+                            <div class="list">
+                                <span>Courses are overdue</span>
+                            </div>
+                        </div>
+
+                        <div class="podItem">
+                            <div class="coupon"><span class="yellowBackground">15</span></div>
+                            <div class="list">
+                                <span>Courses are going to expire in the next 30 days.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="space"></div>
+
+
+                <div class="pod">
+                    <div class="line borderBottomGrey">Awards/Certificates</div>
+
+
+                    <div class="podBlock">
+                        <div class="podItem">
+                            <div class="half">
+                                <div class="blue big">CERTIFICATES </div><b>(3)</b>
+                                <p>Your latest certificates</p>
+                                <button class="btnBlue">View all</button>
+                            </div>
+
+                            <div class="half">
+                                <img src="/Content/img/c1.jpg" alt="">
+                                <img src="/Content/img/c2.jpg" alt="">
+                                <img src="/Content/img/c3.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+       
+    </div>
+</div>
+<emp-footer></emp-footer>

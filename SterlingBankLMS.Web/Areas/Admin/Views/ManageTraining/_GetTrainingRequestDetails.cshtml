@@ -1,0 +1,172 @@
+﻿@using SterlingBankLMS.Core.DTO
+@model TrainingRequestDto
+<style>
+    .success {
+        color: #fff !important;
+    }
+
+    .bDGreen {
+        border-bottom: 3px solid #2fbf71;
+    }
+
+    .bulkfile {
+        background: rgba(22, 96, 136, 0.2);
+        padding: 30px;
+        padding-right: 45%;
+    }
+
+        .bulkfile button {
+            background: #166088;
+        }
+
+    .formBox1 label {
+        width: 100%;
+        margin-bottom: 10px;
+        font-weight: bold;
+        font-size: 13px;
+        float: left;
+    }
+
+    label i {
+        font-style: italic;
+        color: #ccc;
+        font-size: 12px;
+        padding-left: 20px;
+        float: none;
+    }
+
+    .halfForm .halfForm {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+    form.report {
+        padding: 0px;
+        width: 100%;
+        margin-left: 0%;
+        border: 0px solid transparent;
+    }
+
+        form.report input {
+            width: 100%;
+            height: 35px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 15px;
+        }
+
+    .Pending {
+        color: #E68618;
+    }
+
+    .Approved {
+        color: #38C64E;
+    }
+
+    .Rejected {
+        color: #DA3024;
+    }
+
+    .NotSeen {
+        color: #E68618;
+    }
+
+    .Yes {
+        color: #38C64E;
+    }
+
+    .No {
+        color: #DA3024;
+    }
+
+    .jconfirm .jconfirm-box-container.jconfirm-no-transition {
+        margin: 0px;
+        width: 100%;
+    }
+
+    .bordered-section {
+        margin-bottom: 10px;
+        padding: 10px
+    }
+
+        .bordered-section label:first-child {
+            float: right;
+        }
+
+        .bordered-section p {
+            clear: both
+        }
+</style>
+<h4 style="text-align:center; float:none"><span class="@Model.TrainingApprovalFormat col-md-12" id="textstatus" style="text-align:center;">@Model.TrainingApprovalFormat.ToUpper()</span></h4>
+<form class="report">
+    <div class="bordered-section">
+        <div class="fullForm">
+            <label>Requester Details:</label>
+
+            <p><strong>Training Name: </strong>@Model.TrainingName</p>
+            <p><strong>Reason For Request: </strong></p>
+            <p>@Html.Raw(Model.ReasonForRequest)</p>
+            <p><strong>Amount Per Staff: </strong>@Model.AmountPerStaff</p>
+
+        </div>
+
+    </div>
+
+    <div class="bordered-section">
+        <div class="fullForm">
+            <label>Requester Details:</label>
+            <p><strong>Name: </strong>@Model.FirstName, @Model.LastName</p>
+            <p><strong>Staff ID: </strong>@Model.StaffId</p>
+            <p><strong>Grade: </strong>@Model.GradeName</p>
+            <p><strong>Department: </strong>@Model.DepartmentName</p>
+            <p><strong>Branch: </strong>@Model.BranchName</p>
+            <p><strong>Gender: </strong>@Model.Sex</p>
+        </div>
+    </div>
+
+    <div class="bordered-section">
+        @{
+            if (Model.TrainingApprovalStatus > SterlingBankLMS.Data.Models.Enums.TrainingApprovalStatus.PendingLineManagerApproval)
+            {
+                <div class="fullForm">
+                    <label>Line Manager Approval Details:</label>
+                    <p><strong>Name: </strong>@Model.LineManagerName</p>
+                    <p><strong>Staff ID: </strong>@Model.LineManagerStaffId</p>
+                    <p><strong>Comments: </strong>@Model.lineManagerComment</p>
+                    <p><strong>Action Made: </strong>@Model.TrainingApprovalFormat</p>
+                    <p><strong>Action Date</strong> @Model.linemanageractionDate.Value.ToString("dd MMM, yyyy")</p>
+
+                </div>
+            }
+            else
+            {
+                <div class="fullForm">
+                    <label>Line Manager Approval Details:</label>
+                    <p><strong>Name: </strong>@Model.LineManagerName</p>
+                    <p><strong>Staff ID: </strong>@Model.LineManagerStaffId</p>
+                    <p><strong>Status: </strong> Pending Line Manager Approval</p>
+                </div>
+            }
+        }
+    </div>
+
+    @if (Model.TrainingApprovalStatus == SterlingBankLMS.Data.Models.Enums.TrainingApprovalStatus.PendingAdminApproval)
+    {
+        <div class="bordered-section">
+
+            <textarea class="form-control" placeholder="Insert Comments" style="margin-bottom: 10px;"></textarea>
+
+            <button class="btn bkSkyBlue btnAction" type="button" data-type="1" style="margin-bottom: 10px;" data-id="@Model.Id">
+                Approve Request <i class="fa fa-check"></i>
+            </button>
+            <button class="btn bkRed btnAction" type="button" data-type="2" style="margin-bottom: 10px;float:right" data-id="@Model.Id">
+                Reject Request <i class="fa fa-times"></i>
+            </button>
+
+            <div>
+            </div>
+        </div>
+    }
+
+</form>

@@ -1,0 +1,509 @@
+﻿@model EmployeeDetailsModel
+@{
+    ViewBag.Title = "Employee Profile";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section head{
+    <link href="~/Content/css/employee-profile.css" rel="stylesheet" />
+    <style>
+        .Pending {
+            color: #f4b942
+        }
+
+        .Approved {
+            color: #2fbf71;
+        }
+
+        .Rejected {
+            color: #ab192d;
+        }
+
+        .menuTab1 a:nth-child(2) .pageTab1 {
+            background: #AB192D;
+        }
+
+        table.courselist {
+            width: 100%;
+            font-size: 13px;
+            border: 1px solid #eaeaea !important;
+        }
+
+        .courselist thead {
+            width: 100%;
+            color: #19535f;
+            font-weight: bold;
+            font-size: 13px;
+            border-top: 0px solid transparent;
+            background: #ddd;
+            font-weight: bold;
+            font-size: 13px;
+            border-bottom: 2px solid #28A7BE;
+        }
+
+        .courselist tbody {
+            width: 100%;
+        }
+
+        .courselist tr {
+            width: 100%;
+        }
+
+        .courselist tbody tr:last-child {
+            border: none;
+        }
+
+        .courselist tr td {
+            padding: 10px;
+        }
+
+            .courselist tr td:nth-child(1) {
+                width: 5% !important;
+            }
+
+
+
+            .courselist tr td:nth-child(2) {
+                width: 15% !important;
+            }
+
+        .courselist tbody tr td:nth-child(1) {
+            border-right: 2px solid #f0f3f5;
+        }
+
+        .courselist tbody tr td:nth-child(2) {
+            border-right: 2px solid #f0f3f5;
+        }
+
+        .courselist tbody tr td:nth-child(3) {
+            border-right: 2px solid #f0f3f5;
+        }
+
+        .courselist tbody tr td:nth-child(4) {
+            border-right: 2px solid #f0f3f5;
+        }
+
+        .courselist tbody tr td:nth-child(5) {
+            border-right: 2px solid #f0f3f5;
+        }
+
+        .courselist tr td a {
+            color: #00d7ff;
+        }
+
+        .courselist tr td:nth-child(3) {
+            width: 30% !important;
+        }
+
+        .courselist tr td:nth-child(4), .courselist tr td:nth-child(5), .courselist tr td:nth-child(6) {
+            width: 10% !important;
+        }
+
+        .courselist tr td:nth-child(7) {
+            width: 15% !important;
+        }
+
+        .courselist tbody tr {
+            margin-top: 0px;
+            border-bottom: 2px solid #f0f3f5;
+        }
+
+            .courselist tbody tr td a button {
+                margin: 0;
+            }
+
+        .counter {
+            padding: 10px;
+            float: right;
+            font-size: 15px;
+            background: #ddd;
+            width: 100%;
+        }
+
+            .counter i {
+                background: #fff;
+                color: #000;
+            }
+    </style>
+}
+
+<title>Employee Details</title>
+
+
+<div class="banner1 bkCyanBlue">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>Employee Profile</span>
+</div>
+
+<div class="content1" ng-controller="employeedetails as vm" ng-cloak="">
+
+    <div class="boxHead1">
+        <div class="boxHeader1 bBYellow">Employee Profile</div>
+    </div>
+
+
+    <div class="tabs">
+        <ul class="tab-links statsBanner">
+            <li class="active">
+                <a href="#tab1">Personal Info</a>
+            </li>
+            <li data-id="@Model.Id" class="trainingRecords">
+                <a href="#tab2">Training records</a>
+            </li>
+            <li data-id="@Model.Id" class="certificateRecords">
+                <a href="#tab3">certifications</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="tab1" class="tab active">
+                <div class="profile">
+
+                    <div class="profilePic">
+                        <img src="img/man.png" alt="">
+                    </div>
+
+                    <div class="prob">
+                        <div class="label">Staff ID:</div>
+                        <div class="input"><input class="halfer" type="text" disabled value="@Model.StaffId"></div>
+                    </div>
+
+                    <div class="prob">
+                        <div class="label">First Name:</div>
+                        <div class="input"><input type="text" disabled value="@Model.FirstName"></div>
+                    </div>
+
+                    <div class="prob">
+                        <div class="label">Last Name:</div>
+                        <div class="input"><input type="text" disabled value="@Model.LastName"></div>
+                    </div>
+
+                    <div class="prob">
+                        <div class="label">Gender:</div>
+                        <div class="input"><input type="text" class="halfer" disabled value="@Model.Sex"></div>
+                    </div>
+
+                    <div class="prob">
+                        <div class="label">Email:</div>
+                        <div class="input"><input type="text" disabled value="@Model.Email"></div>
+                    </div>
+
+                    <div class="prob">
+                        <div class="label">Phone:</div>
+                        <div class="input">
+                            <input class="halfer" type="text" disabled value="@Model.PhoneNumber">
+                            @*<input class="halfer" type="text" disabled value="">*@
+                        </div>
+                    </div>
+
+                    <div class="prob">
+                        <div class="label">Residence Address:</div>
+                        <div class="input"><input type="text" disabled value="@Model.Address"></div>
+                    </div>
+
+                    @*<div class="prob">
+                            <div class="label">City:</div>
+                            <div class="input"><input type="text" disabled value="Lagos Mainland"></div>
+                        </div>
+
+                        <div class="prob">
+                            <div class="label">State:</div>
+                            <div class="input"><input type="text" disabled value="Lagos"></div>
+                        </div>
+                    *@
+                    <div class="prob">
+                        <div class="label">Date Of Employment:</div>
+                        <div class="input"><input type="text" disabled value="@Model.DateOfEmploymentFormat"></div>
+                    </div>
+
+                    <div class="prob">
+                        <div class="label">Location:</div>
+                        <div class="input"><input type="text" disabled value="@Model.Branch"></div>
+                    </div>
+
+                    <div class="prob">
+                        <div class="label">Department:</div>
+                        <div class="input"><input type="text" disabled value="@Model.Department"></div>
+                    </div>
+                    <div class="prob">
+                        <div class="label">Functions:</div>
+                        <div class="input"><input type="text" disabled value="@Model.Functions"></div>
+                    </div>
+
+                    <div class="prob">
+                        <div class="label">Job Title:</div>
+                        <div class="input"><input type="text" disabled value="@Model.Grade"></div>
+                    </div>
+
+                    <div class="prob">
+                        <div class="label">Grade:</div>
+                        <div class="input"><input type="text" disabled value="@Model.Grade"></div>
+                    </div>
+                    <div class="prob">
+                        <div class="label">Line Manager:</div>
+                        <div class="input"><input type="text" disabled value="@Model.LineManagerNameFormat"></div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="tab2" class="tab">
+                <div class="tableRanch">
+                    <table class="courselist trainingTable">
+                        <thead>
+                            <tr>
+                                <td>#</td>
+                                <td>Programmes</td>
+                                <td> &nbsp; </td>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+
+                    </table>
+
+                </div>
+
+
+
+            </div>
+
+
+            <div id="tab3" class="tab">
+                <div class="tableRanch">
+                    <table class="courselist certificateTable">
+                        <thead>
+                            <tr>
+                                <td>#</td>
+                                <td>Certificates</td>
+                                <td>Description</td>
+                                <td>Date Awarded</td>
+                                <td>Expiry Date</td>
+                                <td>Status</td>
+                                <td> &nbsp; </td>
+                            </tr>
+                        </thead>
+
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="trainingModal" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width:70%">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body training_alert">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="certModal" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width:70%">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body img_alert">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/content/js/angular.min.js"></script>
+    <script src="~/Content/js/httpservice.js"></script>
+    <script type="text/javascript">
+
+        angular.module('angularApp', ['requestSvc'])
+            .config(function ($httpProvider) {
+                $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+            }).controller('employeedetails', ['httpRequestSvc', function (http) {
+                var vm = this;
+                vm.trainingRecords = {};
+                vm.certificates = {};
+                vm.getTrainingRecords = function (url) {
+                    if (jQuery.isEmptyObject(vm.trainingRecords)) {
+                        http.get(url).then(function (response) {
+                            vm.trainingRecords = response.Result.Records;
+                        });
+                    }
+                }
+
+                vm.getCertificatesRecords = function (url) {
+                    if (jQuery.isEmptyObject(vm.certificates)) {
+                        http.get(url).then(function (response) {
+                            vm.certificates = response.Result.Records;
+                        });
+                    }
+                }
+            }]);
+
+        angular.element(function () {
+            angular.bootstrap(document, ['angularApp']);
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.trainingRecords').on('click', function (e) {
+                e.preventDefault();
+                var $userId = $(this).attr('data-id');
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/api/Employee/GetEmployeeTrainingRecords',
+                    data: { id: $userId },
+                    success: function (data) {
+                        if (!data.HasError) {
+
+                            var rows;
+                            var a = 1;
+                            $.each(data.Result, function (id, result) {
+                                rows +=
+                                    '<tr>' +
+                                    '<td>' + a++ + '</td>' +
+                                    '<td>' + result.TrainingName + '</td>' +
+
+                                    '<td><button class="btn1 bkSkyBlue trainingDetails"data-user="' + result.UserId + '" data-id="' + result.UserTrainingId + '" >View details</button></td>' +
+                                    '</tr>'
+
+                            });
+                            $('.trainingTable tbody').html(rows);
+                        }
+                        else {
+                            $('.trainingTable tbody').html('<strong style="text-align:center;">No Training Record for this Staff</strong>');
+                        }
+                    }
+                });
+            });
+
+            $('.certificateRecords').on('click', function (e) {
+                e.preventDefault();
+                var $userId = $(this).attr('data-id');
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/api/Employee/GetEmployeeCertificates',
+                    data: { id: $userId },
+                    success: function (data) {
+                        if (!data.HasError) {
+
+                            var rows;
+                            var a = 1;
+                            $.each(data.Result, function (id, result) {
+                                rows +=
+                                    '<tr>' +
+                                    '<td>' + a++ + '</td>' +
+                                    '<td>' + result.Name + '</td>' +
+                                    '<td>' + result.Description + '</td>' +
+                                    '<td>' + result.DateObtainedFormat + '</td>' +
+                                    '<td>' + result.ExpiryDateFormat + '</td>' +
+                                    '<td class="' + result.CertificateApprovalFormat + '">' + result.CertificateApprovalFormat + '</td>' +
+
+                                    '<td><button class="btn1 bkSkyBlue cert"data-url="' + result.TemplateUrl + '" data-id="' + result.Id + '" >View Image</button></td>' +
+                                    '</tr>'
+
+                            });
+                            $('.certificateTable tbody').html(rows);
+                        }
+                        else {
+                            $('.certificateTable tbody').html('<strong style="text-align:center;">No Certificate Record for this Staff</strong>');
+                        }
+                    }
+                });
+            });
+
+
+            $(".trainingTable").on("click", ".trainingDetails", function (evt) {
+                evt.preventDefault();
+                var $userTrainingId = $(this).attr("data-id");
+                var $userId = $(this).attr('data-user');
+                console.log($userTrainingId)
+                $(".training_alert").html("Fetching data ...<br> Please wait...");
+                $("#trainingModal").modal("show");
+                $.ajax({
+                    url: "/api/Employee/GetTrainingRecordDetails",
+                    data: { userTrainingId: $userTrainingId, userId: $userId },
+                    type: "GET",
+                    success: function (data) {
+                        if (!data.HasError) {
+                            $("#trainingModal").modal('show');
+                            //$('#StaffName').val(data.Result.NameFormat);
+                            //$('#StaffId').val(data.Result.StaffId);
+                            //$('#TrainingName').val(data.Result.TrainingName);
+                            //$('#StartDate').val(data.Result.StartPeriodFormat);
+                            //$('#EndDate').val(data.Result.EndPeriodFormat);
+                            //$('#Location').val(data.Result.LocationFormat);
+                            //$('#AmountPerStaff').val(data.Result.AmountPerStaffFormat);
+                            $(".training_alert").html(
+                                '<div class="">' +
+                                '<div class="formBox1 fullForm">' +
+                                '<label for=""> Staff Name:</label>' +
+                                '<input type="text" class="form-control" value="' + data.Result.NameFormat + '" disabled="disabled">' +
+                                '</div>' +
+                                '<div class="formBox1 fullForm">' +
+                                '<label for=""> Staff ID:</label>' +
+                                '<input type="text" class="form-control" value="' + data.Result.StaffId + '" disabled="disabled">' +
+                                '</div>' +
+                                '<div class="formBox1 fullForm">' +
+                                '<label for=""> Training Name:</label>' +
+                                '<input type="text" class="form-control" value="' + data.Result.TrainingName + '" disabled="disabled">' +
+                                '</div>' +
+                                '<div class="formBox1 fullForm">' +
+                                '<label for=""> Start Date:</label>' +
+                                '<input type="text" class="form-control" value="' + data.Result.StartPeriodFormat + '" disabled="disabled">' +
+                                '</div>' +
+                                '<div class="formBox1 fullForm">' +
+                                '<label for=""> End Date:</label>' +
+                                '<input type="text" class="form-control" value="' + data.Result.EndPeriodFormat + '" disabled="disabled">' +
+                                '</div>' +
+                                '<div class="formBox1 fullForm">' +
+                                '<label for="">Location:</label>' +
+                                '<input type="text" class="form-control" value="' + data.Result.LocationFormat + '" disabled="disabled">' +
+                                '</div>' +
+                                '<div class="formBox1 fullForm">' +
+                                '<label for=""> Amount Per Staff:</label>' +
+                                '<input type="text" class="form-control" value="' + data.Result.AmountPerStaffFormat + '" disabled="disabled">' +
+                                '</div>' +
+
+                                '</div>'
+                            );
+
+
+                        }
+                        else {
+                            ShowNotie(data);
+                        }
+
+                    }
+
+                });
+
+            });
+
+            $('.certificateTable').on('click', '.cert', function (e) {
+                e.preventDefault();
+                $('#certModal').modal('show');
+                var img = $(this).attr('data-url');
+                $('.img_alert').html('<img src="' + img + '" height="500" width="1000"/>');
+            })
+        });
+    </script>
+}

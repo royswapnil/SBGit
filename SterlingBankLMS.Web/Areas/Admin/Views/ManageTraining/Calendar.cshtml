@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "Calendar";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link href="~/Content/css/fullcalendar.min.css" rel="stylesheet" />
+<style>
+    .toggle-calender {
+        color: #788288 !important;
+        background-color: #fcfcfd;
+        border-color: rgba(0,0,0,0.1);
+        -webkit-box-shadow: 0 1px 1px rgba(90,90,90,0.1);
+        box-shadow: 0 1px 1px rgba(90,90,90,0.1);
+        margin: 0 2px;
+        font-size: 12px;
+    }
+    .content * {
+        float: none;
+    }
+
+    .fc-content span {
+        font-size: 11px;
+    }
+
+    .fc-event {
+        color: #428BCC;
+        background: #fff;
+    }
+
+        .fc-event:hover {
+            color: #2a6496;
+        }
+    .period-label {
+        float: none;
+        display: block;
+        width: 100%;
+    }
+    span.fc-time{
+        margin-right:0
+    }
+</style>
+
+<div class="banner1 bkTorBlue">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>Training Calendar</span>
+</div>
+
+<section class="panel no-border bg-light" style="padding: 50px;margin-top:50px; background: #f2f4f8;">
+    <div class="calendar-view">
+        <a href="javascript:void" class="active" data-type="calendar">
+            <i class="fa fa-calendar"></i> Calendar View
+        </a>
+        <a href="javascript:void" data-type="list">
+            <i class="fa fa-tasks"></i> List View
+        </a>
+    </div>
+
+    <header style="background-color: #177bbb;color: #aad7f4;" class="panel-heading bg-primary clearfix">
+        <div class="btn-group pull-right" data-toggle="buttons">
+            <label class="btn btn-sm btn-bg btn-default toggle-calender active" id="monthview">
+                <input type="radio" name="options">Month
+            </label>
+            <label class="btn btn-sm btn-bg btn-default toggle-calender" id="weekview">
+                <input type="radio" name="options">Week
+            </label>
+            <label class="btn btn-sm btn-bg btn-default toggle-calender" id="dayview">
+                <input type="radio" name="options">Day
+            </label>
+
+        </div>
+        <span class="m-t-xs inline text-white" style="vertical-align: -webkit-baseline-middle;">
+            Training Calendar
+        </span>
+    </header>
+    <div class="calendar" id="calendar" style="padding: 20px;background: #fff;">
+
+    </div>
+</section>
+@section Scripts{
+    <script src="~/Content/js/fullcalendar.min.js"></script>
+    <script src="~/Content/PageJs/Admin_TrainingCalendar.js"></script>
+}

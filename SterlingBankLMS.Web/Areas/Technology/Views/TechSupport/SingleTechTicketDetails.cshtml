@@ -1,0 +1,439 @@
+﻿
+@{
+    ViewBag.Title = "Ticket Details";
+    Layout = "~/Areas/Technology/Views/Shared/_TechLayout.cshtml";
+}
+
+
+<link href="~/Content/css/pagination.css" rel="stylesheet" />
+<style>
+
+
+    .paginationjs.paginationjs-theme-blue .paginationjs-pages li.active > a {
+        background: #354c98;
+    }
+
+    .paginationjs.paginationjs-theme-blue .paginationjs-go-input > input[type=text], .paginationjs.paginationjs-theme-blue .paginationjs-pages li {
+        border-color: #354c98;
+    }
+
+        .paginationjs.paginationjs-theme-blue .paginationjs-pages li > a {
+            color: #354c98;
+        }
+</style>
+
+<div class="banner1 bkDarkBlue">
+    <i class="material-icons menuBtn1">menu</i>
+    <span class="topic">Support Center</span>
+</div>
+
+
+<input type="hidden" id="TicketId" data-status="@ViewBag.Status" value="@ViewBag.TicketId" />
+<div class="content1">
+    <div class="msgHead">
+        <button class="btnMedium bkGreen"><a href="/Technology/TechSupport/Dashboard">Back to Dashboard</a></button>
+    </div>
+
+    <div class="msgBody">
+        <div class="msgList">
+            <div class="empty" style="display:none">
+                Fetching Tickets <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+            </div>
+            <div id="page"></div>
+        </div>
+
+
+        <div class="msgShow">
+            <div class="empty1" style="display:none">
+                Fetching Messages <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+            </div>
+
+            <div class="slt" style="background-color:#f4f4fe; text-align:center;width:100%;height:100%;position:relative;">
+                Select a ticket to read
+            </div>
+            <div class="forwardBox" style="display:none;">
+                <form>
+                    <div class="formArea">
+                        <div class="formBox1 fullForm">
+                            <label for="">To:</label>
+                            <input type="text" id="ToFoward">
+
+                        </div>
+                        <div class="formBox1 fullForm">
+                            <label for="">Subject:</label>
+                            <input type="text" id="SubjectForward">
+                        </div>
+                        <div class="formBox1 fullForm">
+
+                            <label for="">Message:</label>
+                            <textarea> </textarea>
+                        </div>
+                        <div class="underlineBtn">
+                            <button class="btnMedium bkSkyBlue replySend">Forward Message</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+<style>
+    span.Open {
+        color: #ab192d;
+    }
+
+    span.Closed {
+        color: #2fbf71;
+    }
+
+    span.Escalate {
+        color: #f4b942;
+    }
+
+    .material-icons.Closed {
+        color: #2fbf71;
+    }
+
+    .material-icons.Open {
+        color: #ab192d;
+    }
+
+    .material-icons.Escalate {
+        color: #f4b942;
+    }
+
+    .msgTab.New {
+        border-left: 3px solid #354c98
+    }
+
+    label#New {
+        font-weight: bolder;
+    }
+
+    .msgNote#New:not(p) {
+        color: #354c98;
+        font-weight: bolder;
+    }
+</style>
+
+@section Scripts{
+    <script src="~/Content/js/pagination.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.all').addClass('active');
+            var $ticketId = $('#TicketId').val();
+            var $status = $('#TicketId').attr('data-status');
+
+            $.ajax({
+                url: "/api/support/getSingleTicketMessages?ticketId=" + $ticketId,
+                type: "GET",
+                success: function (data) {
+                    $('.msgList').html('');
+                    if (!data.HasError) {
+                        data.Result.forEach(function (item) {
+                            LoadTickets(item);
+                        });
+                    }
+                    else {
+                        $('.msgList').html("No Tickets to show");
+                    }
+                    $('.empty').hide();
+                }
+            });
+
+                $('.msgTab').addClass("active");
+                $('.msgList').addClass("upup");
+                $('.msgShow').html('');
+                console.log($status);
+                $('.empty1').show();
+                $.ajax({
+                    url: "/api/support/GetTicketDetails",
+                    data: { ticketId: $ticketId, status: $status },
+                    type: "GET",
+                    success: function (data) {
+                        $('.slt').hide();
+                        $('.topic').html('Ticket Title: ' + data.Result.TicketTitle);
+                        $('.msgShow').append(
+                            '<div class="msgTitle">New: ' + data.Result.TicketTitle + '<span class="' + data.Result.TicketStatusFormat + '"> (' + data.Result.TicketStatusFormat + ' Ticket)</span></div>' +
+                            '<div class="msgIcon">' +
+                            '<i class="material-icons">reply</i>' +
+                            '<i class="material-icons">delete</i>' +
+                            '<select name="" id="assignTo" class="assn" data-id="' + data.Result.TicketId + '" data-status="' + data.Result.TicketStatusFormat + '">' +
+                            '<option value= "">Assign to</option>' +
+                            '<option value= "it">Assign to IT</option>' +
+                            '<option value= "close">Mark as Closed</option>' +
+                            '</select >' +
+                            '</div>' +
+                            '<div class="msgSender">' +
+                            data.Result.NameEmailFormat + '<br> to Admin ' +
+                            '</div>' +
+                            '<div class="timeSent">' + data.Result.Timeago + '</div>' +
+                            '<div class="msgRead">' +
+                            data.Result.TicketDescription +
+                            '</div>' +
+                            '<div class="msgFooter">' +
+                            'Click here to <a href="" data-id="' + data.Result.TicketId + '" class="msgReply">Reply</a> or <a href="" data-id="' + data.Result.TicketId + '" class="msgForward">Forward</a> <div class="simp">or <a href="javascript:;">Go back</a></div>' +
+                            '</div>'
+
+                        )
+                        $('.empty1').hide();
+
+                    }
+                });
+                $('.msgList').on('click', '.msgTab div,.msgTab span,.msgTab label', function (e) {
+
+                    e.preventDefault();
+                    $('.msgTab').removeClass("active");
+                    $(this).parent().addClass("active");
+                    $('.msgList').addClass("upup");
+                    $('.msgShow').html('');
+                    var $ticketId = $(this).parent().attr('data-id');
+                    var $status = $(this).parent().attr('data-status');
+                    $('.empty1').show();
+                    $.ajax({
+                        url: "/api/support/GetTicketDetails",
+                        data: { ticketId: $ticketId, status: $status },
+                        type: "GET",
+                        success: function (data) {
+                            $('.slt').hide();
+                            $('.msgShow').append(
+                                '<div class="msgTitle">New: ' + data.Result.TicketTitle + '<span class="' + data.Result.TicketStatusFormat + '"> (' + data.Result.TicketStatusFormat + ' Ticket)</span></div>' +
+                                '<div class="msgIcon">' +
+                                '<i class="material-icons">reply</i>' +
+                                '<i class="material-icons">delete</i>' +
+                                '<select name="" id="assignTo" class="assn" data-id="' + data.Result.TicketId + '" data-status="' + data.Result.TicketStatusFormat + '">' +
+                                '<option value= "">Assign to</option>' +
+                                '<option value= "it">Assign to IT</option>' +
+                                '<option value= "close">Mark as Closed</option>' +
+                                '</select >' +
+                                '</div>' +
+                                '<div class="msgSender">' +
+                                data.Result.NameEmailFormat + '<br> to Admin ' +
+                                '</div>' +
+                                '<div class="timeSent">' + data.Result.Timeago + '</div>' +
+                                '<div class="msgRead">' +
+                                data.Result.TicketDescription +
+                                '</div>' +
+                                '<div class="msgFooter">' +
+                                'Click here to <a href="" data-id="' + data.Result.TicketId + '" class="msgReply">Reply</a> or <a href="" data-id="' + data.Result.TicketId + '" class="msgForward">Forward</a> <div class="simp">or <a href="javascript:;">Go back</a></div>' +
+                                '</div>'
+
+                            )
+                            $('.empty1').hide();
+
+                        }
+                    });
+                });
+                $('.msgShow').on('click', '.msgReply', function (e) {
+                    e.preventDefault();
+                    var $id = $(this).attr('data-id');
+                    $.ajax({
+                        url: "/api/support/ShowMsgReply",
+                        data: { id: $id },
+                        type: "GET",
+                        success: function (data) {
+                            if (!data.HasError) {
+                                $('.msgShow').find('.forwardMail').remove();
+                                $('.msgShow').append(
+                                    '<form class="replyMail">' +
+                                    '<div class="formArea" style="display:block;">' +
+                                    '<input type="hidden" id="TicketId" value="' + data.Result.TicketId + '"/>' +
+                                    '<div class="formBox1 fullForm">' +
+                                    '<label for="">To:</label>' +
+                                    '<input type="text" id="To" value="' + data.Result.Email + '" class="form-control">' +
+                                    '</div>' +
+                                    '<div class="formBox1 fullForm">' +
+                                    '<label for="">Subject:</label>' +
+                                    '<input type="text"id="Subject" value="RE: ' + data.Result.TicketTitle + '" class="form-control">' +
+                                    '</div>' +
+                                    '<div class="formBox1 fullForm">' +
+                                    '<label for="">Message:</label>' +
+                                    '<textarea> </textarea>' +
+                                    '</div>' +
+                                    '<div class="underlineBtn">' +
+                                    '<button class="btnMedium bkSkyBlue replySend">Send</button>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</form>'
+                                )
+                            }
+                            BindHtmlEditor($('textarea'), data.Result.TicketDescription);
+                        }
+                    });
+                });
+
+                $('.msgShow').on('click', '.msgForward', function (e) {
+                    e.preventDefault();
+                    var $id = $(this).attr('data-id');
+                    $.ajax({
+                        url: "/api/support/ShowMsgReply",
+                        data: { id: $id },
+                        type: "GET",
+                        success: function (data) {
+                            if (!data.HasError) {
+
+                                $('.msgShow').find('.replyMail').remove();
+                                $('.msgShow').append(
+                                    '<form class="forwardMail">' +
+                                    '<div class="formArea" style="display:block;">' +
+                                    '<input type="hidden" id="TicketId" value="' + data.Result.TicketId + '"/>' +
+                                    '<div class="formBox1 fullForm">' +
+                                    '<label for="">Forward To:</label>' +
+                                    '<input type="text" id="To" class="form-control">' +
+                                    '</div>' +
+                                    '<div class="formBox1 fullForm">' +
+                                    '<label for="">Subject:</label>' +
+                                    '<input type="text"id="Subject" value="RE: ' + data.Result.TicketTitle + '" class="form-control">' +
+                                    '</div>' +
+                                    '<div class="formBox1 fullForm">' +
+                                    '<label for="">Message:</label>' +
+                                    '<textarea> </textarea>' +
+                                    '</div>' +
+                                    '<div class="underlineBtn">' +
+                                    '<button class="btnMedium bkSkyBlue replySend">Forward</button>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</form>'
+                                )
+                            }
+                            BindHtmlEditor($('textarea'), data.Result.TicketDescription);
+
+                        }
+                    });
+                });
+
+
+            $('.msgShow').on('click', '.replySend', function (e) {
+                e.preventDefault();
+                var $button = $(this);
+                var prev = $button.html();
+                $button.html('Processing <i class="fa fa-circle-o-notch fa-spin nofloat"></i>');
+                $button.attr('disabled', 'disabled');
+                var $msg = $('textarea').val();
+                var $to = $('#To').val();
+                var $subject = $('#Subject').val();
+                var $id = $('#TicketId').val();
+
+                if ($msg === "") {
+                    ShowNotie({ HasError: true, Message: "Please enter the Message" });
+                    $button.html(prev);
+                    $button.removeAttr('disabled');
+                    return;
+                }
+                var $data = { Message: $msg, To: $to, Subject: $subject, TicketId: $id };
+                $.ajax({
+                    url: '/api/support/ReplyTicket',
+                    contentType: "application/json; charset=UTF-8",
+                    type: 'POST',
+                    data: JSON.stringify($data),
+                    success: function (data) {
+                        ShowNotie(data);
+                        $button.html('').html('Send');
+                        $button.attr('disabled', false);
+                    }
+
+                });
+            });
+
+            $('.msgShow').on('change', '#assignTo', function () {
+                var $selected = $(this).val();
+                var $id = $(this).attr('data-id');
+                var $status = $(this).attr('data-status');
+
+                if (!parseInt($id) && parseInt($id) <= 0) {
+                    return;
+                }
+                if ($selected == '') {
+                    ShowNotie({ HasError: true, Message: "Please select from the list" });
+                    return;
+                }
+                if ($selected == 'it') {
+                    var $confirm = ShowConfirm();
+                    $confirm.onAction = function (btnName) {
+
+                        if (btnName == "cancel") {
+                            return false;
+                        }
+                        else {
+
+                            $.ajax({
+                                url: '/api/support/EscalateToIt',
+                                type: 'GET',
+                                data: { id: $id },
+                                success: function (data) {
+                                    if (!data.HasError) {
+                                        ShowNotie(data);
+                                        window.location.reload();
+                                    }
+                                    else {
+                                        ShowNotie(data);
+                                    }
+
+                                }
+                            });
+                        }
+
+                    }
+                }
+                else if ($selected == 'close') {
+                    var $confirm = ShowConfirm();
+                    $confirm.onAction = function (btnName) {
+
+                        if (btnName == "cancel") {
+                            return false;
+                        }
+                        else {
+                            $.ajax({
+                                url: '/api/support/CloseSingleTicket',
+                                type: 'GET',
+                                data: { id: $id },
+                                success: function (data) {
+                                    if (!data.HasError) {
+                                        ShowNotie(data);
+                                        window.location.reload();
+                                    }
+                                    else {
+                                        ShowNotie(data);
+                                    }
+                                }
+                            });
+                        }
+
+                    }
+                }
+
+            })
+
+        });
+
+
+        var LoadTickets = function (item) {
+            var className = "";
+            if (item.TicketStatusFormat == "Closed") {
+                className = "lock";
+            }
+            if (item.TicketStatusFormat == "Open") {
+                className = "lock_open";
+            }
+            if (item.TicketStatusFormat == "Escalate") {
+                className = "check_circle";
+            }
+            $('.msgList').append(
+
+                '<div class="msgTab ' + item.TicketStatusFormat + '" data-id="' + item.TicketId + '" data-status="' + item.TicketStatusFormat + '">' +
+                '<input name="checkk" type="checkbox" style="float:left;" data-id="' + item.TicketId + '">' +
+                '<span class="checkmark"></span>' +
+                '<label class="containers" id="' + item.TicketStatusFormat + '" >' +
+                item.NameFormat + '<i class="material-icons ' + item.TicketStatusFormat + '">' + className + '</i>' +
+                '</label>' +
+                '<span class="time">' + item.DateFormat + '</span>' +
+                '<div class="msgNote" id="' + item.TicketStatusFormat + '" >' +
+                item.TicketTitle + ' <br><br><p id="body">' + item.TicketDescriptionFormat + '</p>' +
+                '</div>' +
+                '</div>'
+            );
+        }
+    </script>
+}
+

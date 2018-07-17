@@ -1,0 +1,38 @@
+﻿<div class="startExam">
+    <h2 ng-bind="vm.exam.Name"></h2>
+
+    <div class="col33">
+        <div class="nid" style="color:#0091d9;">
+            <i class="material-icons">alarm</i> Duration
+        </div>
+        <div class="nid">
+            <span ng-bind="vm.exam.Duration">00:45 mins</span>
+        </div>
+
+    </div>
+
+    <div class="col33">
+        <div class="nid" style="color: #00d200;">
+            <i class="material-icons">check</i> Pass Grade
+        </div>
+        <div class="nid">
+            <span ng-bind="vm.exam.PassGrade">30%</span>
+        </div>
+    </div>
+
+    <div class="col33">
+        <div class="nid" style="color: #ab192d;">
+            <i class="material-icons">warning</i> Due date
+        </div>
+        <div class="nid">
+            <span ng-bind="vm.exam.EndDate"></span>
+        </div>
+    </div>
+
+    <p>
+        <b>INTRODUCTIONS:</b> <BR><BR>
+       <div ng-bind-html="vm.exam.Description"></div>
+    </p>
+
+    <button class="btn btnLarge btnBlue" ng-click="vm.startExam()">Start</button>
+</div>​

@@ -1,0 +1,246 @@
+﻿@model  SterlingBankLMS.Core.DTO.TrainingDto
+@using Vereyon.Web;
+@{
+    ViewBag.Title = "Training";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+    <style>
+
+
+        .alert.alert-danger, .alert.alert-success, .alert.alert-info, .alert.alert-warning {
+            width: 70%;
+            margin-top: 20px;
+        }
+
+        .formArea {
+            width: 100%;
+            margin-top: 20px;
+            padding-bottom: 60px;
+            float: left;
+        }
+
+        .formBox1 .label {
+            width: 100%;
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 13px;
+            float: left;
+        }
+
+        .formBox1 input, .formBox1 textarea, .formBox1 select {
+            width: 100%;
+            height: 30px;
+            padding: 5px;
+            font-size: 15px;
+            border: 1px solid rgba(0, 0, 0, 0.39);
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            float: left;
+        }
+
+        .formBox1 textarea {
+            height: 100px;
+        }
+
+        .formBox1 button {
+            background: #760f91;
+            border: none;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            color: #fff;
+            height: 30px;
+            width: 120px;
+            margin-top: -30px;
+            float: right;
+        }
+
+        .bDGreen {
+            border-bottom: 3px solid #2fbf71;
+        }
+
+        .bkGreen {
+            background: #2fbf71;
+        }
+
+        .bkRed {
+            background: #ab192d;
+        }
+        .period-label {
+            margin: 5px 2px;
+            display: block;
+        }
+    </style>
+
+
+<link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />
+<link href="~/Content/css/datepicker.css" rel="stylesheet" />
+
+
+<div class="banner1 bkTorBlue">
+    <i class="material-icons menuBtn1">menu</i>
+    <span class="changetext">All Training</span>
+</div>
+
+
+<div class="content1" style="min-height: 90vh;">
+
+    <div class="boxHead1">
+        <div class="boxHeader1 bDOrange changetext">All Training</div>
+    </div>
+
+    <div class="boxBody1" style="margin-top:-20px">
+        <div id="TrainingListPanel">
+
+            @if (TempData["Success"] != null)
+            {
+                <p style="color:#38C64E;"><i class="material-icons">check_circle</i>@TempData["Success"]</p>
+            }
+
+            @if (TempData["Error"] != null)
+            {
+                <p style="color:#DA3024;"><i class="material-icons">error</i>@TempData["Error"]</p>
+            }
+            <a class="btn bkSkyBlue pull-right" style="margin:20px 0" href="@Url.Action("NewTraining","ManageTraining",new { area="Admin"})">Add New Training</a>
+            <div class="tableRanch">
+                <table id="TrainingTable">
+                    <thead>
+                        <tr>
+                            <td>Training</td>
+                            <td>Type</td>
+                            <td>Category</td>
+                            <td>Schedule Date</td>
+                            <td>Location</td>
+                            <td>Period</td>
+                            <td>Action</td>
+                        </tr>
+                    </thead>
+                    <tr class="empty">
+                        <td colspan="7">
+                            Fetching Data <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div id="TrainingViewPanel" style="display:none">
+            <div id="form1">
+                @using (Html.BeginForm("UpdateTraining", "ManageTraining", new { area = "Admin" }, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="formArea" style="display:block;">
+                        <div class="formBox1 fullForm">
+                            <label for="">Enter Programme Title:</label>
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", @style = "color:red" })
+                        </div>
+                        <input name="Id" id="Id" type="hidden" />
+
+                        <div class="formBox1 halfForm">
+                            <label for="">Training Category</label>
+                            @Html.DropDownList("TrainingCategory", null, htmlAttributes: new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.TrainingCategory, "", new { @class = "text-danger", @style = "color:red" })
+                        </div>
+
+                        <div class="formBox1 halfForm">
+
+                            <div class="formBox1 halfForm">
+                                <label for="">Vendor</label>
+                                @Html.EditorFor(model => model.Vendor, new { htmlAttributes = new { } })
+                                @Html.ValidationMessageFor(model => model.Vendor, "", new { @class = "text-danger", @style = "color:red" })
+                            </div>
+
+                            <div class="formBox1 halfForm">
+                                <label for="">Training Type</label>
+                                @Html.DropDownList("TrainingType", null, htmlAttributes: new { @class = "form-control " })
+                                @Html.ValidationMessageFor(model => model.TrainingType, "", new { @class = "text-danger", @style = "color:red" })
+                            </div>
+
+                        </div>
+
+                        <div class="formBox1 halfForm">
+
+                            <div class="formBox1 halfForm">
+                                <label for="">Location</label>
+                                @Html.EditorFor(model => model.Location, new { htmlAttributes = new { } })
+                                @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger", @style = "color:red" })
+                            </div>
+
+                            <div class="formBox1 halfForm">
+                                <label for="">Venue</label>
+                                @Html.EditorFor(model => model.Venue, new { htmlAttributes = new { } })
+                                @Html.ValidationMessageFor(model => model.Venue, "", new { @class = "text-danger", @style = "color:red" })
+                            </div>
+
+                        </div>
+
+
+                        <div class="formBox1 halfForm">
+
+                            <div class="formBox1 halfForm">
+                                <label for="">Start Date</label>
+                                <input type="text" id="StartPeriod" name="StartPeriod" />
+                            </div>
+
+                            <div class="formBox1 halfForm">
+                                <label for="">End Date</label>
+                                <input type="text" id="EndDate" name="EndDate" />
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="formBox1 halfForm">
+                            <label for="">Training Hours</label>
+                            @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { } })
+                            @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger", @style = "color:red" })
+                        </div>
+
+                        <div class="formBox1 halfForm">
+                            <label for="">No of days</label>
+                            <input type="text" id="Duration" name="Duration" />
+                            @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger", @style = "color:red" })
+                        </div>
+
+
+                        <div class="formBox1 halfForm">
+                            <label for="">Training Fee Per Staff(&#8358;)</label>
+                            @Html.EditorFor(model => model.BudgetPerStaff, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.BudgetPerStaff, "", new { @class = "text-danger", @style = "color:red" })
+                        </div>
+
+                        <div class="formBox1 halfForm">
+                            <label for="">Other Fees(&#8358;)</label>
+                            <input type="text" id="OtherFees" name="OtherFees" />
+                        </div>
+
+                        <div class="formBox1 fullForm">
+                            <label for="">Total Cost(&#8358;)</label>
+                            @Html.EditorFor(model => model.Budget, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Budget, "", new { @class = "text-danger", @style = "color:red" })
+                        </div>
+
+
+
+
+                        <div class="underlineBtn">
+                            <button class="nextBtn btn1 btnMedium bkGreen" type="submit">Update</button>
+                        </div>
+                    </div>
+
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/Content/js/datatables.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Content/PageJs/ListTraining.js"></script>
+    <script src="~/Content/PageJs/NewTraining.js"></script>
+}

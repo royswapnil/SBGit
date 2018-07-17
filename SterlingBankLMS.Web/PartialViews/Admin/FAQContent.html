@@ -1,0 +1,43 @@
+﻿<script id="FAQContent" type="x-tmpl-mustache">
+    {{#array}}
+    <div class="nabi" data-id="{{Id}}">
+        <div class="nabiHd">
+
+            <div class="courseSlate">
+                <div class="topicNm module-action closed">
+                    <i class="material-icons">keyboard_arrow_up</i>
+                    <input value="{{Title}}" placeholder="Insert Title" {{^IsNew}} style="display:none" {{/IsNew}} />
+                    <i class="fa fa-times close-edit-nabi" style="margin-left: 5px; color: red; display:none"></i>
+                    <span {{#IsNew}} style="display:none" {{/IsNew}}>{{Title}}</span>
+                </div>
+
+                <div class="topicAction">
+                 
+                    <button class="btnClear edit-nabi" {{#IsNew}} style="display:none" {{/IsNew}}>
+                        <i class="material-icons">edit</i>
+                    </button>
+                    <button class="btnClear delete-module">
+                        <i class="material-icons" style="color: red;">close</i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="nabiBd noPad {{#IsNew}}harden{{/IsNew}}">
+            <div class="courseLesson bordered-section {{^IsNew}}collasped{{/IsNew}}" style="margin-bottom: 10px;">
+                <div class="body full-width">
+                    <div class="formBox1 full-width nofloat">
+                        <label for="">Description</label>
+                        <textarea rows="3" class="nofloat lessonDesc" placeholder="Add Description">{{Description}}</textarea>
+                    </div>
+
+                    <div class="formBox1 fullForm center">
+                        <button class="noMarg nofloat btnSmaller save-faq-content">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/array}}
+</script>

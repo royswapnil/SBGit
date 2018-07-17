@@ -1,0 +1,389 @@
+﻿<!--LOAD MANAGE COURSE MODULES-->
+<script id="ManageCourseModules" type="x-tmpl-mustache">
+    {{#array}}
+    <div class="nabi" data-id="{{Id}}">
+        <div class="nabiHd">
+
+            <div class="courseSlate">
+                <div class="topicNm module-action closed">
+                    <i class="material-icons">keyboard_arrow_up</i>
+                    <input value="{{Name}}" placeholder="Insert Module Name" {{^IsNew}} style="display:none" {{/IsNew}} />
+                    <i class="fa fa-times close-edit-nabi" style="margin-left: 5px; color: red; display:none"></i>
+                    <span {{#IsNew}} style="display:none" {{/IsNew}}>{{Name}}</span>
+                </div>
+
+                <div class="topicAction">
+                    <button class="btnClear save-nabi save-module" {{^IsNew}} style="display:none" {{/IsNew}}>
+                        <i class="material-icons">save</i>
+                    </button>
+                    <button class="btnClear edit-nabi" {{#IsNew}} style="display:none" {{/IsNew}}>
+                        <i class="material-icons">edit</i>
+                    </button>
+                    <button class="btnClear delete-module">
+                        <i class="material-icons" style="color: red;">close</i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="nabiBd">
+            <div class="loadingPanel">
+                Please Wait... Fetching Data <i class="fa fa-spinner fa-spin"></i>
+            </div>
+            <div class="emptyPanel" style="display:none">
+                No lessons added. <i class="fa fa-question-circle"></i> Add new content by clicking either of the buttons below
+            </div>
+
+            <div class="pull-right center action-buttons" style="margin: 20px;display:none">
+
+                <button type="button" class="nofloat bordered addNewLessonContent" data-type="1">ADD TEXT <i class="fa fa-font pull-right"></i></button>
+                <button type="button" class="nofloat bordered red addNewLessonContent" data-type="2">ADD MEDIA <i class="fa fa-file-video-o pull-right"></i></button>
+                <button type="button" class="nofloat bordered green  addNewLessonContent" data-type="3">ADD DOCUMENT <i class="fa fa-file pull-right"></i></button>
+                <button type="button" class="nofloat bordered purple  addNewLessonContent" data-type="4">ADD QUIZ <i class="fa fa-question-circle pull-right"></i></button>
+            </div>
+
+        </div>
+    </div>
+    {{/array}}
+</script>
+
+
+
+<script id="LessonContentTemplate" type="x-tmpl-mustache">
+    {{#array}}
+    <div class="courseSlate" data-id="{{Id}}" data-type="{{LessonContentType}}">
+
+        <div class="topicNm closed lesson-action">
+            <i class="material-icons">keyboard_arrow_up</i>
+            <input {{^IsNew}} style="display:none" {{/IsNew}} value="{{Name}}" placeholder="Insert Lesson Name" />
+            <i class="fa fa-times close-edit-nabi" style="margin-left: 5px; color: red; {{^IsNew}}display:none{{/IsNew}}"></i>
+            <span {{#IsNew}} style="display:none" {{/IsNew}}>{{Name}}</span>
+            <i class="fa
+                       {{#IsText}}fa-font{{/IsText}}
+                       {{#IsVideo}}fa-file-video-o{{/IsVideo}}
+                       {{#IsDocument}}fa-file{{/IsDocument}}
+                       {{#IsQuiz}}fa-question-circle{{/IsQuiz}}
+                       pull-right lessonIcon"></i>
+        </div>
+
+        <div class="topicAction">
+            <button class="btnClear save-nabi save-lesson" {{^IsNew}} style="display:none" {{/IsNew}}>
+                <i class="material-icons">save</i>
+
+            </button>
+            <button class="btnClear edit-nabi" {{#IsNew}} style="display:none" {{/IsNew}}>
+                <i class="material-icons">edit</i>
+            </button>
+
+            <button class="btnClear delete-lesson">
+                <i class="material-icons" style="color: red;">close</i>
+            </button>
+        </div>
+
+        <div class="courseLesson bordered-section collasped">
+
+
+            <div class="body full-width">
+
+
+                <!--<div class="formBox1 full-width nofloat">
+                    <label for="">Description <small class="red">(not required)</small></label>
+                    <textarea rows="3" class="nofloat lessonDesc" placeholder="Add Description">{{Description}}</textarea>
+                </div>-->
+
+                {{#IsQuiz}}
+                <div class="formBox1 fullForm">
+                    <label for="">Quiz Retake Count</label>
+                    <input name="RetakeCount" min="1" type="number" value="{{QuizRetakeCount}}" class="form-control">
+                </div>
+
+                <div class="formBox1 fullForm">
+                    <label for="">Pass Mark</label>
+                    <input name="PassMark" min="1" type="text" value="{{PassMark}}" class="form-control">
+                </div>
+
+                <div class="formBox1 fullForm">
+                    <label for="">No. of Questions Displayed</label>
+                    <input name="QuestionNo" min="1" type="number" value="{{QuestionNo}}" class="form-control">
+                </div>
+
+
+                <div class="formBox1 fullForm">
+                    <label for="">Grade Quiz</label>
+                    <input name="IsGradeableContent" class="form-control" type="checkbox" style="display: block;margin-bottom: 13px;float: none;" {{#IsGradeableContent}} checked {{/IsGradeableContent}}>
+                </div>
+
+
+                {{/IsQuiz}}
+
+                <div class="formBox1 full-width manage-lesson-panel">
+
+                    <label for="">Content</label>
+
+                    {{#IsText}}
+                    <div class="uploadBox textWriter content">
+                        <textarea rows="4">{{HtmlContent}}</textarea>
+                    </div>
+                    {{/IsText}}
+
+                    {{#IsVideo}}
+                    <div class="tabs">
+                        <ul class="tab-links">
+                            <li {{^IsExternalContent}} class="active" {{/IsExternalContent}}><a href="#tabUpload">Upload Content</a></li>
+                            <li {{#IsExternalContent}} class="active" {{/IsExternalContent}}><a href="#tabExternal" id="temp">External Content</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div>
+                                <div class="uploadBox mediaUpload content">
+                                    <video {{^LiveContentUrl}} class="empty" {{/LiveContentUrl}}><source src="{{LiveContentUrl}}" /></video>
+
+                                    <div class="tabUpload tab {{^IsExternalContent}}active{{/IsExternalContent}}">
+                                        <div class="newFile">
+                                            <small><em class="red">(Formats allowed: mp4, webm, avi, flv)</em></small>
+                                            <input type="file" name="ImageUpload" id="" placeholder="">
+                                        </div>
+                                    </div>
+
+                                    <div class="tabExternal tab {{#IsExternalContent}}active{{/IsExternalContent}}">
+                                        <div class="formBox1 fullForm">
+                                            <input type="text" placeholder="Insert URL" {{#IsExternalContent}} value="{{LiveContentUrl}}" {{/IsExternalContent}}>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    {{/IsVideo}}
+
+                    {{#IsDocument}}
+                    <div class="uploadBox docUpload content">
+                        <a href="{{LiveContentUrl}}" target="_blank">{{Name}}</a>
+                        <div class="newFile">
+                            <small><em class="red">(Formats allowed: xls, .pdf, .docx, .pptx, .csv)</em></small>
+                            <input type="file" name="ImageUpload" id="" placeholder="">
+                        </div>
+
+                    </div>
+                    {{/IsDocument}}
+
+                    {{#IsQuiz}}
+
+                    <div class="uploadBox quiz content">
+                        <button id="reSortTemplate" class="btn btnGrey btnSmall" style="float: left;margin-left: 15px;margin-bottom: 0;margin-top: 0;height: initial;width:initial" disabled>
+                            Re-Sort Items
+                        </button>
+                        <div class="pull-right qnumbering" style="margin-bottom: 10px">
+                            {{#Questions}}
+                            <div data-id="{{Id}}" data-sort="{{SortOrder}}" class="btn-group">
+                                <a href="javascript:void" class="btn btn-inline btn-secondary-outline getquestion">{{SortOrder}}</a>
+                            </div>
+                            {{/Questions}}
+
+                            {{^Questions}}
+                            <div data-id="0" data-sort="1" class="btn-group active">
+                                <a href="javascript:void" class="btn btn-inline btn-secondary-outline getquestion">1</a>
+                            </div>
+                            {{/Questions}}
+
+                            <div class="btn-group excludeSort">
+                                <a href="javascript:void" class="btn btn-inline btn-secondary-outline addquestion"><i class="fa fa-plus green"></i></a>
+                            </div>
+                        </div>
+                        {{#Questions}}
+                        <div class="question" data-id="{{Id}}" data-sort="{{SortOrder}}" style="display:none">
+                            <button class="noMarg pull-right btnSmaller btnRed delete-question">Delete this question</button>
+                            <div class="formBox1 fullForm questionPanel">
+                                <label for="">Question</label>
+                                <textarea class="questionText">{{Question}}</textarea>
+                            </div>
+                            <div class="formBox1 fullForm">
+                                <label for="">Question Mark Weight</label>
+                                <input name="Weight" min="0" type="number" value="{{Weight}}" class="form-control">
+                            </div>
+
+                          
+
+                            <div class="formBox1 fullForm">
+                                <label for="">Answer Presentation</label>
+                                <select class="AnswerType  form-control">
+
+                                    <option value="select">Select List</option>
+                                    <option value="radio">Radiolist</option>
+                                    <!--<option value="1">Textbox</option>-->
+                                    <option value="checkbox">Checkbox</option>
+                                </select>
+                            </div>
+
+                            <div class="formBox1 fullForm optionPanel" style="margin: 0;">
+
+                                <label for="" style="margin-bottom: 15px;">Answer Options <small class="red">(Mark checkbox of correct answer)</small></label>
+
+                                <div class="col-sm-12 bordered-section" style="margin-bottom: 30px;padding: 30px;">
+
+                                     {{#Options}}
+                                    <div class="form-group option" data-id="{{Id}}">
+                                        <div class="questionPanel">
+                                            <textarea class="form-control" type="text">{{Title}}</textarea>
+                                        </div>
+                                        <div class="settingPanel">
+                                            <input class="form-control" type="checkbox" style="display: block;margin-bottom: 13px;" {{#IsAnswer}} checked{{/IsAnswer}}>
+                                            <a style="display: block;padding-top: 5px;" class="delete-option"><i class="fa fa-trash"></i></a>
+                                        </div>
+
+                                    </div>
+                                    {{/Options}}
+
+                                 
+                                    <div class="formBox1 fullForm" style="margin: 10px 0;">
+                                        <button class="btn bkSkyBlue btnSmall" id="addNewOption" style="margin-bottom: 10px; float: right;width:initial;height:initial">
+                                            Add New Option	<i class="fa fa-plus pull-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="formBox1 fullForm AnswerSelection" style="display:none">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="">Answer Selection Logic</label>
+                                        <select class="AnswerSelection form-control">
+                                            <option value="0">OR</option>
+                                            <option value="1">AND</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="formBox1 fullForm center">
+                                <button class="noMarg nofloat btnBlue btnSmaller save-quiz-content">Save Question</button>
+                            </div>
+
+                            <!--<div class="formBox1 fullForm optionPanel">
+                                <label for="">Answer Options <small class="red"><strong>(Seperate with commas or tab)</strong></small></label>
+                                <textarea class="answerOptions"></textarea>
+                            </div>
+
+                            <div class="formBox1 fullForm answerPanel">
+                                <label for="">Right Answer <small class="red"><strong>(Seperate with commas or tab)</strong></small></label>
+                                <textarea class="rightAnswer"></textarea>
+                            </div>-->
+
+                        </div>
+                        {{/Questions}}
+
+                        {{^Questions}}
+                        <div class="question" data-id="0" data-sort="1">
+                            <button class="noMarg pull-right btnSmaller btnRed delete-question">Delete this question</button>
+                            <div class="formBox1 fullForm questionPanel">
+                                <label for="">Question</label>
+                                <textarea class="questionText"></textarea>
+                            </div>
+
+                            <div class="formBox1 fullForm">
+                                <label for="">Question Mark Weight</label>
+                                <input name="Weight" min="0" type="number" value="1" class="form-control">
+                            </div>
+
+                      
+                            <div class="formBox1 fullForm">
+                                <label for="">Answer Presentation</label>
+                                <select class="AnswerType  form-control">
+                                    <option value="select">Select List</option>
+                                    <option value="radio">Radiolist</option>
+                                    <!--<option value="1">Textbox</option>-->
+                                    <option value="checkbox">Checkbox</option>
+                                </select>
+                            </div>
+
+
+                            <div class="formBox1 fullForm optionPanel" style="margin: 0;">
+
+                                <label for="" style="margin-bottom: 15px;">Answer Options <small class="red">(Mark checkbox of correct answer)</small></label>
+
+                                <div class="col-sm-12 bordered-section" style="margin-bottom: 30px;padding: 30px;">
+                                    <div class="form-group option" data-id="0">
+                                        <div class="questionPanel">
+                                            <textarea class="form-control" type="text"></textarea>
+                                        </div>
+                                        <div class="settingPanel">
+                                            <input class="form-control" type="checkbox" style="display: block;margin-bottom: 13px;">
+                                            <a style="display: block;padding-top: 5px;" class="delete-option"><i class="fa fa-trash"></i></a>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group option" data-id="0">
+                                        <div class="questionPanel">
+                                            <textarea class="form-control" type="text"></textarea>
+                                        </div>
+                                        <div class="settingPanel">
+                                            <input class="form-control" type="checkbox" style="display: block;margin-bottom: 13px;">
+                                            <a style="display: block;padding-top: 5px;" class="delete-option"><i class="fa fa-trash"></i></a>
+                                        </div>
+
+                                    </div>
+                                    <div class="formBox1 fullForm" style="margin: 10px 0;">
+                                        <button class="btn bkSkyBlue btnSmall" id="addNewOption" style="margin-bottom: 10px; float: right;width:initial;height:initial">
+                                            Add New Option	<i class="fa fa-plus pull-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="formBox1 fullForm AnswerSelection" style="display:none">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="">Answer Selection Logic</label>
+                                        <select class="AnswerSelection form-control">
+                                            <option value="0">OR</option>
+                                            <option value="1">AND</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="formBox1 fullForm center">
+                                <button class="noMarg nofloat btnBlue btnSmaller save-quiz-content">Save Question</button>
+                            </div>
+
+                            <!--<div class="formBox1 fullForm optionPanel">
+                                <label for="">Answer Options <small class="red"><strong>(Seperate with commas or tab)</strong></small></label>
+                                <textarea class="answerOptions"></textarea>
+                            </div>
+
+                            <div class="formBox1 fullForm answerPanel">
+                                <label for="">Right Answer <small class="red"><strong>(Seperate with commas or tab)</strong></small></label>
+                                <textarea class="rightAnswer"></textarea>
+                            </div>-->
+
+                        </div>
+                        {{/Questions}}
+
+                    </div>
+
+                    {{/IsQuiz}}
+
+                    <div class="formBox1 fullForm center">
+                        <button class="noMarg nofloat btnSmaller save-lesson-content">Save Lesson</button>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
+
+    </div>
+    {{/array}}
+</script>

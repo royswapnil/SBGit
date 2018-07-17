@@ -1,0 +1,194 @@
+﻿@using SterlingBankLMS.Web.ViewModels;
+@using SterlingBankLMS.Data.Models.Enums;
+@{
+    ViewBag.Title = "Manage Learning Groups";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section head{
+    <link href="~/Content/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .counter {
+            padding: 10px;
+            float: none;
+            font-size: 15px;
+            background: #fbfbfb;
+            width: 100%;
+            margin-top: 0;
+            border: 1px solid #ddd;
+            border-top: none;
+        }
+
+        .table {
+            margin-bottom: 0;
+        }
+    </style>
+}
+
+<div class="banner1 bkPurple">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>Manage Learning Groups</span>
+</div>
+
+
+<div class="content1">
+
+    <div class="boxBody1" style="padding:0">
+
+        <div class="tanBody" style="height: auto;overflow-y: auto;margin-top: 15px;">
+            <h4 style=" margin-left: 25px;margin-bottom: 30px;">
+                Add New Learning Group
+            </h4>
+
+            <div class="toggleSelectPanel">
+                <select id="mainSelect" class="toggleSelect select11">
+                    <option value="0">Selection Type</option>
+                    <option value="group">Group</option>
+                    <option value="gender">Gender</option>
+                    <option value="grade">Grade</option>
+                    <option value="role">Role</option>
+                    <option value="indv">Individuals</option>
+                    <option value="region">Region</option>
+                    <option value="all">All Users</option>
+                    <option value="inactive">In-active Users</option>
+                    <option value="learner">Saved Learner Group</option>
+                </select>
+            </div>
+
+            <div class="toggleSelectPanel">
+                <div id="SelectPanel">
+                    <select id="toggleSelect1" class="toggleSelect select2" disabled>
+                        <option>Choose a selection type</option>
+                    </select>
+                </div>
+            
+                <div class="input-group" style="display:none" id="UserSearchPanel">
+                    <input type="text" class="searchT" placeholder="Search users by name or staff id" style="width: 100%;">
+                    <span class="input-group-addon" id="searchUser">
+                        <i class="fa fa-search"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="toggleSelectPanel" style="display:none">
+                <select id="toggleSelect2" class="toggleSelect select2" disabled></select>
+            </div>
+
+            <div class="toggleAddPanel">
+                <a href="javascript:void" id="addLearningGroup" class="btn btn-inline btn-secondary-outline addLearningGroup"><i class="fa fa-plus green"></i></a>
+            </div>
+
+            <div id="learningGroupTagPanel" class="learningGroupTagPanel bordered-section" style="display:none">
+
+
+                <div class="saveBox">
+
+                    <button class="nextBtn btnMedium btnGrey" id="showLearningGroupUsers">Show targetted users</button>
+
+                    <div class="group-input">
+                        <div class="learnerInfo" style="padding: 10px;font-size: 14px;background: #555146!important;color: #fff;margin-bottom: 10px;display:none">
+                            <i class="fa fa-info"></i> Assign new courses to this learner group or add new filter tags and save as a new learner group
+                        </div>
+                        <input type="text" name="Name" id="LearningGroupName" class="form-control" placeholder="Enter new learning group name here...">
+                        <div class="group-append">
+                            <button id="saveLearningGroup" class="bordered noMarg">Save as new learner group</button>
+                            <input type="hidden" value="0" id="LearningGroupId" />
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="tableRanch">
+
+            <table id="GroupTable">
+                <thead>
+                    <tr>
+                        <td>Name</td>
+                        <td>Learning Group Tags</td>
+                        <td>Assigned Courses</td>
+                        <td>Assigned Trainings</td>
+                        <td>Assigned Examinations</td>
+                        <td>Assigned Surveys</td>
+                        <td>Action</td>
+                    </tr>
+                </thead>
+                <tr class="empty">
+                    <td colspan="7">
+                        Fetching Data <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+
+
+
+
+    </div>
+
+    <div class="selectBoxes" style="display:none">
+        <select data-type="@((int)LearningGroupTagType.Group)" class="dummyGroup" data-next="department" data-next-type="@((int)LearningGroupTagType.Department)"></select>
+        <select data-type="@((int)LearningGroupTagType.Gender)" class="dummyGender">
+            <option value="0">Select a gender</option>
+            @{var options = MvcUtilities.GenerateEnumSelectList(typeof(Gender), null);
+                foreach (var option in options)
+                {
+            <option value="@option.Value">@option.Text</option>
+                }
+            }
+        </select>
+
+        <select data-type="@((int)LearningGroupTagType.Grade)" class="dummyGrade"></select>
+        <select data-type="@((int)LearningGroupTagType.Role)" class="dummyRole"></select>
+        <select data-type="@((int)LearningGroupTagType.Individual)" class="dummyIndv"></select>
+        <select data-type="@((int)LearningGroupTagType.Region)" class="dummyRegion"></select>
+        <select class="dummyLearnerGroup" data-type="0"></select>
+    </div>
+</div>
+
+<div id="modalUsers" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width:70%">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Learning Group Users</h4>
+            </div>
+            <div class="modal-body">
+                <h4>
+                    Total Users : <span id="LearningGroupUserCount"></span>
+                </h4>
+                <table id="table_users" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <td>First Name</td>
+                            <td>Last Name</td>
+                            <td>Department</td>
+                            <td>Branch</td>
+                            <td>Region</td>
+                            <td>Grade</td>
+                            <td>Gender</td>
+                        </tr>
+
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section scripts{
+
+    <script src="~/Content/js/datatables.min.js"></script>
+    <script src="~/Content/js/select2.min.js"></script>
+    <script src="~/Content/PageJs/Admin_LearningGroup.js"></script>
+}

@@ -1,0 +1,247 @@
+﻿@model CourseDetailModel
+@{
+    ViewBag.Title = "Course Details";
+    Layout = "~/Areas/Common/Views/Shared/_CommonLayout.cshtml";
+    var courseLMAUrl = Url.Content($"~/course/learn/{Model.Id}/{Model.Slug}");
+    var breadCrumb = Model.TopSectionAd == null ? "/Content/img/course_img.jpg" : Model.TopSectionAd.FileUrl;
+}
+@section head{
+    <link href="~/Content/PageCss/common.css" rel="stylesheet" />
+    <style>
+        .tab .abtn {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            margin-top: 35px;
+            margin-bottom: 35px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 17px;
+            border: 0px solid transparent;
+            color: #fff;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            font-family: 'Ubuntu';
+        }
+    </style>
+}
+
+<div class="wrapper" ng-controller="coursedetails as vm" ng-cloak="">
+    <div class="breadcrum" style="background:url('@breadCrumb') no-repeat center center / cover">
+        <div class="col8">
+            <div class="headcrum">@Model.Name</div>
+            <div class="bodycrum">@Html.Raw(Model.ShortDescription)</div>
+        </div>
+        <div class="col4">
+            <div class="headcrum">@CurrentUser.Function.ToUpper()</div>
+            <div class="bodycrum"><i class="material-icons">room</i> <i>@CurrentUser.BranchName.ToUpper()</i></div>
+            <div class="bodycrum"><i style="font-size: 12px;margin-top: 3px;">Staff ID: </i> <b>@CurrentUser.StaffId</b></div>
+        </div>
+    </div>
+
+    <div class="searchArea">
+        <div class="searchbox white">
+            <form action="/common/course/searchCourse" method="get">
+                <input type="text" placeholder="Search Courses" name="search" />
+                <button type="submit" class="SearchBtn"><i class="material-icons" style="cursor:pointer">search</i></button>
+            </form>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="col9">
+            <div class="tabs">
+                <ul class="tab-links">
+                    <li class="active"><a href="#tab1">Overview</a></li>
+                    <li><a href="#tab2">Instructional Objective</a></li>
+                    <li><a href="#tab3">Curriculum</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="tab1" class="tab active">
+                        <div class="col33">
+                            <div class="coupon" style="width:100%;text-align:center;"><i class="material-icons" style="text-align: center;width: 100%;">hourglass_empty</i></div>
+                            <div class="list" style="width:100%;text-align:center;">
+                                <span>Duration</span>
+                                @if (Model.EstimatedDuration.HasValue) {
+                                    <p>@(Model.EstimatedDuration) Week(s)</p>
+                                }
+                            </div>
+                        </div>
+                        <div class="col33">
+                            <div class="coupon" style="width:100%;text-align:center;"><i class="material-icons" style="text-align: center;width: 100%;">restore</i></div>
+                            <div class="list" style="width:100%;text-align:center;">
+                                <span>@Model.HoursPerWeek hours</span>
+                                <p>per week</p>
+                            </div>
+                        </div>
+                        <div class="col33">
+                            @if (!string.IsNullOrWhiteSpace(Model.DueDate)) {
+                                <div class="coupon" style="width:100%;text-align:center;"><i class="material-icons" style="text-align: center;width: 100%;">event</i></div>
+                                <div class="list" style="width:100%;text-align:center;">
+                                    <span>Due Date:</span>
+                                    <p>@(Model.DueDate)</p>
+                                </div>
+                            }
+                        </div>
+
+                        @if (Model.ModulesCount > 0) {
+                            <a href="@courseLMAUrl" class="btnLarge btnRed abtn"> Start Learning</a>
+                        }
+
+                        <div class="case">
+                            <div class="caseHead">About This course</div>
+                            <div class="caseBody">
+                                @Html.Raw(Model.Description)
+                            </div>
+
+                            <div class="caseHead">Requirement(s)</div>
+                            <div class="caseBody">
+                                @Html.Raw(Model.Overview)
+                            </div>
+                        </div>
+
+                        <div class="caseHead">Reviews </div>
+                        <div class="caseBody">
+                            @*<div class="comment">
+                                <div class="ini">JO</div><div class="offline"></div>
+                                <div class="commenter">Joy Okere</div>	<span>made a comment</span>
+                                <i class="material-icons">thumb_down</i><i class="material-icons blue">thumb_up</i>
+                                <div class="commentTopic">AN AFFECTIVE DILEMMA</div>
+                                <div class="commentBody">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Morbi leo urna molestie at elementum.</div>
+                                <div class="addComment">
+                                    <span class="blue">reply comment</span><i class="material-icons blue">comments</i>
+                                </div>
+                            </div>
+                            <div class="comment">
+                                <div class="ini" style="background: orange">SO</div><div class="online"></div>
+                                <div class="commenter">me</div>	<span>made a comment</span>
+                                <i class="material-icons">thumb_down</i><i class="material-icons blue">thumb_up</i>
+                                <div class="commentBody">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Morbi leo urna molestie at elementum. onsectetur adipiscing elit, sed do eiusmod tempor incid onsectetur adipiscing elit, sed do eiusmod tempor incid</div>
+                                <div class="addComment">
+                                    <span class="blue">reply comment</span><i class="material-icons blue">comments</i>
+                                </div>
+                            </div>
+                            <form>
+                                <textarea name="" id="" cols="30" rows="10" placeholder="Leave a comment..."></textarea>
+                                <a class="btnBlue"><i class="material-icons">comment</i>Post comment</a>
+                            </form>*@
+                        </div>
+
+                    </div>
+
+                    <div id="tab2" class="tab">
+                        <div class="case">
+                            <div class="caseHeader blue center">What will you achieve?</div>
+                            <p class="center">By the end of the course: you'd be able to:</p>
+                            <div class="caseBody">
+                                @Html.Raw(Model.Objectives)
+                            </div>
+                        </div>
+
+                        @if (Model.ModulesCount > 0) {
+                            <a href="@courseLMAUrl" class="btnLarge btnRed abtn"> Start Learning</a>
+                        }
+                    </div>
+
+                    <div id="tab3" class="tab">
+                        <div class="case">
+                            <div class="caseHeader blue center">Course Curriculum</div>
+                            <p class="center">What topics will you cover?</p>
+                            <div ng-if="!vm.modules.length">
+                                <p>No Module Under This Course</p>
+                            </div>
+                            <div class="caseBody" ng-repeat="m in vm.modules">
+                                <div class="curri">
+                                    <div class="curriHead" ng-bind="'Module ' + ($index+1)+ ': ' + m.Name"></div>
+                                    <div class="curriBody">
+                                        @*<span ng-bind="m.Name"></span>*@
+
+                                        <ul class="pin" >
+                                            <li ng-repeat="l in m.Lessons">
+                                                <i class="material-icons" ng-bind="vm.getIco(l.Type)"></i>
+                                                <span style="margin-bottom:0px;" ng-bind="l.Name"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="@courseLMAUrl" class="btnLarge btnRed abtn" ng-if="vm.modules.length > 0"> Start Learning</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Html.Action("employeesidebar", "home")
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script src="~/Content/js/jquery-confirm.js"></script>
+    <script src="~/content/js/angular.min.js"></script>
+    <script src="~/content/js/httpservice.js"></script>
+    <script type="text/javascript">
+        angular.module('sterlinglms', ['requestSvc'])
+            .config(function ($httpProvider) {
+                $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+            }).controller('coursedetails', ['httpRequestSvc', function (http) {
+                var vm = this;
+
+                vm.getCourseModules = function (url, id) {
+                    if (!jQuery.isArray(vm.modules)) {
+                        http.get(url, { id: id }).then(function (response) {
+                            vm.modules = response.Result.Records;
+                        }).catch(function (e) {
+                            ShowNotie(APPVARS.errors[0]);
+                        });
+                    }
+                }
+
+                vm.getIco = function (type) {
+                    
+                    switch (type) {
+                        case 'Video':
+                            return 'video_library';
+                        case 'Text':
+                            return 'description';
+                        case 'Quiz':
+                            return 'playlist_add';
+                        case 'Survey':
+                            return 'mood';
+                        case 'Document':
+                            return 'library_books';
+                        default:
+                            return '';
+                    }
+                }
+
+            }]).directive('lmsLoader', ['$http', function ($http) {
+                return {
+                    restrict: 'A',
+                    link: function (scope, elm, attrs) {
+                        scope.isLoading = function () {
+                            return $http.pendingRequests.length > 0;
+                        };
+
+                        scope.$watch(scope.isLoading, function (v) {
+                            if (v) {
+                                elm.show();
+                            } else {
+                                elm.hide();
+                            }
+                        });
+                    }
+                };
+            }]);
+
+        angular.element(function () {
+            angular.bootstrap(document, ['sterlinglms']);
+        });
+
+        $('#tab3').on('tabbed', function () {
+            var url='@Url.Content("~/api/course/getcoursemodules")'
+            $('#tab3').scope().vm.getCourseModules(url,@Model.Id);
+        });
+    </script>
+}

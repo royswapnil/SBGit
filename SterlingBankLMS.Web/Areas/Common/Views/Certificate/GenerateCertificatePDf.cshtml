@@ -1,0 +1,72 @@
+﻿@model EmployeeCertificateModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    
+</head>
+<body>
+  
+    <img src="~/Content/img/cert.jpg" />
+    <span class="name">@Model.User</span>
+    <span class="course">@Model.Name</span>
+    <span class="location">N/A</span>
+    <span class="date">@Model.DateCompletedFormat</span>
+
+    <style>
+        img {
+            width: 800px;
+            margin-right: 100px;
+            float: left;
+        }
+
+        .name {
+            float: left;
+            font-size: 43px;
+            color: #5465A5FF;
+            width: 800px;
+            text-align: center;
+            font-weight: bold;
+            margin-top: -420px;
+        }
+
+        .course {
+            float: left;
+            font-size: 20px;
+            color: #333;
+            width: 800px;
+            text-align: center;
+            margin-top: -307px;
+            font-weight: bold;
+            font-family: Helvetica;
+            text-transform:uppercase;
+        }
+
+        .location {
+            float: left;
+            font-size: 15px;
+            color: #333;
+            width: 800px;
+            text-align: center;
+            margin-top: -267px;
+        }
+
+        .date {
+            float: left;
+            font-size: 17px;
+            color: #bbb;
+            width: 800px;
+            padding-left: 60px;
+            margin-top: -67px;
+            font-family: Helvetica;
+        }
+    </style>
+
+
+</body>
+</html>
+

@@ -1,0 +1,288 @@
+﻿<emp-header></emp-header>
+<div class="wrapper">
+
+
+    <div class="breadcrum" style="background-image: url('/Content/img/details (1).jpg');">
+        <div class="col8">
+            <div class="headcrum">{{course.CourseName}}</div>
+            <div class="bodycrum">{{course.CourseDescription|slice:0:100}}</div>
+        </div>
+
+        <div class="col4">
+            <div class="headcrum">Customer Service Representative</div>
+            <div class="bodycrum"><i class="material-icons">room</i> <i>Marina, Lagos</i></div>
+            <div class="bodycrum"><i style="font-size: 12px;margin-top: 3px;">Staff ID: </i> <b>001558</b></div>
+        </div>
+    </div>
+
+
+    <div class="searchArea">
+        <div class="searchbox">
+            <input type="text" placeholder="Search Courses" />
+            <i class="material-icons">search</i>
+        </div>
+    </div>
+
+
+    <div class="content">
+        <div class="col9">
+
+
+            <div class="tabs">
+                <ul class="tab-links">
+                    <li class="active"><a href="#tab1">Overview</a></li>
+                    <li><a href="#tab2" id="temp">Instructional Objective</a></li>
+                    <li><a href="#tab3">Curriculum</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="tab1" class="tab active">
+                        <div class="col33">
+                            <div class="coupon"><i class="material-icons">hourglass_empty</i></div>
+                            <div class="list">
+                                <span>Duration</span>
+                                <p>{{course.TimeDuration}}</p>
+                            </div>
+                        </div>
+                        <div class="col33">
+                            <div class="coupon"><i class="material-icons">restore</i></div>
+                            <div class="list">
+                                <span>3 hours</span>
+                                <p>per week</p>
+                            </div>
+                        </div>
+                        <div class="col33">
+                            <div class="coupon"><i class="material-icons">event</i></div>
+                            <div class="list">
+                                <span>Due date:</span>
+                                <p>{{course.DueDate | date:'dd-MM-yyyy'}}</p>
+                            </div>
+                        </div>
+
+                        <button class="btnLarge btnRed" (click)="startLearning()"><a [routerLink]="['/course',course.Id,'module']">Start Learning</a></button>
+
+
+                        <div class="case">
+                            <div class="caseHead">About This course</div>
+                            <div class="caseBody">
+                                {{course.CourseDescription}}
+                            </div>
+
+                            <div class="caseHead">Requirements</div>
+                            <div class="caseBody">
+                                <ul>
+                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt </li>
+                                    <li>Quisque sagittis purus sit amet volutpat consequat mauris nunc.</li>
+                                </ul>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div id="tab2" class="tab">
+                        <div class="case">
+                            <div class="caseHeader blue center">What will you achieve?</div>
+                            <p class="center">By the end of the course: you'd be able to:</p>
+                            <div class="caseBody">
+                                <ul class="pin">
+                                    <li>
+                                        <i class="material-icons">check_box</i>
+                                        <span>Investigate how the aggregate deemed sales price and adjusted Gross up basis are determined. </span>
+                                    </li>
+                                    <li>
+                                        <i class="material-icons">check_box</i>
+                                        <span>Identify the mechanism of an IRC 338(h)10 transaction.</span>
+                                    </li>
+                                    <li>
+                                        <i class="material-icons">check_box</i>
+                                        <span>Investigate how the aggregate deemed sales price and adjusted Gross up basis are determined. </span>
+                                    </li>
+                                    <li>
+                                        <i class="material-icons">check_box</i>
+                                        <span>Identify the mechanism of an IRC 338(h)10 transaction.</span>
+                                    </li>
+                                    <li>
+                                        <i class="material-icons">check_box</i>
+                                        <span>Investigate how the aggregate deemed sales price and adjusted Gross up basis are determined. </span>
+                                    </li>
+                                    <li>
+                                        <i class="material-icons">check_box</i>
+                                        <span>Identify the mechanism of an IRC 338(h)10 transaction.</span>
+                                    </li>
+                                    <li>
+                                        <i class="material-icons">check_box</i>
+                                        <span>Investigate how the aggregate deemed sales price and adjusted Gross up basis are determined. </span>
+                                    </li>
+                                    <li>
+                                        <i class="material-icons">check_box</i>
+                                        <span>Identify the mechanism of an IRC 338(h)10 transaction.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                        <button class="btnLarge btnRed" (click)="startLearning()"><a [routerLink]="['/course',course.Id,'module']">Start Learning</a></button>
+
+                    </div>
+
+                    <div id="tab3" class="tab">
+                        <div class="case">
+                            <div class="caseHeader blue center">Course Curriculum</div>
+                            <p class="center">What topics will you cover?</p>
+                            <div class="caseBody">
+                                <div class="curri" *ngFor="let module of course.Modules; let x=index">
+                                    <div class="curriBody">Module {{x+1}}: &emsp;{{module.ModuleName}}</div>
+                                    
+                                        <div class="curriHead" *ngFor="let topic of module.Topics">
+                                            <ul>
+                                                <li><span>{{topic.TopicName}}</span></li>
+                                            </ul>                                            
+                                        </div>                                  
+                                </div>
+                               
+                            </div>
+
+                            <button class="btnLarge btnRed" (click)="startLearning()"><a [routerLink]="['/course',course.Id,'module']">Start Learning</a></button>
+
+                        </div>
+
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
+
+
+
+            <div class="caseHead">Share your views below</div>
+            <div class="caseBody">
+
+                <div class="comment">
+                    <div class="ini">JO</div>
+                    <div class="commenter">Joy Okere</div>
+                    <span>made a comment</span>
+                    <i class="material-icons">thumb_down</i><i class="material-icons blue">thumb_up</i>
+                    <div class="commentTopic">AN AFFECTIVE DILEMMA</div>
+                    <div class="commentBody">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Morbi leo urna molestie at elementum.
+                    </div>
+                    <div class="addComment">
+                        <span class="blue">reply comment</span><i class="material-icons blue">comments</i>
+                    </div>
+                </div>
+
+
+
+                <div class="comment">
+                    <div class="ini" style="background: orange">SO</div>
+                    <div class="commenter">me</div>
+                    <span>made a comment</span>
+                    <i class="material-icons">thumb_down</i><i class="material-icons blue">thumb_up</i>
+                    <div class="commentBody">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Morbi leo urna molestie at elementum. onsectetur adipiscing elit, sed do eiusmod tempor incid onsectetur adipiscing elit, sed do eiusmod tempor incid
+                    </div>
+                    <div class="addComment">
+                        <span class="blue">reply comment</span><i class="material-icons blue">comments</i>
+                    </div>
+                </div>
+
+
+                <!--<form [formGroup]="commentForm" (onSubmit)="PostComment()">
+                    <textarea name="" id="" cols="30" rows="10" placeholder="Leave a comment..." formControlName="comment"></textarea>
+                    <a class="btnBlue"><i class="material-icons">comment</i>Post comment</a>
+                </form>-->
+
+
+
+            </div>
+
+
+        </div>
+        <div class="col2">
+
+
+            <div class="pod">
+                <div class="line borderBottomGrey">
+                    Coming Up  <button class="btnBlue"><i class="material-icons">event</i> <span>View Calendar</span></button>
+                </div>
+
+                <div class="podBlock">
+                    <div class="podItem">
+                        <div class="coupon"><i class="material-icons blue">event</i></div>
+                        <div class="list">
+                            <span class="blue">General Staff Shop</span>
+                            <i>Jan 10, 2018</i>
+                        </div>
+                    </div>
+
+                    <div class="podItem">
+                        <div class="coupon"><i class="material-icons blue">event</i></div>
+                        <div class="list">
+                            <span class="blue">Live Podcast</span>
+                            <i>Jan 10, 2018</i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="space"></div>
+            <div class="pod">
+                <div class="line borderBottomGrey">Quick Notification</div>
+
+
+                <div class="podBlock">
+                    <div class="podItem">
+                        <div class="coupon"><span class="redBackground">05</span></div>
+                        <div class="list">
+                            <span>Courses are overdue</span>
+                        </div>
+                    </div>
+
+                    <div class="podItem">
+                        <div class="coupon"><span class="yellowBackground">15</span></div>
+                        <div class="list">
+                            <span>Courses are going to expire in the next 30 days.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="space"></div>
+
+
+            <div class="pod">
+                <div class="line borderBottomGrey">Awards/Certificates</div>
+
+
+                <div class="podBlock">
+                    <div class="podItem">
+                        <div class="half">
+                            <div class="blue big">CERTIFICATES </div><b>(3)</b>
+                            <p>Your latest certificates</p>
+                            <button class="btnBlue">View all</button>
+                        </div>
+
+                        <div class="half">
+                            <img src="/Content/img/c1.jpg" alt="">
+                            <img src="/Content/img/c2.jpg" alt="">
+                            <img src="/Content/img/c3.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+<emp-footer></emp-footer>

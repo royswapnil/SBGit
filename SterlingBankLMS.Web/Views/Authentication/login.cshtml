@@ -1,0 +1,50 @@
+﻿@model LoginModel
+@{
+    ViewBag.Title = "Sign in";
+}
+
+<div class="live">
+    <div class="double">
+        <div class="welcome">
+            <div class="up">Welcome to <b>Sterling Bank</b></div>
+            <div class="down">Learning Management System</div>
+        </div>
+    </div>
+    <div class="double2">
+        <div class="loginBox">
+            <div class="loginTop">
+                <div class="nick">
+                    <i class="material-icons">person</i><span>Sign in</span>
+                </div>
+            </div>
+
+            @if (ViewData.ModelState.Any(x => x.Value.Errors.Any())) {
+                <div class="inputwrapper login-alert" style="display:block">
+                    <div class="alert alert-error" style="color:#ea7e7e">
+                        @Html.ValidationSummary(false)
+                    </div>
+                </div>
+            }
+
+            <form method="post" class="loginForm">
+                <label for="Email">Email address</label>
+                <input type="email" name="Email" value="@(Model?.Email)"/>
+                <label for="Password">Password</label>
+                <input type="password" name="Password"/>
+                <input type="hidden" name="RememberMe" value="True" />
+                @*<h4>
+                    @Html.CheckBoxFor(x => x.RememberMe) &emsp;Remember me
+                </h4>*@
+
+                <input type="submit" value="LOG IN">
+
+                <h5><a href="~/authentication/forgotpassword">Forgot your Password?</a></h5>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="copy">
+        &copy;2017 All right reserved | Sterling bank Plc - LEARNING MANAGEMENT SYSTEM
+    </div>
+</div>

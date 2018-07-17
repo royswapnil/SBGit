@@ -1,0 +1,142 @@
+﻿
+@{
+    ViewBag.Title = "Create Role";
+    Layout = "~/Areas/Technology/Views/Shared/_TechLayout.cshtml";
+}
+
+<style>
+    .tanBody .radio {
+        font-size: 13px;
+        margin-top: -2px;
+    }
+
+    .row {
+        margin-bottom: 15px;
+    }
+</style>
+<div class="banner1 bkRed">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>User Management</span>
+</div>
+<div class="content1">
+
+
+    <div class="boxHead1">
+        <div class="boxHeader1 bDSkyBlue">Create Role</div>
+    </div>
+
+    <div class="boxBody1">
+
+        <div class="profile">
+            <div class="col-sm-10 col-sm-offset-1">
+                <span class="hint">Create a new role on the LMS</span>
+            </div>
+
+            <div class="col-sm-10 col-sm-offset-1">
+
+                <div class="row">
+                    <div class="form-group">
+                        <label class="col-sm-2">Name:</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="RoleName" class="form-control" id="RoleName">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <label class="col-sm-2">Permisions:</label>
+                        <div class="col-sm-8">
+                            @{
+                                List<SterlingBankLMS.Web.ViewModels.PermissionModel> permission = ViewBag.PermissionName;
+                                foreach (var item in permission)
+                                {
+                                    <div class="input check" data-id="@item.Id">
+                                        <div class="leftOff">
+
+                                            <label class="containers">
+                                                @item.PermissionName
+                                                <input type="checkbox" name="PermissionName" id="PermissionName" value="@item.Id">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="underlineBtn">
+            <button class="nextBtn btnMedium bkSkyBlue savebtn" type="submit">Save Role</button>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('.savebtn').on('click', function (e) {
+                var $button = $(this);
+                var prev = $button.html();
+                $button.html('Processing <i class="fa fa-circle-o-notch fa-spin nofloat"></i>');
+                $button.attr('disabled', 'disabled');
+
+                if (!$('.check input:checkbox:checked').length) {
+                    ShowNotie({ HasError: true, Message: "No Permission selected" });
+                    $button.html(prev);
+                    $button.removeAttr('disabled');
+                    return;
+                }
+
+                if ($('#RoleName').val() === "") {
+                    ShowNotie({ HasError: true, Message: "Please enter a role name" });
+                    $button.html(prev);
+                    $button.removeAttr('disabled');
+                    return;
+                }
+
+                var roleName = $('#RoleName').val();
+                var permissions = [];
+                $('.check').each(function (i, item) {
+                    var obj = new Object();
+                    obj.Id = $(item).attr('data-id');
+                    obj.IsPermissionName = $(item).find('input[name="PermissionName"]').is(':checked');
+
+                    permissions.push(obj);
+                    console.log(obj);
+                });
+                $.ajax({
+                    url: "/Technology/UserRoleMgt/SaveRolePermissions",
+                    type: "POST",
+                    data: { permissions: permissions, roleName: roleName },
+                    success: function (data) {
+                        if (!data.HasError) {
+                            ShowNotie(data);
+                            $('#RoleName').val('');
+                            $button.html('').html('Save Role');
+                            $button.attr('disabled', false);
+                        }
+                        else {
+                            ShowNotie(data);
+                            $button.html('').html('Save Role');
+                            $button.attr('disabled', false);
+                        }
+                        
+                    }
+                })
+            })
+
+        })
+    </script>
+}
+

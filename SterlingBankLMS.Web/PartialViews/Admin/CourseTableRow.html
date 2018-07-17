@@ -1,0 +1,30 @@
+﻿
+<script id="CourseTableRow" type="x-tmpl-mustache">
+    {{#array}}
+    <tr data-id="{{Id}}">
+        <td>{{Name}}<br /><br></td>
+        <td>{{LearningAreaName}}</td>
+        <td>{{ModuleCount}}</td>
+        <td>{{DueDateFormat}}</td>
+        <!--<td>{{#PassGrade}}{{PassGrade}}%{{/PassGrade}}{{^PassGrade}}None{{/PassGrade}}</td>
+        <td>{{CourseRetakeCount}}</td>-->
+
+        <td class="action-buttons">
+            <button class="table-edit btnSmaller btnBlue" href="javascript:;"> <i class="fa fa-edit table-icon" style=""></i> Edit	</button>
+
+            <button class="table-delete btnSmaller btnRed" href="javascript:;"><i class="fa fa-trash table-icon" style=""></i> <span class="deleteLA">Delete</span></button>
+        </td>
+
+    </tr>
+
+    {{/array}}
+
+    {{^array}}
+    <tr class="empty">
+        <td colspan="7">
+            No data found. Click Add New to create a new course.
+        </td>
+    </tr>
+    {{/array}}
+</script>
+

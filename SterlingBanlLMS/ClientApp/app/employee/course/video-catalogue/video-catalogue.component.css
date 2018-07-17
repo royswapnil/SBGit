@@ -1,0 +1,25 @@
+﻿.pageTab:nth-child(4) {
+    border: 2px solid #666;
+}
+
+    .pageTab:nth-child(4) .tabing {
+        background: #961c1d;
+    }
+
+@media(max-width: 500px) {
+    .pageTab:nth-child(4) {
+        border: 0px solid transparent;
+    }
+
+        .pageTab:nth-child(4) .tabing {
+            background: transparent;
+        }
+}
+
+.col2 {
+    display: none;
+}
+
+.searchArea {
+    background: #0a9cb7;
+}

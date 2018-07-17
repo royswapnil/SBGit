@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "Manage Banners";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+@model ManagePageModel
+
+<div class="banner1 bkSkyBlue">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>Manage Advert</span>
+</div>
+
+<div class="content1">
+    <div class="boxHead1" style="border-bottom:none">
+
+        <button style="margin-bottom: 10px; float: left;" class="btn btn-success addNew">
+            Add New <i class="fa fa-plus"></i>
+        </button>
+
+        <button class="btn bkSkyBlue viewManagePanel" style="margin-bottom: 10px;float: right;@(Model.New ? Html.Raw("display:none"): Html.Raw(""))">
+            Manage Banners <i class="fa fa-cogs"></i>
+        </button>
+        <button class="btn bkPurple viewListPanel" style="margin-bottom: 10px;float: right;@(Model.New ? Html.Raw(""):Html.Raw("display:none"))">
+            View Banners <i class="fa fa-tasks"></i>
+        </button>
+    </div>
+
+    <div class="boxBody1" style="padding:0">
+        <div id="listPanel" style="width:100%;@(Model.New ? Html.Raw("display:none") : Html.Raw(""))">
+            <div class="tableRanch">
+                <table id="bannerTable">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Size</th>
+                            <th>Banner</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tr class="empty">
+                        <td colspan="4">
+                            Fetching Data <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+
+        <div id="managePanel" style="margin-top: 20px;width:100%;@(Model.New ? Html.Raw(""): Html.Raw("display:none"))">
+            <div class="boxHead1" style="margin-bottom:30px">
+                <div class="boxHeader1 bDGreen">
+                    Manage Banners
+                </div>
+            </div>
+
+            <form id="BannerForm" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-sm-10 col-sm-offset-1">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="uploadBox mediaUpload content1" style="display:none;padding:0;margin-bottom:20px">
+                                    <label style="margin:10px 0;display:block">Preview File</label>
+                                    <img id="PreviewFile" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Title</label>
+                                    <input name="Title" id="AdvertTitle" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Upload File</label>
+                                    <small><em class="red">(only image file types allowed)</em></small>
+                                    <input type="file" class="form-control" name="ImageUpload" id="BannerImageUpload" placeholder="">
+                                </div>
+                               
+                            </div>
+
+                        </div>
+
+                        <div>
+
+
+                        </div>
+
+                        <div class="underlineBtn">
+                            <button type="submit" id="AddBanner" class="btn btn-success btn-lg nofloat">Add Banner</button>
+                            <input name="Id" id="BannerID" type="hidden" value="0" />
+                        </div>
+
+
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+
+
+
+    </div>
+
+</div>
+
+
+
+
+
+
+@section Scripts{
+    <script src="~/Content/js/jquery.validate.min.js"></script>
+    <script src="~/Content/js/additional-methods.min.js"></script>
+    <script src="~/Content/js/CustomValidation.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script src="~/Content/js/datatables.min.js"></script>
+    <script src="~/Content/PageJs/Admin_Banner.js"></script>
+    <script src="~/Content/js/bootstrap-datepicker.min.js"></script>
+    <script>
+    </script>
+}

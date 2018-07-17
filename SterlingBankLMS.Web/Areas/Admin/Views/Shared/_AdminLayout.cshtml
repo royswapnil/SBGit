@@ -1,0 +1,459 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>@ViewBag.Title - Learning Management System</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/l&d.css" rel="stylesheet" />
+    <link href="~/Content/css/summernote.css" rel="stylesheet" />
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/css/jquery-confirm.css" rel="stylesheet" />
+    <script src="~/Content/js/jquery.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.2.3.min.js"></script>
+    <script src="~/signalr/Hubs/"></script>
+
+    @RenderSection("head", required: false)
+
+    <style>
+        ul, ol {
+            margin: 0;
+            padding: 0
+        }
+
+        .menuTab1 ul li {
+            width: 100%;
+            list-style: none;
+        }
+
+        .menuTab1 li.link-active {
+            background: #AB192D;
+        }
+    </style>
+</head>
+
+<body>
+
+    @*<div class="lms-loader" data-lms-loader="" style="display:none">
+            <h2 class="animated infinite fadeOut center">Please wait...</h2>
+        </div>*@
+    <!-- Messages Popup -->
+    <div class="msgBox popBox">
+        <div class="hD">Messages</div>
+        <div class="bD">
+        </div>
+
+        <a class="eD" href="#">
+            View All Messages
+        </a>
+    </div>
+    <!-- end of Messages Popup -->
+    <!-- Notification Popup -->
+    @*<div class="notyBox popBox" >
+            <div class="hD">Notification</div>
+            <div class="bD">
+
+                <!-- INfo Tab -->
+                <div class="infoTab">
+                    <a href="#">
+                        <p>You have just <b>3 days</b> to complete your <b>Employment Changes in Tech</b> Course</p>
+                    </a>
+                    <div class="infoAct">View</div>
+                </div>
+                <!-- end of InfoTab -->
+            </div>
+            <a class="eD" href="#">
+                View All Notifications
+            </a>
+        </div>*@
+    <div class="notyBox popBox" id="divinfoTab"></div>
+
+    <!-- end of Notification Popup -->
+    <!-- profile box -->
+
+    <div class="probBox">
+        <a href="~/common/profile">
+            <span class="probTab">Profile</span>
+        </a>
+
+        <a href="javascript:lo('lf');">
+            <span class="probTab">Logout</span>
+        </a>
+        <form id="lf" action="~/authentication/logout" method="post" style="display:none">
+            @Html.AntiForgeryToken()
+        </form>
+        <script>function lo(e) { document.getElementById(e).submit(); }</script>
+    </div>
+
+    <!-- end of profile box -->
+
+
+    <header class="second">
+        <i class="material-icons menuBtn1">menu</i>
+        <a href="~/" title="Dashboard">
+            <img src="~/Content/img/retro.png" />
+            <img src="~/Content/img/logo.png" class="marginImg" />
+        </a>
+        <ul>
+            @*<li class="msg">
+                    <i class="material-icons">email</i><span class="redBackground">2</span>
+                </li>*@
+            <li class="noty" id="testnf"><i class="material-icons" id="imgtestnf">notifications_none</i><span id="notiCount"></span></li>
+            <li class="user">
+                <i class="material-icons">person</i>
+                <h6>Welcome <b>@CurrentUser.FirstName, @CurrentUser.LastName</b></h6>  <i class="material-icons">arrow_drop_down</i>
+            </li>
+        </ul>
+    </header>
+
+    <div class="menuTab1">
+        <ul class="loop">
+
+            <li class="pageTab1">
+                <a href="~/Admin/ManageCourse">
+                    <i class="material-icons">library_books</i>
+                    <span>Manage Course</span>
+                </a>
+            </li>
+
+            <li class="pageTab1">
+                <a href="~/Admin/LearningGroup">
+                    <i class="material-icons">group</i>
+                    <span>Learning Groups</span>
+                </a>
+            </li>
+
+            <a href="javascript:;">
+                <li class="pageTab1 fallDown">
+
+                    <i class="material-icons">content_copy</i>
+                    <span>Examination <i class="material-icons" style="float: right;">arrow_drop_down</i></span>
+
+                    <ul>
+
+                        <li><a href="@Url.Action("","Examination",new { area="Admin"})"><i class="material-icons">dvr</i><span>View Examination</span></a></li>
+
+                        <li><a href="@Url.Action("AddExam","Examination",new { area="Admin"})"><i class="material-icons">add_box</i><span>Add New</span></a></li>
+
+                        <li><a href="@Url.Action("Assign","Examination",new { area="Admin"})"><i class="material-icons">swap_horiz</i><span>Assign Examination</span></a></li>
+
+                    </ul>
+
+                </li>
+            </a>
+
+
+
+            <a href="javascript:;">
+                <li class="pageTab1 fallDown">
+                    <i class="material-icons">payment</i>
+                    <span>Survey / Feedback</span>
+
+                    <ul>
+                        <li><a href="@Url.Action("Template","Survey",new { area="Admin"})"><i class="material-icons">payment</i><span>Templates</span></a></li>
+
+                        <li><a href="@Url.Action("AddTemplate","Survey",new { area="Admin"})"><i class="material-icons">payment</i><span>New Template</span></a></li>
+
+                        <li><a href="@Url.Action("","Survey",new { area="Admin"})"><i class="material-icons">payment</i><span>View Surveys</span></a></li>
+
+                        <li><a href="@Url.Action("Add","Survey",new { area="Admin"})"><i class="material-icons">add_box</i><span>Create New Survey</span></a></li>
+
+                        <li><a href="@Url.Action("Assign","Survey",new { area="Admin"})"><i class="material-icons">swap_horiz</i><span>Assign Surveys</span></a></li>
+                    </ul>
+
+                </li>
+            </a>
+
+
+            <a href="javascript:;">
+                <li class="pageTab1 fallDown">
+                    <i class="material-icons">event</i>
+                    <span>Training Management <i class="material-icons" style="float: right;">arrow_drop_down</i></span>
+                    <ul>
+                        <li><a href="@Url.Action("ListTraining","ManageTraining",new { area="Admin"})"><i class="material-icons">dvr</i><span>All Training</span></a></li>
+
+                        <li><a href="@Url.Action("NewTraining","ManageTraining",new { area="Admin"})"><i class="material-icons">add_box</i><span>Add New</span></a></li>
+                        <li><a href="~/Admin/ManageTraining/TrainingBulkUpload"><i class="material-icons">file_upload</i><span>Bulk Training Upload</span></a></li>
+
+                        <li><a href="@Url.Action("AssignTraining","ManageTraining",new { area="Admin"})"><i class="material-icons">link</i><span>Assign Training</span></a></li>
+
+                        <li><a href="@Url.Action("TrainingRequest","ManageTraining",new { area="Admin"})"><i class="material-icons">swap_horiz</i><span>Training Request</span></a></li>
+
+                        <li><a href="@Url.Action("Calendar","ManageTraining",new { area="Admin"})"><i class="material-icons">event</i><span>Training Calendar</span></a></li>
+
+                        <li><a href="@Url.Action("TrainingBudget","ManageTraining",new { area="Admin"})"><i class="material-icons">attach_money</i><span>Training Budget</span></a></li>
+                        <li><a href="@Url.Action("ListTrainingVideo","ManageTraining",new { area="Admin"})"><i class="material-icons">video_library</i><span>Training Video</span></a></li>
+                        <li><a href="@Url.Action("LiveTraining","ManageTraining",new { area="Admin"})"><i class="material-icons"><i class="material-icons">live_tv</i></i><span>Live Classroom</span></a></li>
+                    </ul>
+                </li>
+            </a>
+
+            <li class="pageTab1">
+                <a href="~/Admin/employeerecords/listemployees">
+                    <i class="material-icons">folder</i>
+                    <span>Employee Records</span>
+                </a>
+            </li>
+
+            <li class="pageTab1">
+                <a href="@Url.Action("","Notification",new { area="Admin"})">
+                    <i class="material-icons">warning</i><span>Notification settings</span>
+                </a>
+
+            </li>
+
+
+            <a href="javascript:;">
+                <li class="pageTab1 fallDown">
+                    <i class="material-icons">work</i>
+                    <span>Advert Management <i class="material-icons" style="float: right;">arrow_drop_down</i></span>
+
+                    <ul>
+                        <li><a href="@Url.Action("index","Adverts",new { area="Admin"})"><i class="material-icons">image</i><span>All Adverts</span></a></li>
+
+                        <li><a href="@Url.Action("AddNew","Adverts",new { area="Admin"})"><i class="material-icons">add_box</i><span>Add New Advert</span></a></li>
+
+                        <li><a href="@Url.Action("Banner","Adverts",new { area="Admin"})"><i class="material-icons">add_box</i><span>Banners</span></a></li>
+                    </ul>
+
+                </li>
+            </a>
+
+
+            <a href="javascript:;">
+                <li class="pageTab1 fallDown">
+                    <i class="material-icons">settings</i>
+                    <span>Support Center <i class="material-icons" style="float: right;">arrow_drop_down</i></span>
+                    <ul>
+                        <li><a href="@Url.Action("Index","FAQ",new { area="Admin"})"><i class="material-icons">language</i><span>Manage FAQ's</span></a></li>
+
+                        <li><a href="@Url.Action("Dashboard","SupportManagement",new { area="Admin"})"><i class="material-icons">dashboard</i><span>Dashboard</span></a></li>
+
+                        <li><a href="@Url.Action("NewMessage","SupportManagement",new { area="Admin"})"><i class="material-icons">comment</i><span>New Message</span></a></li>
+
+                        <li><a href="@Url.Action("Ticket","SupportManagement", new { area="Admin"})"><i class="material-icons">mail</i><span>Tickets <code id="ticketcount"></code></span></a></li>
+                    </ul>
+                </li>
+            </a>
+
+            <a href="javascript:;">
+                <li class="pageTab1 fallDown">
+                    <i class="material-icons">list</i>
+                    <span>Reports <i class="material-icons" style="float: right;">arrow_drop_down</i></span>
+
+
+                    <ul>
+                        <li><a href="@Url.Action("GenerateReport","ReportManagement",new { area="Admin"})"><i class="material-icons">add_box</i><span>Generate Report</span></a></li>
+
+                        <li><a href="@Url.Action("NewReport","ReportManagement",new { area="Admin"})"><i class="material-icons">setting</i><span>Configure Report</span></a></li>
+
+                        <li><a href="@Url.Action("AllReports","ReportManagement",new { area="Admin"})"><i class="material-icons">list</i><span>Report list</span></a></li>
+                        <li><a href="@Url.Action("UserCourseProgress","ReportManagement",new { area="Admin"})"><i class="material-icons">list</i><span>User Course Progress</span></a></li>
+                        <li><a href="@Url.Action("UserExamProgress","ReportManagement",new { area="Admin"})"><i class="material-icons">list</i><span>User Examination Progress</span></a></li>
+                    </ul>
+                </li>
+            </a>
+
+
+            <li class="pageTab1">
+                <a href="@Url.Action("AuditTrail","ReportManagement",new { area="Admin"})">
+                    <i class="material-icons">warning</i><span>Audit</span>
+                </a>
+
+            </li>
+            <li class="pageTab1">
+                <a href="@Url.Action("ApproveComments","ReportManagement",new { area="Admin"})">
+                    <i class="material-icons">warning</i><span>Approve Comments</span>
+                </a>
+
+            </li>
+            @*<a href="javascript:;">
+                    <li class="pageTab1 fallDown">
+                        <i class="material-icons">account_balance</i>
+                        <span>Organization <i class="material-icons" style="float: right;">arrow_drop_down</i></span>
+
+
+                        <ul>
+                            <li><a href="@Url.Action("AllOrganization","OrganizationManagement",new { area="Admin"})"><i class="material-icons">list</i><span>All Organization</span></a></li>
+
+                        </ul>
+                    </li>
+                </a>
+
+
+
+
+
+
+                <a href="javascript:;">
+                    <li class="pageTab1 fallDown">
+                        <i class="material-icons">group</i>
+                        <span>User Management <i class="material-icons" style="float: right;">arrow_drop_down</i></span>
+                        <ul>
+
+                            <li><a href="@Url.Action("AllUsers","UserManagement", new { area="Admin"})"><i class="material-icons">group</i><span>All Users</span></a></li>
+
+                            <li><a href="#" class="addNewUser"><i class="material-icons">add_box</i><span>Add New User</span></a></li>
+
+                            <li><a href="@Url.Action("CreateRole","UserManagement", new { area="Admin"})"><i class="material-icons">person</i><span>Create Role</span></a></li>
+
+                        </ul>
+                    </li>
+                </a>
+
+
+
+
+
+
+
+
+                <li class="pageTab1">
+                    <a href="~/Admin/Forum">
+                        <i class="material-icons">wifi</i>
+                        <span>Discussion Management</span>
+                    </a>
+
+                </li>*@
+        </ul>
+
+    </div>
+
+    <div class="pallete1">
+
+        @RenderBody()
+    </div>
+
+
+    <footer>
+        <div class="foot">&copy;<span id="CopyrightYear"></span> - LEARNING MANAGEMENT SYSTEM</div>
+        @*<div class="power"><img src="~/Content/img/sbsc.png" alt=""><span>Powered by: </span></div>*@
+    </footer>
+
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script src="~/Content/js/summernote.min.js"></script>
+    <script src="~/Content/js/main.js"></script>
+    <script src="~/Content/js/mustache.js"></script>
+    <script src="~/Content/js/moment.min.js"></script>
+    <script src="~/Content/js/jquery-confirm.js"></script>
+
+
+    <div id="PartialTemplates">
+        <script id="ResponseMessageTemplate" type="x-tmpl-mustache">
+            <div class="messageText {{#HasError}}error{{/HasError}} {{^HasError}}success{{/HasError}}">
+                <i class="fa {{#HasError}}fa-times{{/HasError}} {{^HasError}}fa-check-circle{{/HasError}}"></i>
+                <p>{{Message}}</p>
+            </div>
+
+        </script>
+    </div>
+    <script>
+        $(document).ready(function () {
+
+
+
+
+            $('.menuTab1 .pageTab1.fallDown').click(function () {
+                $('ul', this).toggleClass('dropped');
+            });
+
+
+
+
+
+            var ticketcount = $('#ticketcount');
+            $.ajax({
+                url: "@Url.Action("NewTicketCount","SupportManagement",new { area="Admin"})",
+                type: "GET",
+                success: function (data) {
+                    ticketcount.html(data);
+                }
+            });
+
+            $('#notiCount').css('display', 'none');
+            $('#imgtestnf').click(function (e) {
+                    var divinfoTab = $('#divinfoTab');
+                    if ($("#divinfoTab").is(':hidden')) {
+                        $('#divinfoTab').show();
+                    } else {
+                        updateData();
+                        $('#divinfoTab').hide();
+                    }
+            });
+
+            $('#notiCount').click(function (e) {
+                if ($("#divinfoTab").is(':hidden')) {
+                    $('#divinfoTab').show();
+                } else {
+                    updateData();
+                    $('#divinfoTab').hide();
+                }
+            });
+
+
+            var hub = $.connection.sbLMSHub;
+            hub.client.displayStatus = function () {
+                getData();
+            };
+
+
+                //start
+                $.connection.hub.start();
+                getData();
+
+                function getData() {
+                    var divinfoTab = $('#divinfoTab');
+
+                    $.ajax({
+                        url: '../Home/GetNotification',
+                        type: 'POST',
+                        data: "{'userId':'" + @CurrentUser.Id + "'}",
+                        datatype: 'json',
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            data = $.parseJSON(data);
+                            var notification = '';
+                            if (data.length > 0) {
+                                divinfoTab.empty();
+                                $('#notiCount').text(data.length);
+                                var snotification = '<div class="hD">Notification</div>';
+                                divinfoTab.append(snotification);
+                                for (var i = 0; i < data.length; i++) {
+                                    var notification = '<div class="bD"><div class="infoTab">'
+                                        + data[i].Message +
+                                        '</div></div>'
+                                    divinfoTab.append(notification);
+                                    $('#notiCount').css('display', 'block');
+                                }
+                            }
+                        }
+                    });
+                }
+
+                function updateData() {
+                    var divinfoTab = $('#divinfoTab');
+                    $.ajax({
+                        url: '../Home/UpdateNotification',
+                        type: 'POST',
+                        data: "{'userId':'" + @CurrentUser.Id + "'}",
+                        datatype: 'json',
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            data = $.parseJSON(data);
+                            divinfoTab.empty();
+                            $('#notiCount').text('');
+                            $('#notiCount').css('display', 'none');
+                        }
+                    });
+                }
+
+        })
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

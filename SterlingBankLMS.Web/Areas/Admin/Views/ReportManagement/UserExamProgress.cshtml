@@ -1,0 +1,156 @@
+﻿
+@{
+    ViewBag.Title = "UserExamProgress";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="banner1 bkPurple">
+    <i class="material-icons menuBtn1">menu</i>
+    <span class="changetext">View Course Progress</span>
+</div>
+
+
+<div class="content1">
+    <div class="boxBody1" style="padding:0">
+
+        <div id="BudgetTablePanel">
+
+            <div class="tableRanch">
+
+                <table id="ProgressTable" class="courselist">
+                    <thead>
+                        <tr>
+                            <td>Employee</td>
+                            <td>Examination Name</td>
+                            <td>Start Date</td>
+                            <td>Avg. Score</td>
+                            <td>Highest Score</td>
+                            <td>Pass Mark</td>
+                            <td>Attempts</td>
+                            <td>Action</td>
+                        </tr>
+                    </thead>
+                    <tr class="empty">
+                        <td colspan="8">
+                            Fetching Data <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+@section Scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Content/js/additional-methods.min.js"></script>
+    <script src="~/Content/js/CustomValidation.js"></script>
+    <script src="~/Content/js/datatables.min.js"></script>
+    <script src="~/Content/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            //Load the Budget table
+
+
+            var jqTable = $('#ProgressTable').DataTable({
+                dom: '<"tanHead tanHP"f>rt<"counter"lip>',
+                "autoWidth": false,
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    "url": '/api/ReportManagement/getemployeeexamprogress',
+                    "type": "GET"
+                },
+                'language': {
+                    'search': '',
+                    'searchPlaceholder': 'Search name, group, course...'
+                },
+                "fnDrawCallback": function (oSettings) {
+                },
+                "order": [],
+                columns: [
+                    {
+                        bSortable: true,
+                        "render": function (d, i, data) {
+
+                            return data.NameFormat;
+                        }
+                    },
+                    {
+                        bSortable: true,
+                        "render": function (d, i, data) {
+
+                            return data.ExamName;
+                        }
+                    },
+                    {
+                        "render": function (d, r, data) {
+                            return data.StartDateFormat;
+                        }
+                    },
+                    {
+                        "render": function (d, i, data) {
+                            return data.AverageScore;
+                        }
+                    },
+
+                    {
+                        "render": function (d, i, data) {
+                            return data.HighestScore;
+                        }
+                    },
+
+                    {
+                        bSortable: true,
+                        "render": function (d, r, data) {
+                            if (data.PassGrade === null)
+                                return "N/A";
+                            else
+                                return data.PassGrade;
+                        }
+                    },
+                    {
+                        bSortable: true,
+                        "render": function (d, r, data) {
+                            if (data.Attempts === null)
+                                return "N/A";
+                            else
+                                return data.Attempts;
+                        }
+                    },
+
+                    {
+                        bSortable: false,
+                        className: "action-buttons",
+                        "render": function (d, i, data) {
+
+                            var dropdown = '<div class="dropdown">' +
+                                '<button class="btn btnSmaller  btnBlue dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                                ' Actions <i class="fa fa-caret-down"></i>' +
+                                '</button>' +
+                                '<div class="dropdown-menu pull-right" aria-labelledby="dropdownMenuButton" > ' +
+                                ' <a class="table-view dropdown-item purple"' + data.Id + '"><i class="fa fa-eye table-icon" ></i>  View Quiz Attempts</a > ' +
+                                ' </div> ' +
+                                ' </div>'
+                            return dropdown +
+                                '<input type="hidden" value="' + data.Id + '"/>';
+
+                        }
+                    }
+                ]
+            });
+
+            jqTable.on('draw', function () {
+
+                $('.tableRanch').find('input[type="search"]').addClass('searchT');
+                // reset();
+            });
+        });
+    </script>
+}
+

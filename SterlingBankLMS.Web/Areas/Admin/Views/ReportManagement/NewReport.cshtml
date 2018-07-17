@@ -1,0 +1,1124 @@
+﻿@using SterlingBankLMS.Core.DTO;
+@{
+    ViewBag.Title = "Report";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var reporttext = "";
+    if (ViewBag.ReportName != null)
+    {
+        reporttext = ViewBag.ReportName;
+    }
+    else
+    {
+        reporttext = "";
+    }
+
+    var currentculture = "";
+    if (ViewBag.CurrentCulture != null)
+    {
+        currentculture = ViewBag.CurrentCulture;
+    }
+
+}
+@model ReportDto
+
+<div class="banner1 bkPurple">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>Reports</span>
+</div>
+<link href="~/Content/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+<link href="~/Content/css/bootstrap-timepicker.css" rel="stylesheet" />
+<link href="~/Content/css/select2.min.css" rel="stylesheet" />
+<style>
+    .formArea textarea {
+        background: #efefef;
+        border: none;
+        padding: 10px;
+        height: 70px;
+    }
+
+    .prop {
+        float: left;
+        width: 50%;
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .val {
+        float: left;
+        width: 50%;
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+
+    a.toggle {
+        float: left;
+        padding: 10px;
+        font-size: 13px;
+        color: #444;
+        background: #ddd;
+        margin-right: 20px;
+        border-radius: 15px;
+        webkit-border-radius: 15px;
+        font-weight: bold;
+        margin-bottom: 40px;
+    }
+
+        a.toggle:hover, a.toggle.active {
+            background: #0cdae8;
+            color: #fff;
+        }
+
+    table.orga {
+        width: 100%;
+        font-size: 13px;
+        float: left;
+    }
+
+    .orga thead {
+        width: 100%;
+        color: #0094dc;
+        font-weight: bold;
+        font-size: 13px;
+        padding-bottom: 3px;
+        padding-top: 3px;
+        margin-bottom: 5px;
+        background: #fbfbfb;
+        border-top: 0px solid transparent;
+        float: left;
+    }
+
+    .orga tbody {
+        width: 100%;
+        float: left;
+    }
+
+    .orga tr {
+        width: 100%;
+        float: left;
+    }
+
+        .orga tr td {
+            padding: 10px;
+            float: left;
+        }
+
+            .orga tr td:nth-child(3), .orga tr td:nth-child(2), .orga tr td:nth-child(4), .orga tr td:nth-child(5) {
+                width: 17.5%;
+            }
+
+            .orga tr td a {
+                color: #00d7ff;
+            }
+
+            .orga tr td:nth-child(1) {
+                width: 30%;
+            }
+
+    .orga tbody tr:nth-child(even) {
+        background: #fbfbfb;
+    }
+
+    .orga tbody tr:nth-child(odd) {
+        background: #fff;
+    }
+
+    .orga tbody tr {
+        margin-top: 0px;
+    }
+
+        .orga tbody tr td a button {
+            margin-top: -5px;
+            float: left;
+        }
+
+    .orga span.ina {
+        color: #bbb;
+        float: left;
+    }
+
+    .row {
+        margin: 15px 0;
+    }
+
+        .row.bordered-section {
+            padding: 20px
+        }
+
+    label.label.label-primary.tags {
+        margin: 0 5px;
+    }
+
+    .tags {
+        margin: 5px;
+        padding: 5px 10px;
+        font-size: 13px;
+        float: none;
+        display: inline-block;
+    }
+
+    .icon-chevron-up, .icon-chevron-down {
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+
+        .icon-chevron-up:before {
+            content: "\f077";
+        }
+
+        .icon-chevron-down:before {
+            content: "\f078";
+        }
+</style>
+
+
+<div class="content1">
+    <div class="boxed1">
+
+        <div class="boxHead1">
+            <div class="boxHeader1 bDOrange">New Report</div>
+        </div>
+
+
+        <div class="boxBody1" style="display:block">
+
+            <div class="row bordered-section">
+                <div class="col-md-12">
+                    <label for="">Report Title:</label>
+                    <input type="text" name="ReportName" id="ReportName" class="form-control" value="@reporttext" />
+                </div>
+            </div>
+
+
+            <div class="row  bordered-section">
+
+                <div class="col-sm-12">
+                    <label for="">Select fields:</label>
+                    <div class="check">
+
+                        <div class="row" style="margin-top:20px">
+
+
+                            <div class="col-md-3">
+                                <div class="leftOff">
+                                    <label class="containers">
+                                        &emsp;Staff ID
+                                        <input type="checkbox" name="StaffId" data-name="Staff ID" id="StaffId">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="leftOff">
+                                    <label class="containers">
+                                        &emsp;Staff Name
+                                        <input type="checkbox" name="StaffName" data-name="Staff Name" id="StaffName">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="leftOff">
+                                    <label class="containers">
+                                        &emsp;Department
+                                        <input type="checkbox" name="Department" data-name="Department" id="Department">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="leftOff">
+                                    <label class="containers">
+                                        &emsp;Group
+                                        <input type="checkbox" name="Group" data-name="Group" id="Group">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="leftOff">
+                                    <label class="containers">
+                                        &emsp;Grade
+                                        <input type="checkbox" name="Grade" data-name="Grade" id="Grade">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="leftOff">
+                                    <label class="containers">
+                                        &emsp;courses (report on each courses)
+                                        <input type="checkbox" name="Courses" data-name="Courses" id="Courses">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="leftOff">
+                                    <label class="containers">
+                                        &emsp;Number of courses
+                                        <input type="checkbox" name="NumberOfCourses" data-name="No of Courses" id="NumberOfCourses">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="leftOff">
+                                    <label class="containers">
+                                        &emsp;Status of courses
+                                        <input type="checkbox" name="StatusOfCourse" data-name="Course Status" id="StatusOfCourse">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="leftOff">
+                                    <label class="containers">
+                                        &emsp;Number of views
+                                        <input type="checkbox" name="NumberOfViews" data-name="No of Views" id="NumberOfViews">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="leftOff">
+                                    <label class="containers">
+                                        &emsp;Number of attempts
+                                        <input type="checkbox" name="NumberOfAttempts" data-name="No of Attempts" id="NumberOfAttempts">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="leftOff">
+                                    <label class="containers">
+                                        &emsp;Date accessed (day)
+                                        <input type="checkbox" name="DateAccessed" data-name="Date Accessed" id="DateAccessed">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="leftOff">
+                                    <label class="containers">
+                                        &emsp;Time accessed
+                                        <input type="checkbox" name="TimeAccessed" data-name="Time Accessed" id="TimeAccessed">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-3">
+                                <div class="leftOff">
+                                    <label class="containers">
+                                        &emsp;Duration
+                                        <input type="checkbox" name="Duration" data-name="Duration" id="Duration">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="leftOff">
+                                    <label class="containers">
+                                        &emsp;Scope per course
+                                        <input type="checkbox" name="ScopeOfCourse" data-name="Course Scope" id="ScopeOfCourse">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="leftOff">
+                                    <label class="containers">
+                                        &emsp;Average score (for multiple courses)
+                                        <input type="checkbox" name="AverageScore" data-name="Average Course" id="AverageScore">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="leftOff">
+                                    <label class="containers">
+                                        &emsp;Line Manager
+                                        <input type="checkbox" name="LineManager" data-name="Line Manager" id="LineManager">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="leftOff">
+                                    <label class="containers">
+                                        &emsp;Location
+                                        <input type="checkbox" name="Location" data-name="Location" id="Location">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="leftOff">
+                                    <label class="containers">
+                                        &emsp;Training budget
+                                        <input type="checkbox" name="TrainingBudget" data-name="Training Budget" id="TrainingBudget">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="leftOff">
+                                    <label class="containers">
+                                        &emsp;Budget Utilized
+                                        <input type="checkbox" name="BudegtUtitlized" data-name="Budget Utilized" id="BudegtUtitlized">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="leftOff">
+                                    <label class="containers">
+                                        &emsp;Outstanding budget
+                                        <input type="checkbox" class="ch" name="OutstandingBudget" data-name="Outstanding Budget" id="OutstandingBudget">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="leftOff">
+                                    <label class="containers">
+                                        &emsp;Percentage Utilization
+                                        <input type="checkbox" class="ch" name="PercentageUtilization" data-name="Percentage Utilization" id="PercentageUtilization">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="leftOff">
+                                    <label class="containers">
+                                        &emsp;Number of participants
+                                        <input type="checkbox" class="ch" name="NumberOfParticipants" data-name="Percentage Utilization" id="NumberOfParticipants">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="leftOff">
+                                    <label class="containers">
+                                        &emsp;Course evaluation score
+                                        <input type="checkbox" name="CourseEvaluationScore" data-name="Course Evaluation Score" id="CourseEvaluationScore">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row bordered-section">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label for="" style="width: 100%;">Auto-generate Settings:</label>
+                            <select name="" id="MainSelect" class="toggleSelect form-control">
+                                <option value="">Select Frequency</option>
+                                <option value="once">Once</option>
+                                <option value="day">Daily</option>
+                                <option value="week">Weekly</option>
+                                <option value="month">Monthly</option>
+                                <option value="year">Yearly</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 bordered-section">
+                            <div class="tooglePanel oncePanel row" style="display:none">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Select Date</label>
+                                        <input id="dtSelect" class="datepicker form-control" data-date-format="mm/dd/yyyy" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tooglePanel dayPanel row" style="display:none">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Select time of day</label>
+                                        <div class="input-group bootstrap-timepicker">
+                                            <input id="timeSelect" type="text" class="form-control timepicker">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-clock-o"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tooglePanel weekPanel row" style="display:none">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Select days</label>
+                                        <select class="selectoptions select2 form-control" id="selectDays" multiple>
+                                            <option></option>
+                                            <option value="Sunday">Sunday</option>
+                                            <option value="Monday">Monday</option>
+                                            <option value="Tuesday">Tuesday</option>
+                                            <option value="Wednesday">Wednesday</option>
+                                            <option value="Thursday">Thursday</option>
+                                            <option value="Friday">Friday</option>
+                                            <option value="Saturday">Saturday</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Select time</label>
+                                        <div class="input-group bootstrap-timepicker">
+                                            <input type="text" id="tmweek" class="form-control timepicker">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-clock-o"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="tooglePanel monthYearPanel row" style="display:none">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Select frequency (Every X Months or Years)</label>
+                                        <input id="freq" type="number" class="form-control" />
+                                    </div>
+
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Start Date</label>
+                                        <input id="freqDate" class="datepicker form-control" data-date-format="mm/dd/yyyy" />
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row bordered-section">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label for="" style="width: 100%;">Add recipients</label>
+                            <select name="" id="selectProfile" class="toggleSelect form-control">
+                                <option value="">Select profiles</option>
+                                <option value="0">Employee</option>
+                                <option value="1">L & D</option>
+                                <option value="2">Management</option>
+                                <option value="3">HR</option>
+                                <option value="4">I.T.</option>
+                                <option value="5">Custom</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 bordered-section">
+                            <div class="togglePanelselectProfile userPanel row" style="display:none">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Select users</label>
+                                        <select class="select2 form-control" id="selectUsers" multiple>
+                                            @*<option></option>*@
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row bordered-section">
+                <div class="col-sm-12">
+                    <div id="divSort">
+                        <label for="" style="width: 100%;">Sort Tags</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="underlineBtn">
+                <button class="nextBtn btnMedium bkSkyBlue" id="SaveReport">Save Report</button>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+@section Scripts{
+    <script src="~/Content/js/jquery-ui-sortable.min.js"></script>
+    <script src="~/Content/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/Content/js/bootstrap-timepicker.min.js"></script>
+    <script src="~/Content/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            var dtformat;
+            var dtfrmt = @Html.Raw(Json.Encode(currentculture));
+
+            if (dtfrmt== 'd/M/yyyy') {
+                dtformat = "dd/mm/yyyy";
+            }
+            else if (dtfrmt== 'd/M/yyyy') {
+                dtformat = "mm/dd/yyyy";
+            }
+            $('#dtSelect').datepicker({
+                yearRange: "-119:+0",
+                changeMonth: true,
+                changeYear: true,
+                format: dtformat,
+                autoclose: true
+
+            });
+
+            $('#freqDate').datepicker({
+                yearRange: "-119:+0",
+                changeMonth: true,
+                changeYear: true,
+                format: dtformat,
+                autoclose: true
+
+            });
+
+            var model = @Html.Raw(Json.Encode(Model));
+
+            if (model != null) {
+                $('#ReportName').val(model.ReportName)
+                $("#selectProfile option:contains(" + model.ReportRecipients + ")").attr('selected', 'selected');
+
+
+                var Names = model.Sorts.map(function (item) { return item.ColumnName; });
+                $('input[type=checkbox]').each(function () {
+                    if ($.inArray($(this).attr('name'), Names) > -1) {
+                        $(this).prop("checked", true);
+                    }
+                });
+
+                $.each(model.Sorts, function (index, value) {
+                    $('#divSort').append('<label data-name="' + value.ColumnName + '" class="lblsort label label-primary tags">' + value.ColumnName + '</label>');
+                    $('#divSort').sortable({
+                        items: '.tags'
+                    });
+                });
+
+                var weekArr = new Array();
+                var userarr = new Array();
+                $.each(model.ReportSchedules, function (index, value) {
+                    if (value.FrequencyType == 'week') {
+                        $("#MainSelect").val("week");
+                        weekArr.push(value.RunDay)
+                        var dailyruntime = value.RunTime;
+                        $("#tmweek").val(dailyruntime);
+                    }
+                    if (value.FrequencyType == 'once') {
+                        $("#MainSelect").val("once");
+                        var nowDate = new Date(parseInt(value.RunDate.substr(6)));
+                        $("#dtSelect").datepicker("update", new Date(nowDate));
+                    }
+                    if (value.FrequencyType == 'daily') {
+                        $("#MainSelect").val("day");
+                        var dailyruntime = value.RunTime;
+                        $("#timeSelect").val(dailyruntime);
+
+                    }
+                    if (value.FrequencyType == 'month') {
+                        $("#MainSelect").val("month");
+                        var nowDate = new Date(parseInt(value.RunDate.substr(6)));
+                        $("#freqDate").datepicker("update", new Date(nowDate));
+                        $("#freq").val(value.RunFrequency);
+                    }
+                    if (value.FrequencyType == 'year') {
+                        $("#MainSelect").val("year");
+                        var nowDate = new Date(parseInt(value.RunDate.substr(6)));
+                        $("#freqDate").datepicker("update", new Date(nowDate));
+                        $("#freq").val(value.RunFrequency);
+                    }
+
+                    $('.tooglePanel').hide();
+                    if (value.FrequencyType == "month" || value.FrequencyType == "year") {
+                        $('.monthYearPanel').show();
+                        $('.monthYearPanel').find('.timepicker').timepicker({
+                            minuteStep: 1,
+                            showSeconds: false,
+                            showMeridian: true,
+                            format: 'g:i A'
+                        }).next().on('click', function () {
+                            $(this).prev().focus();
+                        });
+                    }
+                    else {
+                        if (value.FrequencyType == 'daily')
+                            value.FrequencyType = 'day';
+                        $('.' + value.FrequencyType + 'Panel').show();
+                        $('.' + value.FrequencyType + 'Panel').find('.timepicker').timepicker({
+                            minuteStep: 1,
+                            showSeconds: false,
+                            showMeridian: true,
+                            format: 'g:i A'
+                        }).next().on('click', function () {
+                            $(this).prev().focus();
+                        });
+                    }
+
+                });
+                if (weekArr.length > 0) {
+                    $('#selectDays').val(weekArr);
+                }
+
+
+                if (model.ReportUserList.length > 0 && model.ReportRecipients != null) {
+
+                    $.each(model.ReportUserList, function (index, value) {
+                        userarr.push(value.UserId);
+                    });
+                }
+
+            } else {
+                $('input[type=checkbox]').each(function () {
+                    $(this).prop("checked", false);
+                });
+                $('#selectProfile').val('');
+
+                $('#MainSelect').val('');
+            }
+
+
+
+            $('.select2').select2({
+                placeholder: "Please select",
+                'width': '100%'
+            });
+           // $('.datepicker').datepicker();
+
+
+
+
+            $('#MainSelect').on('change', function () {
+                var val = $(this).val();
+                $('.tooglePanel').hide();
+                if (val == "month" || val == "year") {
+                    $('.monthYearPanel').show();
+                    $('.monthYearPanel').find('.timepicker').timepicker({
+                        minuteStep: 1,
+                        showSeconds: false,
+                        showMeridian: true,
+                        format: 'g:i A'
+                    }).next().on('click', function () {
+                        $(this).prev().focus();
+                    });
+                }
+                else {
+                    $('.' + val + 'Panel').show();
+                    $('.' + val + 'Panel').find('.timepicker').timepicker({
+                        minuteStep: 1,
+                        showSeconds: false,
+                        showMeridian: true,
+                        format: 'g:i A'
+                    }).next().on('click', function () {
+                        $(this).prev().focus();
+                    });
+                }
+            });
+
+            $('#selectProfile').on('change', function () {
+
+                $('#selectUsers').val(null).trigger('change');
+
+                var val = $(this).val();
+                if (val == "5") {
+                    $('.userPanel').show();
+
+                    $.ajax({
+                        url: '/api/ReportManagement/getallusers',
+                        contentType: "application/json; charset=UTF-8",
+                        type: "GET",
+                        success: function (data) {
+
+                            $.each(data, function (index, value) {
+                                // APPEND OR INSERT DATA TO SELECT ELEMENT.
+                                if ($('#selectUsers').find("option[value='" + value.Id + "']").length) {
+
+                                }
+                                else {
+                                    $('#selectUsers').append('<option value="' + value.Id + '">' + value.FirstName + '</option>');
+                                }
+                            });
+
+                            if (userarr != null) {
+                                if (userarr.length > 0) {
+                                    $('#selectUsers').val(userarr).trigger('change');
+                                }
+                            }
+                        },
+                        error: function (data) {
+
+                        }
+                    });
+                }
+                else {
+                    $('.userPanel').hide();
+                    $('#selectUsers').val(null).trigger('change');
+                    userarr = null;
+                }
+            });
+
+            $("#selectProfile").trigger("change");
+
+            $('input:checkbox').on('change', function () {
+                var name = $(this).attr('name');
+                var text = $(this).attr('data-name');
+
+                if ($('#divSort').find('label[data-name="' + name + '"]').length) {
+
+                    if (!$(this).is(':checked')) {
+                        $('#divSort').find('label[data-name="' + name + '"]').remove();
+                        $('#divSort').sortable({
+                            items: '.tags'
+                        });
+                    }
+
+                }
+                else {
+                    if ($(this).is(':checked')) {
+
+                        $('#divSort').append('<label data-name="' + name + '" class="lblsort label label-primary tags">' + text + '</label>');
+                        $('#divSort').sortable({
+                            items: '.tags'
+                        });
+                    }
+
+                }
+
+            });
+
+            $('#SaveReport').on('click', function (e) {
+
+                e.preventDefault();
+                var $button = $(this);
+                var prev = $button.html();
+                $button.html('Processing <i class="fa fa-circle-o-notch fa-spin nofloat"></i>');
+                $button.attr('disabled', 'disabled');
+
+                if (!$('.check input:checkbox:checked').length) {
+                    ShowNotie({ HasError: true, Message: "No Report fields selected" });
+                    $button.html(prev);
+                    $button.removeAttr('disabled');
+                    return;
+                }
+
+                if ($('#ReportName').val() === "") {
+                    ShowNotie({ HasError: true, Message: "Please enter a Report Name" });
+                    $button.html(prev);
+                    $button.removeAttr('disabled');
+                    return;
+                }
+
+                var evaluationScore = $('input[name="CourseEvaluationScore"]').is(':checked');
+                var numberPartic = $('input[name="NumberOfParticipants"]').is(':checked');
+                var percentage = $('#PercentageUtilization').is(':checked');
+                var outstanding = $('#OutstandingBudget').is(':checked');
+                var utilized = $('#BudegtUtitlized').is(':checked');
+                var training = $('#TrainingBudget').is(':checked');
+                var location = $('#Location').is(':checked');
+                var linemanager = $('#LineManager').is(':checked');
+                var avgScore = $('#AverageScore').is(':checked');
+                var scopeofcourse = $('#ScopeOfCourse').is(':checked');
+                var duration = $('#Duration').is(":checked");
+                var time = $('#TimeAccessed').is(":checked");
+                var date = $('#DateAccessed').is(':checked');
+                var attempts = $('#NumberOfAttempts').is(':checked');
+                var views = $('#NumberOfViews').is(':checked');
+                var statuscourse = $('#StatusOfCourse').is(':checked');
+                var courses = $('#Courses').is(':checked');
+                var numberofcourses = $('#NumberOfCourses').is(':checked');
+                var grade = $('#Grade').is(':checked');
+                var group = $('#Group').is(':checked');
+                var dept = $('#Department').is(':checked');
+                var staffname = $('#StaffName').is(':checked');
+                var staffId = $('#StaffId').is(':checked');
+                var reportname = $('#ReportName').val();
+                var list = new Array();
+                var reportschedulelist = new Array();
+                var reportusers = new Array();
+
+                var jsonschedule = null;
+
+                if (model != null) {
+                    jsonschedule = model.ReportSchedules;
+                }
+
+                var jsonscheduleid = 0;
+
+                if ($('#MainSelect').val() == 'once') {
+                    if ($('#dtSelect').val() === "") {
+                        ShowNotie({ HasError: true, Message: "Please enter Run Date" });
+                        $button.html(prev);
+                        $button.removeAttr('disabled');
+                        return;
+                    }
+
+                    jsonscheduleid = 0;
+                    if (jsonschedule != null) {
+                        for (var s = 0; s < jsonschedule.length; ++s) {
+
+                            var schedule = jsonschedule[s];
+                            if (schedule.FrequencyType == "once") {
+                                jsonscheduleid = schedule.Id;
+                                break;
+                            }
+                        }
+                    }
+
+                    reportschedulelist.push({ "Id": jsonscheduleid, "FrequencyType": "once", "RunDate": $('#dtSelect').val() })
+                }
+                else if ($('#MainSelect').val() == 'day') {
+                    if ($('#timeSelect').val() === "") {
+                        ShowNotie({ HasError: true, Message: "Please enter Run Time" });
+                        $button.html(prev);
+                        $button.removeAttr('disabled');
+                        return;
+                    }
+
+                    jsonscheduleid = 0;
+                    if (jsonschedule != null) {
+                        for (var s = 0; s < jsonschedule.length; ++s) {
+
+                            var schedule = jsonschedule[s];
+                            if (schedule.FrequencyType == "daily" || schedule.FrequencyType == "day") {
+                                jsonscheduleid = schedule.Id;
+                                break;
+                            }
+                        }
+                    }
+                    reportschedulelist.push({ "Id": jsonscheduleid,"FrequencyType": "daily", "RunTime": $('#timeSelect').val() })
+                }
+                else if ($('#MainSelect').val() == 'week') {
+                    if ($('#tmweek').val() === "") {
+                        ShowNotie({ HasError: true, Message: "Please enter Run Time" });
+                        $button.html(prev);
+                        $button.removeAttr('disabled');
+                        return;
+                    }
+
+                    var selectDays = $("#selectDays").select2('data')
+                    if (selectDays.length > 0) {
+                        for (var i = 0; i < selectDays.length; i++) {
+
+                            jsonscheduleid = 0;
+                            if (jsonschedule != null) {
+                                for (var s = 0; s < jsonschedule.length; ++s) {
+
+                                    var schedule = jsonschedule[s];
+                                    if (schedule.RunTime == $('#tmweek').val()) {
+                                        jsonscheduleid = schedule.Id;
+                                        break;
+                                    }
+                                }
+                            }
+
+                            reportschedulelist.push({ "Id": jsonscheduleid,"FrequencyType": "week", "RunTime": $('#tmweek').val(), "RunDay": selectDays[i].text })
+                        }
+                    }
+                    else {
+                        ShowNotie({ HasError: true, Message: "Please select days" });
+                        $button.html(prev);
+                        $button.removeAttr('disabled');
+                        return;
+                    }
+                }
+                else if ($('#MainSelect').val() == 'month') {
+                    if ($('#freqDate').val() === "") {
+                        ShowNotie({ HasError: true, Message: "Please enter Run Date" });
+                        $button.html(prev);
+                        $button.removeAttr('disabled');
+                        return;
+                    }
+                    if ($('#freq').val() === "") {
+                        ShowNotie({ HasError: true, Message: "Please enter Frequency" });
+                        $button.html(prev);
+                        $button.removeAttr('disabled');
+                        return;
+                    }
+
+                    jsonscheduleid = 0;
+                    if (jsonschedule != null) {
+                        for (var s = 0; s < jsonschedule.length; ++s) {
+
+                            var schedule = jsonschedule[s];
+                            if (schedule.FrequencyType == "month") {
+                                jsonscheduleid = schedule.Id;
+                                break;
+                            }
+                        }
+                    }
+                    reportschedulelist.push({ "Id": jsonscheduleid,"FrequencyType": "month", "RunDate": $('#freqDate').val(), "RunFrequency": $('#freq').val() });
+                }
+                else if ($('#MainSelect').val() == 'year') {
+                    if ($('#freqDate').val() === "") {
+                        ShowNotie({ HasError: true, Message: "Please enter Run Date" });
+                        $button.html(prev);
+                        $button.removeAttr('disabled');
+                        return;
+                    }
+                    if ($('#freq').val() === "") {
+                        ShowNotie({ HasError: true, Message: "Please enter Frequency" });
+                        $button.html(prev);
+                        $button.removeAttr('disabled');
+                        return;
+                    }
+
+                    jsonscheduleid = 0;
+                    if (jsonschedule != null) {
+                        for (var s = 0; s < jsonschedule.length; ++s) {
+
+                            var schedule = jsonschedule[s];
+                            if (schedule.FrequencyType == "year") {
+                                jsonscheduleid = schedule.Id;
+                                break;
+                            }
+                        }
+                    }
+                    reportschedulelist.push({ "Id": jsonscheduleid,"FrequencyType": "year", "RunDate": $('#freqDate').val(), "RunFrequency": $('#freq').val() });
+                }
+
+
+                if ($('#selectProfile').val() == '5') {
+                    var selectUsers = $("#selectUsers").select2('data')
+
+                    var jsonusers;
+
+                    if (model != null) {
+                        jsonusers = model.ReportUserList;
+                    }
+                    var jsonusersid = 0;
+
+                    if (selectUsers.length > 0) {
+                        for (var i = 0; i < selectUsers.length; i++) {
+
+                            jsonusersid = 0;
+                            if (jsonusers != null) {
+                                for (var j = 0; j < jsonusers.length; ++j) {
+
+                                    var user = jsonusers[j];
+                                    if (user.UserId == selectUsers[i].id) {
+                                        jsonusersid = user.Id;
+                                        break;
+                                    }
+                                }
+                            }
+
+                            reportusers.push({ "Id": jsonusersid, "UserId": selectUsers[i].id, "UserName": selectUsers[i].text })
+                        }
+                    }
+                    else {
+                        ShowNotie({ HasError: true, Message: "Please select users" });
+                        $button.html(prev);
+                        $button.removeAttr('disabled');
+                        return;
+                    }
+                }
+
+                var jsonsorts;
+
+                if (model != null) { jsonsorts = model.Sorts; }
+
+                $(".lblsort").each(function (index, element) {
+                    var name = $(this).attr('data-name');
+
+                    var id = 0;
+                    if (jsonsorts != null) {
+                        for (var i = 0; i < jsonsorts.length; ++i) {
+
+                            var sort = jsonsorts[i];
+                            if (sort.ColumnName == name) {
+                                id = sort.Id;
+                                break;
+                            }
+                        }
+                    }
+
+                    list.push({ "Id" : id , "ColumnName": name, "Sort": (index + 1).toString() });
+
+                });
+
+
+                var data = {
+                    Id: model == null ? 0 : model.Id,
+                    CourseEvaluationScore: evaluationScore,
+                    NumberOfParticipants: numberPartic,
+                    PercentageUtilization: percentage,
+                    OutstandingBudget: outstanding,
+                    BudegtUtitlized: utilized,
+                    TrainingBudget: training,
+                    Location: location,
+                    LineManager: linemanager,
+                    AverageScore: avgScore,
+                    ScopeOfCourse: scopeofcourse,
+                    Duration: duration,
+                    TimeAccessed: time,
+                    DateAccessed: date,
+                    NumberOfAttempts: attempts,
+                    NumberOfViews: views,
+                    StatusOfCourse: statuscourse,
+                    Courses: courses,
+                    Grade: grade,
+                    Department: dept,
+                    StaffName: staffname,
+                    StaffId: staffId,
+                    Group: group,
+                    NumberOfCourses: numberofcourses,
+                    ReportName: reportname,
+                    ReportRecipients: $('#selectProfile option:selected').text(),
+                    Sorts: list,
+                    ReportSchedules: reportschedulelist,
+                    ReportUserList: reportusers
+                };
+
+
+                $.ajax({
+                    url: '/Admin/ReportManagement/SaveNewReport',
+                    contentType: "application/json; charset=UTF-8",
+                    data: JSON.stringify(data),
+                    type: "POST",
+                    success: function (data) {
+                        ShowNotie(data)
+                        $button.html('').html('Save Report');
+                        $button.attr('disabled', false);
+                        //$('#ReportName').val('');
+                    },
+                    error: function (data) {
+                        ShowNotie(data);
+                        $button.html('').html('Save Report');
+                        $button.attr('disabled', false);
+                    }
+                })
+            })
+        })
+    </script>
+}

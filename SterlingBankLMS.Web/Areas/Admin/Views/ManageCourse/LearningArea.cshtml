@@ -1,0 +1,115 @@
+﻿@using SterlingBankLMS.Core.DTO
+@{
+    ViewBag.Title = "Learning Area";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+  
+</style>
+
+
+
+<div class="banner1 bkSkyBlue">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>Add New Learning Area</span>
+</div>
+
+<div class="content1">
+    <!-- Modal -->
+
+
+    <style>
+        tr td:nth-child(2), tr th:nth-child(2) {
+            text-align: center;
+        }
+    </style>
+
+
+    <div class="boxHead1">
+        <div class="boxHeader1 bDGreenishBlue">Learning Areas</div>
+        <button class="btn bkSkyBlue addNewLearningArea" style="margin-bottom: 10px;float: right;">
+            Add New <i class="fa fa-plus"></i>
+        </button>
+    </div>
+    <div class="boxBody1">
+        <div class="tableRanch">
+            <table id="LearningAreaTable" class="courselist">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Course Count</th>
+                        <th>Action</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr class="empty">
+                        <td colspan="4">
+                            Fetching Data <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+<div id="modallearningArea" class="modal fade learningArea" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Manage Learning Area</h4>
+            </div>
+            <form id="LearningAreaForm">
+                <div class="modal-body">
+
+
+                    @Html.AntiForgeryToken()
+                    <div class="errorHolder"></div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Learning Area Name</label>
+                                <input type="text" id="LearningAreaName" class="form-control" name="Name" placeholder="New Learning Area">
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="Id" value="0" id="LearningAreaID">
+                    <input type="hidden" name="CourseCount" value="0" id="CourseCount">
+                    <button type="submit" class="btn bkSkyBlue" ></button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Content/PageJs/Admin_LearningAreaView.js"></script>
+    <script src="~/Content/js/jquery.validate.min.js"></script>
+}
+
+
+
+

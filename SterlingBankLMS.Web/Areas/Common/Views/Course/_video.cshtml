@@ -1,0 +1,8 @@
+﻿@*<video controls ng-init="vm.getContent()"
+    ng-src="{{vm.video.ContentUrl}}" type="{{vm.video.MimeType}}"></video>*@
+
+<div ng-init="vm.getContent()" class="video-js-responsive-container vjs-hd">
+    <video class="video-js vjs-default-skin" controls preload="auto" vjs-big-play-centered
+           id="vid">
+    </video>
+</div>

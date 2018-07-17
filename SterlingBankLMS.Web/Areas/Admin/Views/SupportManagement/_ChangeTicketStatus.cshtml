@@ -1,0 +1,194 @@
+﻿<style>
+    .success {
+        color: #fff !important;
+    }
+
+    .bDGreen {
+        border-bottom: 3px solid #2fbf71;
+    }
+
+    .bulkfile {
+        background: rgba(22, 96, 136, 0.2);
+        padding: 30px;
+        padding-right: 45%;
+    }
+
+        .bulkfile button {
+            background: #166088;
+        }
+
+    .formBox1 label {
+        width: 100%;
+        margin-bottom: 10px;
+        font-weight: bold;
+        font-size: 13px;
+        float: left;
+    }
+
+    label i {
+        font-style: italic;
+        color: #ccc;
+        font-size: 12px;
+        padding-left: 20px;
+        float: none;
+    }
+
+    .halfForm .halfForm {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+    form.report {
+        padding: 0px;
+        margin-top: 60px;
+        width: 100%;
+        margin-left: 0%;
+        border: 0px solid transparent;
+    }
+
+        form.report input {
+            width: 100%;
+            height: 35px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 15px;
+        }
+
+    .Pending {
+        color: #E68618;
+    }
+
+    .Approved {
+        color: #38C64E;
+    }
+
+    .Rejected {
+        color: #DA3024;
+    }
+
+    .NotSeen {
+        color: #E68618;
+    }
+
+    .Yes {
+        color: #38C64E;
+    }
+
+    .No {
+        color: #DA3024;
+    }
+
+    .jconfirm .jconfirm-box-container.jconfirm-no-transition {
+        margin: 0px;
+        width: 100%;
+    }
+</style>
+<form class="report">
+
+
+    <div class="fullForm">
+        <label>Ticket Title:</label>
+        <input type="text" disabled="disabled" value="@ViewBag.TicketTitle" />
+    </div>
+
+    @if (ViewBag.ButtonValue == "New")
+    {
+        <a href="#" class="btnApprove">
+            <button class="btn bkSkyBlue btnApprove " style="margin-bottom: 10px;" id="@ViewBag.TicketId">
+                Mark as Closed <i class="fa fa-check"></i>
+            </button>
+        </a>
+        <a href="#" class="btnReject">
+            <button class="btn bkRed btnReject" style="margin-bottom: 10px;float:right" id="@ViewBag.TicketId">
+                Mark as Open <i class="fa fa-times"></i>
+            </button>
+        </a>
+
+    }
+    else if (ViewBag.ButtonValue == "Open")
+    {
+        <a href="#" class="btnApprove">
+            <button class="btn bkSkyBlue btnApprove " style="margin-bottom: 10px;" id="@ViewBag.TicketId">
+                Mark as Closed <i class="fa fa-check"></i>
+            </button>
+        </a>
+    }
+    else
+    {
+        <strong class="col-md-6 col-md-offset-3" style="text-align:center; color:#38C64E;"><h3>Ticket is now closed.</h3></strong>
+    }
+    </form>
+
+<script>
+    $(document).ready(function () {
+        $(".btnApprove").click(function (e) {
+            e.preventDefault();
+            var ticketId = $(this).attr('id');
+
+            var $button = $(this);
+            var prev = $button.html();
+
+            if (!parseInt(ticketId) && parseInt(ticketId) <= 0) {
+                return;
+            }
+
+            $button.attr('disabled', 'disabled');
+            $button.find('i').removeClass('fa-check');
+            $button.find('i').addClass('fa-circle-o-notch fa-spin');
+
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "GET",
+                url: "/api/support/MarkTicketClosed?ticketId=" + ticketId,
+
+                success: function (data) {
+                    $("#TicketButtonModal").hide();
+                    $(".btnApprove").hide();
+                    $(".btnReject").hide();
+                    ShowNotie(data);
+                    $("#textstatus").empty().html(data.Result)
+                    $button.find('i').addClass('fa-check');
+                    $button.find('i').removeClass('fa-circle-o-notch fa-spin');
+
+                }
+
+            });
+        });
+
+        $(".btnReject").click(function (e) {
+            e.preventDefault();
+            var ticketId = $(this).attr('id');
+
+            var $button = $(this);
+            var prev = $button.html();
+
+            if (!parseInt(ticketId) && parseInt(ticketId) <= 0) {
+                return;
+            }
+
+            $button.attr('disabled', 'disabled');
+            $button.find('i').removeClass('fa-check');
+            $button.find('i').addClass('fa-circle-o-notch fa-spin');
+
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "GET",
+                url: "/api/support/MarkTicketOpen?ticketId=" + ticketId,
+
+                success: function (data) {
+                    $("#TicketButtonModal").hide();
+                    $(".btnApprove").hide();
+                    $(".btnReject").hide();
+                    $("#textstatus").empty().html(data.Result)
+                    ShowNotie(data);
+                    $button.find('i').addClass('fa-check');
+                    $button.find('i').removeClass('fa-circle-o-notch fa-spin');
+                }
+
+            });
+        })
+    });
+</script>

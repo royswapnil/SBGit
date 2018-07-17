@@ -1,0 +1,2335 @@
+@font-face {
+    font-family: 'Ubuntu';
+    src: url('/fonts/Ubuntu-L.ttf');
+}
+
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../iconfont/MaterialIcons-Regular.eot);
+    /* For IE6-8 */
+    src: local('Material Icons'), local('MaterialIcons-Regular'), url(../iconfont/MaterialIcons-Regular.woff2) format('woff2'), url(../iconfont/MaterialIcons-Regular.woff) format('woff'), url(../iconfont/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Ubuntu';
+    tab-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -o-tab-highlight-color: rgba(0,0,0,0);
+    -moz-tab-highlight-color: rgba(0,0,0,0);
+    -ms-tab-highlight-color: rgba(0,0,0,0);
+    color: #333;
+}
+
+input:focus, button:focus, button:active, textarea:focus, select:focus, select:active {
+    outline: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+button a {
+    width: 100%;
+    text-align: center;
+    color: #fff;
+}
+/** global styles **/
+div, span, input, textarea, button, a, ul, li, i, h1, h2, h3, h4, h5, h6, form, textarea, sup, video {
+    float: left;
+    box-sizing: border-box;
+    position: relative;
+}
+
+img {
+    float: left;
+}
+
+a.button {
+    width: 100%;
+}
+
+
+
+
+
+/** header styles **/
+header {
+    width: 100%;
+    height: 80px;
+    background: #fff;
+    position: fixed;
+    z-index: 10;
+}
+
+    header.header_up {
+        height: 50px;
+    }
+
+    header img {
+        height: 100%;
+    }
+
+    header .menuBtn {
+        display: none;
+        font-size: 25px;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        padding: 12.5px;
+        transition: all 0.5s ease-out;
+        -webkit-transition: all 0.5s ease-out;
+        cursor: pointer;
+    }
+
+        header .menuBtn.inside {
+            margin-left: -20px;
+            transition: all 0.5s ease-out;
+            -webkit-transition: all 0.5s ease-out;
+        }
+
+img.marginImg {
+    height: 80%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+header.header_up ul {
+    margin-top: 10px;
+}
+
+header ul {
+    list-style-type: none;
+    height: 50px;
+    padding: 5px;
+    right: 0;
+    float: right;
+    margin-right: 50px;
+    margin-top: 30px;
+}
+
+    header ul li {
+        margin-right: 40px;
+    }
+
+        header ul li i {
+            font-size: 20px;
+            color: #333;
+            margin-top: 3px;
+            cursor: pointer;
+            tab-highlight-color: rgba(0,0,0,0);
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            -o-tab-highlight-color: rgba(0,0,0,0);
+            -moz-tab-highlight-color: rgba(0,0,0,0);
+            -ms-tab-highlight-color: rgba(0,0,0,0);
+        }
+
+        header ul li h6 {
+            font-size: 15px;
+            margin-left: 7px;
+            margin-top: 5px;
+            font-weight: normal;
+        }
+
+        header ul li span {
+            background: #4286f4;
+            width: 23px;
+            height: 23px;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            padding: 3px;
+            color: #333;
+            text-align: center;
+            margin-top: -11px;
+            margin-left: -15px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+
+
+
+
+/** content style **/
+.wrapper {
+    width: 100%;
+    margin-top: 80px;
+}
+
+.breadcrum {
+    
+    background-size: 100%;
+    height: 250px;
+    padding-left: 20%;
+    width: 100%;
+}
+
+.col8 {
+    width: 65%;
+    padding: 15px;
+    height: 100%;
+    padding-top: 12%;
+}
+
+.col4 {
+    width: 35%;
+    padding: 15px;
+    height: 100%;
+    padding-top: 12%;
+}
+
+.headcrum {
+    width: 100%;
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #eee;
+}
+
+.bodycrum {
+    width: 100%;
+    font-size: 14px;
+    color: #eee;
+    margin-bottom: 5px;
+}
+
+    .bodycrum i {
+        color: #ccc;
+        margin-right: 15px;
+    }
+
+.searchArea {
+    width: 100%;
+    background: #eee;
+    height: 65px;
+}
+
+.searchbox {
+    width: 300px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border: 2px solid #ccc;
+    height: 40px;
+    margin-top: 14px;
+    margin-right: 30px;
+    float: right;
+}
+
+    .searchbox input {
+        width: 250px;
+        height: 100%;
+        border: 0px solid transparent;
+        padding: 10px;
+        background: transparent;
+        font-size: 15px;
+        color: #bbb;
+        font-style: italic;
+        font-weight: bold;
+    }
+
+    .searchbox i {
+        font-size: 25px;
+        font-weight: bold;
+        color: #bbb;
+        margin-top: 5px;
+    }
+
+.content {
+    width: 100%;
+    padding-left: 20%;
+    background: #fff;
+    padding-top: 10px;
+    min-height:800px;
+}
+
+.col9 {
+    width: 70%;
+    padding: 15px;
+}
+
+.col2 {
+    width: 27%;
+    padding: 15px;
+    border-left: 1px solid #ddd;
+}
+
+.boxed {
+    width: 100%;
+    margin-top: 20px;
+    padding-bottom: 20px;
+    border: 1px solid #ddd;
+}
+
+.long {
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+    .long i {
+        float: right;
+        font-size: 22px;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        background: #d4e0f9;
+        text-align: center;
+        margin-top: 20px;
+        cursor: pointer;
+        transition: all 0.5s ease-out;
+        -webkit-transition: all 0.5s ease-out;
+    }
+
+        .long i.down {
+            transition: all 0.5s ease-out;
+            -webkit-transition: all 0.5s ease-out;
+            transform: rotate(180deg);
+            -webkit-transform: rotate(180deg);
+        }
+
+.line {
+    padding: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    width: 100%;
+}
+
+.col9 .line, .col12 .line {
+    width: auto;
+}
+
+.col2 .line {
+    width: 100%;
+    padding: 0px;
+    padding-bottom: 5px;
+    left: 0;
+}
+
+
+.borderBottomRed {
+    border-bottom: 4px solid #AB192D;
+}
+
+.borderBottomBlue {
+    border-bottom: 4px solid #4286f4;
+}
+
+.borderBottomPink {
+    border-bottom: 4px solid #E11DD2;
+}
+
+.blue {
+    color: #4286f4;
+}
+
+.pink {
+    color: #E11DD2;
+}
+
+.borderBottomGrey {
+    border-bottom: 3px solid #bbb;
+}
+
+.borderBottomOrange {
+    border-bottom: 5px solid orange;
+}
+
+.redBackground {
+    background: #f97777;
+}
+
+.yellowBackground {
+    background: #ffd168;
+}
+
+.col33 {
+    width: 32%;
+    margin-left: 0.55%;
+    margin-right: 0.55%;
+}
+
+.courseItem {
+    border-bottom: 5px solid #e11dd2 !important;
+    padding-bottom: 7px;
+}
+
+    .courseItem a {
+        width: 100%;
+    }
+
+.courseItem1 {
+    border-bottom: 5px solid #0a9cb7 !important;
+    padding-bottom: 7px;
+}
+
+    .courseItem 1a {
+        width: 100%;
+    }
+
+.courseImg, .coursePlay {
+    width: 100%;
+    background-size: 100%;
+    height: 120px;
+}
+
+.coursePlay {
+    background: #aaa;
+}
+
+.courseImg i {
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
+    color: #b3c7f2;
+    font-size: 20px;
+}
+
+.text {
+    width: 100%;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+    .text a {
+        width: 100%;
+    }
+
+    .text h5 {
+        font-size: 13px;
+        font-weight: bold;
+        width: 100%;
+        height: 20px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+
+    .text p {
+        font-size: 12px;
+        font-weight: bold;
+        color: #aaa;
+    }
+
+    .text b {
+        margin-left: 6px;
+        color: #444;
+    }
+
+
+
+
+
+
+/** buttons **/
+button {
+    border: 0px solid transparent;
+    color: #fff;
+    font-size: 17px;
+    padding: 7px;
+    cursor: pointer;
+    margin-bottom: 30px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+.button i {
+    color: #fff;
+    font-size: 20px;
+}
+
+.btnLong {
+    width: 100%;
+}
+
+.btnLarge {
+    padding: 10px;
+    width: 50%;
+    margin-left: 25%;
+    margin-bottom: 80px;
+}
+
+.btnCurve {
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+.btnMid {
+    width: 33%;
+    margin-left: 33%;
+}
+
+.btnReach {
+    width: 100%;
+    height: 100%;
+}
+
+.btnBlue {
+    background: #4286f4;
+}
+
+.btnPink {
+    background: #E11DD2;
+}
+
+.btnRed {
+    background: #AB192D;
+}
+
+.red {
+    color: #AB192D;
+}
+
+.btnBlack {
+    background: #000;
+}
+
+.btnPink.btnHerd {
+    width: auto;
+    float: right;
+    font-weight: normal !important;
+    margin-top: 20px;
+}
+
+.btnHerd {
+    font-size: 15px;
+    width: 80%;
+    margin-left: 10%;
+    padding: 10px 10px 10px 10px;
+    margin-bottom: 10px;
+}
+
+sup {
+    color: #333;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.btnSmall {
+    padding: 5px;
+    font-size: 15px;
+    margin-bottom: 0px;
+}
+
+.line button {
+    float: right;
+    margin-bottom: 0px;
+    margin-top: -10px;
+    font-size: 13px;
+}
+
+    .line button span {
+        font-size: 12px;
+        margin-top: 2px;
+    }
+
+button i {
+    color: #fff;
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+button.sax {
+    font-size: 11px;
+    width: 80px;
+    padding: 5px;
+    font-weight: bold;
+    margin-top: 7px;
+    margin-bottom: 3px;
+}
+
+.pen button {
+    font-size: 12px;
+}
+
+
+
+
+
+/** content continues **/
+.hideTab {
+    width: 100%;
+    margin-bottom: 70px;
+    height: 0px;
+    overflow-y: hidden;
+    transition: all 0.5s ease-out;
+    -webkit-transition: all 0.5s ease-out;
+}
+
+    .hideTab.shown {
+        height: auto;
+        transition: all 0.5s ease-out;
+        -webkit-transition: all 0.5s ease-out;
+    }
+
+    .hideTab h4 {
+        width: 100%;
+        margin-top: 15px;
+        margin-bottom: 10px;
+        font-weight: bold;
+        font-size: 15px;
+    }
+
+.load {
+    width: 100%;
+    background: #eee;
+    height: 40px;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+}
+
+.loader {
+    width: 80%;
+    height: 100%;
+}
+
+.pen {
+    width: 20%;
+    height: 100%;
+}
+
+.peg {
+    width: 90%;
+    margin-left: 5%;
+    height: 15px;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    overflow: hidden;
+}
+
+.range {
+    background: #fff;
+    margin-top: 12.5px;
+}
+
+.loading {
+    height: 100%;
+}
+
+.loadInfo {
+    width: 30%;
+    float: right;
+    margin-right: 5%;
+    font-size: 13px;
+    margin-top: -15.5px;
+    font-weight: bold;
+}
+
+.space {
+    width: 100%;
+    height: 60px;
+}
+
+.pod {
+    width: 100%;
+    padding: 15px;
+}
+
+.advert {
+    width: 90%;
+    margin-left: 5%;
+    height: 200px;
+    background: #ddd;
+}
+
+.podItem {
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.coupon {
+    width: 18%;
+    text-align: center;
+}
+
+    .coupon i {
+        font-size: 22px;
+    }
+
+.list {
+    width: 82%;
+}
+
+    .list i {
+        font-size: 14px;
+        margin-top: 0px;
+        color: #555;
+    }
+
+    .list span {
+        font-size: 13px;
+        width: 100%;
+        font-weight: bold;
+        margin-bottom: 2px;
+    }
+
+.coupon span {
+    width: 35px;
+    padding: 2px;
+    text-align: center;
+    color: #fff;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    font-weight: bold;
+}
+
+.podBlock {
+    width: 100%;
+}
+
+.halves {
+    width: 50%;
+}
+
+.half {
+    width: 49%;
+    margin-right: 1%;
+}
+
+    .half .big {
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .half b {
+        color: #ccc;
+        font-weight: bold;
+        font-size: 14px;
+        margin-left: 5px;
+    }
+
+    .half img {
+        width: 30px;
+        margin-right: 5px;
+    }
+
+    .half p {
+        width: 100%;
+        font-weight: bold;
+        color: #222;
+        font-size: 12px;
+        margin: 0px;
+    }
+
+    /**Spinner**/
+div .spinner {
+    font-size: 300%;
+    position: relative;
+    top: 300px;
+    left: 600px;
+    z-index: 10;
+    margin:auto
+}
+
+.glyphicon-spin {
+    -webkit-animation: spin 1000ms infinite linear;
+    animation: spin 1000ms infinite linear;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+
+
+
+
+
+/** menu **/
+.menuTab {
+    position: absolute;
+    width: 12%;
+    background: #313642;
+    top: 200px;
+    margin-left: 7%;
+    min-height: 30px;
+    z-index: 9;
+    border-top: 4px solid #961c1c;
+}
+
+.sack {
+    width: 100%;
+    padding: 20px;
+}
+
+.menuTab.show {
+    margin-left: 0%;
+    transition: all 0.5s ease-out;
+    -webkit-transition: all 0.5s ease-out;
+}
+
+.pageTab.active, .pageTab:hover {
+    border: 2px solid #666;
+}
+
+    .pageTab.active .tabing, .pageTab:hover .tabing {
+        background: #961c1d;
+    }
+
+.menuTab a {
+    width: 100%;
+    color: #ddd;
+}
+
+.pageTab {
+    width: 100%;
+    text-align: center;
+    color: #ddd;
+    padding: 10px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.tabing {
+    width: 100%;
+    height: 100%;
+    padding: 10px 5px 10px 5px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+
+    .tabing i {
+        width: 100%;
+        text-align: center;
+        font-size: 22px;
+    }
+
+    .tabing span {
+        width: 100%;
+        margin-top: 10px;
+        font-weight: bold;
+        font-size: 13px;
+    }
+
+.log.smack {
+    width: 100%;
+    background: #333;
+    color: #fff;
+    padding: 7px;
+}
+
+    .log.smack i {
+        margin-left: 22%;
+        font-size: 14px;
+        margin-right: 4px;
+        margin-top: 2px;
+    }
+
+    .log.smack span {
+        font-weight: normal;
+        font-size: 13px;
+    }
+
+.mylog {
+    display: none;
+}
+
+
+
+
+
+
+
+/** content continues **/
+.center {
+    text-align: center;
+}
+
+p.center {
+    font-size: 14px;
+    width: 100%;
+}
+
+footer {
+    width: 100%;
+}
+
+.foot {
+    width: 100%;
+    text-align: center;
+    background: #ce3535;
+    color: #fff;
+    font-size: 15px;
+    padding: 10px;
+}
+
+.power {
+    background: #eee;
+    width: 100%;
+    height: 50px;
+}
+
+    .power img {
+        float: right;
+        height: 100%;
+        margin-right: 10%;
+    }
+
+    .power span {
+        color: #aaa;
+        font-size: 17px;
+        float: right;
+        height: 100%;
+        padding-top: 13px;
+        font-weight: bold;
+        margin-right: 5px;
+    }
+
+.tabs {
+    width: 100%;
+}
+
+.tab-links {
+    background: #ddd;
+    width: 100%;
+    padding: 0px;
+    margin-top: -24px;
+}
+
+
+
+
+
+    /*----- Tab Links -----*/
+    /* Clearfix */
+    .tab-links li {
+        list-style: none;
+    }
+
+    .tab-links a {
+        padding: 10px 20px 10px 20px;
+        background: #ddd;
+        font-size: 16px;
+        font-weight: 600;
+        color: #aaa;
+        transition: all linear 0.15s;
+    }
+
+        .tab-links a:hover {
+            background: #ddd;
+            text-decoration: none;
+        }
+
+li.active a, li.active a:hover {
+    background: #fff;
+    color: #4286f4;
+}
+/*----- Content of Tabs -----*/
+.tab-content {
+    background: #fff;
+    width: 100%;
+    padding: 20px 0px 20px 0px;
+}
+
+.tab {
+    display: none;
+    width: 100%;
+}
+
+    .tab.active {
+        display: block;
+        width: 100%;
+    }
+
+    .tab .coupon i {
+        font-size: 44px;
+    }
+
+    .tab .list {
+        padding-left: 15px;
+    }
+
+        .tab .list span {
+            font-weight: bolder;
+            font-size: 14px;
+        }
+
+    .tab button {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        width: 33%;
+        font-weight: bold;
+        margin-top: 35px;
+        margin-bottom: 35px;
+        margin-left: 33%;
+    }
+
+
+
+
+
+.comment {
+    width: 90%;
+    margin-left: 5%;
+    border-left: 2px solid #ccc;
+    margin-top: 20px;
+    padding: 0px 30px 0px 30px;
+}
+
+.caseBody .comment:nth-child(2) {
+    border: 0px solid transparent;
+}
+
+.ini {
+    width: 40px;
+    height: 40px;
+    padding: 7px;
+    text-align: center;
+    background: green;
+    color: #fff;
+    font-size: 18px;
+    margin-left: -51px;
+    margin-top: -15px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border: 2px solid #fff;
+}
+
+.commenter {
+    font-weight: bold;
+    font-size: 12px;
+    margin-right: 40px;
+}
+
+.comment span {
+    color: #aaa;
+    font-size: 12px;
+}
+
+.comment i {
+    float: right;
+    margin-right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.commentTopic {
+    width: 100%;
+    font-weight: bold;
+}
+
+.commentBody {
+    width: 100%;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.addComment {
+    width: 100%;
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+
+    .addComment span {
+        float: right;
+        color: #4286f4;
+        cursor: pointer;
+        font-weight: normal;
+    }
+
+    .addComment i {
+        float: right;
+        margin-right: 6px;
+    }
+
+.online, .offline {
+    width: 12px;
+    height: 12px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    background: #ccc;
+    margin-left: -25px;
+    margin-top: 13px;
+}
+
+.online {
+    background: #62f442;
+}
+
+.case {
+    width: 100%;
+    padding: 10px;
+}
+
+.caseHead {
+    font-size: 18px;
+    font-weight: bold;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.caseHeader {
+    font-size: 25px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.caseBody {
+    font-size: 15px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+    .caseBody ul.pin {
+        width: 100%;
+        list-style-type: none;
+        padding: 0px;
+    }
+
+        .caseBody ul.pin li {
+            width: 100%;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+            .caseBody ul.pin li i {
+                width: 8%;
+                height: 100%;
+                font-size: 25px;
+                text-align: center;
+            }
+
+            .caseBody ul.pin li span {
+                font-size: 16px;
+                width: 90%;
+                float: right;
+            }
+
+.curri {
+    width: 100%;
+    border: 1px solid #ddd;
+    margin-bottom: 50px;
+}
+
+.curriHead {
+    width: 100%;
+    padding: 16px;
+    font-weight: bold;
+}
+.curriHead{
+    line-height:0.1;
+    
+}
+
+.curriBody {
+    width: 100%;
+    background: #eee;
+    padding: 15px;
+    font-weight: bold;
+    font-size:x-large;
+}
+
+    .curriBody span {
+        width: 100%;
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .curriBody p {
+        width: 100%;
+        font-size: 14px;
+    }
+
+form {
+    width: 90%;
+    margin-left: 5%;
+    padding: 30px;
+    border: 1px solid #ddd;
+}
+
+textarea {
+    width: 100%;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    background: transparent;
+    border: 2px solid rgba(66, 134, 244, 0.3);
+    height: 80px;
+    padding: 10px;
+    color: #aaa;
+    font-size: 20px;
+}
+
+    textarea::placeholder {
+        color: #ccc;
+        font-style: italic;
+    }
+
+form a {
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+    font-size: 13px;
+    margin-top: 10px;
+    float: right;
+}
+
+    form a i {
+        font-size: 15px;
+        color: #fff;
+        margin-right: 7px;
+    }
+
+.change {
+    width: 100%;
+    padding: 7px;
+}
+
+span {
+    font-weight: bold;
+    font-size: 15px;
+    margin-right: 7px;
+}
+
+select {
+    height: 35px;
+    margin-top: -24px;
+    width: 225px;
+    border: 1px solid #ddd;
+    color: #aaa;
+    font-weight: bold;
+}
+
+.hider {
+    width: 100%;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    color: #fff;
+}
+
+.hiderHead {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    background: #aaa;
+    cursor: pointer;
+}
+
+    .hiderHead i {
+        color: #fff;
+        font-size: 22px;
+        margin-right: 15px;
+    }
+
+.hiderBody {
+    padding: 20px;
+    overflow: hidden;
+    display: none;
+    font-size: 14px;
+    color: #444;
+}
+
+.slab {
+    width: 100%;
+    margin-bottom: 6px;
+}
+
+.slabL, .slabR {
+    width: 50%;
+}
+
+.slabL {
+    color: #aaa;
+    font-style: italic;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.slabR {
+    color: #333;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.bigHead {
+    width: 100%;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: 60px;
+}
+
+.underline {
+    width: 33%;
+    height: 3px;
+    background: #111;
+    margin-left: 33%;
+    margin-bottom: 30px;
+}
+
+
+form.report {
+    padding: 0px;
+    margin-top: 60px;
+    width: 100%;
+    margin-left: 0%;
+    border: 0px solid transparent;
+}
+
+label {
+    float: left;
+    width: 100%;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form.report input {
+    width: 100%;
+    height: 35px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 15px;
+}
+
+form.report textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    height: 120px;
+    margin-bottom: 20px;
+}
+
+
+
+.videoTab {
+    width: 100%;
+    background: #fff;
+    padding: 20px 0px 20px 0px;
+}
+
+video, .viewArea {
+    width: 100%;
+}
+
+    .viewArea img {
+        width: 100%;
+    }
+
+.hightlight {
+    float: left;
+    width: 100%;
+    padding: 10px;
+    padding-left: 25px;
+    background: #222;
+    color: #fff;
+}
+
+    .hightlight button {
+        margin-bottom: 5px;
+        font-size: 12px;
+        width: auto;
+    }
+
+.vTopic {
+    width: auto;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.vTime {
+    width: 100%;
+    font-size: 13px;
+    color: #555;
+}
+
+
+
+
+
+/**profile page **/
+
+.col12 {
+    width: 92%;
+    margin-left: 4%;
+    border: 1px solid #ddd;
+    padding: 15px;
+    padding-bottom: 100px;
+}
+
+.profile {
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 100px;
+}
+
+.prob {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.label {
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 7px;
+    width: 20%;
+    padding-left: 30px;
+    color:#000
+}
+
+.input {
+    width: 60%;
+}
+
+    .input input {
+        width: 100%;
+        height: 30px;
+        padding: 5px 15px 5px 15px;
+    }
+
+        .input input.halfer {
+            width: 35%;
+            margin-right: 10px;
+        }
+
+
+
+
+/** vid **/
+
+.boxes {
+    width: 100%;
+    border-top: 3px solid #4286f4;
+    margin-top: 25px;
+    padding-bottom: 100px;
+}
+
+.boxes1 {
+    width: 100%;
+    border-top: 3px solid #0a9cb7;
+    margin-top: 25px;
+    padding-bottom: 100px;
+}
+
+.col44 {
+    width: 23%;
+    margin-right: 2%;
+    border: 0px solid transparent;
+    padding-top: 0px;
+    margin-top: 15px;
+}
+
+.coursePlay i {
+    width: 100%;
+    padding: 25px;
+    color: #555;
+    font-size: 60px;
+    text-align: center;
+}
+
+.col44 b {
+    margin-left: 0px;
+}
+
+.holder {
+    width: auto;
+    margin-bottom: 10px;
+}
+
+.stars {
+    width: 100%;
+    padding: 0px 10px 0px 10px;
+}
+
+    .stars i.mark {
+        color: #f2ea4f;
+        font-size: 20px;
+        float: right;
+    }
+
+    .stars i.unmark {
+        color: #ccc;
+        font-size: 20px;
+        float: right;
+    }
+
+
+
+
+
+.loginBox {
+    width: 100%;
+    margin-top: 100px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border: 1px solid #aaa;
+    padding: 15px 30px 15px 30px;
+}
+
+.loginTop {
+    width: 100%;
+    border-bottom: 1px solid #aaa;
+    padding: 5px 0px 25px 0px;
+    color: #fff;
+}
+
+.nick {
+    width: 33%;
+    margin-left: 38%;
+}
+
+    .nick i {
+        margin-right: 5px;
+    }
+
+form.loginForm {
+    border: 0px solid transparent;
+    width: 100%;
+    padding: 0px;
+    padding-top: 40px;
+    float: left;
+}
+
+    form.loginForm label {
+        color: #fff;
+        width: 100%;
+        font-size: 13px;
+        font-weight: normal;
+        margin-bottom: 10px;
+    }
+
+    form.loginForm input[type="email"], form.loginForm input[type="password"] {
+        width: 90%;
+        height: 35px;
+        padding: 5px 15px 5px 15px;
+        border: 1px solid #aaa;
+        background: transparent;
+        color: #fff;
+        font-size: 13px;
+        float: left;
+        margin-bottom: 10px;
+    }
+
+    form.loginForm h4 {
+        width: 100%;
+        font-size: 11px;
+        color: #fff;
+        margin-top: 20px;
+    }
+
+        form.loginForm h4 input {
+            margin-top: 0px;
+        }
+
+    form.loginForm input[type="submit"] {
+        width: 90%;
+        margin-top: 20px;
+        background: #AB192D;
+        color: #fff;
+        font-size: 14px;
+        height: 35px;
+        border: 0px solid transparent;
+        font-weight: bold;
+    }
+
+    form.loginForm h5 {
+        font-size: 12px;
+        width: 65%;
+        text-align: center;
+    }
+
+.live {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    overflow-y: auto;
+    background-size: cover;
+    background-position: center;
+    background-image: url('/Content/img/login.jpg');
+}
+
+.double, .double2 {
+    width: 50%;
+    padding: 100px;
+    padding-top: 20px;
+}
+
+.welcome {
+    width: 100%;
+    color: #fff;
+    margin-top: 160px;
+}
+
+.up {
+    font-size: 32px;
+    width: 100%;
+}
+
+.down {
+    font-size: 16px;
+    width: 100%;
+}
+
+
+
+
+/** noty and msg pop **/
+
+.infoTab {
+    width: 100%;
+    padding: 5px 15px 5px 15px;
+    border-bottom: 1px solid #ddd;
+    font-size: 11px;
+}
+
+    .infoTab a p {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        color: #aaa;
+    }
+
+        .infoTab a p b {
+            font-weight: bold;
+        }
+
+    .infoTab b {
+        font-weight: normal;
+    }
+
+    .infoTab .infoAct {
+        float: right;
+        cursor: pointer;
+        font-size: 10px;
+        font-weight: bold;
+    }
+
+.msgBox .infoAct {
+    color: #AB192D;
+}
+
+.notyBox .infoAct {
+    color: #4286f4;
+}
+
+.popBox {
+    position: fixed;
+    width: 300px;
+    float: right;
+    top: 50px;
+    z-index: 30;
+    background: #fff;
+    box-shadow: 0px 10px 10px rgba(58, 58, 58, 0.1);
+    display: none;
+}
+
+    .popBox.showPop {
+        display: block;
+    }
+
+.msgBox {
+    border-top: 3px solid #AB192D;
+    right: 30%;
+}
+
+.notyBox {
+    border-top: 3px solid #4286f4;
+    right: 26%;
+}
+
+.msgBox .hD {
+    color: #AB192D;
+}
+
+.notyBox .hD {
+    color: #4286f4;
+}
+
+.msgBox .eD {
+    background: #AB192D;
+}
+
+.notyBox .eD {
+    background: #4286f4;
+}
+
+.bD {
+    max-height: 300px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.hD {
+    width: 100%;
+    padding: 7px;
+    font-size: 14px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.eD {
+    width: 100%;
+    margin-top: 15px;
+    padding: 5px 10px 5px 10px;
+    text-align: center;
+    color: #fff;
+    font-size: 12px;
+}
+
+.probBox {
+    width: 150px;
+    padding: 5px;
+    background: #fff;
+    box-shadow: 0px 10px 10px rgba(58, 58, 58, 0.3);
+    float: right;
+    right: 10%;
+    position: fixed;
+    top: 50px;
+    z-index: 30;
+    display: none;
+}
+
+    .probBox.showPop {
+        display: block;
+    }
+
+    .probBox a {
+        width: 100%;
+    }
+
+        .probBox a span {
+            width: 100%;
+            font-weight: normal;
+            font-size: 14px;
+            padding: 7px;
+            padding-left: 15px;
+            color: #aaa;
+        }
+
+
+/** video **/
+
+
+
+.vLike {
+    float: right;
+    width: auto;
+}
+
+    .vLike i {
+        font-size: 14px;
+        color: #fff;
+        margin-right: 4px;
+        cursor: pointer;
+    }
+
+    .vLike span {
+        font-size: 14px;
+        color: #fff;
+        font-weight: normal;
+        margin-right: 15px;
+    }
+
+.lessonTab {
+    width: 100%;
+    background: #fff;
+    padding: 13px 10px 13px 20px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.module {
+    width: 16%;
+    text-align: center;
+    color: #333;
+    background: #aaa;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    padding: 4px;
+    font-weight: bold;
+}
+
+.lessonTab.active .module {
+    background: #4286f4;
+    color: #fff;
+}
+
+.moduleTp {
+    width: 84%;
+    padding: 4px 10px;
+}
+
+.moduleT {
+    font-weight: bold;
+    color: #666;
+}
+
+.lessonTab.active .moduleT {
+    color: #4286f4;
+}
+
+    .lessonTab.active .moduleT i {
+        color: #4286f4;
+    }
+
+.moduleT i {
+    color: #bbb;
+    float: right;
+    font-size: 12px;
+}
+
+.col99 {
+    width: 74%;
+    float: right;
+    margin-right: 5%;
+    padding-left: 15px;
+    display: none;
+}
+
+    .col99.show {
+        display: block;
+    }
+
+.courseMenu {
+    width: 21%;
+    border-right: 2px solid #4286f4;
+    margin-top: 70px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+}
+
+.courseMod {
+    width: 100%;
+    height: 500px;
+    overflow-y: auto;
+}
+
+.Lessona {
+    width: 100%;
+}
+
+.nextLesson {
+    width: 100%;
+    padding: 20px 25px 20px 30px;
+    background: #4286f4;
+    color: #fff;
+}
+
+    .nextLesson span {
+        font-size: 14px;
+        font-weight: normal;
+        margin-right: 10px;
+    }
+
+    .nextLesson i {
+        font-size: 14px;
+        margin-top: 3px;
+        margin-right: 10px;
+    }
+
+    .nextLesson b {
+        font-size: 14px;
+    }
+
+.videoTopic {
+    width: 100%;
+    padding: 25px 0px 15px 0px;
+}
+
+.topicTop {
+    width: 100%;
+    padding-left: 5px;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.topicBtm {
+    width: 100%;
+    padding-left: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #aaa;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    padding-top: 7px;
+}
+
+
+@media(max-width: 1200px) {
+    .col8 {
+        width: 50%;
+    }
+
+    .col4 {
+        width: 50%;
+    }
+
+    .headcrum {
+        font-size: 18px;
+    }
+
+    .bodycrum {
+        font-size: 15px;
+    }
+
+    .line button span {
+        display: none;
+    }
+
+    .half {
+        width: 100%;
+        margin: 0;
+    }
+
+    .double {
+        width: 40%
+    }
+
+    .double2 {
+        width: 60%;
+    }
+
+    .col99 {
+        width: 65%;
+    }
+
+    .courseMenu {
+        width: 30%;
+    }
+
+    .courseMod {
+        height: 400px;
+    }
+}
+
+
+
+
+
+
+
+@media(max-width: 960px) {
+    .col33 {
+        width: 48%;
+        margin-left: 1%;
+        margin-right: 1%;
+        margin-bottom: 15px;
+    }
+
+    .col2 {
+        width: 30%;
+        padding: 5px;
+    }
+
+    .half {
+        padding-left: 25%;
+    }
+
+    .menuTab {
+        width: 15%;
+        margin-left: 4%;
+        border-top: 19px solid #961c1c;
+    }
+
+    .sack {
+        padding: 15px;
+    }
+
+    .pen button {
+        font-size: 13px;
+    }
+
+    .double {
+        width: 30%;
+        padding: 20px;
+    }
+
+    .up {
+        font-size: 17px;
+    }
+
+    .down {
+        font-size: 14px;
+    }
+
+    .double2 {
+        width: 70%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+@media(max-width: 800px) {
+    header {
+        height: 50px;
+    }
+
+        header ul {
+            margin-top: 10px;
+            margin-right: 0px;
+        }
+
+    .wrapper {
+        margin-top: 50px;
+    }
+
+    header ul li {
+        margin-right: 20px;
+    }
+
+        header ul li i {
+            font-size: 20px;
+        }
+
+        header ul li h6 {
+            font-size: 14px;
+        }
+
+        header ul li span {
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+        }
+
+    .col4 {
+        display: none;
+    }
+
+    .col9 {
+        width: 100%;
+    }
+
+    .col2 {
+        width: 100%;
+    }
+
+    .pod {
+        width: 50%;
+        min-height: 220px;
+    }
+
+    .space {
+        display: none;
+    }
+
+    .menuTab {
+        margin-left: 0px;
+        top: 50px;
+        position: fixed;
+        overflow-y: auto;
+        height: 100vh;
+        width: 17%;
+        border-top: 0px solid transparent;
+    }
+
+    .mylog {
+        display: block;
+    }
+
+    .log {
+        display: none;
+    }
+
+    .sack {
+        padding: 5px;
+        padding-bottom: 50px;
+    }
+
+    .tabing span {
+        font-size: 11px;
+    }
+
+    .tabing i {
+        font-size: 17px;
+    }
+
+
+    .col44 {
+        width: 48%;
+        margin-right: 2%;
+    }
+
+    .col99 {
+        width: 90%;
+        margin-left: 5%;
+        float: left;
+    }
+
+    .courseMenu {
+        width: 90%;
+        margin-left: 5%;
+        margin-top: 20px;
+        padding-right: 0px;
+        border-right: 0px solid transparent;
+    }
+
+    .courseMod {
+        height: auto;
+    }
+
+    .module {
+        width: 40px;
+    }
+}
+
+
+
+
+
+@media(max-width: 768px) {
+    .double, .double2 {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .double {
+        text-align: center;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .welcome {
+        margin-top: 70px;
+    }
+
+    .loginBox {
+        margin-top: 50px;
+    }
+}
+
+
+
+
+
+@media(max-width: 580px) {
+    .col8 {
+        width: 100%;
+    }
+
+    .breadcrum {
+        height: 150px;
+    }
+
+    .searchbox {
+        width: 72%;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+        .searchbox input {
+            width: 90%;
+        }
+
+    header ul li h6 {
+        display: none;
+    }
+
+    .menuTab {
+        width: 20%;
+    }
+
+    .halves {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .btnMid {
+        width: 70%;
+        margin-left: 15%;
+    }
+
+    .label {
+        padding-left: 0px;
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .input {
+        width: 100%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+@media(max-width: 500px) {
+    header .menuBtn {
+        display: block;
+    }
+
+    .menuTab {
+        width: 60px;
+        margin-left: -60px;
+        transition: all 0.5s ease-out;
+        -webkit-transition: all 0.5s ease-out;
+    }
+
+    .tabing {
+        background: transparent;
+    }
+
+        .tabing span {
+            display: none;
+        }
+
+        .tabing i {
+            font-size: 25px;
+        }
+
+    .pageTab {
+        margin-bottom: 10px;
+    }
+
+        .pageTab:hover {
+            border: 0px solid transparent;
+        }
+
+            .pageTab:hover .tabing {
+                background: transparent;
+            }
+
+    .breadcrum {
+        padding-left: 10%;
+    }
+
+    .searchbox {
+        width: 90%;
+    }
+
+    .content {
+        padding-left: 0px;
+    }
+
+    .col33 {
+        width: 96%;
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+
+    .pod {
+        width: 100%;
+    }
+
+    .half {
+        padding-left: 0px;
+        width: 50%;
+    }
+
+    .btnLarge {
+        width: 100%;
+        margin-left: 0px;
+    }
+
+    header img {
+        display: none;
+    }
+
+    .tab-links li {
+        width: 100%;
+    }
+
+        .tab-links li a {
+            width: 100%;
+            font-size: 13px;
+            text-align: center;
+        }
+
+    .comment span {
+        display: none;
+    }
+
+    .tab .btnLarge {
+        width: 100%;
+        margin-left: 0px;
+    }
+
+    .col44 {
+        width: 100%;
+        margin-right: 0px;
+    }
+
+    .col99 {
+        width: 100%;
+        margin-left: 0%;
+        margin-right: 0%;
+        padding: 0px;
+    }
+
+    .btnPink.btnHerd {
+        float: left;
+        margin-left: 5%;
+    }
+}
+
+
+@media(max-width: 480px) {
+    .popBox {
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+        right: 0;
+    }
+
+    .bD {
+        max-height: 75vh;
+    }
+}

@@ -1,0 +1,398 @@
+﻿@{
+    ViewBag.Title = "Employee Records";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .ui-datepicker, .ui-datepicker div, .ui-datepicker span,
+    .ui-datepicker input, .ui-datepicker textarea,
+    .ui-datepicker button, .ui-datepicker ul,
+    .ui-datepicker li, .ui-datepicker i, .ui-datepicker h1,
+    .ui-datepicker h2, .ui-datepicker h3, .ui-datepicker h4,
+    .ui-datepicker h5, .ui-datepicker h6, .ui-datepicker textarea, .ui-datepicker sup,
+    .ui-datepicker video, .ui-datepicker table, .ui-datepicker tr, .ui-datepicker td, .ui-datepicker th, .ui-datepicker tbody,
+    .ui-datepicker thead {
+        float: none;
+    }
+
+    .tanHP {
+        background: #fff;
+        border-radius: 0;
+    }
+
+    .searchT {
+        border: 1px solid #eee;
+    }
+
+    .pinA select {
+        border: 1px solid #ddd;
+    }
+
+    .pinA span {
+        font-weight: bold;
+        margin-top: 3px;
+    }
+
+
+    table.courselist {
+        width: 100%;
+        font-size: 13px;
+        border: 1px solid #eaeaea !important;
+    }
+
+    .courselist thead {
+        width: 100%;
+        color: #19535f;
+        font-weight: bold;
+        font-size: 13px;
+        border-top: 0px solid transparent;
+        background: #ddd;
+        font-weight: bold;
+        font-size: 13px;
+        border-bottom: 2px solid #28A7BE;
+    }
+
+    .courselist tbody {
+        width: 100%;
+    }
+
+    .courselist tr {
+        width: 100%;
+    }
+
+    .courselist tbody tr:last-child {
+        border: none;
+    }
+
+    .courselist tr td {
+        padding: 10px;
+    }
+
+        .courselist tr td:nth-child(1) {
+            width: 10% !important;
+        }
+
+        .courselist tr td:nth-child(2) {
+            width: 20% !important;
+        }
+
+        .courselist tr td:nth-child(3) {
+            width: 25% !important;
+        }
+
+    .courselist tbody tr td:nth-child(1) {
+        border-right: 2px solid #f0f3f5;
+    }
+
+    .courselist tbody tr td:nth-child(2) {
+        border-right: 2px solid #f0f3f5;
+    }
+
+    .courselist tbody tr td:nth-child(3) {
+        border-right: 2px solid #f0f3f5;
+    }
+
+    .courselist tbody tr td:nth-child(4) {
+        border-right: 2px solid #f0f3f5;
+    }
+
+    .courselist tr td a {
+        color: #00d7ff;
+    }
+
+    .courselist tr td:nth-child(4), .courselist tr td:nth-child(5), .courselist tr td:nth-child(6) {
+        width: 20% !important;
+    }
+
+    .courselist tr td:nth-child(7) {
+        width: 15% !important;
+    }
+
+    .courselist tbody tr {
+        margin-top: 0px;
+        border-bottom: 2px solid #f0f3f5;
+    }
+
+        .courselist tbody tr td a button {
+            margin: 0;
+        }
+
+    .counter {
+        padding: 10px;
+        float: right;
+        font-size: 15px;
+        background: #ddd;
+        width: 100%;
+    }
+
+        .counter i {
+            background: #fff;
+            color: #000;
+        }
+
+    .alert.alert-danger, .alert.alert-success, .alert.alert-info, .alert.alert-warning {
+        width: 70%;
+        margin-top: 20px;
+    }
+
+    .formArea {
+        width: 100%;
+        margin-top: 20px;
+        padding-bottom: 60px;
+        float: left;
+    }
+
+    .formBox1 .label {
+        width: 100%;
+        margin-bottom: 10px;
+        font-weight: bold;
+        font-size: 13px;
+        float: left;
+    }
+
+    .formBox1 input, .formBox1 textarea, .formBox1 select {
+        width: 100%;
+        height: 30px;
+        padding: 5px;
+        font-size: 15px;
+        border: 1px solid rgba(0, 0, 0, 0.39);
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        float: left;
+    }
+
+    .formBox1 textarea {
+        height: 100px;
+    }
+
+    .formBox1 button {
+        background: #760f91;
+        border: none;
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        color: #fff;
+        height: 30px;
+        width: 120px;
+        margin-top: -30px;
+        float: right;
+    }
+
+    .bDGreen {
+        border-bottom: 3px solid #2fbf71;
+    }
+
+    .bkGreen {
+        background: #2fbf71;
+    }
+
+    .bkRed {
+        background: #ab192d;
+    }
+
+    jconfirm div {
+        float: none !important;
+    }
+
+    .jconfirm .jconfirm-holder {
+        margin: 0 40%;
+    }
+
+    .jconfirm-content {
+        padding-top: 20px;
+    }
+
+        .jconfirm-content div {
+            font-weight: 700;
+        }
+
+    .jconfirm-type-orange .jconfirm-content div {
+        color: red;
+    }
+
+    .jconfirm.jconfirm-light .jconfirm-box {
+        padding: 20px 25px 10px 25px;
+    }
+
+    .jconfirm .jconfirm-box-container.jconfirm-no-transition {
+        margin: 0px;
+        width: 100%;
+    }
+
+    .Pending {
+        color: #E68618;
+    }
+
+    .Approved {
+        color: #38C64E;
+    }
+
+    .Rejected {
+        color: #DA3024;
+    }
+
+    .NotSeen {
+        color: #E68618;
+    }
+
+    .Yes {
+        color: #38C64E;
+    }
+
+    .No {
+        color: #DA3024;
+    }
+</style>
+<div class="banner1 bkCyanBlue">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>Employee Records</span>
+</div>
+
+<div class="content1" style="min-height: 90vh;" ng-controller="employeelisting as vm" ng-cloak="">
+
+    <div class="boxHead1" ng-init="vm.loadEmployee('@Url.Content("~/api/employee/getemployees")')">
+        <div class="boxHeader1 bDCyanBlue">Employee List</div>
+    </div>
+
+    <div class="boxBody1">
+        <div class="tanHead tanHP" style="background: #fff;border-bottom:0px solid transparent;">
+            <form ng-submit="vm.filterSearch()" style="width:100%">
+                <input type="text" ng-model="vm.search.keywords" class="searchT" placeholder="Employee Search ...">
+                <div class="pinA">
+                    <span>Filter by:</span>
+                    @Html.DropDownList("group", null, "All Groups", new { ng_model = "vm.search.group", ng_change = "vm.filterSearch()", convert_to_number = "" })
+                </div>
+            </form>
+        </div>
+
+        <div class="tableRanch">
+            <table class="courselist">
+                <thead>
+                    <tr>
+                        <td>Staff ID</td>
+                        <td>Name</td>
+                        <td>Group</td>
+                        <td>Branch</td>
+                        <td>Action</td>
+                    </tr>
+                </thead>
+
+                <tbody id="staff-list" ng-repeat="staff in vm.staffs">
+                    <tr>
+                        <td>{{staff.StaffId}}</td>
+                        <td><a href="~/admin/employeerecords/profiledetails/{{staff.Id}}">{{staff.FirstName}} {{staff.LastName}}</a></td>
+                        <td>{{staff.Group || 'No Group'}}</td>
+                        <td>{{staff.Branch || 'No Branch'}}</td>
+                        <td>
+                            <a class="btn1 bkSkyBlue" href='~/admin/employeerecords/profiledetails/{{staff.Id}}'>View Details</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="counter">
+            <span>Show </span>
+            <select ng-model="vm.search.pageSize" ng-change="vm.filterSearch()" convert-to-number="">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+            <span>entries </span>
+            <span>Showing {{vm.lowerBoundCount}} to {{vm.upperBoundCount}} of {{vm.total}} entries</span>
+
+            <a href="javascript:;" ng-show="vm.hasPrevious" ng-click="vm.previousPage()"><i class="material-icons">keyboard_arrow_left</i></a>
+            <a href="javascript:;" ng-show="vm.hasNext" ng-click="vm.nextPage()"> <i class="material-icons">keyboard_arrow_right</i></a>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/content/js/angular.min.js"></script>
+    <script src="~/Content/js/httpservice.js"></script>
+    <script>
+        angular.module('sterlinglms', ['requestSvc'])
+            .config(function ($httpProvider) {
+                $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+            }).directive("convertToNumber", function () {
+                return {
+                    restrict: "A",
+                    require: "ngModel",
+                    link: function (scope, element, attrs, ngModel) {
+                        ngModel.$parsers.push(function (val) {
+                            return val ? parseInt(val, 10) : "";
+                        });
+                        ngModel.$formatters.push(function (val) {
+                            return val ? "" + val : "";
+                        });
+                    }
+                };
+            }).controller('employeelisting', ['httpRequestSvc', '$scope', function (http, scope) {
+                var cacheUrl, vm = this, def = 1;
+                vm.search = { pageIndex: def, pageSize: 10 };
+
+                vm.loadEmployee = function (url) {
+                    cacheUrl = url;
+                    updateStaffList(url, vm.search);
+                }
+
+                vm.nextPage = function () {
+                    if (vm.hasNext)
+                        vm.search.pageIndex++;
+                    updateStaffList(cacheUrl, vm.search);
+                }
+
+                vm.previousPage = function () {
+                    if (vm.hasPrevious) {
+                        vm.search.pageIndex--;
+                        updateStaffList(cacheUrl, vm.search);
+                    }
+                }
+
+                vm.filterSearch = function () {
+                    updateStaffList(cacheUrl, vm.search);
+                    resetPage();
+                }
+
+                function resetPage() {
+                    vm.search.pageIndex = def;
+                }
+
+                function updateUpperBoundCount(index, size, total) {
+                    if (total < size)
+                        return total;
+
+                    return index <= 0 ? (def * size) : size * index;
+                }
+
+                function updateLowerBoundCount(index, size, total) {
+                    if (total <= 0)
+                        return total;
+
+                    return (size * (index - def)) + def;
+                }
+
+                function updateStaffList(url, data) {
+                    http.get(url, data).then(function (response) {
+
+                        vm.staffs = response.Result.Records;
+                        vm.total = response.Result.Total;
+
+                        vm.hasNext = vm.total > (vm.search.pageIndex * vm.search.pageSize);
+                        vm.hasPrevious = vm.search.pageIndex > def;
+
+                        vm.lowerBoundCount = updateLowerBoundCount(data.pageIndex, data.pageSize, vm.total);
+                        vm.upperBoundCount = updateUpperBoundCount(data.pageIndex, data.pageSize, vm.total);
+
+                    }).catch(function (err) {
+
+                        alert('an error occurred.');
+                    });
+                }
+            }]);
+
+        angular.element(function () {
+            angular.bootstrap(document, ['sterlinglms']);
+        });
+
+    </script>
+}

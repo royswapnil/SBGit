@@ -1,0 +1,260 @@
+﻿
+<script id="ExamQuestions" type="x-tmpl-mustache">
+    <div class="pull-right qnumbering" style="margin-bottom: 10px">
+        {{#array}}
+        <div data-id="{{Id}}" data-sort="{{SortOrder}}" class="btn-group">
+            <a href="javascript:void" class="btn btn-inline btn-secondary-outline getquestion"></a>
+        </div>
+        {{/array}}
+
+        {{^array}}
+        <div data-id="0" data-sort="1" class="btn-group active">
+            <a href="javascript:void" class="btn btn-inline btn-secondary-outline getquestion">1</a>
+        </div>
+        {{/array}}
+
+        <div class="btn-group excludeSort">
+            <a href="javascript:void" class="btn btn-inline btn-secondary-outline addquestion"><i class="fa fa-plus green"></i></a>
+        </div>
+    </div>
+    {{#array}}
+
+    <div class="question row full-width" data-id="{{Id}}" data-sort="{{SortOrder}}" style="display:none">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <button class="noMarg pull-right btnSmaller btnRed delete-question">Delete this question</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="">Question</label>
+                        <textarea class="questionText form-control">{{Question}}</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="">Question Mark Weight</label>
+                        <input name="Weight" min="0" type="number" value="{{Weight}}" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+        
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="">Answer Presentation</label>
+                        <select class="AnswerType form-control">
+                            <option value="select">Select List</option>
+                            <option value="radio">Radiolist</option>
+                            <option style="display:none" value="textbox">Textbox</option>
+                            <option value="checkbox">Checkbox</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <div class="row optionPanel" style="margin: 0;">
+
+                        <label for="" style="margin-bottom: 15px;">Answer Options <small class="red">(Mark checkbox of correct answer)</small></label>
+
+                        <div class="col-sm-12 bordered-section" style="margin-bottom: 30px;padding: 30px;">
+
+                            {{#Options}}
+                            <div class="form-group option" data-id="{{Id}}">
+                                <div class="questionPanel">
+                                    <textarea class="form-control" type="text">{{Title}}</textarea>
+                                </div>
+                                <div class="settingPanel">
+                                    <input class="form-control" type="checkbox" style="display: block;margin-bottom: 13px;" {{#IsAnswer}}checked{{/IsAnswer}}>
+                                    <a style="display: block;padding-top: 5px;" class="delete-option"><i class="fa fa-trash"></i></a>
+                                </div>
+
+                            </div>
+                            {{/Options}}
+
+                            {{^Options}}
+                            <div class="form-group option" data-id="0">
+                                <div class="questionPanel">
+                                    <textarea class="form-control" type="text"></textarea>
+                                </div>
+                                <div class="settingPanel">
+                                    <input class="form-control" type="checkbox" style="display: block;margin-bottom: 13px;">
+                                    <a style="display: block;padding-top: 5px;" class="delete-option"><i class="fa fa-trash"></i></a>
+                                </div>
+
+                            </div>
+                            <div class="form-group option" data-id="0">
+                                <div class="questionPanel">
+                                    <textarea class="form-control" type="text"></textarea>
+                                </div>
+                                <div class="settingPanel">
+                                    <input class="form-control" type="checkbox" style="display: block;margin-bottom: 13px;">
+                                    <a style="display: block;padding-top: 5px;" class="delete-option"><i class="fa fa-trash"></i></a>
+                                </div>
+
+                            </div>
+                            {{/Options}}
+
+
+                            <div class="row" style="margin: 10px 0;">
+                                <button class="btn bkSkyBlue" id="addNewOption" style="margin-bottom: 10px; float: right;">
+                                    Add New Option	<i class="fa fa-plus pull-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+            <div class="row AnswerSelection" style="display:none">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="">Answer Selection Logic</label>
+                        <select class="AnswerSelection form-control">
+                            <option value="0">OR</option>
+                            <option value="1">AND</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin: 10px 0;text-align: center;">
+                <button class="btn btnBlue" id="saveQuestion">
+                    Save Question
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+    {{/array}}
+
+    {{^array}}
+    <div class="question row full-width" data-id="0" data-sort="1">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <button class="noMarg pull-right btnSmaller btnRed delete-question">Delete this question</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="">Question</label>
+                        <textarea class="questionText form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="">Question Mark Weight</label>
+                        <input name="Weight" min="0" type="number" value="1" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="">Answer Presentation</label>
+                        <select class="AnswerType form-control">
+                            <option value="select">Select List</option>
+                            <option value="radio">Radiolist</option>
+                           <option style="display:none" value="textbox">Textbox</option>
+                            <option value="checkbox">Checkbox</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <div class="row optionPanel" style="margin: 0;">
+
+                        <label for="" style="margin-bottom: 15px;">Answer Options <small class="red">(Mark checkbox of correct answer)</small></label>
+                        
+                        <div class="col-sm-12 bordered-section " style="margin-bottom: 30px;padding: 30px;">
+                          
+                            <div class="form-group option" data-id="0">
+                                <div class="questionPanel">
+                                <textarea class="form-control" type="text"></textarea>
+                                </div>
+                                <div class="settingPanel">
+                                    <input class="form-control" type="checkbox" style="display: block;margin-bottom: 13px;">
+                                    <a style="display: block;padding-top: 5px;" class="delete-option"><i class="fa fa-trash"></i></a>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group option" data-id="0">
+                                <div class="questionPanel">
+                                    <textarea class="form-control" type="text"></textarea>
+                                </div>
+                                <div class="settingPanel">
+                                    <input class="form-control" type="checkbox" style="display: block;margin-bottom: 13px;">
+                                    <a style="display: block;padding-top: 5px;" class="delete-option"><i class="fa fa-trash"></i></a>
+                                </div>
+
+                            </div>
+
+                            <div class="row" style="margin: 10px 0;">
+                                <button class="btn bkSkyBlue" id="addNewOption" style="margin-bottom: 10px; float: right;">
+                                    Add New Option	<i class="fa fa-plus pull-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    
+                </div>
+             
+            </div>
+
+            <div class="row AnswerSelection" style="display:none">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="">Answer Selection Logic</label>
+                        <select class="AnswerSelection form-control">
+                            <option value="0">Single Answer</option>
+                            <option value="1">Multiple Answers</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row" style="margin: 10px 0;text-align: center;">
+                <button class="btn btnBlue" id="saveQuestion">
+                    Save Question
+                </button>
+            </div>
+
+        </div>
+      
+    </div>
+    {{/array}}
+
+</script>

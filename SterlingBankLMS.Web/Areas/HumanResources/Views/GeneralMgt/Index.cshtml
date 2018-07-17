@@ -1,0 +1,1156 @@
+﻿
+@{
+    ViewBag.Title = "General";
+    Layout = "~/Areas/HumanResources/Views/Shared/_HRLayout.cshtml";
+}
+<link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />
+<link href="~/Content/css/datepicker.css" rel="stylesheet" />
+<style>
+    .menuTab1 a:nth-child(1) .pageTab1 {
+        background: #AB192D;
+    }
+
+    .courselist tr td:nth-child(3) {
+        width: 10% !important;
+    }
+
+    .courselist#DepartmentTable tr td:nth-child(3) {
+        width: 35% !important;
+    }
+
+    .courselist#DepartmentTable tr td:nth-child(4) {
+        width: 10% !important;
+    }
+
+    .courselist#GroupTable tr td:nth-child(3) {
+        width: 20% !important;
+    }
+
+    .courselist#GroupTable tr td:nth-child(4) {
+        width: 10% !important;
+    }
+
+    .courselist#GroupTabletr td:nth-child(5) {
+        width: 10% !important;
+    }
+
+    .courselist#GroupTable tr td:nth-child(6) {
+        width: 10% !important;
+    }
+
+    .courselist#LineManagerTable tr td:nth-child(3) {
+        width: 20% !important;
+    }
+
+    .courselist#DepartmentGroupTable tr td:nth-child(1) {
+        width: 10% !important;
+    }
+
+    .courselist#DepartmentGroupTable tr td:nth-child(2) {
+        width: 35% !important;
+    }
+
+    .courselist#DepartmentGroupTable tr td:nth-child(3) {
+        width: 35% !important;
+    }
+
+    .courselist#DepartmentGroupTable tr td:nth-child(4) {
+        width: 10% !important;
+    }
+</style>
+
+<div class="banner1 bkCyanBlue">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>General Management</span>
+</div>
+
+
+<div class="content1">
+
+    <div id="DashboardPanel">
+        <div class="boxHead1">
+            <div class="boxHeader1 bDCyanBlue">General</div>
+        </div>
+
+        <div class="boxBody1">
+
+            <a href="" class="branch">
+                <div class="bigMenu2">
+                    <div class="smallMenu2">
+                        <i class="material-icons">list</i>
+                        <span>Manage Branches</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="" class="region">
+                <div class="bigMenu2">
+                    <div class="smallMenu2">
+                        <i class="material-icons">library_add</i>
+                        <span>Manage Regions</span>
+                    </div>
+                </div>
+            </a>
+
+
+            <a href="" class="group">
+                <div class="bigMenu2">
+                    <div class="smallMenu2">
+                        <i class="material-icons">folder_open</i>
+                        <span>Mange Groups</span>
+                    </div>
+                </div>
+            </a>
+
+
+
+            <a href="javascript:;" class="dept">
+                <div class="bigMenu2">
+                    <div class="smallMenu2">
+                        <i class="material-icons">folder</i>
+                        <span>Manage Departments</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+
+
+
+        <div class="boxHead1">
+            <div class="boxHeader1 bDGreenishBlue"></div>
+        </div>
+
+        <div class="boxBody1">
+
+            <a href="~/humanresources/generalmgt/BulkUploads">
+                <div class="bigMenu2">
+                    <div class="smallMenu2">
+                        <i class="material-icons">swap_horiz</i>
+                        <span>Bulk uploads for all</span>
+                    </div>
+                </div>
+            </a>
+
+
+        </div>
+    </div>
+
+    <div id="BranchPanel" style="display:none;">
+        <div class="boxHead1">
+            <div class="boxHeader1 bDCyanBlue"><a href="~/humanresources/generalmgt">Back to Dashboard</a> </div>
+            <button class="boxHeader1 bkGreen addBranch" style="float:right;"><a href="">Add New Branch</a> </button>
+        </div>
+        <div class="boxBody1">
+            <div class="tableRanch">
+                <table class="courselist" id="BranchTable">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td>Name of Branch</td>
+                            <td>Action</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tr class="empty">
+                        <td colspan="3">
+                            Fetching Data <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="RegionPanel" style="display:none;">
+        <div class="boxHead1">
+            <div class="boxHeader1 bDCyanBlue"><a href="~/humanresources/generalmgt">Back to Dashboard</a> </div>
+            <button class="boxHeader1 bkGreen addRegion" style="float:right;"><a href="#addRegion">Add New Region</a> </button>
+        </div>
+
+        <div class="boxBody1">
+            <div class="tableRanch">
+                <table class="courselist" id="RegionTable">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td>Name of Region</td>
+                            <td>Action</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tr class="empty">
+                        <td colspan="3">
+                            Fetching Data <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="GroupPanel" style="display:none;">
+        <div class="boxHead1">
+            <div class="boxHeader1 bDCyanBlue"><a href="~/humanresources/generalmgt">Back to Dashboard</a> </div>
+            <button class="boxHeader1 bkGreen addGroup" style="float:right;"><a href="">Add New Group</a> </button>
+        </div>
+
+        <div class="boxBody1">
+            <div class="tableRanch">
+                <table class="courselist" id="GroupTable">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td>Name of Group</td>
+                            <td>Group Head</td>
+                            <td>Staff Id</td>
+                            <td>Departments</td>
+                            <td>Action</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tr class="empty">
+                        <td colspan="6">
+                            Fetching Data <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="DepartmentGroupPanel" style="display:none;">
+        <div class="boxHead1">
+            <div class="boxHeader1 bDCyanBlue"><a href="~/humanresources/generalmgt">Back to Dashboard</a> </div>
+        </div>
+
+        <div class="boxBody1">
+            <div class="tableRanch">
+                <table class="courselist" id="DepartmentGroupTable">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td>Department</td>
+                            <td>Group</td>
+                            <td>Action</td>
+                        </tr>
+                    </thead>
+                    <tr class="empty">
+                        <td colspan="2">
+                            Fetching Data <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="DepartmentPanel" style="display:none;">
+        <div class="boxHead1">
+            <div class="boxHeader1 bDCyanBlue"><a href="~/humanresources/generalmgt">Back to Dashboard</a> </div>
+            <button class="boxHeader1 bkGreen addDept" style="float:right;"><a href="">Add New Department</a> </button>
+        </div>
+
+        <div class="boxBody1">
+            <div class="tableRanch">
+                <table class="courselist" id="DepartmentTable">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td>Department</td>
+                            <td>Group</td>
+                            <td>Action</td>
+                        </tr>
+                    </thead>
+                    <tr class="empty">
+                        <td colspan="3">
+                            Fetching Data <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="LineManagerPanel" style="display:none;">
+        <div class="boxHead1">
+            <div class="boxHeader1 bDCyanBlue"><a href="~/humanresources/generalmgt">Back to Dashboard</a> </div>
+            <button class="boxHeader1 bkGreen" style="float:right;"><a href="">Add New LineManager</a> </button>
+        </div>
+
+        <div class="boxBody1">
+            <div class="tableRanch">
+                <table class="courselist" id="LineManagerTable">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td>Line Manager</td>
+                            <td>Staff Id</td>
+                            <td>Department</td>
+                            <td>Action</td>
+                        </tr>
+                    </thead>
+                    <tr class="empty">
+                        <td colspan="4">
+                            Fetching Data <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+    <div id="AddBranch" style="display:none;">
+        <div class="boxHead1" style="">
+            <div class="boxHeader1 bDCyanBlue"><a href="~/humanresources/generalmgt">Back to Dashboard</a> </div>
+        </div>
+        <div class="boxBody1">
+            <div class="formArea formArea1">
+                <form id="formBranch">
+
+                    @*<input name="BranchId" id="BranchId" type="hidden" />*@
+
+
+                    <div class="formBox1 fullForm">
+                        <label for="">Branch Name</label>
+                        <input type="text" id="BranchName" name="BranchName" class="form-control" />
+                    </div>
+
+                    <div class="underlineBtn">
+                        <button class="nextBtn btnMedium bkGreen btnBranch" type="submit">Add Branch</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <div id="UpdateBranch" style="display:none;">
+        <div class="boxHead1" style="">
+            <div class="boxHeader1 bDCyanBlue"><a href="~/humanresources/generalmgt">Back to Dashboard</a> </div>
+        </div>
+        <div class="boxBody1">
+            <div class="formArea formArea1">
+                <form id="formBranchUpdate">
+
+                    <input name="BranchId" id="BranchId1" type="hidden" />
+
+
+                    <div class="formBox1 fullForm">
+                        <label for="">Branch Name</label>
+                        <input type="text" id="BranchName1" name="BranchName" class="form-control" />
+                    </div>
+
+                    <div class="underlineBtn">
+                        <button class="nextBtn btnMedium bkGreen btnBranch" type="submit"></button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="AddRegion" style="display:none;">
+        <div class="boxHead1" style="">
+            <div class="boxHeader1 bDCyanBlue"><a href="~/humanresources/generalmgt">Back to Dashboard</a> </div>
+        </div>
+        <div class="boxBody1">
+            <div class="formArea formArea1">
+                <form id="formRegion">
+
+                    <div class="formBox1 fullForm">
+                        <label for="">Region Name</label>
+                        <input type="text" id="RegionName" name="RegionName" class="form-control" />
+                    </div>
+
+                    <div class="underlineBtn">
+                        <button class="nextBtn btnMedium bkGreen btnRegion" type="submit">Add Region</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <div id="AddGroup" style="display:none;">
+        <div class="boxHead1" style="">
+            <div class="boxHeader1 bDCyanBlue"><a href="~/humanresources/generalmgt">Back to Dashboard</a> </div>
+        </div>
+        <div class="boxBody1">
+            <div class="formArea formArea1">
+                <form id="formGroup">
+
+                    <div class="formBox1 fullForm">
+                        <label for="">Group Name</label>
+                        <input type="text" id="GroupName" name="GroupName" class="form-control" />
+                    </div>
+                    <div class="formBox1 fullForm">
+                        <label for="">Group Head Staff Id</label>
+                        <input type="text" id="GroupHeadStaffId" name="GroupHeadStaffId" class="form-control" />
+                    </div>
+                    <div class="formBox1 fullForm ghn" style="display:none;">
+                        <label for="">Group Head Full Name</label>
+                        <input type="text" id="GroupHead" name="GroupHead" class="form-control" disabled />
+                    </div>
+                    <div class="formBox1 fullForm ghg" style="display:none;">
+                        <label for="">Group Head Grade</label>
+                        <input type="text" id="GroupHeadGrade" name="GroupHeadGrade" class="form-control" disabled />
+                    </div>
+
+                    <div class="underlineBtn">
+                        <button class="nextBtn btnMedium bkGreen btnRegion" type="submit">Add Group</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Content/js/jquery.validate.min.js"></script>
+    <script src="~/Content/js/additional-methods.min.js"></script>
+    <script src="~/Content/js/CustomValidation.js"></script>
+    <script src="~/Content/js/datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.branch').on('click', function (e) {
+                e.preventDefault();
+
+                $('#DashboardPanel').fadeOut();
+                $('#BranchPanel').fadeIn();
+                window.location.href = "#viewbranches";
+
+            });
+            $('.region').on('click', function (e) {
+                e.preventDefault();
+
+                $('#DashboardPanel').fadeOut();
+                $('#BranchPanel').hide();
+                $('#GroupPanel').hide();
+                $('#RegionPanel').fadeIn();
+                $('#LineManagerPanel').hide();
+                window.location.href = "#viewregions";
+
+            });
+            $('.group').on('click', function (e) {
+                e.preventDefault();
+
+                $('#DashboardPanel').fadeOut();
+                $('#BranchPanel').hide();
+                $('#RegionPanel').hide();
+                $('#GroupPanel').fadeIn();
+                $('#LineManagerPanel').hide();
+                window.location.href = "#viewgroups";
+
+            });
+            $('.dept').on('click', function (e) {
+                e.preventDefault();
+
+                $('#DashboardPanel').fadeOut();
+                $('#BranchPanel').hide();
+                $('#RegionPanel').hide();
+                $('#DepartmentPanel').fadeIn();
+                $('#LineManagerPanel').hide();
+                window.location.href = "#viewdepartments";
+
+            });
+            $('.line').on('click', function (e) {
+                e.preventDefault();
+
+                $('#DashboardPanel').fadeOut();
+                $('#BranchPanel').hide();
+                $('#RegionPanel').hide();
+                $('#DepartmentPanel').hide();
+                $('#GroupPanel').hide();
+                $('#LineManagerPanel').fadeIn();
+                window.location.href = "#viewlinemanagers";
+
+            })
+            var jqTable = $('#BranchTable').DataTable({
+                dom: '<"tanHead tanHP"f>rt<"counter"lip>',
+                "autoWidth": false,
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    "url": '/api/general/getbranches',
+                    "type": "GET"
+                },
+                'language': {
+                    'search': '',
+                    'searchPlaceholder': 'Search...'
+                },
+                "fnDrawCallback": function (oSettings) {
+                },
+                "order": [],
+                columns: [
+                    {
+                        bSortable: true,
+                        "render": function (d, r, data) {
+                            return data.BranchId;
+                        }
+                    },
+
+                    {
+                        "render": function (d, r, data) {
+                            return data.BranchName;
+                        }
+                    },
+
+                    {
+                        bSortable: false,
+                        className: "action-buttons",
+                        "render": function (d, i, data) {
+
+                            return '<button class="table-edit btnSmaller bkPurple" href="javascript:;"> <i class="fa fa-edit table-icon" style=""></i> Update</button>' +
+
+                                '<input type="hidden" value="' + data.BranchId + '"/>';
+                        }
+                    },
+                    {
+                        bSortable: false,
+                        className: "action-buttons",
+                        "render": function (d, i, data) {
+
+                            return '<button class="table-delete btnSmaller bkRed" href="javascript:;"> <i class="fa fa-times table-icon" style=""></i> Delete</button>' +
+
+                                '<input type="hidden" value="' + data.BranchId + '"/>';
+                        }
+                    }
+                ]
+            });
+            var jqTable = $('#RegionTable').DataTable({
+                dom: '<"tanHead tanHP"f>rt<"counter"lip>',
+                "autoWidth": false,
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    "url": '/api/general/getregions',
+                    "type": "GET"
+                },
+                'language': {
+                    'search': '',
+                    'searchPlaceholder': 'Search...'
+                },
+                "fnDrawCallback": function (oSettings) {
+                },
+                "order": [],
+                columns: [
+                    {
+                        bSortable: true,
+                        "render": function (d, r, data) {
+                            return data.RegionId;
+                        }
+                    },
+
+                    {
+                        "render": function (d, r, data) {
+                            return data.RegionName;
+                        }
+                    },
+
+                    {
+                        bSortable: false,
+                        className: "action-buttons",
+                        "render": function (d, i, data) {
+
+                            return '<button class="table-delete btnSmaller bkRed" href="javascript:;"> <i class="fa fa-times table-icon" style=""></i> Delete</button>' +
+
+                                '<input type="hidden" value="' + data.RegionId + '"/>';
+                        }
+                    }
+                ]
+            });
+
+            var jqTable = $('#GroupTable').DataTable({
+                dom: '<"tanHead tanHP"f>rt<"counter"lip>',
+                "autoWidth": false,
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    "url": '/api/general/getgroups',
+                    "type": "GET"
+                },
+                'language': {
+                    'search': '',
+                    'searchPlaceholder': 'Search...'
+                },
+                "fnDrawCallback": function (oSettings) {
+                },
+                "order": [],
+                columns: [
+                    {
+                        bSortable: true,
+                        "render": function (d, r, data) {
+                            return data.GroupId;
+                        }
+                    },
+
+                    {
+                        "render": function (d, r, data) {
+                            return data.GroupName;
+                        }
+                    },
+                    {
+                        "render": function (d, r, data) {
+                            return data.GroupHead;
+                        }
+                    },
+
+                    {
+                        "render": function (d, r, data) {
+                            return data.GhStaffId;
+                        }
+                    },
+
+                    {
+                        bSortable: false,
+                        className: "action-buttons",
+                        "render": function (d, i, data) {
+
+                            return '<button class="table-dept btnSmaller bkPurple" href="javascript:;"> <i class="fa fa-eye table-icon" style=""></i> View Depts</button>' +
+
+                                '<input type="hidden" value="' + data.GroupId + '"/>';
+                        }
+                    },
+                    {
+                        bSortable: false,
+                        className: "action-buttons",
+                        "render": function (d, i, data) {
+
+                            return '<button class="table-view btnSmaller bkPurple" href="javascript:;"> <i class="fa fa-edit table-icon" style=""></i> Update</button>' +
+
+                                '<input type="hidden" value="' + data.GroupId + '"/>';
+                        }
+                    },
+                    {
+                        bSortable: false,
+                        className: "action-buttons",
+                        "render": function (d, i, data) {
+
+                            return '<button class="table-view btnSmaller bkRed" href="javascript:;"> <i class="fa fa-times table-icon" style=""></i> Delete</button>' +
+
+                                '<input type="hidden" value="' + data.GroupId + '"/>';
+                        }
+                    }
+                ]
+            });
+
+            var jqTable = $('#DepartmentTable').DataTable({
+                dom: '<"tanHead tanHP"f>rt<"counter"lip>',
+                "autoWidth": false,
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    "url": '/api/general/getdepts',
+                    "type": "GET"
+                },
+                'language': {
+                    'search': '',
+                    'searchPlaceholder': 'Search...'
+                },
+                "fnDrawCallback": function (oSettings) {
+                },
+                "order": [],
+                columns: [
+                    {
+                        bSortable: true,
+                        "render": function (d, r, data) {
+                            return data.DepartmentId;
+                        }
+                    },
+
+                    {
+                        "render": function (d, r, data) {
+                            return data.DeptName;
+                        }
+                    },
+                    {
+                        "render": function (d, r, data) {
+                            return data.GroupName;
+                        }
+                    },
+
+                    {
+                        bSortable: false,
+                        className: "action-buttons",
+                        "render": function (d, i, data) {
+
+                            return '<button class="table-view btnSmaller bkRed" href="javascript:;"> <i class="fa fa-times table-icon" style=""></i> Delete</button>' +
+
+                                '<input type="hidden" value="' + data.DepartmentId + '"/>';
+                        }
+                    }
+                ]
+            });
+
+           
+            $('.addBranch').on('click', function (e) {
+                e.preventDefault();
+                $('#BranchPanel').hide();
+                $('#AddBranch').show();
+                window.location.href = "#addbranch";
+            });
+            $('.addRegion').on('click', function (e) {
+                e.preventDefault();
+                $('#RegionPanel').hide();
+                $('#AddRegion').show();
+                window.location.href = "#addregion";
+            });
+            $('.addGroup').on('click', function (e) {
+                e.preventDefault();
+                $('#GroupPanel').hide();
+                $('#AddGroup').show();
+                window.location.href = "#addgroup";
+            });
+
+            //$('.backToGroup').on('click', function (e) {
+            //    e.preventDefault();
+            //    $('#DeparmentGroupPanel').fadeOut();
+            //    $('#GroupPanel').fadeIn();
+            //})
+
+            $("#formBranch").validate({
+                ignore: [],
+                rules: {
+                    BranchName: { required: true },
+                },
+
+                errorPlacement: function ($error, $element) {
+                    $error.addClass('errorHolder');
+                    $element.closest('.formBox1').find('label:first').after($error);
+                },
+                submitHandler: function (form) {
+
+                    var $button = $(form).find(':submit');
+                    var prev = $button.html();
+                    $button.attr('disabled', 'disabled');
+                    $button.html('Processing <i class="fa fa-circle-o-notch fa-spin pull-right"></i>');
+
+                    var formData = new FormData(form);
+                    console.log(formData);
+                    $.ajax({
+                        cache: false,
+                        async: true,
+                        type: "POST",
+                        url: "/api/general/SaveNewBranch",
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (data) {
+                            if (!data.HasError) {
+                                $button.attr('disabled', false);
+                                ShowNotie(data);
+                                $('#BranchName').val('');
+                                $('#BranchId').val(0);
+                                $button.html('').html('Add Branch');
+
+                            }
+                            else {
+                                $button.html('').html('Add Branch');
+                                $button.attr('disabled', false);
+                                ShowNotie(data);
+                            }
+
+                        },
+
+                        error: function (data) {
+                            ShowNotie({ HasError: true, Message: "An error occurred when processing your request" });
+                        },
+                        complete: function (data) {
+                            $button.removeAttr('disabled');
+                            $button.html(prev);
+                        }
+                    });
+
+                }
+            });
+
+            $("#formRegion").validate({
+                ignore: [],
+                rules: {
+                    RegionName: { required: true },
+                },
+
+                errorPlacement: function ($error, $element) {
+                    $error.addClass('errorHolder');
+                    $element.closest('.formBox1').find('label:first').after($error);
+                },
+                submitHandler: function (form) {
+
+                    var $button = $(form).find(':submit');
+                    var prev = $button.html();
+                    $button.attr('disabled', 'disabled');
+                    $button.html('Processing <i class="fa fa-circle-o-notch fa-spin pull-right"></i>');
+
+                    var formData = new FormData(form);
+                    console.log(formData);
+                    $.ajax({
+                        cache: false,
+                        async: true,
+                        type: "POST",
+                        url: "/api/general/SaveNewRegion",
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (data) {
+                            if (!data.HasError) {
+                                $button.attr('disabled', false);
+                                ShowNotie(data);
+                                $('#RegionName').val('');
+                                $button.html('').html('Add Region');
+
+                            }
+                            else {
+                                $button.html('').html('Add Region');
+                                $button.attr('disabled', false);
+                                ShowNotie(data);
+                            }
+
+                        },
+
+                        error: function (data) {
+                            ShowNotie({ HasError: true, Message: "An error occurred when processing your request" });
+                        },
+                        complete: function (data) {
+                            $button.removeAttr('disabled');
+                            $button.html(prev);
+                        }
+                    });
+
+                }
+            });
+
+            $("#formGroup").validate({
+                ignore: [],
+                rules: {
+                    GroupName: { required: true },
+                    GroupHeadStaffId: { required: true }
+                },
+
+                errorPlacement: function ($error, $element) {
+                    $error.addClass('errorHolder');
+                    $element.closest('.formBox1').find('label:first').after($error);
+                },
+                submitHandler: function (form) {
+
+                    var $button = $(form).find(':submit');
+                    var prev = $button.html();
+                    $button.attr('disabled', 'disabled');
+                    $button.html('Processing <i class="fa fa-circle-o-notch fa-spin pull-right"></i>');
+
+                    var formData = new FormData(form);
+                    console.log(formData);
+                    $.ajax({
+                        cache: false,
+                        async: true,
+                        type: "POST",
+                        url: "/api/general/SaveNewGroup",
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (data) {
+                            if (!data.HasError) {
+                                $button.attr('disabled', false);
+                                ShowNotie(data);
+                                $('.ghg').show();
+                                $('.ghn').show();
+                                $('#GroupHeadGrade').val(data.Result.GradeName);
+                                $('#GroupHead').val(data.Result.GroupHead);
+                                $button.html('').html('Add Group');
+
+                            }
+                            else {
+                                $button.html('').html('Add Group');
+                                $button.attr('disabled', false);
+                                ShowNotie(data);
+                            }
+
+                        },
+
+                        error: function (data) {
+                            ShowNotie({ HasError: true, Message: "An error occurred when processing your request" });
+                        },
+                        complete: function (data) {
+                            $button.removeAttr('disabled');
+                            $button.html(prev);
+                        }
+                    });
+
+                }
+            });
+            $("#formBranchUpdate").validate({
+                ignore: [],
+                rules: {
+                    BranchName: { required: true },
+                },
+
+                errorPlacement: function ($error, $element) {
+                    $error.addClass('errorHolder');
+                    $element.closest('.formBox1').find('label:first').after($error);
+                },
+                submitHandler: function (form) {
+
+                    var $button = $(form).find(':submit');
+                    var prev = $button.html();
+                    $button.attr('disabled', 'disabled');
+                    $button.html('Processing <i class="fa fa-circle-o-notch fa-spin pull-right"></i>');
+
+                    var formData = new FormData(form);
+                    console.log(formData);
+                    $.ajax({
+                        cache: false,
+                        async: true,
+                        type: "POST",
+                        url: "/api/general/UpdateBranch",
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (data) {
+                            if (!data.HasError) {
+                                $button.attr('disabled', false);
+                                ShowNotie(data);
+                                $button.html('').html('Update');
+
+                            }
+                            else {
+                                $button.html('').html('Update Branch');
+                                $button.attr('disabled', false);
+                                ShowNotie(data);
+                            }
+
+                        },
+
+                        error: function (data) {
+                            ShowNotie({ HasError: true, Message: "An error occurred when processing your request" });
+                        },
+                        complete: function (data) {
+                            $button.removeAttr('disabled');
+                            $button.html(prev);
+                        }
+                    });
+
+                }
+            });
+
+            $("#GroupTable tbody").on("click", "td.action-buttons button.table-dept", function (e) {
+                e.preventDefault();
+                var tr = $(this).closest("tr");
+                var $id = $(this).closest("td").find('input').val();
+
+                $('.content1 .messageText').remove();
+                var $button = $(this);
+                var prev = $button.html();
+
+                if (!parseInt($id) && parseInt($id) <= 0) {
+                    return;
+                }
+
+                $button.attr('disabled', 'disabled');
+                $button.find('i').removeClass('fa-edit');
+                $button.find('i').addClass('fa-circle-o-notch fa-spin');
+                var $data = { GroupId: $id }
+
+
+                var jqTable = $('#DepartmentGroupTable').DataTable({
+                    dom: '<"tanHead tanHP"f>rt<"counter"lip>',
+                    "autoWidth": false,
+                    processing: true,
+                    serverSide: true,
+                    ajax: {
+                        "url": '/api/general/getgroupdepts',
+                        "type": "GET",
+                        "data": function (d) {
+                            d.AdditionalParameters = JSON.stringify($data);
+                        },
+                    },
+                    'language': {
+                        'search': '',
+                        'searchPlaceholder': 'Search...'
+                    },
+                    "fnDrawCallback": function (oSettings) {
+                        $('#GroupPanel').fadeOut();
+                        $('#DepartmentGroupPanel').fadeIn();
+                        $button.attr('disabled', false);
+                        $button.html(prev);
+                        window.location.href = "#viewdepts=" + oSettings.json.data[0].GroupName;
+                    },
+                    "order": [],
+                    columns: [
+                        {
+                            bSortable: true,
+                            "render": function (d, r, data) {
+                                return data.DepartmentId;
+                            }
+                        },
+
+                        {
+                            "render": function (d, r, data) {
+                                return data.DeptName;
+                            }
+                        },
+                        {
+                            "render": function (d, r, data) {
+                                return data.GroupName;
+                            }
+                        },
+
+                        {
+                            bSortable: false,
+                            className: "action-buttons",
+                            "render": function (d, i, data) {
+
+                                return '<button class="table-delete btnSmaller bkRed" href="javascript:;"> <i class="fa fa-times table-icon" style=""></i> Delete</button>' +
+
+                                    '<input type="hidden" value="' + data.DepartmentId + '"/>';
+                            }
+                        }
+                    ]
+                });
+            });
+
+            $("#BranchTable tbody").on("click", "td.action-buttons button.table-edit", function (e) {
+                e.preventDefault();
+                var tr = $(this).closest("tr");
+                var $id = $(this).closest("td").find('input').val();
+
+                $('.content1 .messageText').remove();
+                var $button = $(this);
+                var prev = $button.html();
+
+                if (!parseInt($id) && parseInt($id) <= 0) {
+                    return;
+                }
+
+                $button.attr('disabled', 'disabled');
+                $button.find('i').removeClass('fa-edit');
+                $button.find('i').addClass('fa-circle-o-notch fa-spin');
+
+                $.ajax({
+                    url: '/api/general/getbranchupdate',
+                    data: { id: $id },
+                    type: 'GET',
+                    success: function (data) {
+                        if (!data.HasError) {
+                            $('#BranchPanel').fadeOut();
+                            $('#UpdateBranch').fadeIn();
+                            $('#BranchName1').val(data.Result.BranchName);
+                            $('#BranchId1').val(data.Result.BranchId);
+                            $('.btnBranch').html("Update");
+                        }
+                        else {
+                            ShowNotie(data);
+                            $button.removeAttr('disabled');
+                            $button.html(prev);
+                            $('.btnBranch').html("Update");
+                        }
+                    }
+                })
+            });
+            $("#BranchTable tbody").on("click", "td.action-buttons button.table-delete", function (e) {
+                e.preventDefault();
+                var tr = $(this).closest("tr");
+                var $id = $(this).closest("td").find('input').val();
+
+                $('.content1 .messageText').remove();
+                var $button = $(this);
+                var prev = $button.html();
+
+                if (!parseInt($id) && parseInt($id) <= 0) {
+                    return;
+                }
+
+                $button.attr('disabled', 'disabled');
+                $button.find('i').removeClass('fa-edit');
+                $button.find('i').addClass('fa-circle-o-notch fa-spin');
+                var data = { id: $id };
+                var $confirm = ShowConfirm();
+                $confirm.onAction = function (btnName) {
+
+                    if (btnName == "cancel") {
+                        $button.removeAttr('disabled');
+                        $button.html(prev);
+                        return false;
+                    }
+                    else {
+                        $.ajax({
+                            url: '/api/general/deletebranch',
+                            type: 'GET',
+                            data: { id: $id },
+                            success: function (data) {
+                                if (!data.HasError) {
+                                    ShowNotie(data);
+                                    window.location.reload();
+                                }
+                                else {
+                                    $button.removeAttr('disabled');
+                                    $button.html(prev);
+                                    ShowNotie(data);
+                                }
+                            }
+                        });
+                    }
+
+                }
+            });
+
+            $("#RegionTable tbody").on("click", "td.action-buttons button.table-delete", function (e) {
+                e.preventDefault();
+                var tr = $(this).closest("tr");
+                var $id = $(this).closest("td").find('input').val();
+
+                $('.content1 .messageText').remove();
+                var $button = $(this);
+                var prev = $button.html();
+
+                if (!parseInt($id) && parseInt($id) <= 0) {
+                    return;
+                }
+
+                $button.attr('disabled', 'disabled');
+                $button.find('i').removeClass('fa-edit');
+                $button.find('i').addClass('fa-circle-o-notch fa-spin');
+                var data = { id: $id };
+                var $confirm = ShowConfirm();
+                $confirm.onAction = function (btnName) {
+
+                    if (btnName == "cancel") {
+                        $button.removeAttr('disabled');
+                        $button.html(prev);
+                        return false;
+                    }
+                    else {
+                        $.ajax({
+                            url: '/api/general/deleteregion',
+                            type: 'GET',
+                            data: { id: $id },
+                            success: function (data) {
+                                if (!data.HasError) {
+                                    ShowNotie(data);
+                                    window.location.reload();
+                                }
+                                else {
+                                    $button.removeAttr('disabled');
+                                    $button.html(prev);
+                                    ShowNotie(data);
+                                }
+                            }
+                        });
+                    }
+
+                }
+            });
+        });
+    </script>
+}

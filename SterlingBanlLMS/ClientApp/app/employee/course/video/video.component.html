@@ -1,0 +1,171 @@
+﻿<gen-header></gen-header>
+<div class="wrapper">
+
+    <div class="breadcrum" style="background-image: url('/Content/img/details (1).jpg')">
+        <div class="col8">
+            <button class="btnRed btnSmall"><i class="material-icons">arrow_left</i><span>Go Back</span> &emsp;</button>
+        </div>
+        <div class="col4">
+            <div class="headcrum">Customer Service Representative</div>
+            <div class="bodycrum">
+                <i class="material-icons">room</i>  <i>Marina, Lagos</i>
+            </div>
+            <div class="bodycrum">
+                <i style="font-size: 12px;margin-top: 3px;">Staff ID: </i>  <b>001558</b>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="videoTab">
+
+
+        <!-- video section -->
+        <div class="col99 show">
+
+            <div class="videoTopic">
+                <div class="topicTop"></div>
+                <div class="topicBtm"></div>
+            </div>
+            <div id="fullPlayer" (mouseup)="videoService.dragStop($event)" (mousemove)="videoService.dragMove($event)" (mouseleave)="videoService.dragStop($event)">
+                
+                    <video id="videoDisplay" (click)="videoService.playVideo()"></video>
+                    <div id="bigPlayButton" [hidden]="videoService.isPlaying" (click)="videoService.playVideo()"><i class="fa fa-play"></i></div>
+                    <div id="videoTitle" [hidden]="videoService.isPlaying"></div>
+                    <video-progress></video-progress>
+                    <video-toolbar></video-toolbar>
+
+
+                    <div class="hightlight">
+                        <div class="vTopic"></div>
+
+                        <div class="vLike">
+                            <i class="material-icons">thumb_up</i> <span>32</span>
+                            <i class="material-icons">thumb_down</i> <span>3</span>
+                        </div>
+
+                        <div class="vTime">20 mins</div>
+
+                    </div>
+
+                </div>
+            
+
+            <div class="addComment" style="float: left;width: auto;"><span style="color:#222;">View Video transscript</span><i class="material-icons" style="color:#222;">content_copy</i></div>
+            <div class="addComment" style="float: left;width: auto;"><span style="color: #E11DD2;">Contribute to this course</span><i class="material-icons pink">comments</i> &emsp;  &emsp; </div>
+
+
+            <button class="btnPink btnHerd"><span>Mark as complete</span><i class="material-icons">check</i></button>
+
+
+
+        </div>
+
+        <!-- end of video section -->
+        <!-- text section -->
+        <div class="col99">
+
+            <!--<div class="videoTopic">
+                <div class="topicTop">{{course.CourseName}}:</div>
+                <div class="topicBtm" *ngFor="let item of course.Modules">{{item.ModuleName}}</div>
+            </div>-->
+
+            <!--<div class="viewArea">
+                <img src="/Content/img/slide.png" alt="">
+            </div>
+
+            <div class="hightlight">
+                <button class="btn btnMid btnBlack text-center">Next Slide</button>
+
+                <div class="vLike">
+                    <i class="material-icons">thumb_up</i> <span>32</span>
+                    <i class="material-icons">thumb_down</i> <span>3</span>
+                </div>
+
+
+            </div>
+
+
+
+            <div class="addComment" style="float: left;width: auto;"><span style="color: #E11DD2;">Contribute to this course</span><i class="material-icons pink">comments</i> &emsp;  &emsp; </div>
+
+
+            <button class="btnPink btnHerd"><span>Mark as complete</span><i class="material-icons">check</i></button>-->
+
+
+
+        </div>
+
+        <!-- end of text section -->
+
+
+
+
+
+        <div class="courseMenu">
+            <div class="courseMod ">
+
+                <!-- lesson tab -->
+                <div *ngFor="let a of videoService.videos.Modules; let i=index">
+                    <div class="lessonTab " *ngFor="let b of a.Topics;let n=index" (click)="videoService.selectedVideo(i,n)">
+                        <div class="module">{{i+1}}.{{n+1}}</div>
+                        <div class="moduleTp">
+                            <div class="moduleT">{{b.TopicName}} &emsp; <i>{{b.ContentType}} ()</i></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- end of lesson tab -->
+            </div>
+            <a href="#" class="Lessona">
+                <div class="nextLesson">
+                    <span>GO TO</span><i class="material-icons">arrow_forward</i><b>NEXT MODULE</b>
+                </div>
+            </a>
+
+        </div>
+
+
+
+    </div>
+
+    <div class="content">
+
+        <div class="col9">
+
+
+            <div class="case">
+                <div class="long">
+                    <div class="line borderBottomBlue">Course Forum</div>
+                </div>
+                <div class="caseBody">
+                    <div class="comment">
+                        <div class="ini">JO</div><div class="offline"></div>
+                        <div class="commenter">Joy Okere</div>  <span>made a comment</span>
+                        <i class="material-icons">thumb_down</i><i class="material-icons blue">thumb_up</i>
+                        <div class="commentTopic">AN AFFECTIVE DILEMMA</div>
+                        <div class="commentBody">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Morbi leo urna molestie at elementum.</div>
+                        <div class="addComment">
+                            <span class="blue">reply comment</span><i class="material-icons blue">comments</i>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <div class="ini" style="background: orange">SO</div><div class="online"></div>
+                        <div class="commenter">me</div> <span>made a comment</span>
+                        <i class="material-icons">thumb_down</i><i class="material-icons blue">thumb_up</i>
+                        <div class="commentBody">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Morbi leo urna molestie at elementum. onsectetur adipiscing elit, sed do eiusmod tempor incid onsectetur adipiscing elit, sed do eiusmod tempor incid</div>
+                        <div class="addComment">
+                            <span class="blue">reply comment</span><i class="material-icons blue">comments</i>
+                        </div>
+                    </div>
+                    <form>
+                        <textarea name="" id="" cols="30" rows="10" placeholder="Leave a comment..."></textarea>
+                        <a class="btnBlue"><i class="material-icons">comment</i>Post comment</a>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

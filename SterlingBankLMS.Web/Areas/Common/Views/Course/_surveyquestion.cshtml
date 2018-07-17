@@ -1,0 +1,25 @@
+﻿<span ng-bind-html="vm.currentQuestion.Question" ng-cloak=""></span>
+<form ng-submit="vm.submitSurveyAnswer($event,'@Url.Content("~/api/courselearningarea/submitsurveyresponse")')" ng-cloak="" class="quizForm">
+
+    <input type="hidden" ng-value="vm.currentQuestion.Id" name="questionId" />
+    <input type="hidden" ng-value="vm.survey.SurveyId" name="surveyId" />
+    <label ng-repeat="o in vm.currentQuestion.Options" ng-if="vm.currentQuestion.AnswerType==='Radio'">
+        <input type="radio" name="answers" required ng-value="o.Id"> {{o.Title}}
+    </label>
+
+    <label ng-repeat="o in vm.currentQuestion.Options" ng-if="vm.currentQuestion.AnswerType==='CheckBox'">
+        <input type="checkbox" name="answers" ng-value="o.Id"> {{o.Title}}
+    </label>
+
+    <label>
+        <select name="answers" ng-if="vm.currentQuestion.AnswerType==='Select'">
+            <option ng-repeat="o in vm.currentQuestion.Options" ng-value="o.Id"> {{o.Title}}</option>
+        </select>
+    </label>
+
+        <textarea name="answer" ng-if="vm.currentQuestion.AnswerType==='Text'" cols="30" rows="10" placeholder="Type your answer here..."></textarea>
+        <input type="hidden" name="answers" />
+
+        <button type="submit" class="btn btnMedium btnBlack" ng-show="vm.hasNext()">Next Question</button>
+        <button type="submit" class="btn btnMedium btnBlack" ng-show="vm.isLast()">Finish</button>
+</form>

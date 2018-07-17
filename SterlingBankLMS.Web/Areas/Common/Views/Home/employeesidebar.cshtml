@@ -1,0 +1,138 @@
+﻿@model EmployeeSideBarModel
+@{
+    Layout = null;
+}
+<div class="col2">
+    <div class="pod">
+        <div class="line borderBottomGrey">
+            Coming Up  <button class="btnBlue" onclick="window.location.assign('@Url.Action("Calendar","Training",new { area="Common"})')">
+                <i class="material-icons">event</i> <span>View Calendar</span>
+            </button>
+        </div>
+
+        <div class="podBlock">
+            @{
+                if (Model.UpcomingTraining.Count == 0) {
+                    <div class="podItem">
+
+                        <div class="list">
+                            <span class="blue">No upcoming training</span>
+
+                        </div>
+                    </div>
+                }
+                else {
+                    foreach (var item in Model.UpcomingTraining) {
+                        <div class="podItem">
+                            <div class="coupon"><i class="material-icons blue">event</i></div>
+                            <div class="list">
+                                <span class="blue">@item.Name</span>
+                                <i>@item.StartDate.ToString("dddd MMM dd, yyyy HH:MM tt")</i>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+
+        </div>
+
+    </div>
+
+    @*<div class="space"></div>
+        <div class="pod">
+            <div class="line borderBottomGrey">Quick Notification</div>
+
+            <div class="podBlock">
+                <div class="podItem">
+                    <div class="coupon"><span class="redBackground">05</span></div>
+                    <div class="list">
+                        <span>Courses are overdue</span>
+                    </div>
+                </div>
+
+                <div class="podItem">
+                    <div class="coupon"><span class="yellowBackground">15</span></div>
+                    <div class="list">
+                        <span>Courses are going to expire in the next 30 days.</span>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+    <div class="space"></div>
+
+    <div class="pod">
+        <div class="advert">
+            @{
+                if (Model.SideSectionAd == null) {
+                    <img src="~/Content/img/banner.png" />
+                }
+                else
+                {
+                    if (Model.SideSectionAd.AdBannerId == null)
+                    {
+                        Html.Raw(Model.SideSectionAd.HTMLTag);
+                    }
+                    else
+                    {
+                        if (Model.SideSectionAd.AdvertLink == "")
+                        {
+                            <img src="@Url.Content(Model.SideSectionAd.FileUrl)" />
+                        }
+                        else
+                        {
+                            <a target="_blank" href="@Url.Content(Model.SideSectionAd.AdvertLink)">
+                                <img src="@Url.Content(Model.SideSectionAd.FileUrl)" />
+                            </a>
+                        }
+
+
+                    }
+                }
+
+            }
+
+
+        </div>
+    </div>
+
+    <div class="space"></div>
+
+    <div class="pod">
+        <div class="line borderBottomGrey">Awards/Certificates</div>
+
+
+        <div class="podBlock">
+            <div class="blue">Certificates </div><b>(@Model.totalCertificates)</b>
+            @{
+
+                if (Model.Certificates.Count == 0) {
+                    <div class="podItem">
+
+                        <div class="list">
+                            <span class="blue">No certificates</span>
+                        </div>
+                    </div>
+                }
+                else {
+                    <p>Your latest certificates</p>
+                    foreach (var item in Model.Certificates) {
+
+                        <div class="podItem">
+
+                            <div class="list">
+                                <span class="blue">@item.Name</span>
+                            </div>
+                        </div>
+                    }
+                }
+
+            }
+
+        </div>
+
+
+
+
+    </div>
+</div>

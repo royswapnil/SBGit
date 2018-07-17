@@ -1,0 +1,27 @@
+﻿<sup ng-cloak="">Question {{vm.position + 1 }} of {{vm.total}}</sup>
+
+<span ng-bind-html="vm.currentQuestion.Question" ng-cloak=""></span>
+<form ng-submit="vm.submitAnswer($event,'@Url.Content("~/api/courselearningarea/submitexamresponse")')" ng-cloak="" class="quizForm">
+
+    <input type="hidden" ng-value="vm.currentQuestion.Id" name="QuestionId" />
+    <input type="hidden" ng-value="course.Id" name="CourseId" />
+    <input type="hidden" ng-value="vm.exam.Id" name="ExamId" />
+    <label ng-repeat="o in vm.currentQuestion.Options" ng-if="vm.currentQuestion.AnswerType==='Radio'" ng-cloak="">
+        <input type="radio" name="Answers" ng-value="o.Id"> {{o.Title}}
+    </label>
+
+    <label ng-repeat="o in vm.currentQuestion.Options" ng-if="vm.currentQuestion.AnswerType==='CheckBox'" ng-cloak="">
+        <input type="checkbox" name="Answers" ng-value="o.Id"> {{o.Title}}
+    </label>
+
+    <label>
+        <select name="Answers" ng-if="vm.currentQuestion.AnswerType==='Select'" ng-cloak="">
+            <option ng-repeat="o in vm.currentQuestion.Options" ng-value="o.Id"> {{o.Title}}</option>
+        </select>
+    </label>
+
+        <input type="hidden" name="Answers" />
+    <button type="button" class="btn btnMedium btnBlack" ng-show="vm.hasPrevious()" ng-click="vm.gotoPreviousQuestion()">Previous</button>
+    <button type="submit" class="btn btnMedium btnBlack" ng-show="vm.hasNext()">Next</button>
+    <button type="submit" class="btn btnMedium btnBlack" ng-show="vm.isLast()">Finish</button>
+</form>

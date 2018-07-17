@@ -1,0 +1,222 @@
+﻿@model EmployeeHomePageModel
+@{
+    ViewBag.Title = "Employee Learning Progress";
+    var breadCrumb = "/Content/img/course_img.jpg";
+}
+
+@section head {
+    <link href="~/Content/css/l&d.css" rel="stylesheet" />
+    <link href="~/Content/PageCss/Employee_Dashboard.css" rel="stylesheet" />
+    <style>
+       
+        .bordered-section {
+            margin-bottom: 10px;
+            padding: 10px
+        }
+
+            .bordered-section label:first-child {
+                float: right;
+            }
+
+            .bordered-section p {
+                clear: both
+            }
+    </style>
+}
+
+<div class="wrapper">
+    <div class="breadcrum" style="background:url('@breadCrumb') no-repeat center center / cover">
+        <div class="col8">
+            <div class="headcrum">Employee Learning Progress</div>
+            @*<div class="bodycrum">Access your assigned and recommended courses below and get certified</div>*@
+        </div>
+        <div class="col4">
+            <div class="headcrum">@CurrentUser.Function.ToUpper()</div>
+            <div class="bodycrum"><i class="material-icons">room</i> <i>@CurrentUser.BranchName.ToUpper()</i></div>
+            <div class="bodycrum"><i style="font-size: 12px;margin-top: 3px;">Staff ID: </i> <b>@CurrentUser.StaffId</b></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="content" ng-controller="learningprogressCtrl as vm" ng-init="vm.getLearningProgress('@Url.Content("~/api/courselearningarea/getlearningProgress")')">
+
+    <div class="tabs">
+        <ul class="tab-links" style="margin-top:-1px">
+            <li class="active"><a href="#tab1">Learning Progress</a></li>
+            <li class=""><a href="#tab2">Training History</a></li>
+            <li class=""><a href="#tab3">Notification History</a></li>
+        </ul>
+
+        <div class="tab-content" style="padding:15px">
+            <div id="tab1" class="tab active" style="">
+                <section class="panel no-border bg-light">
+
+                    <div class="col9">
+                        <div class="long">
+                            <div class="line borderBottomOrange">
+                                Learning Progress
+                            </div>
+                        </div>
+                        <div class="shown">
+                            <div class="each-holder" ng-repeat="la in vm.learningProgress">
+                                <h4 ng-bind="la.LearningArea+': '+ la.Name"></h4>
+                                <div class="load">
+                                    <div class="loader">
+                                        <div class="peg range"><div class="loading" ng-style="{'width': (la.Progress +'%'),'background':la.BackGround}"></div></div>
+                                        <div class="peg loadInfo" ng-bind="la.Progress +'% ' + la.Status"></div>
+                                    </div>
+                                    <div class="pen">
+                                        <button ng-show="la.Status==='Completed'" @*ng-click="vm.goto('@Url.Content("~/course/learningprogress")')"*@ class="btnBlue btnReach">View Certificate</button>
+                                        <button ng-show="la.Status==='In-Progress'" ng-click="vm.goto('@Url.Content("~/course/learn/")' + la.CourseId +'/'+ la.Slug)" class="btnBlue btnReach">Continue Learning</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @Html.Action("employeesidebar", "home")
+                </section>
+            </div>
+            <div id="tab2" class="tab" style="">
+                <section class="panel no-border bg-light">
+
+                    <div id="TrainingHistoryTable">
+
+                    </div>
+                </section>
+            </div>
+            <div id="tab3" class="tab" style="">
+                <section cla++ss="panel no-border bg-light">
+
+                    <div id="NotificationHistory">
+
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts{
+    <script src="~/Content/js/jquery-confirm.js"></script>
+    <script src="~/content/js/angular.min.js"></script>
+    <script src="~/content/js/httpservice.js"></script>
+    <script src="~/Content/js/datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var $userid =@CurrentUser.Id;
+            var count = 1;
+            var x = 1;
+            $.ajax({
+                url: '/api/Employee/GetUserTraining?userId=' + $userid,
+                type: 'GET',
+                success: function (data) {
+                    if (!data.HasError) {
+                        data.Result.forEach(function (item) {
+                            $('#TrainingHistoryTable').append(
+                                '<div class="bordered-section" style="width:100%">' +
+                                '<div class="fullForm">' +
+                                '<label>Training Details ' + count++ + ': </label>' +
+                                '<p><strong>TRAINING NAME: </strong>' + item.TrainingName + '</p>' +
+                                '<p><strong>LOCATION: </strong>' + item.LocationFormat + '</p>' +
+                                '<p><strong>START DATE: </strong>' + item.StartPeriodFormat + '</p>' +
+                                '</div>' +
+                                '</div>'
+                            );
+                            $('#TrainingHistoryTable').append('<br />')
+                        });
+                    }
+                    else {
+                        $('#TrainingHistoryTable').append('<strong>No training records for this user</strong>')
+                    }
+                }
+            });
+
+            $.ajax({
+                url: '/api/notification/GetUserNotification?userId=' + $userid,
+                type: 'GET',
+                success: function (data) {
+                    if (!data.HasError) {
+                        data.Result.forEach(function (item) {
+                            $('#NotificationHistory').append(
+                                '<div class="bordered-section" style="width:100%">' +
+                                '<div class="fullForm">' +
+                                '<label>Notification Details ' + x++ + ': </label>' +
+                                '<p><strong>NOTIFICATION TYPE: </strong>' + item.NotficationFormat + '</p>' +
+                                '<p><strong>DATE: </strong>' + item.CreatedDateFormat + '</p>' +
+                                '<p><strong>MESSAGE: </strong>' + item.Message + '</p>' +
+                                '</div>' +
+                                '</div>'
+                            );
+                            $('#NotificationHistory').append('<br />')
+                        });
+                    }
+                    else {
+                        $('#NotificationHistory').append('<strong>No notifications records for this user</strong>')
+                    }
+                }
+            })
+
+
+        })
+        angular.module('sterlinglms', ['requestSvc'])
+            .config(function ($httpProvider) {
+                $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+            }).controller('learningprogressCtrl', ['httpRequestSvc', function (http) {
+                var vm = this;
+                vm.learningProgress = [];
+
+                vm.getLearningProgress = function (url) {
+                    http.get(url).then(function (response) {
+
+                        vm.learningProgress = response.Result.Records;
+
+                        angular.forEach(vm.learningProgress, function (item) {
+                            var backGround = '';
+
+                            if (item.Progress >= 75)
+                                backGround = '#b1eddc';
+                            else if (item.Progress >= 50)
+                                backGround = "#f7daad";
+
+                            else backGround = "#f97575";
+                            item.BackGround = backGround;
+
+                            item.Status = item.CourseStatus === 'Complete' ? 'Completed' : 'In-Progress';
+                        });
+
+                        console.log(vm.learningProgress);
+
+                    }).catch(function (e) {
+                        ShowNotie(APPVARS.errors[0]);
+                    });
+                }
+                vm.goto = function (url) {
+                    window.location.assign(url);
+                }
+
+            }]).directive('lmsLoader', ['$http', function ($http) {
+                return {
+                    restrict: 'A',
+                    link: function (scope, elm, attrs) {
+                        scope.isLoading = function () {
+                            return $http.pendingRequests.length > 0;
+                        };
+
+                        scope.$watch(scope.isLoading, function (v) {
+                            if (v) {
+                                elm.show();
+                            } else {
+                                elm.hide();
+                            }
+                        });
+                    }
+                };
+            }])
+
+        angular.element(function () {
+            angular.bootstrap(document, ['sterlinglms']);
+        });
+    </script>
+}

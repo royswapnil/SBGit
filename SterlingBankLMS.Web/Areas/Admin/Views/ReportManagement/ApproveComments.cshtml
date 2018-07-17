@@ -1,0 +1,477 @@
+﻿
+@{
+    ViewBag.Title = "Approve Comments";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link href="~/Content/css/pagination.css" rel="stylesheet" />
+<style>
+
+
+    .paginationjs.paginationjs-theme-blue .paginationjs-pages li.active > a {
+        background: #354c98;
+    }
+
+    .paginationjs.paginationjs-theme-blue .paginationjs-go-input > input[type=text], .paginationjs.paginationjs-theme-blue .paginationjs-pages li {
+        border-color: #354c98;
+    }
+
+        .paginationjs.paginationjs-theme-blue .paginationjs-pages li > a {
+            color: #354c98;
+        }
+</style>
+
+<div class="banner1 bkDarkBlue">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>Approve Comments</span>
+</div>
+
+<div class="content1">
+    <div class="msgHead">
+        <div class="tapz">
+            <input type="checkbox" class="select_all">
+            <select name="" id="bulk">
+                <option value="">Bulk Action</option>
+                <option value="DeleteAll">Delete All</option>
+                <option value="ApproveAll">Approve All</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="msgBody">
+        <div class="msgList">
+            <div class="empty" style="display:none">
+                Fetching Comments <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+            </div>
+            <div id="page"></div>
+        </div>
+
+
+        <div class="msgShow">
+            <div class="empty1" style="display:none">
+                Fetching Comments <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+            </div>
+
+            <div class="slt" style="background-color:#f4f4fe; text-align:center;width:100%;height:100%;position:relative;">
+                Select a comment to Edit\Delete\Approve
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<style>
+    span.Open {
+        color: #ab192d;
+    }
+
+    span.Closed {
+        color: #2fbf71;
+    }
+
+    span.Escalate {
+        color: #f4b942;
+    }
+
+    .material-icons.Closed {
+        color: #2fbf71;
+    }
+
+    .material-icons.Open {
+        color: #ab192d;
+    }
+
+    .material-icons.Escalate {
+        color: #f4b942;
+    }
+
+    .msgTab.New {
+        border-left: 3px solid #354c98
+    }
+
+    label#New {
+        font-weight: bolder;
+    }
+
+    .msgNote#New:not(p) {
+        color: #354c98;
+        font-weight: bolder;
+    }
+</style>
+
+@section Scripts{
+    <script src="~/Content/js/pagination.min.js"></script>
+    <script>
+
+        var LoadCommentsPaginate = function (item) {
+            var className = "";
+
+            $('.msgList #page').append(
+
+                '<div class="msgTab ' + item.Id + '" data-id="' + item.Id + '" data-status="' + item.Status + '">' +
+                '<input name="checkk" type="checkbox" style="float:left;" data-id="' + item.Id + '">' +
+                '<span class="checkmark"></span>' +
+                '<label class="containers" id="' + item.Id + '" >' +
+                item.NameFormat + '<i class="material-icons ' + item.Id + '">' + className + '</i>' +
+                '</label>' +
+                '<span class="time">' + item.DateFormat + '</span>' +
+                '<div class="msgNote" id="' + item.Id + '" >' +
+                ' <br><br><p id="body">' + item.CommentFormat + '</p>' +
+                '</div>' +
+                '</div>'
+            );
+        }
+
+        $(document).ready(function () {
+            $('.all').addClass('active');
+
+            function CmtPaging(id) {
+                $('.msgList').pagination({
+                    dataSource: "/api/Course/getCommentsPaginate",
+                    locator: 'data',
+                    totalNumberLocator: function (response) {
+                        if ($('#page')[0].hasAttribute("data-total")) {
+                            return parseInt($('#page').attr("data-total"));
+                        }
+                        else {
+                            $('#page').attr("data-total", response.recordsTotal);
+                            return response.recordsTotal;
+                        }
+
+                    },
+                    pageSize: 10,
+                    className: 'paginationjs-theme-blue paginationjs-big',
+                    ajax: {
+                        beforeSend: function () {
+                            var html = '<div class="nofloat">Fetching Data <i class="fa fa-spinner fa-pulse fa-fw nofloat"></i></div>';
+                            $('.msgList #page').html(html);
+                        }
+                    },
+                    callback: function (data, pagination) {
+                        data.forEach(function (item) {
+                            LoadCommentsPaginate(item);
+                        });
+                        $('.nofloat').hide();
+
+                        if (parseInt(id) > 0) {
+                            $("[data-id=" + id + "]").addClass("active");
+                        }
+                    }
+                });
+            }
+
+            function GetCommentDetails(id) {
+
+                $('.msgShow').html('');
+
+                $.ajax({
+                    url: "/api/Course/GetCommentDetails",
+                    data: { Id: id },
+                    type: "GET",
+                    success: function (data) {
+                        $('.slt').hide();
+                        $('.msgShow').append(
+                            '<label class="msgTitle" id="' + data.Result.Id + '" >' +
+                            data.Result.NameFormat + '<i class="material-icons ' + data.Result.Id + '">' + '</i>' +
+                            '</label><div class="msgIcon">' +
+                            '<span class="time" style="font-size:10px;">' + data.Result.Timeago + '</span>' +
+                            '<select name="" id="Actions" class="Actions" data-id="' + data.Result.Id + '" data-status="' + data.Result.Status + '">' +
+                            '<option value= "">Action</option>' +
+                            '<option value= "Edit">Edit</option>' +
+                            '<option value= "Delete">Delete</option>' +
+                            '<option value= "Approve">Approve</option>' +
+                            '</select >' +
+                            '</div>' +
+                            '<div class="cmtflagged">Total flagged comments for the user :' + data.Result.FlaggedCount + '</div>' +
+                            '<div class="msgRead">' +
+                            data.Result.CommentMessage +
+                            '</div>'
+
+                        )
+                        $('.empty1').hide();
+
+                    }
+                });
+            }
+
+            CmtPaging(0);
+
+
+            $('.msgList').on('click', '.msgTab div,.msgTab span,.msgTab label', function (e) {
+
+                e.preventDefault();
+                $('.msgTab').removeClass("active");
+                $(this).parent().addClass("active");
+                $('.msgList').addClass("upup");
+                $('.msgShow').html('');
+                var $Id = $(this).parent().attr('data-id');
+                var $Status = $(this).parent().attr('data-status');
+                $('.empty1').show();
+                GetCommentDetails($Id);
+            });
+
+            $('.select_all').change(function () {
+                $('.msgList').find('input[name="checkk"]').prop('checked', $(this).prop('checked'));
+            });
+
+            $('.msgList').on('change', 'input[name="checkk"]', function () {
+                if (false == $(this).prop("checked")) {
+                    $(".select_all").prop('checked', false);
+                }
+                if ($('.msgList').find('input[name="checkk"]:checked').length == $('.msgList').find('input[name="checkk"]').length) {
+                    $(".select_all").prop('checked', true);
+                }
+            });
+
+            $("#bulk").change(function () {
+
+                var selected = $(this).val();
+
+                if (!$('.msgList').find('input[name="checkk"]:checked').length && selected != "") {
+                    ShowNotie({ HasError: true, Message: "No Comments selected" });
+                    return;
+                }
+
+                var $comments = new Array();
+                $('.msgList input[name="checkk"]').each(function (i, item) {
+                    var obj = new Object();
+                    obj.Id = $(item).attr('data-id');
+                    obj.IsChecked = $(item).is(':checked');
+
+                    $comments.push(obj);
+
+                });
+
+                if (selected == "DeleteAll") {
+                    var $confirm = ShowConfirm();
+
+                    $confirm.onAction = function (btnName) {
+                        if (btnName == "cancel") {
+                            return false;
+                        }
+                        else {
+                            $.ajax({
+                                url: "/api/Course/DeleteComment",
+                                type: 'POST',
+                                data: { "": $comments },
+                                success: function (data) {
+                                    if (!data.HasError) {
+                                        ShowNotie(data);
+                                        window.location.reload();
+                                    }
+                                    else {
+                                        ShowNotie(data);
+                                    }
+                                }
+                            }
+                            );
+                        }
+                    }
+                }
+                else if (selected == "ApproveAll") {
+                    var $confirm = ShowConfirm();
+
+                    $confirm.onAction = function (btnName) {
+                        if (btnName == "cancel") {
+                            return false;
+                        }
+                        else {
+                            $.ajax({
+                                url: "/api/Course/ApproveComment",
+                                type: 'POST',
+                                data: { "": $comments },
+                                success: function (data) {
+                                    if (!data.HasError) {
+                                        ShowNotie(data);
+                                        window.location.reload();
+                                    }
+                                    else {
+                                        ShowNotie(data);
+                                    }
+                                }
+
+                            });
+                        }
+                    }
+                }
+            });
+
+            $(".msgShow").on("change", "#Actions", function () {
+                var $selected = $(this).val();
+                var $id = $(this).attr('data-id');
+
+                if (!parseInt($id) && parseInt($id) <= 0) {
+                    return;
+                }
+
+                var $comments = new Array();
+                var obj = new Object();
+                obj.Id = $id;
+                obj.IsChecked = true;
+                $comments.push(obj);
+
+                if ($selected == '') {
+                    ShowNotie({ HasError: true, Message: "Please select from the list" });
+                    $(".EditComment").remove();
+                    return;
+                }
+
+                if ($selected != "") {
+                    if ($selected == "Delete") {
+                        var $confirm = ShowConfirm();
+
+                        $confirm.onAction = function (btnName) {
+                            if (btnName == "cancel") {
+                                return false;
+                            }
+                            else {
+                                $.ajax({
+                                    url: "/api/Course/DeleteComment",
+                                    type: 'POST',
+                                    data: { "": $comments },
+                                    success: function (data) {
+                                        if (!data.HasError) {
+                                            ShowNotie(data);
+                                            window.location.reload();
+                                        }
+                                        else {
+                                            ShowNotie(data);
+                                        }
+                                    }
+                                }
+                                );
+                            }
+                        }
+                    }
+                    else if ($selected == "Approve") {
+                        var $confirm = ShowConfirm();
+
+                        $confirm.onAction = function (btnName) {
+                            if (btnName == "cancel") {
+                                return false;
+                            }
+                            else {
+                                $.ajax({
+                                    url: "/api/Course/ApproveComment",
+                                    type: 'POST',
+                                    data: { "": $comments },
+                                    success: function (data) {
+                                        if (!data.HasError) {
+                                            ShowNotie(data);
+                                            window.location.reload();
+                                        }
+                                        else {
+                                            ShowNotie(data);
+                                        }
+                                    }
+                                }
+                                );
+                            }
+                        }
+                    }
+                    else if ($selected == "Edit") {
+                        var $confirm = ShowConfirm();
+
+                        $confirm.onAction = function (btnName) {
+                            if (btnName == "cancel") {
+                                return false;
+                            }
+                            else {
+                                $.ajax({
+                                    url: "/api/Course/GetCommentDetails",
+                                    type: 'GET',
+                                    data: { Id: $id },
+                                    success: function (data) {
+                                        if (!data.HasError) {
+                                            $('.msgShow').append(
+                                                '<form class="EditComment">' +
+                                                '<div class="formArea" style="display:block;">' +
+                                                '<input type="hidden" id="CommentId" value="' + data.Result.Id + '"/>' +
+                                                '<div class="formBox1 fullForm">' +
+                                                '<label for="">Comment:</label>' +
+                                                '<textarea style="height:100px;"> </textarea>' +
+                                                '</div>' +
+                                                '<div class="underlineBtn">' +
+                                                '<button class="btnSmall bkSkyBlue SaveEdit" style="margin-right:4px;">Save</button>' +
+                                                '<button class="btnSmall bkRed CancelEdit" style="margin-right:4px;">Cancel</button>' +
+                                                '</div>' +
+                                                '</div>' +
+                                                '</form>'
+                                            );
+                                        }
+                                        else {
+                                            ShowNotie(data);
+                                        }
+
+                                        $('textarea').html(data.Result.CommentMessage);
+                                    }
+                                }
+                                );
+                            }
+                        }
+                    }
+                }
+
+            });
+
+            $('.msgShow').on('click', '.SaveEdit', function (e) {
+                e.preventDefault();
+
+                var $button = $(this);
+                var prev = $button.html();
+                $button.html('Processing <i class="fa fa-circle-o-notch fa-spin nofloat"></i>');
+                $button.attr('disabled', 'disabled');
+                var cmt = $('textarea').val();
+                var id = $('#CommentId').val();
+
+
+                if (cmt === "") {
+                    ShowNotie({ HasError: true, Message: "Please enter the Comment" });
+                    $button.html(prev);
+                    $button.removeAttr('disabled');
+                    return;
+                }
+
+                var $data = { CommentMessage: cmt, Id: id };
+                $.ajax({
+                    url: '/api/Course/CommentEditSave',
+                    contentType: "application/json",
+                    type: 'POST',
+                    data: JSON.stringify($data),
+                    success: function (data) {
+                        if (!data.HasError) {
+                            ShowNotie(data);
+                            $button.html('').html('Save');
+                            $button.attr('disabled', false);
+                            $(".EditComment").remove();
+                            CmtPaging(id);
+                            GetCommentDetails(id);
+                        }
+                        else {
+                            ShowNotie(data);
+                            $button.html('').html('Save');
+                            $button.attr('disabled', false);
+                        }
+
+                    },
+                    error: function (data) {
+                        ShowNotie(data);
+                        $button.html('').html('Save');
+                        $button.attr('disabled', false);
+                    }
+
+                });
+
+            });
+
+            $(".msgShow").on("click", ".CancelEdit", function (e) {
+                e.preventDefault();
+
+                $(".EditComment").remove();
+
+                return false;
+
+            });
+        });
+    </script>
+}

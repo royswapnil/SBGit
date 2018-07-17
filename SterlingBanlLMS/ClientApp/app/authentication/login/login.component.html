@@ -1,0 +1,90 @@
+﻿<header>
+    <img src="/Content/img/retro.png" alt="">
+    <img src="/Content/img/logo.png" class="marginImg" alt="">
+
+</header>
+
+
+<div class="live">
+
+    <div class="double">
+        <div class="welcome">
+            <div class="up">Welcome to <b>Sterling Bank</b></div>
+            <div class="down">Learning Management System</div>
+        </div>
+    </div>
+    <div class="double2">
+        <div class="loginBox">
+            <div class="loginTop">
+                <div class="nick">
+                    <i class="material-icons">person</i><span>Sign in</span>
+                </div>
+            </div>
+            <form novalidate class="loginForm" [formGroup]="loginFrm" #formDir="ngForm" (ngSubmit)="login(loginFrm.value)">
+                <label for="">Email address</label>
+                <input type="email" formControlName="email" />
+                <span class="help-block" *ngIf="(loginFrm.get('email').touched||loginFrm.get('email').dirty)&&loginFrm.get('email').errors">
+                    <span class="text-danger" *ngIf="loginFrm.hasError('required', 'email') ">
+                        Email Address is required.
+                    </span>
+                    <span class="text-danger" *ngIf="loginFrm.hasError('pattern','email')">
+                        Please enter a valid email address
+                    </span>
+
+                </span>
+                
+                <!--<span class="help-block" *ngIf="displayMessage.email">
+                  {{displayMessage.email}}
+                </span>-->
+
+                <label for="">Password</label>
+                <input type="password" formControlName="password" />
+                ="
+                <span class="help-block" *ngIf="(loginFrm.get('password').touched||loginFrm.get('password').dirty)&&loginFrm.get('password').errors">
+                    <span class="text-danger" *ngIf="loginFrm.hasError('required', 'password') ">
+                        Password is required.
+                    </span>
+
+                </span>
+                <h4><input type="checkbox" name="" id="" forControlName="remember"> &emsp;Remember me</h4>
+
+                <input type="submit" value="LOG IN" [disabled]='!loginFrm.valid'>
+
+                <h5><a href="#">Forgot your Password?</a></h5>
+            </form>
+            
+           
+            <!--<br />Dirty:{{loginFrm.dirty}}
+            <br />Touched:{{loginFrm.touched}}
+            <br />Valid:{{loginFrm.valid}}
+            <br />Value:{{loginFrm.value | json}}-->
+
+            <!--<form novalidate class="loginForm" [formGroup]="loginFrm" (ngSubmit)="login(loginFrm.value)">
+        <div [ngClass]="{'has-error':displayMessage.email}">
+            <label for="">Email address</label>
+            <input type="email" formControlName="email" style="width:100%" />
+            <span class="help-block" *ngIf="displayMessage.email">
+                {{displayMessage.email}}
+            </span>
+        </div>
+
+        <div [ngClass]="{'has-error': displayMessage.password}">
+            <label for="">Password</label>
+            <input type="password" formControlName="password" style="width:100%"/>
+            <span class="help-block" *ngIf="displayMessage.password">
+                {{displayMessage.password}}
+            </span>
+        </div>
+
+
+        <h4><input type="checkbox" name="" id="" forControlName="remember"> &emsp;Remember me</h4>
+
+        <input type="submit" value="LOG IN" [disabled]='!loginFrm.valid'>
+
+        <h5><a href="#">Forgot your Password?</a></h5>
+    </form>-->
+        </div>
+    </div>
+
+
+</div>

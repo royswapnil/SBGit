@@ -1,0 +1,197 @@
+﻿@model EmployeeDetailsModel
+<style>
+    .success {
+        color: #fff !important;
+    }
+
+    .bDGreen {
+        border-bottom: 3px solid #2fbf71;
+    }
+
+    .bulkfile {
+        background: rgba(22, 96, 136, 0.2);
+        padding: 30px;
+        padding-right: 45%;
+    }
+
+        .bulkfile button {
+            background: #166088;
+        }
+
+    .formBox1 label {
+        width: 100%;
+        margin-bottom: 10px;
+        font-weight: bold;
+        font-size: 13px;
+        float: left;
+    }
+
+    label i {
+        font-style: italic;
+        color: #ccc;
+        font-size: 12px;
+        padding-left: 20px;
+        float: none;
+    }
+
+    .halfForm .halfForm {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+    form.report {
+        padding: 0px;
+        margin-top: 60px;
+        width: 100%;
+        margin-left: 0%;
+        border: 0px solid transparent;
+    }
+
+        form.report input {
+            width: 100%;
+            height: 35px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 15px;
+        }
+
+    .Pending {
+        color: #E68618;
+    }
+
+    .Approved {
+        color: #38C64E;
+    }
+
+    .Rejected {
+        color: #DA3024;
+    }
+
+    .NotSeen {
+        color: #E68618;
+    }
+
+    .Yes {
+        color: #38C64E;
+    }
+
+    .No {
+        color: #DA3024;
+    }
+
+    .jconfirm .jconfirm-box-container.jconfirm-no-transition {
+        margin: 0px;
+        width: 100%;
+    }
+</style>
+<form class="report">
+
+    
+    <div class="fullForm">
+        <label>Ticket Title:</label>
+        <input type="text" disabled="disabled" value="@ViewBag.TicketTitle" />
+    </div>
+
+    <div class="fullForm">
+        <label>Ticket Issuer:</label>
+        <input type="text" disabled="disabled" value="@Model.FirstName, @Model.LastName" />
+    </div>
+
+    <div class="fullForm">
+        <label>Staff Id:</label>
+        <input type="text" disabled="disabled" value="@Model.StaffId" />
+    </div>
+    <div class="fullForm">
+        <label>Sex:</label>
+        <input type="text" disabled="disabled" value="@Model.Sex" />
+    </div>
+    <div class="fullForm">
+        <label>Branch:</label>
+        <input type="text" disabled="disabled" value="@Model.Branch" />
+    </div>
+
+    <div class="fullForm">
+        <label>Grade:</label>
+        <input type="text" disabled="disabled" value="@Model.Grade" />
+    </div>
+
+    <div class="fullForm">
+        <label>Department:</label>
+        <input type="text" disabled="disabled" value="@Model.Department" />
+    </div>
+
+
+
+
+</form>
+<script>
+    $(document).ready(function () {
+        $(".btnApprove").click(function (e) {
+            e.preventDefault();
+            var requestId = $(this).attr('id');
+
+            var $button = $(this);
+            var prev = $button.html();
+
+            if (!parseInt(requestId) && parseInt(requestId) <= 0) {
+                return;
+            }
+
+            $button.attr('disabled', 'disabled');
+            $button.find('i').removeClass('fa-check');
+            $button.find('i').addClass('fa-circle-o-notch fa-spin');
+
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "GET",
+                url: "/api/ManageTraining/ApproveTrainingRequest?requestId=" + requestId,
+
+                success: function (data) {
+                    $(".btnApprove").hide();
+                    $(".btnReject").hide();
+                    ShowNotie(data);
+                    $("#textstatus").empty().html(data.Result)
+                    $button.find('i').addClass('fa-check');
+                    $button.find('i').removeClass('fa-circle-o-notch fa-spin');
+
+                }
+
+            });
+        });
+
+        $(".btnReject").click(function (e) {
+            e.preventDefault();
+            var requestId = $(this).attr('id');
+
+            var $button = $(this);
+            var prev = $button.html();
+
+            if (!parseInt(requestId) && parseInt(requestId) <= 0) {
+                return;
+            }
+
+            $button.attr('disabled', 'disabled');
+            $button.find('i').removeClass('fa-check');
+            $button.find('i').addClass('fa-circle-o-notch fa-spin');
+
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "GET",
+                url: "/api/ManageTraining/RejectTrainingRequest?requestId=" + requestId,
+
+                success: function (data) {
+                    $(".btnApprove").hide();
+                    $(".btnReject").hide();
+                    $("#textstatus").empty().html(data.Result)
+                    ShowNotie(data);
+                    $button.find('i').addClass('fa-check');
+                    $button.find('i').removeClass('fa-circle-o-notch fa-spin');
+                }
+
+            });
+        })
+    });
+</script>

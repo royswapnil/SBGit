@@ -1,0 +1,216 @@
+﻿
+@{
+    ViewBag.Title = "Employee Examinations";
+    var breadCrumb = "/Content/img/course_catalog (1).jpg" ;
+}
+
+@section head {
+    <style>
+        .pageTab:nth-child(3) {
+            border: 2px solid #666;
+        }
+
+            .pageTab:nth-child(3) .tabing {
+                background: #961c1d;
+            }
+
+        @@media(max-width: 500px) {
+            .pageTab:nth-child(3) {
+                border: 0px solid transparent;
+            }
+
+                .pageTab:nth-child(3) .tabing {
+                    background: transparent;
+                }
+        }
+
+        .col2 {
+            display: none;
+        }
+
+        .text h5 {
+            margin-bottom: 20px;
+        }
+
+        .searchbox.white input::placeholder {
+            color: #fff;
+        }
+    </style>
+
+}
+
+<div class="wrapper" ng-cloak="" ng-controller="examinationcatalog as vm" ng-init="vm.fillSearch('@Url.Content("~/api/userexamination/getemployeeexams")')">
+
+    <div class="breadcrum" style="background:url('@breadCrumb') no-repeat center center / cover">
+        <div class="col8">
+            <div class="headcrum">Examination Catalog</div>
+        </div>
+
+        <div class="col4">
+            <div class="headcrum">@CurrentUser.Function.ToUpper()</div>
+            <div class="bodycrum"><i class="material-icons">room</i> <i>@CurrentUser.BranchName.ToUpper()</i></div>
+            <div class="bodycrum"><i style="font-size: 12px;margin-top: 3px;">Staff ID: </i> <b>@CurrentUser.StaffId</b></div>
+        </div>
+    </div>
+
+    <div class="searchArea" style="background: #993d61;">
+        <div class="searchbox white">
+            <form ng-submit="vm.search()">
+                <input type="text" placeholder="Search examination" ng-model="vm.search.keywords" style="color:#fff;" /> <i class="material-icons" style="color:#fff;">search</i>
+            </form>
+        </div>
+    </div>
+
+    <div class="content">
+
+        <div class="col12">
+
+            <div class="long">
+                <div class="line borderBottomBlue" style="border-bottom: 4px solid #993d61;" ng-show="!vm.totalCount">Course Catalog</div>
+                <div class="line borderBottomBlue" style="border-bottom: 4px solid #993d61;" ng-show="vm.totalCount">Course Catalog : ({{vm.totalCount}})</div>
+            </div>
+
+            <div class="change">
+                @*<div class="holder">
+                    <span style="margin-bottom:15px;">FILTER BY</span>
+                    <select ng-model="vm.search.filterBy" ng-change="vm.getFilter('@Url.Content("~/api/course/getcoursefiltervalues/?filter=")' + vm.search.filterBy)" style="margin-bottom:20px;">
+                        <option value="">--All--</option>
+                        <option value="1">Learning Area</option>
+                    </select>
+                </div>*@
+
+                <div class="holder">
+                    <span>:</span>
+                    <select ng-model="vm.search.filter" ng-change="vm.search()" style="margin-bottom:20px;">
+                        <option value="">--All--</option>
+                        <option ng-repeat="f in vm.filters" value="{{f.Id}}">{{f.Name}}</option>
+                    </select>
+                </div>
+            </div>
+            <!--Here-->
+            <div infinite-scroll="vm.loadMoreCourses()" infinite-scroll-distance="2" infinite-scroll-listen-for-event="list:filtered">
+                <div class="col44 courseItem" ng-repeat="c in vm.examinations">
+                    <a href="~/common/examination/examination/{{c.ExaminationId}}">
+                        <div class="courseImg" style="background-image:url('{{c.ImageUrl || ''}}')">
+                            <i class="material-icons" title="view details">visibility</i>
+                        </div>
+                    </a>
+                    <div class="text">
+                        <a href="~/common/examination/examination/{{c.ExaminationId}}" title="{{c.Name}}"><h5 class="blue" style="color:#993d61;" ng-bind="c.Name"></h5></a>
+                        <p class="courseDesc">
+                            {{c.Description}}
+                            <br>
+                            <br> <div class="courseDate" ng-if="c.DueDate"><i>Available till: </i>  <b> &nbsp; {{c.DueDate}}</b></div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Content/js/jquery-confirm.js"></script>
+    <script src="~/content/js/angular.min.js"></script>
+    <script src="~/content/js/httpservice.js"></script>
+
+    <script src="~/Content/js/ng-infinite-scroll.min.js"></script>
+    <script>
+        angular.module('sterlinglms', ['requestSvc', 'infinite-scroll'])
+            .config(function ($httpProvider) {
+                $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+            }).controller('examinationcatalog', ['httpRequestSvc', 'pageSize', function (http, pageSize) {
+                var vm = this;
+                var one = 1, cachedUrl;
+                vm.search = {};
+                vm.courses = [];
+                vm._hasMore = false;
+
+                vm.fillSearch = function (url) {
+                    vm.search.keywords = mainApp.getUrlQueryStringValue('q');
+                    vm.search.pageIndex = one;
+                    vm.search.pageSize = pageSize;
+                    vm.getAllCourses(url);
+                }
+
+                vm.search = function () {
+                    vm.search.pageIndex = one;
+                    vm.search.pageSize = pageSize;
+                    vm.getAllCourses(cachedUrl);
+                }
+
+                vm.getFilter = function (url) {
+                    http.get(url).then(function (response) {
+
+                        vm.filters = response.Result;
+
+                    }).catch(function (e) {
+                        //Todo: send to error handler
+                        ShowNotie(APPVARS.errors[0]);
+                    });
+                }
+
+                vm.loadMoreCourses = function () {
+                    if (vm.busy) return;
+
+                    if (vm._hasMore) {
+                        vm.busy = true;
+
+                        var q = {};
+                        angular.copy(vm.search, q);
+                        q.pageIndex += one;
+                        http.get(cachedUrl, q).then(function (response) {
+
+                            if (response.Result.Courses.length) {
+                                Array.prototype.push.apply(vm.courses, response.Result.Courses);
+                                vm._hasMore = response.Result.HasMore;
+                                vm.search.pageIndex += one;
+                                vm.totalCount = response.Result.TotalCount;
+                            }
+                        }).catch(function (e) {
+                            //Todo: send to error handler
+                            ShowNotie(APPVARS.errors[0]);
+                        }).finally(function () {
+                            vm.busy = false;
+                        });
+                    }
+                }
+
+                vm.getAllCourses = function (url) {
+                    if (!cachedUrl) { cachedUrl = url; }
+                    http.get(cachedUrl, vm.search).then(function (response) {
+                        vm.examinations = response.Result;
+                        vm._hasMore = response.Result.HasMore;
+                        vm.totalCount = response.Result.TotalCount;
+                    }).catch(function (e) {
+                        //Todo: send to error handler
+                        ShowNotie(APPVARS.errors[0]);
+                    });
+                }
+            }])
+            .directive('lmsLoader', ['$http', function ($http) {
+                return {
+                    restrict: 'A',
+                    link: function (scope, elm, attrs) {
+                        scope.isLoading = function () {
+                            return $http.pendingRequests.length > 0;
+                        };
+
+                        scope.$watch(scope.isLoading, function (v) {
+                            if (v) {
+                                elm.show();
+                            } else {
+                                elm.hide();
+                            }
+                        });
+                    }
+                };
+            }])
+            .constant('pageSize', 10)
+            .value('THROTTLE_MILLISECONDS', 250);
+
+        angular.element(function () {
+            angular.bootstrap(document, ['sterlinglms']);
+        });
+    </script>
+}

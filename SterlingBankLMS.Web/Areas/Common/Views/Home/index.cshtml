@@ -1,0 +1,278 @@
+﻿@using SterlingBankLMS.Core.DTO
+@model AdvertDto
+@{
+    ViewBag.Title = "Employee Dashboard";
+    var breadCrumb = Model == null ? "/Content/img/course_img.jpg" : Model.FileUrl;
+}
+@section head {
+    <link href="~/Content/PageCss/Employee_Dashboard.css" rel="stylesheet" />
+    <link href="~/Content/css/rateit.css" rel="stylesheet" />
+}
+<div class="wrapper" ng-cloak="" ng-controller="coursedashboard as vm" ng-init="vm.getAllCourses('@Url.Content("~/api/employeedashboard/getemployeecourses")')">
+    <div class="breadcrum" style="background:url('@breadCrumb') no-repeat center center / cover">
+        <div class="col8">
+            <div class="headcrum">Employee Dashboard</div>
+            <div class="bodycrum">Access your assigned and recommended courses below and get certified</div>
+        </div>
+        <div class="col4">
+            <div class="headcrum">@CurrentUser.Function.ToUpper()</div>
+            <div class="bodycrum"><i class="material-icons">room</i> <i>@CurrentUser.BranchName.ToUpper()</i></div>
+            <div class="bodycrum"><i style="font-size: 12px;margin-top: 3px;">Staff ID: </i> <b>@CurrentUser.StaffId</b></div>
+        </div>
+    </div>
+    <div class="searchArea" style="background:#f1f1f1;">
+        <div class="searchbox white" style="border: 2px solid #ccc;">
+            <form action="~/common/course/courses" method="get">
+                <input type="text" placeholder="Search Courses" name="q" />
+                <button type="submit" class="SearchBtn"><i class="material-icons" style="cursor:pointer">search</i></button>
+            </form>
+        </div>
+    </div>
+    <div class="content">
+        <div class="col9" id="courseResult">
+            <img id="loading2" class="col-md-6 col-md-offset-3" style="display: none;" src="~/Content/img/loader.gif" />
+            <div class="courses">
+                <div style="width:100%;">
+                    <div class="boxed">
+                        <div class="long">
+                            <div class="line borderBottomBlue">
+                                Assigned Courses
+                            </div>
+                        </div>
+                        <div class="courseHolder">
+                            <div class="col33 courseItem" ng-repeat="c in vm.assignedCourses">
+                                <a href="~/course/{{c.Id}}/{{c.Slug}}">
+                                    <div class="courseImg" style="background-image:url('{{c.ImageUrl || ''}}')">
+                                        <i class="material-icons" title="view details">visibility</i>
+                                    </div>
+                                </a>
+                                <div class="text">
+                                    <a title="{{c.Name}}" href="~/course/{{c.Id}}/{{c.Slug}}"><h5 class="blue courseTitle" style="color:#0095da;">{{c.Name}}</h5></a>
+                                    <p class="courseDesc">
+                                        {{c.ShortDescription}}
+                                        <div class="courseDate" ng-show="c.DueDate">
+                                            <i>Available till: </i> <b> {{c.DueDate}}</b>
+                                        </div>
+                                    </p>
+                                </div>
+
+                                <ng-rate-it ng-model="c.AverageRating" max="5" read-only="true"></ng-rate-it>
+                            </div>
+                            <div ng-show="!vm.assignedCourses.length">
+                                <p>You do not have any Assigned course</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="view-more" ng-hide="!vm.assignedCourses.length">
+                        <button class="btnLong btnBlue" ng-disabled="!vm._hasMore" ng-click="vm.loadMoreAssignedCourses('@Url.Content("~/api/employeedashboard/getmoreassignedcourse")')">
+                            View More
+                            <span>
+                                <img id="loading" style="display: none;" src="~/content/img/loader.gif" />
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <div style="width:100%;">
+                    <div class="boxed">
+                        <div class="long">
+                            <div class="line borderBottomRed">
+                                Recommended Courses
+                            </div>
+                        </div>
+                        <div class="courseHolder">
+                            <div class="col33 courseItem" ng-repeat="c in vm.recommendedCourses">
+                                <a href="~/course/{{c.Id}}/{{c.Slug}}">
+                                    <div class="courseImg" style="background-image:url('{{c.ImageUrl || ''}}')">
+                                        <i class="material-icons" title="view details">visibility</i>
+                                    </div>
+                                </a>
+                                <div class="text">
+                                    <a title="{{c.Name}}" href="~/course/{{c.Id}}/{{c.Slug}}"><h5 class="blue courseTitle" style="color:#6256a2;" ng-bind="c.Name"></h5></a>
+                                    <p class="courseDesc">
+                                        {{c.ShortDescription}}
+                                        <div class="courseDate" ng-show="c.DueDate">
+                                            <i>Available till: </i> <b ng-bind="c.DueDate"></b>
+                                        </div>
+                                    </p>
+                                </div>
+                                <ng-rate-it ng-model="c.AverageRating" max="5" read-only="true"></ng-rate-it>
+                            </div>
+
+                            <div ng-show="!vm.recommendedCourses.length">
+                                <p>You do not have any recommended course</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="view-more" ng-hide="!vm.recommendedCourses.length">
+                        <button class="btnLong btnRed" style="background:#6256a2;" ng-disabled="!vm.__hasMore" ng-click="vm.loadMoreRecommendedCourses('@Url.Content("~/api/employeedashboard/getmorerecommendedcourse")')">
+                            View all
+                            <span>
+                                <img id="loading1" style="display: none;" src="~/Content/img/loader.gif" />
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="SearchCourses">
+                    <div class="boxed">
+                    </div>
+                </div>
+
+                <button onclick="location.assign('@Url.Content("~/common/course/courses")')" class="btnLarge btnRed btnCurve btnBordered">View Course Catalog</button>
+                <div class="long">
+                    <div class="line borderBottomOrange">
+                        Learning Progress
+                    </div>
+                    <i class="material-icons down">keyboard_arrow_down</i>
+                </div>
+
+                <div class="hideTab shown" ng-init="vm.getLearningProgress('@Url.Content("~/api/employeedashboard/getlearningprogress")')">
+                    <div class="each-holder" ng-repeat="la in vm.learningProgress">
+                        <h4 ng-bind="la.LearningArea+': '+ la.Name"></h4>
+                        <div class="load">
+                            <div class="loader">
+                                <div class="peg range"><div class="loading" ng-style="{'width': (la.Progress +'%'),'background':la.BackGround}"></div></div>
+                                <div class="peg loadInfo" ng-bind="la.Progress +'% ' + la.Status"></div>
+                            </div>
+                            <div class="pen">
+                                <button ng-show="la.Status==='Completed'" ng-click="vm.goto('@Url.Content("~/course/learninghistory")')" class="btnBlue btnReach">View Report</button>
+                                <button ng-show="la.Status==='In-Progress'" ng-click="vm.goto('@Url.Content("~/course/learn/")' + la.CourseId +'/'+ la.Slug)" class="btnBlue btnReach">Continue Learning</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Html.Action("employeesidebar", "home")
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Content/js/jquery-confirm.js"></script>
+    <script src="~/content/js/angular.min.js"></script>
+    <script src="~/content/js/httpservice.js"></script>
+    <script src="~/Content/js/ng-rateit.min.js"></script>
+    <script>
+        angular.module('sterlinglms', ['requestSvc', 'ngRateIt'])
+            .config(function ($httpProvider) {
+                $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+            }).controller('coursedashboard', ['httpRequestSvc', function (http) {
+                var vm = this, incr = 1;
+                vm.assignedCourses = [];
+                vm.recommendedCourses = [];
+                vm._page = incr;
+                vm.__page = incr;
+                vm._hasMore = false;
+                vm.__hasMore = false;
+
+                vm.goto = function (url) {
+                    window.location.assign(url);
+                }
+
+                vm.loadMoreAssignedCourses = function (url) {
+                    if (vm._hasMore) {
+
+                        http.get(url, { page: vm._page + incr }).then(function (response) {
+                            Array.prototype.push.apply(vm.assignedCourses, response.Result.AssignedCourses);
+                            vm._page += incr;
+                            vm._hasMore = response.Result.AssignedCoursesHasMore;
+                        }).catch(function (e) {
+                            ShowNotie(APPVARS.errors[0]);
+                        });
+                    }
+                }
+
+                vm.loadMoreRecommendedCourses = function (url) {
+                    if (vm.__hasMore) {
+                        http.get(url, { page: vm.__page + incr }).then(function (response) {
+                            Array.prototype.push.apply(vm.recommendedCourses, response.Result.RecommendedCourses);
+                            vm.__page += incr;
+                            vm.__hasMore = response.Result.RecommendedCoursesHasMore;
+                        }).catch(function (e) {
+                            ShowNotie(APPVARS.errors[0]);
+                        });
+                    }
+                }
+
+                vm.getAllCourses = function (url) {
+                    http.get(url).then(function (response) {
+                        vm.assignedCourses = response.Result.AssignedCourses;
+                        vm.recommendedCourses = response.Result.RecommendedCourses;
+
+                        vm._hasMore = response.Result.AssignedCoursesHasMore;
+                        vm.__hasMore = response.Result.RecommendedCoursesHasMore;
+                    }).catch(function (e) {
+                        ShowNotie(APPVARS.errors[0]);
+                    });
+                }
+
+                vm.getLearningProgress = function (url) {
+                    http.get(url).then(function (response) {
+                        vm.learningProgress = response.Result.Records;
+
+                        angular.forEach(vm.learningProgress, function (item) {
+                            var backGround = '';
+
+                            if (item.Progress >= 75)
+                                backGround = '#b1eddc';
+                            else if (item.Progress >= 50)
+                                backGround = "#f7daad";
+
+                            else backGround = "#f97575";
+                            item.BackGround = backGround;
+
+                            item.Status = item.CourseStatus === 'Complete' ? 'Completed' : 'In-Progress';
+                        });
+
+                    }).catch(function (e) {
+                        ShowNotie(APPVARS.errors[0]);
+                    });
+                }
+
+            }]).directive('lmsLoader', ['$http', function ($http) {
+                return {
+                    restrict: 'A',
+                    link: function (scope, elm, attrs) {
+                        scope.isLoading = function () {
+                            return $http.pendingRequests.length > 0;
+                        };
+
+                        scope.$watch(scope.isLoading, function (v) {
+                            if (v) {
+                                elm.show();
+                            } else {
+                                elm.hide();
+                            }
+                        });
+                    }
+                };
+            }]).directive('sa', [function () {
+                return {
+                    restrict: 'A',
+                    template: `<div class="stars" title="average ratings"  ng-repeat="star in stars">
+                                    <i class="material-icons unmark">star</i>
+                                    <i class="material-icons unmark">star</i>
+                                    <i class="material-icons mark">star_half</i>
+                                    <i class="material-icons mark">star</i>
+                                    <i class="material-icons mark">star</i>
+                                </div>`,
+                    scope: {
+                        ratingValue: '=',
+                        max: '='
+                    },
+                    link: function (scope, elem, attrs) {
+                        scope.stars = [];
+                        for (var i = scope.max; i < 1; i--) {
+                            scope.stars.push({
+                                filled: i < scope.ratingValue
+                            });
+                        }
+                    }
+                }
+            }])
+
+        angular.element(function () {
+            angular.bootstrap(document, ['sterlinglms']);
+        });
+    </script>
+}

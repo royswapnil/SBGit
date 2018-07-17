@@ -1,0 +1,307 @@
+﻿@model ManagePageModel
+@{
+    ViewBag.Title = "Examination";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    
+}
+
+@section head{
+    <link href="~/Content/css/tags_editor.min.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/select2.min.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    
+}
+
+
+<div class="backdrop"></div>
+
+
+<div class="banner1 bkPurple">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>Manage Examination</span>
+</div>
+
+
+<div class="content1">
+
+    <div class="boxHead1" style="border-bottom:none">
+
+        <button class="btn bkSkyBlue viewManagePanel" style="margin-bottom: 10px;float: right;@(Model.New ? Html.Raw("display:none"): Html.Raw(""))">
+            Examination Management <i class="fa fa-cogs"></i>
+        </button>
+        <button class="btn bkPurple viewListPanel" style="margin-bottom: 10px;float: right;@(Model.New ? Html.Raw(""):Html.Raw("display:none"))">
+            View Examinations <i class="fa fa-tasks"></i>
+        </button>
+    </div>
+
+    <div class="boxBody1" style="padding:0">
+        <div id="listPanel" style="width:100%;@(Model.New ? Html.Raw("display:none"): Html.Raw(""))">
+
+            <div class="tableRanch">
+
+                <table id="ExamTable" class="">
+                    <thead>
+                        <tr>
+                            <td>Name</td>
+                            <td>Course</td>
+                            <td>Pass Grade</td>
+                            <td>Duration</td>
+                            <td>Retake Count</td>
+                            <td>Available Period</td>
+                            <td>Action</td>
+                        </tr>
+                    </thead>
+                    <tr class="empty">
+                        <td colspan="6">
+                            Fetching Data <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+        </div>
+        <div id="managePanel" style="margin-top: 20px;width:100%;@(Model.New ? Html.Raw(""):Html.Raw("display:none"))">
+            <div class="progress1">
+
+                <div class="tabloid active">
+                    <div class="podb">1</div>
+                    <span>Examination Details</span>
+                </div>
+
+                <div class="tabloid">
+                    <div class="podb">2</div>
+                    <span>Examination Questions</span>
+                </div>
+
+                <div class="tabloid last">
+                    <div class="podb">3</div>
+                    <span>Finish</span>
+                </div>
+
+                <div class="progressLine1">
+                    <div class="progressIndicator1"></div>
+                </div>
+
+            </div>
+
+
+
+            <form id="FormStep1" data-step="1" class="formArea formArea1" method="post">
+
+                <div class="row">
+                    <div class="form-group">
+                        <label>Exam Name</label>
+                        <input type="text" name="Name" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Exam Description:</label>
+                        <textarea name="Description" maxlength="750" placeholder="750 characters max..." rows="7" class="form-control"></textarea>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="">Course:</label>
+                                <div class="checkbox" style="float: right;display: inline-block;vertical-align: middle;margin:0">
+                                    <input type="checkbox" id="chkIsStandAlone" name="IsStandAlone">
+                                    <label for="chkIsStandAlone" style="margin: 0;"><small class="red">Create as stand alone exam?</small></label>
+                                </div>
+                                <select name="CourseId" class="form-control select2" @(Model.Id != null ? "data-selected=" + Model.Id.ToString()  : "")>
+                                    <option value="0">Please Select</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="">Exam Retake Count:</label>
+                                <div class="checkbox" style="float: right;display: inline-block;vertical-align: middle;margin:0">
+                                    <input type="checkbox" id="chkIgnoreExamReTakeCount" name="IgnoreExamReTakeCount">
+                                    <label for="chkIgnoreExamReTakeCount" style="margin: 0;"><small class="red">Ignore exam retake count?</small></label>
+                                </div>
+                                <input type="number" name="ExamRetakeCount" class="form-control" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="checkbox">
+                                <input type="checkbox" id="IngoreDueDate" name="IngoreDueDate">
+                                <label for="IngoreDueDate" style="margin: 0;"><small class="red">Always Available</small></label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Start Date</label>
+                                <input name="StartDateFormat" class="datepicker form-control" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>End Date</label>
+                                <input name="EndDateFormat" class="datepicker form-control" />
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="checkbox">
+                                <input type="checkbox" id="IgnoreTimeLimit" name="IgnoreTimeLimit">
+                                <label for="IgnoreTimeLimit" style="margin: 0;"><small class="red">No Time Limit</small></label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>Hour Limit</label>
+                                <input type="number" class="form-control" id="ExamHourLimit" name="HourLimit">
+                            </div>
+
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>Minute Limit</label>
+                                <input type="number" class="form-control" id="MinLimit" name="MinuteLimit">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="">Pass Grade:</label>
+                                <input type="number" name="PassGrade" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="underlineBtn">
+                    <button type="submit" class="nextBtn btnMedium btnDarkPink nofloat">Save and Continue</button>
+                    <input name="Id" id="ExamID" type="hidden" value="0" />
+                </div>
+
+
+
+            </form>
+
+
+
+            <div id="FormStep2" data-step="2" class="formArea formArea2">
+
+                <div class="formBox1 fullForm TitleBg">
+                    <label for="">
+                        Exam Title: <span id="ExamTitleSpan" class="nofloat"></span>
+                    </label>
+
+                </div>
+
+                <div class="bordered-section full-width">
+                    <div class="boxHead1" style="padding: 20px;border: none;padding-bottom: 0;">
+                        <div class="boxHeader1 bDPurple">Examination Questions</div>
+                    </div>
+
+                    <div class="body full-width" style="margin-top: 20px;">
+                        <div class="boxBody1 uploadBox" id="ExamQuestionHolder" style="padding:30px">
+
+
+                            @*<button class="btn bkSkyBlue" id="addNewQuestion" style="margin-bottom: 10px; float: right;">
+                                    Add New Question	<i class="fa fa-plus pull-right"></i>
+                                </button>*@
+                        </div>
+                    </div>
+                </div>
+
+                <div class="underlineBtn" style="margin-top: 30px;">
+                    <button class="backBtn  btnMedium btnGrey nofloat goback" style="margin-right: 20px;">Back</button>
+                    <button class="nextBtn  btnMedium btnDarkPink nofloat" id="ExamStep2">Save and Continue</button>
+                </div>
+            </div>
+
+
+
+
+            <div id="FormStep3" data-step="3" class="formArea formArea3 full-width bordered-section">
+
+                <div class="notyClass">You have successfully updated this examination</div>
+                <div class="endNotePanel">
+                    <button class="endNote goback btnGrey nofloat">
+                        Go Back To Examination
+                    </button>
+                    <button class="endNote createNewExam nofloat">
+                        Create new Examination
+                    </button>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div id="modalClone" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Clone Examination: (<span id="ClonedExamName"></span>)</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger text-center">
+                    You are currently about cloning all the content of this exam into another. Close this dialog box if this is not your intended action
+                </div>
+
+                <form id="FormCloneExam">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <div class="form-group">
+                                <label>New Examination Name:</label>
+                                <input name="Name" class="form-control" />
+                            </div>
+
+                            <div class="form-group center">
+                                <button type="submit" class="btn btn-success">PROCEED</button>
+                                <input type="hidden" name="ExamId" id="CloneID" />
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Content/js/jquery.validate.min.js"></script>
+    <script src="~/Content/js/additional-methods.min.js"></script>
+    <script src="~/Content/js/CustomValidation.js"></script>
+    <script src="~/Content/PageJs/Admin_ExaminationManagement.js"></script>
+    <script src="~/Content/js/datatables.min.js"></script>
+    <script src="~/Content/js/jquery-ui-sortable.min.js"></script>
+    <script src="~/Content/js/jquery.caret.min.js"></script>
+    <script src="~/Content/js/jquery.tag-editor.min.js"></script>
+    <script src="~/Content/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/Content/js/select2.min.js"></script>
+}
+
+
+
+

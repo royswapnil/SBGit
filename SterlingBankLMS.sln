@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SterlingBankLMS.Data", "SterlingBankLMS.Data\SterlingBankLMS.Data.csproj", "{7FC465B8-D02F-4C86-9935-6EFAC91C2F5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SterlingBankLMS.Core", "SterlingBankLMS.Core\SterlingBankLMS.Core.csproj", "{8BF09689-8972-4C0E-9BBF-E0B18CC4EF51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SterlingBankLMS.Web", "SterlingBankLMS.Web\SterlingBankLMS.Web.csproj", "{9FB0BBE7-9D11-4848-8434-5F50EFD4B51F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Staging|Any CPU = Staging|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7FC465B8-D02F-4C86-9935-6EFAC91C2F5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FC465B8-D02F-4C86-9935-6EFAC91C2F5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FC465B8-D02F-4C86-9935-6EFAC91C2F5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FC465B8-D02F-4C86-9935-6EFAC91C2F5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FC465B8-D02F-4C86-9935-6EFAC91C2F5F}.Staging|Any CPU.ActiveCfg = Staging|Any CPU
+		{7FC465B8-D02F-4C86-9935-6EFAC91C2F5F}.Staging|Any CPU.Build.0 = Staging|Any CPU
+		{8BF09689-8972-4C0E-9BBF-E0B18CC4EF51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BF09689-8972-4C0E-9BBF-E0B18CC4EF51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BF09689-8972-4C0E-9BBF-E0B18CC4EF51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BF09689-8972-4C0E-9BBF-E0B18CC4EF51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BF09689-8972-4C0E-9BBF-E0B18CC4EF51}.Staging|Any CPU.ActiveCfg = Staging|Any CPU
+		{8BF09689-8972-4C0E-9BBF-E0B18CC4EF51}.Staging|Any CPU.Build.0 = Staging|Any CPU
+		{9FB0BBE7-9D11-4848-8434-5F50EFD4B51F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FB0BBE7-9D11-4848-8434-5F50EFD4B51F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FB0BBE7-9D11-4848-8434-5F50EFD4B51F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FB0BBE7-9D11-4848-8434-5F50EFD4B51F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FB0BBE7-9D11-4848-8434-5F50EFD4B51F}.Staging|Any CPU.ActiveCfg = Staging|Any CPU
+		{9FB0BBE7-9D11-4848-8434-5F50EFD4B51F}.Staging|Any CPU.Build.0 = Staging|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {32FAE775-9DE0-46F2-9EB0-C190BC1C488D}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://sbsc-nigeria.visualstudio.com/
+		SccProjectUniqueName0 = SterlingBankLMS.Data\\SterlingBankLMS.Data.csproj
+		SccProjectName0 = SterlingBankLMS.Data
+		SccAuxPath0 = https://sbsc-nigeria.visualstudio.com
+		SccLocalPath0 = SterlingBankLMS.Data
+		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName1 = SterlingBankLMS.Core\\SterlingBankLMS.Core.csproj
+		SccProjectName1 = SterlingBankLMS.Core
+		SccAuxPath1 = https://sbsc-nigeria.visualstudio.com
+		SccLocalPath1 = SterlingBankLMS.Core
+		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName2 = SterlingBankLMS.Web\\SterlingBankLMS.Web.csproj
+		SccProjectName2 = SterlingBankLMS.Web
+		SccAuxPath2 = https://sbsc-nigeria.visualstudio.com
+		SccLocalPath2 = SterlingBankLMS.Web
+		SccProvider2 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+	EndGlobalSection
+EndGlobal

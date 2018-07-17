@@ -1,0 +1,286 @@
+﻿
+@{
+    ViewBag.Title = "GenerateReport";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />
+
+<style>
+    .ui-datepicker, .ui-datepicker div, .ui-datepicker span,
+    .ui-datepicker input, .ui-datepicker textarea,
+    .ui-datepicker button, .ui-datepicker ul,
+    .ui-datepicker li, .ui-datepicker i, .ui-datepicker h1,
+    .ui-datepicker h2, .ui-datepicker h3, .ui-datepicker h4,
+    .ui-datepicker h5, .ui-datepicker h6, .ui-datepicker textarea, .ui-datepicker sup,
+    .ui-datepicker video, .ui-datepicker table, .ui-datepicker tr, .ui-datepicker td, .ui-datepicker th, .ui-datepicker tbody,
+    .ui-datepicker thead {
+        float: none;
+    }
+
+    .tanHP {
+        background: #fff;
+        border-radius: 0;
+    }
+
+    .searchT {
+        border: 1px solid #eee;
+    }
+
+    .pinA select {
+        border: 1px solid #ddd;
+    }
+
+    .pinA span {
+        font-weight: bold;
+        margin-top: 3px;
+    }
+
+
+
+    .counter {
+        padding: 10px;
+        float: right;
+        font-size: 15px;
+        background: #ddd;
+        width: 100%;
+    }
+
+        .counter i {
+            background: #fff;
+            color: #000;
+        }
+
+    .alert.alert-danger, .alert.alert-success, .alert.alert-info, .alert.alert-warning {
+        width: 70%;
+        margin-top: 20px;
+    }
+
+    .formArea {
+        width: 100%;
+        margin-top: 20px;
+        padding-bottom: 60px;
+        float: left;
+    }
+
+    .formBox1 .label {
+        width: 100%;
+        margin-bottom: 10px;
+        font-weight: bold;
+        font-size: 13px;
+        float: left;
+    }
+
+    .formBox1 input, .formBox1 textarea, .formBox1 select {
+        width: 100%;
+        height: 30px;
+        padding: 5px;
+        font-size: 15px;
+        border: 1px solid rgba(0, 0, 0, 0.39);
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        float: left;
+    }
+
+    .formBox1 textarea {
+        height: 100px;
+    }
+
+    .formBox1 button {
+        background: #760f91;
+        border: none;
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        color: #fff;
+        height: 30px;
+        width: 120px;
+        margin-top: -30px;
+        float: right;
+    }
+
+    .bDGreen {
+        border-bottom: 3px solid #2fbf71;
+    }
+
+    .bkGreen {
+        background: #2fbf71;
+    }
+
+    .bkRed {
+        background: #ab192d;
+    }
+
+    jconfirm div {
+        float: none !important;
+    }
+
+    .jconfirm .jconfirm-holder {
+        margin: 0 40%;
+    }
+
+    .jconfirm-content {
+        padding-top: 20px;
+    }
+
+        .jconfirm-content div {
+            font-weight: 700;
+        }
+
+    .jconfirm-type-orange .jconfirm-content div {
+        color: red;
+    }
+
+    .jconfirm.jconfirm-light .jconfirm-box {
+        padding: 20px 25px 10px 25px;
+    }
+
+    .jconfirm .jconfirm-box-container.jconfirm-no-transition {
+        margin: 0px;
+        width: 100%;
+    }
+
+    .Pending {
+        color: #E68618;
+    }
+
+    .Approved {
+        color: #38C64E;
+    }
+
+    .Rejected {
+        color: #DA3024;
+    }
+
+    .NotSeen {
+        color: #E68618;
+    }
+
+    .Yes {
+        color: #38C64E;
+    }
+
+    .No {
+        color: #DA3024;
+    }
+</style>
+
+<div class="banner1 bkPurple">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>Generate Reports</span>
+</div>
+
+
+
+<div class="content1">
+    <div class="boxed1">
+
+        <div class="boxHead1">
+            <div class="boxHeader1 bDOrange">Generate Report</div>
+        </div>
+
+
+        <div class="boxBody1">
+            <form action="" class="row">
+
+                <div class="col-md-6">
+                    <label for="">Select report type</label>
+                    <select name="" id="ddlReportType" class="form-control">
+                        <option value="1">Activity Report</option>
+                        <option value="2">Course Overview Report</option>
+                        <option value="3">Grades Report</option>
+                        <option value="4">Participation Report</option>
+                        <option value="5">User-wise Course Completion Report</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label for="">Start Date</label>
+                    <input type="text" class="form-control datepicker" id="txtStartDate" name="StartDate" />
+                </div>
+
+                <div class="col-md-3">
+                    <label for="">End Date</label>
+                    <input type="text" class="form-control datepicker" id="txtEndDate" name="EndDate" />
+                </div>
+
+
+                <div class="col-md-3">
+                    <label for="">Staff ID</label>
+                    <input type="text" id="txtStaffId" class="form-control">
+                </div>
+                <div class="col-md-3">
+                    <label for="">Group</label>
+                    <select name="" id="ddlGroup" class="form-control">
+                        <option value="">Select</option>
+                    </select>
+                </div>
+
+
+                <div class="col-md-3">
+                    <label for="">Grade</label>
+                    <select name="" id="ddlGrade" class="form-control">
+                        <option value="">Select</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="">Department</label>
+                    <select name="" id="ddlDepartment" class="form-control">
+                        <option value="">Select</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4 offset-md-4">
+                    <button id="btnGenerate" type="button" class="btn btn-block btn-info" style="margin-top: 30px;">Generate</button>
+                </div>
+
+                <div class="row" style="margin-top: 70px;">
+
+                    <div class="col-md-10">
+
+                    </div>
+
+                    <div class="col-md-2">
+                        <select name="" id="ddlExport" class="form-control">
+                            <option value="0">Export as</option>
+                            <option value="DownloadCSV">DownloadCSV</option>
+                            <option value="DownloadTxt">DownloadTxt</option>
+                            <option value="DownloadXls">DownloadXls</option>
+                        </select>
+                    </div>
+
+
+
+                    <div class="row" style="padding: 30px;">
+                        <div class="tableRanch">
+                            <table id="tblGenerateReport">
+                                <thead>
+                                    <tr>
+                                        <td class="actreport">Staff Id</td>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="empty">
+                                        <td colspan="7">
+                                            Fetching Data <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Content/js/datatables.min.js"></script>
+    <script src="~/Content/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/Content/js/select2.min.js"></script>
+    <script src="~/Content/PageJs/GenerateReport.js"></script>
+}
+

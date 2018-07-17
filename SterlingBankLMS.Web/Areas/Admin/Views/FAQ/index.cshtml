@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Manage FAQ's";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="banner1 bkPurple">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>Manage Frequently Asked Questions</span>
+</div>
+
+
+<div class="content1">
+    <div style="padding:0px 50px;margin-bottom:10px">
+        <button id="reSortFAQ" class="btnSmall">
+            Re-Sort Items
+        </button>
+    </div>
+  
+    <div class="boxBody1" id="FAQContentArea" style="padding:0 50px">
+        <button class="btn bkSkyBlue" id="addNewFAQ" style="margin-bottom: 10px; float: right;">
+            Add New FAQ	<i class="fa fa-plus pull-right"></i>
+        </button>
+    </div>
+   
+</div>
+@section scripts{
+    <script src="~/Content/js/jquery.validate.min.js"></script>
+    <script src="~/Content/js/additional-methods.min.js"></script>
+    <script src="~/Content/js/CustomValidation.js"></script>
+    <script src="~/Content/PageJs/Admin_FAQ.js"></script>
+    <script src="~/Content/js/jquery-ui-sortable.min.js"></script>
+    @*<script src="~/Content/js/select2.min.js"></script>*@
+}

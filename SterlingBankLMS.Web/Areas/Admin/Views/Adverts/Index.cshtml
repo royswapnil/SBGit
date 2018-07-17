@@ -1,0 +1,229 @@
+﻿@using SterlingBankLMS.Data.Models.Enums;
+@{
+    ViewBag.Title = "Manage Adverts";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+}
+@section head{
+    <link href="~/Content/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+}
+@model ManagePageModel
+
+<div class="banner1 bkSkyBlue">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>Manage Advert</span>
+</div>
+
+<div class="content1">
+    <div class="boxHead1" style="border-bottom:none">
+
+        <button class="btn bkSkyBlue viewManagePanel" style="margin-bottom: 10px;float: right;@(Model.New ? Html.Raw("display:none"): Html.Raw(""))">
+            Manage Adverts <i class="fa fa-cogs"></i>
+        </button>
+        <button class="btn bkPurple viewListPanel" style="margin-bottom: 10px;float: right;@(Model.New ? Html.Raw(""):Html.Raw("display:none"))">
+            View Adverts <i class="fa fa-tasks"></i>
+        </button>
+    </div>
+
+    <div class="boxBody1" style="padding:0">
+        <div id="listPanel" style="width:100%;@(Model.New ? Html.Raw("display:none") : Html.Raw(""))">
+            <div class="tableRanch">
+                <table id="advert_table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Section</th>
+                            <th>Click URL</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Page</th>
+                            <th>Image/HTML Tag</th>
+                            <th>Is Active</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tr class="empty">
+                        <td colspan="9">
+                            Fetching Data <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+
+        <div id="managePanel" style="margin-top: 20px;width:100%;@(Model.New ? Html.Raw(""): Html.Raw("display:none"))">
+            <div class="boxHead1" style="margin-bottom:30px">
+                <div class="boxHeader1 bDGreen">
+                    Manage Adverts
+                </div>
+            </div>
+
+            <form id="AdvertForm" enctype="multipart/form-data" >
+                
+                <div class="row">
+                    <div class="col-sm-10 col-sm-offset-1">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="alert alert-warning text-center">
+                                    Top Banner (Min Width:1200px, Min Height: 200px)  |  Side Banner (Min Width:300px, Min Height: 400px)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Title</label>
+                                    <input name="Title" id="AdvertTitle" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="row">
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Banner Location</label>
+                                            <select class="form-control" id="AdvertSection" name="Section">
+                                                <option disabled selected value="0">Select section</option>
+                                                @{var options = MvcUtilities.GenerateEnumSelectList(typeof(AdvertSections), null);
+                                                    foreach (var option in options)
+                                                    {
+                                                <option value="@option.Value">@option.Text</option>
+                                                    }
+                                                }
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Advert Click Url <small class="red">(not required)</small></label>
+                                            <input type="text" class="form-control" id="AdvertLink" name="AdvertLink" placeholder="http://www.sample.com" />
+                                        </div>         
+                                    
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-lg-6">
+
+                                <div class="tabs">
+                                    <ul class="tab-links">
+                                        <li class="active"><a href="#tabUpload">Select Banner</a></li>
+                                        <li><a href="#tabExternal">HTML Tag</a></li>
+                                    </ul>
+
+                                    <div class="tab-content">
+                                        <div>
+                                            <div class="uploadBox mediaUpload content">
+
+                                                <div class="tabUpload tab active">
+                                                    <div class="form-group newFile">
+                                                        <label>Select Banner</label>
+                                                        <img id="previewImg" />
+                                                      <select name="AdBannerId" id="AdBanner" class="form-control select2"></select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="tabExternal tab">
+                                                    <div class="form-group">
+                                                        <label>Insert HTML Tag</label>
+                                                        <textarea name="HtmlTag" id="AdvertTag" class="form-control"></textarea>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="row">
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Start Date</label>
+                                            <input type="text" class="form-control datepicker" id="AdvertStartDate" name="StartDate" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>End Date</label>
+                                            <input type="text" class="form-control datepicker" id="AdvertEndDate" name="EndDate" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Select page to display banner on</label>
+                                    <select class="form-control" id="AdvertLocation" name="Location">
+                                        <option disabled value="0">Select page location</option>
+                                        @{var options2 = MvcUtilities.GenerateEnumSelectList(typeof(AdvertLocation), null);
+                                            foreach (var option in options2)
+                                            {
+                                                <option value="@option.Value">@option.Text</option>
+                                            }
+                                        }
+                                    </select>
+
+                                </div>
+
+                                
+
+
+                            </div>
+
+                        </div>
+
+                       
+
+                        <div class="underlineBtn" style="margin-top:20px">
+                            <button type="submit" class="btn btn-success btn-lg nofloat">Add Advert</button>
+                            <input name="Id" id="AdvertID" type="hidden" value="0" />
+                        </div>
+
+
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+
+
+
+    </div>
+
+</div>
+
+
+
+
+
+
+@section Scripts{
+<script src="~/Content/js/jquery.validate.min.js"></script>
+<script src="~/Content/js/additional-methods.min.js"></script>
+<script src="~/Content/js/CustomValidation.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script src="~/Content/js/datatables.min.js"></script>
+<script src="~/Content/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/Content/PageJs/Admin_Advert.js"></script>
+
+    <script>
+    </script>
+}

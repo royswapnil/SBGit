@@ -1,0 +1,376 @@
+﻿@using SterlingBankLMS.Web.ViewModels
+@model ManagePageModel
+@{
+    ViewBag.Title = "AddCourse";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section head{
+
+    <link href="~/Content/css/tags_editor.min.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+}
+
+
+<div class="backdrop"></div>
+
+
+<div class="banner1 bkPurple">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>Manage Courses</span>
+</div>
+
+
+<div class="content1">
+
+    <div class="boxHead1" style="border-bottom:none">
+
+        <button class="btn bkSkyBlue courseManagement" style="margin-bottom: 10px;float: right;@(Model.New ? Html.Raw("display:none"): Html.Raw(""))">
+            Course Management <i class="fa fa-cogs"></i>
+        </button>
+        <button class="btn bkPurple viewCourse" style="margin-bottom: 10px;float: right;@(Model.New ? Html.Raw(""):Html.Raw("display:none"))">
+            View Courses <i class="fa fa-tasks"></i>
+        </button>
+    </div>
+
+    <div class="boxBody1" style="padding:0">
+
+        <div id="CourseTablePanel" style="width:100%;@(Model.New ? Html.Raw("display:none"): Html.Raw(""))">
+
+            <div class="tableRanch">
+
+
+                <style>
+                    tr td:nth-child(3) {
+                        text-align: center;
+                    }
+                </style>
+
+                <table id="CourseTable">
+                    <thead>
+                        <tr>
+                            <td>Name</td>
+                            <td>Learning Area</td>
+                            <td>Module Count</td>
+                            <td>Due Date</td>
+                            @*<td>Pass Grade</td>
+                                <td>Exam Retake Count</td>*@
+                            <td>Action</td>
+                        </tr>
+                    </thead>
+                    <tr class="empty">
+                        <td colspan="5">
+                            Fetching Data <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+        </div>
+
+
+
+        <div id="NewCoursePanel" style="margin-top: 20px;width:100%;@(Model.New ? Html.Raw(""):Html.Raw("display:none"))">
+            <div class="progress1">
+
+                <div class="tabloid active">
+                    <div class="podb">1</div>
+                    <span>Course details</span>
+                </div>
+
+                <div class="tabloid">
+                    <div class="podb">2</div>
+                    <span>Upload Course Material</span>
+                </div>
+
+                <div class="tabloid">
+                    <div class="podb">3</div>
+                    <span>Course Certificate</span>
+                </div>
+
+                <div class="tabloid last">
+                    <div class="podb">4</div>
+                    <span>Finish</span>
+                </div>
+
+
+                <div class="progressLine1">
+                    <div class="progressIndicator1"></div>
+                </div>
+
+            </div>
+
+
+
+            <form id="FormStep1" data-step="1" class="formArea formArea1" method="post" enctype="multipart/form-data">
+
+                <div class="row">
+                    <div class="form-group">
+                        <label for="">Course Title:</label>
+                        <input type="text" class="form-control" name="Name" id="CourseTitle" />
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="">Course Description:</label>
+                                <textarea name="Description" maxlength="750" id="CourseDesc" placeholder="750 characters max..." rows="7"></textarea>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="">Select Learning Area</label>
+                                <select class="form-control" name="LearningAreaId" id="LearningArea">
+                                    <option value="0">Please Select</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Course Short Description:</label>
+                                <textarea name="ShortDescription" maxlength="200" class="form-control" id="CourseShortDesc" placeholder="200 characters max..." rows="7"></textarea>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+
+
+                            <div class="form-group">
+                                <label for="">Available Till:</label>
+
+                                <div class="checkbox" style="float: right;display: inline-block;vertical-align: middle;margin:0">
+                                    <input type="checkbox" id="CourseIgnoreDueDate" name="IgnoreDueDate">
+                                    <label for="CourseIgnoreDueDate" style="margin: 0;"><small class="red">Ignore?</small></label>
+                                </div>
+
+                                <input class="form-control datepicker" name="DueDate" id="CourseDate" placeholder="" />
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="">Estimated Duration <small>(weeks)</small>:</label>
+                                <input class="form-control" name="EstimatedDuration" id="CourseEstimatedDuration" type="number" min="1" value="1" placeholder="" />
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="">Hours Per Week</label>
+                                <input class="form-control" name="HoursPerWeek" id="CourseHoursPerWeek" type="number" min="1" value="1" placeholder="" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="">Upload Course Image<small><em class="red">(only image file types allowed)</em></small></label>
+                    <div class="uploadBox">
+                        <img />
+                        <div class="newFile">
+                            <input class="form-control" type="file" name="ImageUpload" id="FileUpload" placeholder="">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Enter course overview/requirements below</label>
+                    <textarea name="Overview" id="CourseOverview" cols="30" rows="10"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Enter Instructional Objectives</label>
+                    <textarea name="Objectives" id="CourseObjectives" cols="30" rows="10"></textarea>
+                </div>
+
+                <div class="underlineBtn">
+                    <button type="submit" class="nextBtn btnMedium btnDarkPink nofloat">Save and Continue</button>
+                    <input name="Id" id="CourseID" type="hidden" value="0" />
+                </div>
+
+
+
+            </form>
+
+
+
+            <div id="FormStep2" data-step="2" class="formArea formArea2">
+
+                <div class="formBox1 fullForm TitleBg">
+                    <label for="">
+                        Course Title: <span id="CourseTitleSpan" class="nofloat"></span>
+                    </label>
+
+                </div>
+
+                <div class="bordered-section full-width">
+                    <div class="boxHead1" style="padding: 20px;
+    border: none;
+    padding-bottom: 0;">
+                        <div class="boxHeader1 bDPurple">Uploaded Content</div>
+                    </div>
+
+                    <div class="body full-width" style="padding-top: 0;">
+                        <div class="boxBody1" id="CourseModuleHolder">
+
+
+
+                            <button class="btn bkSkyBlue" id="addNewModule" style="margin-bottom: 10px; float: right;">
+                                Add New Module	<i class="fa fa-plus pull-right"></i>
+                            </button>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="underlineBtn" style="margin-top: 30px;">
+                    <button class="backBtn  btnMedium btnGrey nofloat goback" style="margin-right: 20px;">Back</button>
+                    <button class="nextBtn  btnMedium btnDarkPink nofloat" id="CourseStep2">Save and Continue</button>
+                </div>
+
+
+
+            </div>
+
+
+            <form id="FormStep3" data-step="3" class="formArea formArea3">
+
+                <div class="row">
+                    @*<div class="form-group">
+                            <label for="">Examination Retake Count</label>
+
+                            <div class="checkbox" style="float: right;display: inline-block;vertical-align: middle;margin:0">
+                                <input type="checkbox" id="CourseIgnoreRetake" name="IgnoreRetake">
+                                <label for="CourseIgnoreRetake" style="margin: 0;"><small class="red">Ignore?</small></label>
+                            </div>
+
+                            <input name="ExamRetakeCount" id="ExamRetakeCount" class="form-control" type="number" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Pass Grade (%)</label>
+                            <input name="PassGrade" id="PassGrade" class="form-control" type="number" value="50" />
+                        </div>*@
+
+                    <div class="form-group">
+                        <label for="">Has Certificate <span><i class="red">(Issue certificate at the end of this course and exam associated)</i></span></label>
+
+                        <div class="checkbox" style="display:block">
+                            <input name="HasCertificate" id="HasCertificate" type="checkbox" checked />
+                            <label for="HasCertificate" style="margin: 0;"><small class="red"></small></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Publish Course<i class="red">(Display course on site)</i></label>
+
+                        <div class="checkbox" style="display:block">
+                            <input name="IsPublished" id="IsPublished" type="checkbox" />
+                            <label for="IsPublished" style="margin: 0;"><small class="red"></small></label>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                <div class="underlineBtn">
+
+                    <button class="backBtn  btnMedium btnGrey nofloat goback" type="button" style="margin-right: 20px;">Back</button>
+                    <button type="submit" class="nextBtn  btnMedium btnDarkPink nofloat">Save and Continue</button>
+                </div>
+
+
+
+            </form>
+
+
+            <div id="FormStep4" data-step="4" class="formArea formArea4 full-width bordered-section">
+
+                <div class="notyClass">You have successfully updated a course</div>
+                <div class="endNotePanel">
+                    <button class="endNote goback btnGrey nofloat">
+                        Go Back To Course
+                    </button>
+
+
+                    <button class="endNote createNewCourse nofloat">
+                        Create new Course
+                    </button>
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div id="modalClone" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Clone Course: (<span id="ClonedCourseName"></span>)</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger text-center">
+                    You are currently about cloning all the content of this course into another. Close this dialog box if this is not your intended action
+                </div>
+
+                <form id="FormCloneCourse">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <div class="form-group">
+                                <label>New Course Name:</label>
+                                <input name="Name" class="form-control" />
+                            </div>
+
+                            <div class="form-group center">
+                                <button type="submit" class="btn btn-success">PROCEED</button>
+                                <input type="hidden" name="CourseId" id="CloneID" />
+                            </div>
+                        </div>
+                      
+                    </div>
+                   
+                    
+
+                </form>
+            </div>
+            
+        </div>
+
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Content/js/jquery.validate.min.js"></script>
+    <script src="~/Content/js/additional-methods.min.js"></script>
+    <script src="~/Content/js/CustomValidation.js"></script>
+    <script src="~/Content/PageJs/Admin_CourseManagement.js"></script>
+    <script src="~/Content/js/datatables.min.js"></script>
+    <script src="~/Content/js/jquery-ui-sortable.min.js"></script>
+    <script src="~/Content/js/jquery.caret.min.js"></script>
+    <script src="~/Content/js/jquery.tag-editor.min.js"></script>
+    <script src="~/Content/js/bootstrap-datepicker.min.js"></script>
+}

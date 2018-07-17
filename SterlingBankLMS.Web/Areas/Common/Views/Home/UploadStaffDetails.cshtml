@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "UploadStaffDetails";
+}
+
+@using (Html.BeginForm("UploadStaffDetails", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+
+    <h4 class="header-child">Upload Contact Infomation: <small>(Only a Standard Microsoft Excel Sheet .xslx or .xsl should be uploaded.). Kindly note that all columns must correspond with <a href="@Url.Action("_ExcelSample","Manufacturers")" class="excel">this sample</a>, else your data will not be uploaded to server.</small></h4>
+    <div class="">
+        <input type="file" name="upload" class="form-control">
+        <button type="submit" class="btn btn-primary bg-blue-active"><span class="glyphicon glyphicon-upload" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Upload"></span> Upload</button>
+
+    </div>
+}

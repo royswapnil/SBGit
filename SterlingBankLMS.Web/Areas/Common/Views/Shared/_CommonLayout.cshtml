@@ -1,0 +1,291 @@
+﻿@using SterlingBankLMS.Web.Utilities
+@using SterlingBankLMS.Web.Infrastructure.Auth
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title - Learning Management System</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="~/Content/css/main.css" rel="stylesheet" />
+    <link href="~/Content/css/common-layout.css" rel="stylesheet" />
+    <link href="~/Content/css/jquery-confirm.css" rel="stylesheet" />
+    <link href="~/Content/PageCss/common.css" rel="stylesheet" />
+    <link href="~/Content/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+
+    <script src="~/Content/js/jquery.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.2.3.min.js"></script>
+    <script src="~/signalr/Hubs/"></script>
+
+    @RenderSection("head", required: false)
+</head>
+<body>
+    <div class="lms-loader" data-lms-loader="" style="display:none">
+        <h2 class="animated infinite fadeOut center">Please wait...</h2>
+    </div>
+
+    <!-- Notification Popup -->
+    <div class="notyBox popBox" id="divinfoTab"></div>
+    <!-- end of Notification Popup -->
+
+    <header>
+        <i class="material-icons menuBtn">menu</i>
+        <a href="~/">
+            <img src="~/Content/img/retro.png" alt="">
+            <img src="~/Content/img/logo.png" class="marginImg" alt="">
+        </a>
+
+        <ul>
+            @*<li class="msg"><i class="material-icons">email</i><span class="redBackground">2</span></li>*@
+            <li class="noty" id="testnf">
+                <i class="material-icons" id="imgtestnf">notifications_none</i>
+                <span id="notiCount"></span>
+            </li>
+            <li class="user"><i class="material-icons">person</i><h6>Welcome <b>@CurrentUser.FirstName, @CurrentUser.LastName</b></h6> </li>
+
+            @if (CurrentUser.HasPermission(PermissionProvider.AccessAdmin)) {
+                <li>
+                    <a href="~/admin/dashboard"><i class="material-icons">settings</i> <h6>Admin</h6></a>
+                </li>
+            }
+
+            @*@if (CurrentUser.IsInRole(AppConstants.Role.Admin)) {
+                <li>
+                    <a href="~/admin/managecourse"><i class="material-icons">settings</i> <h6>Admin</h6></a>
+                </li>
+            }
+            else if (CurrentUser.IsInRole(AppConstants.Role.HR)) {
+                <li>
+                    <a href="~/HumanResources/employeerecords/listemployees"><i class="material-icons">settings</i> <h6>Admin</h6></a>
+                </li>
+            }
+            else if (CurrentUser.IsInRole(AppConstants.Role.IT)) {
+                <li>
+                    <a href="~/technology/techsupport/dashboard"><i class="material-icons">settings</i> <h6>Admin</h6></a>
+                </li>
+            }
+            else if (CurrentUser.IsInRole(AppConstants.Role.Mgt)) {
+                <li>
+                    <a href="~/management/"><i class="material-icons">settings</i> <h6>Admin</h6></a>
+                </li>
+            }*@
+        </ul>
+    </header>
+
+    <div class="menuTab">
+        <div class="sack">
+            <ul style="list-style:none;">
+                @{
+            
+                    var anchorTemplate = "<li {0}><a href=\"{1}\"><div class=\"pageTab\">" +
+                "<div class=\"tabing\">" +
+                "<i class=\"material-icons\">{2}</i><span>" +
+                "{3}</span></div></div></a></li>";
+                }
+
+                @Html.LiActionLink("My Courses", "home", "common", "home", "index", anchorTemplate)
+                @Html.LiActionLink("My Profile", "account_box", "common", "profile", "index", anchorTemplate)
+                @Html.LiActionLink("Course Catalog", "library_books", "common", "course", "courses", anchorTemplate)
+                @Html.LiActionLink("Learning History", "history", "common", "course", "learninghistory", anchorTemplate)
+                @*@Html.LiActionLink("Videos", "playlist", "common", "course", "videos", anchorTemplate)*@
+                @*@Html.LiActionLink("Exams", "playlist", "common", "examination", "index", anchorTemplate)*@
+                @Html.LiActionLink("My Certificates", "turned_in", "common", "certificate", "index", anchorTemplate)
+                @Html.LiActionLink("Support Center", "language", "common", "support", "index", anchorTemplate)
+                @Html.LiActionLink("Learning Calendar", "today", "common", "training", "calendar", anchorTemplate)
+            </ul>
+        </div>
+        <div class="log smack">
+            <a href="javascript:lo('#lf');"><i class="material-icons">power_settings_new</i> <span>Logout</span></a>
+        </div>
+        <form id="lf" action="~/authentication/logout" method="post" style="display:none"> @Html.AntiForgeryToken() </form>
+    </div>
+    @RenderBody()
+    <footer>
+        <div class="foot">&copy;<span id="CopyrightYear"></span>@DateTime.Now.Year - LEARNING MANAGEMENT SYSTEM</div>
+    </footer>
+
+    <script src="~/Content/js/mustache.js"></script>
+    <script src="~/Content/js/moment.min.js"></script>
+    <script src="~/Content/js/jquery-confirm.js"></script>
+    <script src="~/Content/js/main.js"></script>
+    <script src="~/Content/pagejs/common_layout.js"></script>
+    <script>
+        $(document).ready(function () {
+            var divinfoTab = $('#divinfoTab');
+            $('#notiCount').css('display', 'none');
+
+                $('#imgtestnf').click(function (e) {
+                    if ($("#divinfoTab").is(':hidden')) {
+                        if ($('#notiCount').text() != "") {
+                            $('#divinfoTab').show();
+                        }
+                    } else {
+                        updateData();
+                        $('#divinfoTab').hide();
+                    }
+                });
+
+                $('#notiCount').click(function (e) {
+                    if ($("#divinfoTab").is(':hidden')) {
+                        $('#divinfoTab').show();
+                    } else {
+                        updateData();
+                        $('#divinfoTab').hide();
+                    }
+                });
+
+                //var hub = $.connection.sbHub;
+                //hub.client.dispStatus = function () {
+                //    getData();
+                //};
+
+                var hub = $.connection.sbLMSHub;
+                hub.client.displayStatus = function () {
+                    getData();
+                };
+
+                //start
+                $.connection.hub.start();
+                getData();
+
+                function getData() {
+                    var divinfoTab = $('#divinfoTab');
+
+                    $.ajax({
+                        url: '/Home/GetNotification',
+                        type: 'POST',
+                        data: "{'userId':'" + @CurrentUser.Id + "'}",
+                        datatype: 'json',
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            data = $.parseJSON(data);
+                            var notification = '';
+                            if (data.length > 0) {
+                                divinfoTab.empty();
+                                $('#notiCount').text(data.length);
+                                var snotification = '<div class="hD">Notification</div>';
+                                divinfoTab.append(snotification);
+                                for (var i = 0; i < data.length; i++) {
+                                      var  notification = '<div class="bD"><div class="infoTab">'
+                                        + data[i].Message +
+                                        '</div></div>'
+                                      divinfoTab.append(notification);
+                                      divinfoTab.addClass('showPop');
+                                      $('#notiCount').css('display', 'block');
+                                }
+                            }
+                        }
+                    });
+                }
+
+                function updateData() {
+                    var divinfoTab = $('#divinfoTab');
+                    $.ajax({
+                        url: '/Home/UpdateNotification',
+                        type: 'POST',
+                        data: "{'userId':'" + @CurrentUser.Id + "'}",
+                        datatype: 'json',
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            data = $.parseJSON(data);
+                            divinfoTab.empty();
+                            $('#notiCount').text('');
+                            $('#notiCount').css('display', 'none');
+                        }
+                    });
+                }
+            });//end of ready
+
+    </script>
+
+    <script>
+        var didScroll;
+        var lastScrollTop = 0;
+        var delta = 5;
+        var navbarHeight = $('header').outerHeight();
+
+        $(window).scroll(function (event) {
+            didScroll = true;
+        });
+
+        setInterval(function () {
+            if (didScroll) {
+                hasScrolled();
+                didScroll = false;
+            }
+        }, 250);
+
+        function hasScrolled() {
+            var st = $(this).scrollTop();
+
+            // Make sure they scroll more than delta
+            if (Math.abs(lastScrollTop - st) <= delta)
+                return;
+
+            // If they scrolled down and are past the navbar, add class .header_up.
+            // This is necessary so you never see what is "behind" the navbar.
+            if (st > lastScrollTop && st > navbarHeight) {
+                // Scroll Down
+
+                $('header').addClass('header_up');
+            } else {
+                // Scroll Up
+                if (st + $(window).height() < $(document).height()) {
+                    $('header').removeClass('header_up');
+
+                }
+            }
+
+            lastScrollTop = st;
+        }
+        //end of sticky headers
+
+        //menu Button
+
+        $('.menuBtn').click(function () {
+            $('.menuTab').toggleClass("show");
+            $(this).toggleClass("inside");
+        });
+
+        $('.long i').click(function () {
+            $('.hideTab').toggleClass("shown");
+            $(this).toggleClass("down");
+        });
+
+        $('.tabs .tab-links a').on('click', function (e) {
+            var currentAttrValue = $(this).attr('href');
+
+            // Show/Hide Tabs
+            $('.tabs ' + currentAttrValue).slideDown(400).siblings().slideUp(400);
+
+            // Change/remove current tab to active
+            $(this).parent('li').addClass('active').siblings().removeClass('active');
+
+            e.preventDefault();
+        });
+    </script>
+    <script>
+        var APPVARS = {
+            logoutUrl: '@Url.Content("~/auth/login?returnurl=")',
+            errors: [{HasError:!0, Message: 'Sorry, an error occured. Please try again or contact admin.'}]
+        };
+
+        mainApp.init(APPVARS, jQuery);
+        function lo(selector) { $(selector).get(0).submit(); }
+    </script>
+    @RenderSection("scripts", required: false)
+
+    <div id="PartialTemplates">
+        <script id="ResponseMessageTemplate" type="x-tmpl-mustache">
+            <div class="messageText {{#HasError}}error{{/HasError}} {{^HasError}}success{{/HasError}}">
+                <i class="fa {{#HasError}}fa-times{{/HasError}} {{^HasError}}fa-check-circle{{/HasError}}"></i>
+                <p>{{Message}}</p>
+            </div>
+
+        </script>
+    </div>
+</body>
+</html>

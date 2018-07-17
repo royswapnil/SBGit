@@ -1,0 +1,153 @@
+﻿
+@{
+    ViewBag.Title = "New Messages";
+    Layout = "~/Areas/Technology/Views/Shared/_TechLayout.cshtml";
+}
+
+<style>
+    .msgHead {
+        padding-top: 15px;
+        padding-bottom: 4px;
+        border-bottom: 3px solid #0094dc;
+        width: 100%;
+        float: left;
+        background: #f0f3f5;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .msgBody {
+        height: auto;
+    }
+</style>
+
+<div class="banner1 bkDarkBlue">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>Information Technology</span>
+</div>
+
+
+
+<div class="content1">
+
+
+
+    <div class="msgHead" style="border-bottom: 3px solid #a1ce61;">
+
+
+        <button class="btnMedium" style="background: #539d50;">New Message</button>
+
+
+
+    </div>
+
+    <div class="msgBody">
+
+        <div class="formArea" style="display:block">
+            <form id="formEmail">
+                <div class="formBox1 fullForm">
+                    <label></label>
+                    <input type="text" placeholder="To: " class="form-control" id="To" name="To">
+
+                </div>
+
+                <div class="formBox1 fullForm">
+                    <label></label>
+                    <input type="text" placeholder="Subject: " id="Subject" class="form-control" name="Subject">
+
+                </div>
+
+                <div class="formBox1 fullForm">
+                    <label></label>
+                    <textarea name="Message" class="form-control" id="Message"></textarea>
+
+                </div>
+
+
+                <div class="underlineBtn">
+                    <button class="btnMedium bkSkyBlue" type="submit">Send Message</button>
+                </div>
+            </form>
+
+
+
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+
+
+@section Scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Content/js/additional-methods.min.js"></script>
+    <script src="~/Content/js/CustomValidation.js"></script>
+    <script>
+        $(document).ready(function () {
+            BindHtmlEditor($('textarea'), '');
+
+            $("#formEmail").validate({
+                ignore: [],
+                rules: {
+                    To: { required: true, email: true },
+                    Subject: { required: true },
+                    Message: { required: true },
+                },
+
+                errorPlacement: function ($error, $element) {
+                    $error.addClass('errorHolder');
+                    $element.closest('.formBox1').find('label:first').after($error);
+                },
+                submitHandler: function (form) {
+
+                    var $button = $(form).find(':submit');
+                    var prev = $button.html();
+                    $button.attr('disabled', 'disabled');
+                    $button.html('Processing <i class="fa fa-circle-o-notch fa-spin pull-right"></i>');
+
+                    var formData = new FormData(form);
+                    console.log(formData);
+                    $.ajax({
+                        cache: false,
+                        async: true,
+                        type: "POST",
+                        url: "/api/support/NewMessage",
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (data) {
+                            if (!data.HasError) {
+                                ShowNotie(data);
+                                $('#To').val('');
+                                $('#Subject').val('');
+                                BindHtmlEditor($('textarea'), '');
+                                $button.html('').html('Send Message');
+                                $button.attr('disabled', false);
+                                $('#Budget').val('');
+                            }
+                            else {
+                                $button.html('').html('Send Message');
+                                $button.attr('disabled', false);
+                                ShowNotie(data);
+                            }
+
+                        },
+
+                        error: function (data) {
+                            ShowNotie({ HasError: true, Message: "An error occurred when processing your request" });
+                        },
+                        complete: function (data) {
+                            $button.removeAttr('disabled');
+                            $button.html(prev);
+                        }
+                    });
+
+                }
+            });
+        })
+    </script>
+}

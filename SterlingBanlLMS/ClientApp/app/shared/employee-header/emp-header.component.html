@@ -1,0 +1,105 @@
+﻿
+<div>
+    <header>
+        <i class="material-icons menuBtn">menu</i>
+        <img src="/Content/img/retro.png" alt="">
+        <img src="/Content/img/logo.png" class="marginImg" alt="">
+
+        <ul>
+            <li class="msg"><i class="material-icons">email</i><span class="redBackground">2</span></li>
+            <li class="noty"><i class="material-icons">notifications_none</i><span>3</span></li>
+            <li class="user"><i class="material-icons">person</i><h6>Welcome <b>{{LoggedInUser}}</b></h6> <i class="material-icons">arrow_drop_down</i></li>
+            <li>
+                <a [routerLink]="['/admin/dashboard']"><i class="material-icons">settings</i></a>
+            </li>
+
+        </ul>
+    </header>
+</div>
+
+<div class="menuTab">
+    <div class="sack">
+
+        <ul>
+            <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}">
+                <a [routerLink]="['/home']">
+                    <div class="pageTab">
+                        <div class="tabing"><i class="material-icons">library_books</i><span>My Courses</span></div>
+                    </div>
+                </a>
+            </li>
+            <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}">
+                <a [routerLink]="['/profile']">
+                    <div class="pageTab">
+                        <div class="tabing"><i class="material-icons">library_books</i><span>My profile</span></div>
+                    </div>
+                </a>
+            </li>
+
+            <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}">
+                <a [routerLink]="['/course']">
+                    <div class="pageTab">
+                        <div class="tabing"><i class="material-icons">library_books</i><span>
+                              Course Catalog</span></div>
+                    </div>
+                </a>
+            </li>
+
+            <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}">
+                <a [routerLink]="['/all_videos']">
+                    <div class="pageTab">
+                        <div class="tabing"><i class="material-icons">library_books</i><span>My videos</span></div>
+                    </div>
+                </a>
+            </li>
+
+            <li>
+                <a>
+                    <div class="pageTab">
+                        <div class="tabing"><i class="material-icons">people</i><span>Forums</span></div>
+                    </div>
+                </a>
+            </li>
+
+            <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}">
+                <a [routerLink]="['/certificate']">
+                    <div class="pageTab">
+                        <div class="tabing"><i class="material-icons">turned_in</i><span>My Certificates</span></div>
+                    </div>
+                </a>
+            </li>
+
+            <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}">
+                <a [routerLink]="['/support']">
+                    <div class="pageTab">
+                        <div class="tabing"><i class="material-icons">language</i><span>Support Center</span></div>
+                    </div>
+                </a>
+
+            </li>
+
+            <li>
+                <a>
+                    <div class="pageTab">
+                        <div class="tabing"><i class="material-icons">today</i><span>Learning Calendar</span></div>
+                    </div>
+                </a>
+            </li>
+
+            <li [routerLinkActive]="['link-active']">
+                <a>
+                    <div class="pageTab mylog">
+                        <div class="tabing">
+                            <i class="material-icons">power_settings_new</i><span>Logout</span>
+                        </div>
+                    </div>
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+    <div class="log smack">
+        <a href="#"><i class="material-icons">power_settings_new</i> <span>Logout</span></a>
+    </div>
+</div>

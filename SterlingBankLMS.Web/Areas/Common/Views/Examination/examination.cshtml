@@ -1,0 +1,282 @@
+﻿@model ExamDetailsModel
+    @{
+        ViewBag.Title = "Examination Summary";
+        var breadCrumb = "/Content/img/course_catalog (1).jpg";
+
+        var contentUrl = $"{Url.Content("~/api/exam/getexamsummary/")}{Model.ExaminationId}";
+    }
+
+    @section head {
+        <style>
+            .questionArea {
+                float: left;
+                width: 100%;
+                margin-top: 15px;
+            }
+
+            .ques {
+                float: left;
+                width: 100%;
+                margin-bottom: 15px;
+                font-size: 16px;
+            }
+
+                .ques ol {
+                    width: 100%;
+                    float: left;
+                }
+
+                    .ques ol li {
+                        width: 100%;
+                        float: left;
+                        margin-bottom: 15px;
+                        min-height: 150px;
+                        opacity: 0.3;
+                    }
+
+                        .ques ol li:nth-child(1) {
+                            opacity: 1;
+                        }
+
+                        .ques ol li span {
+                            color: #0091d9;
+                            width: 100%;
+                            float: left;
+                            margin-bottom: 17px;
+                            margin-top: -18px;
+                        }
+
+                        .ques ol li label {
+                            width: 100%;
+                            float: left;
+                            color: #555;
+                            padding-left: 20px;
+                            margin-bottom: 7px;
+                            font-size: 14px;
+                            font-weight: normal;
+                            box-sizing: border-box;
+                        }
+
+                            .ques ol li label input {
+                                width: 20px;
+                                float: left;
+                            }
+
+            .examArea {
+                float: left;
+                width: 100%;
+                padding-left: 15%;
+                padding-right: 15%;
+                padding-top: 50px;
+            }
+
+            .indit {
+                float: left;
+                width: 100%;
+                font-size: 15px;
+            }
+
+                .indit span {
+                    float: left;
+                    margin-right: 10px;
+                }
+
+            .inditBack {
+                float: right;
+                width: 60%;
+                height: 7px;
+                border-radius: 5px;
+                -webkit-border-radius: 5px;
+                background: #ddd;
+            }
+
+            .inditRun {
+                float: left;
+                background: #0091d9;
+                height: 100%;
+            }
+
+            .menuTab {
+                display: none;
+            }
+
+            .col2 {
+                display: none;
+            }
+
+            .examBridge {
+                float: left;
+                width: 100%;
+                margin-bottom: 20px;
+                background: #0091d9;
+            }
+
+            .bridgeA {
+                float: left;
+                min-width: 150px;
+                padding: 15px;
+                font-size: 17px;
+                font-weight: bold;
+                background: #333;
+                color: #fff;
+                text-align: center;
+                border-top-right-radius: 30px;
+                border-bottom-right-radius: 30px;
+                -webkit-border-top-right-radius: 30px;
+                -webkit-border-bottom-right-radius: 30px;
+            }
+
+            .bridgeB {
+                color: #fff;
+                font-size: 15px;
+                padding: 15px;
+                float: left;
+            }
+        </style>
+
+        <style>
+            footer {
+                position: fixed;
+                bottom: 0;
+            }
+
+            .startExam button {
+                margin-top: 30px;
+            }
+
+            .nid {
+                width: 100%;
+                text-align: center;
+            }
+
+                .nid i {
+                    width: 100%;
+                    text-align: center;
+                }
+
+                .nid span {
+                    width: 100%;
+                    text-align: center;
+                    margin-top: 10px;
+                }
+
+            .startExam p {
+                margin-top: 27px;
+                float: left;
+            }
+
+            .startExam {
+                position: fixed;
+                z-index: 100;
+                background: #f7f7f7;
+                width: 80%;
+                margin-left: 10%;
+                max-height: 70vh;
+                margin-top: 10vh;
+                box-sizing: border-box;
+                padding: 4%;
+                font-size: 14px;
+            }
+
+                .startExam h2 {
+                    width: 100%;
+                    text-align: center;
+                    color: #0091d9;
+                    margin-bottom: 30px;
+                }
+
+            .pgl {
+                margin-top: 0px;
+                position: relative;
+                z-index: 0;
+                margin-bottom: 100px;
+                background: #f7f7f7;
+                width: 80%;
+                margin-left: 10%;
+                box-sizing: border-box;
+                padding: 4%;
+                font-size: 14px;
+            }
+                .pgl h2 {
+                    width: 100%;
+                    text-align: center;
+                    color: #0091d9;
+                    margin-bottom: 30px;
+                }
+        </style>
+
+    }
+    <div class="wrapper" ng-init="vm.getExaminationSummary('@Model.ExaminationId')" ng-controller="exam as vm">
+
+        <div class="breadcrum" style="background:url('@breadCrumb') no-repeat center center / cover">
+            <div class="col8">
+                <div class="headcrum">&nbsp;</div>
+            </div>
+
+            <div class="col4">
+                <div class="headcrum">@CurrentUser.Function.ToUpper()</div>
+                <div class="bodycrum"><i class="material-icons">room</i> <i>@CurrentUser.BranchName.ToUpper()</i></div>
+                <div class="bodycrum"><i style="font-size: 12px;margin-top: 3px;">Staff ID: </i> <b>@CurrentUser.StaffId</b></div>
+            </div>
+        </div>
+
+        <div class="examBridge">
+            <div class="bridgeA">Exam</div>
+            @*<div class="bridgeB">Exam title goes here</div>*@
+        </div>
+
+        <ui-view>
+        </ui-view>
+
+    </div>
+
+    @section scripts{
+        <script src="~/Content/js/jquery-confirm.js"></script>
+        <script src="~/content/js/angular.min.js"></script>
+        <script src="~/content/js/httpservice.js"></script>
+        <script src="~/Content/js/angular-ui-router.min.js"></script>
+        <script src="~/Content/js/angular-sanitize.min.js"></script>
+
+        <script>
+            var appConfig = {
+                loginUrl: '@Url.Content("~/auth/login?returnurl=")',
+                baseUrl: '@Url.Content("~/")',
+                lms: {
+                    claApiUrl:'@Url.Content("~/api/userexamination/")'
+                },
+                errors: [{ HasError: !0, Message: 'Sorry, an error occured. Please try again or contact admin.'}],
+            };
+
+        mainApp.init(appConfig, jQuery);
+
+        $(document).ready(function () {
+            var window_height = $(window).height();
+            $(window).scroll(function () {
+                var scrollMiddle = $(window).scrollTop() + (window_height / 2);
+                $('li[id^="scroll_"]').each(function () {
+                    elTop = $(this).offset().top;
+                    elBtm = elTop + $(this).height();
+                    if (elTop < scrollMiddle && elBtm > scrollMiddle) {
+                        $(this).css('opacity', "1");
+                    } else {
+                        $(this).css('opacity', "0.3");
+                    }
+                });
+            });
+
+
+            $('.startExam button').click(function () {
+
+                $('.startExam').fadeOut();
+                $('.examArea').fadeIn();
+
+            });
+        });
+        </script>
+        <script src="~/Content/PageJs/Common_Examination.js"></script>
+        <script>
+            angular.element(function () {
+                angular.bootstrap(document, ['sterlinglms']);
+            });
+        </script>
+    }

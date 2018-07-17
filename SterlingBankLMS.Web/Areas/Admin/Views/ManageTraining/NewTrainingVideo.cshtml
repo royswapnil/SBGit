@@ -1,0 +1,300 @@
+﻿@model SterlingBankLMS.Core.DTO.TrainingVideoDto
+@{
+    ViewBag.Title = "New Training Video";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .success {
+        color: #fff !important;
+    }
+
+    .bDGreen {
+        border-bottom: 3px solid #2fbf71;
+    }
+
+    .bulkfile {
+        background: rgba(22, 96, 136, 0.2);
+        padding: 30px;
+        padding-right: 45%;
+    }
+
+        .bulkfile button {
+            background: #166088;
+        }
+
+    .formBox1 label {
+        width: 100%;
+        margin-bottom: 10px;
+        font-weight: bold;
+        font-size: 13px;
+        float: left;
+    }
+
+    label i {
+        font-style: italic;
+        color: #ccc;
+        font-size: 12px;
+        padding-left: 20px;
+        float: none;
+    }
+
+    .halfForm .halfForm {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+    form.report {
+        padding: 0px;
+        margin-top: 60px;
+        width: 100%;
+        margin-left: 0%;
+        border: 0px solid transparent;
+    }
+
+        form.report input {
+            width: 100%;
+            height: 35px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 15px;
+        }
+
+    .ui-widget-header {
+        background: #cedc98;
+        border: 1px solid #DDDDDD;
+        color: #333333;
+        font-weight: bold;
+        float: none;
+    }
+
+    .progress-label {
+        position: absolute;
+        left: 50%;
+        top: 13px;
+        font-weight: bold;
+        text-shadow: 1px 1px 0 #fff;
+    }
+
+    .red {
+        color: red;
+    }
+
+    .ui-progressbar-value .ui-corner-left .ui-widget-header .ui-progressbar-complete .ui-corner-right {
+        float: none;
+    }
+</style>
+
+<link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />
+<link href="~/Content/css/training.css" rel="stylesheet" />
+<style>
+    .videoupload {
+        margin-top: -45px !important;
+        margin-right: 20px !important;
+        height: initial !important;
+    }
+</style>
+<div class="banner1 bkTorBlue">
+    <i class="material-icons menuBtn1">menu</i>
+    <span>Upload Training Video</span>
+</div>
+
+
+
+<div class="content1" style="min-height: 90vh;">
+
+    <div class="boxHead1">
+        <div class="boxHeader1 bDGreen">Upload Training Video</div>
+    </div>
+    <div class="boxBody1">
+
+        <form id="uploadVideoForm">
+
+            @Html.AntiForgeryToken()
+            <div class="formArea" style="display:block;">
+                <div class="formBox1 fullForm">
+                    <label for="">Enter Training Video Name:</label>
+                    @Html.EditorFor(model => model.TrainingVideoName, new { htmlAttributes = new { } })
+                    @Html.ValidationMessageFor(model => model.TrainingVideoName, "", new { @class = "text-danger", @style = "color:red" })
+                </div>
+                <div class="formBox1 fullForm Video" style="display:none;">
+                    <label for="">Training Video Url:</label>
+                    @Html.EditorFor(model => model.ImageUrl, new { htmlAttributes = new { } })
+                    @Html.ValidationMessageFor(model => model.TrainingVideoName, "", new { @class = "text-danger", @style = "color:red" })
+                </div>
+                @Html.HiddenFor(model => model.TrainingVideoUrl)
+                @Html.ValidationMessageFor(model => model.TrainingVideoUrl, "", new { @class = "text-danger", @style = "color:red" })
+
+                <div class="formBox1 fullForm bulkfile" style="margin-top:15px;">
+                    <label for="">Upload Training Video</label>
+                    <input type="file" id="vidoeFile" style="padding: 30px 20px 30px 30px;" />
+                    <button type="button" class="bkTorBlue videoupload btnSmall" style="float:right">Upload</button>
+                </div>
+                <div id="progressbar-5" style="float:none">
+                    <div class="progress-label">
+                    </div>
+                </div>
+                <div class="underlineBtn">
+                    <button class="nextBtn btn1 btnMedium bkGreen" id="btnn" type="submit">Add and Save</button>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+
+
+</div>
+
+
+
+@section Scripts{
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Content/js/jquery.validate.min.js"></script>
+    <script src="~/Content/js/additional-methods.min.js"></script>
+    <script src="~/Content/js/CustomValidation.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $('#btnn').attr("disabled", "disabled");
+
+            $('.videoupload').on('click', function () {
+                var fileUpload = $("#vidoeFile").get(0);
+
+
+                var files = fileUpload.files;
+                var fileData = new FormData();
+                for (var i = 0; i < files.length; i++) {
+                    fileData.append(files[i].name, files[i]);
+                }
+                $('.boxBody1').prepend("");
+                $.ajax({
+                    url: '/Admin/ManageTraining/UploadFiles',
+                    type: "POST",
+                    contentType: false,
+                    processData: false,
+                    data: fileData,
+                    success: function (result) {
+                        if (result.Result != "") {
+                            $('.bulkfile').find("*").prop("disabled", true);
+                            LoadProgressBar(result);
+
+                        }
+                        else {
+                            ShowNotie(result);
+                            $('#vidoeFile').val('');
+                        }
+                    },
+                    error: function (result) {
+                         ShowNotie({ HasError: true, Message: result.responseJSON });
+                        
+                    }
+                });
+
+            });
+
+            $("#uploadVideoForm").validate({
+                ignore: [],
+                rules: {
+                    TrainingVideoName: { required: true },
+
+                },
+
+                errorPlacement: function ($error, $element) {
+                    $error.addClass('errorHolder');
+                    $element.closest('.formBox1').find('label:first').after($error);
+                },
+                submitHandler: function (form) {
+                    var $button = $(form).find(':submit');
+                    var prev = $button.html();
+                    $button.attr('disabled', 'disabled');
+                    $button.html('Processing <i class="fa fa-circle-o-notch fa-spin pull-right"></i>');
+
+                    var formData = new FormData(form);
+                    $.ajax({
+                        cache: false,
+                        async: true,
+                        type: "POST",
+                        url: "/Admin/ManageTraining/SaveUploadVideo",
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (data) {
+                            if (!data.HasError) {
+                                ShowNotie(data);
+                                $button.html('').html('Add and Save');
+                                $button.attr('disabled', false);
+                                $(".Video").hide();
+                                $('.bulkfile').show();
+                                $('#TrainingVideoName').val('');
+                            }
+                            else {
+
+                                ShowNotie(data);
+                                $button.html('').html('Add and Save');
+                                $button.attr('disabled', false);
+                                $(".Video").hide();
+                                $('.bulkfile').show();
+
+                            }
+
+                        },
+
+                        error: function (data) {
+                            ShowNotie({ HasError: true, Message: "An error occurred when processing your request" });
+                        },
+                        complete: function (data) {
+                            $button.removeAttr('disabled');
+                            $button.html(prev);
+                        }
+                    });
+
+                }
+            });
+
+
+        });
+
+
+        function LoadProgressBar(result) {
+            var progressbar = $("#progressbar-5");
+            var progressLabel = $(".progress-label");
+            progressbar.show();
+            $("#progressbar-5").progressbar({
+                //value: false,
+                change: function () {
+                    progressLabel.text(
+                        progressbar.progressbar("value") + "%");
+                },
+                complete: function () {
+                    progressLabel.text("Loading Completed!");
+                    progressbar.progressbar("value", 0);
+                    progressLabel.text("");
+                    progressbar.hide();
+                    $(".Video").show();
+                    $('#TrainingVideoUrl').val(result.Result);
+                    $('#ImageUrl').val(result.Result);
+                    $('#vidoeFile').val('');
+                    $('.bulkfile').hide();
+                    $('#btnn').removeAttr("disabled");
+                    //var output = LoadPageError(result);
+                    //$('.boxBody1').prepend(output);
+                    ShowNotie(result);
+                }
+            });
+            function progress() {
+                var val = progressbar.progressbar("value") || 0;
+                progressbar.progressbar("value", val + 1);
+                if (val < 99) {
+                    setTimeout(progress, 25);
+                }
+            }
+            setTimeout(progress, 1000);
+        }
+
+        function DeleteFile(FileName) {
+
+        }
+    </script>
+}

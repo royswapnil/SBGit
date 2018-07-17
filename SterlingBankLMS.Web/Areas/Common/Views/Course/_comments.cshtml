@@ -1,0 +1,276 @@
+﻿@model  IList<SterlingBankLMS.Web.ViewModels.CommentsVM>
+@using SterlingBankLMS.Web.ViewModels;
+
+@if (Model != null)
+{
+    foreach (CommentsVM comment in Model)
+    {
+        
+        string style = (comment.ParentMessage.Parmessage != null && comment.ParentMessage.ParId !=null) && comment.Status==0  ? "background-color:#45c7c05e" : null;
+        <div class="row" style="width: 100.3%; border-bottom: 1px solid #d2cece; margin-right: -14px; margin-left: -1px;">
+            <div style="padding-left:20px">
+                <table style="width:80%">
+                    <tr>
+                        <td>
+                            <div class="userProfil" style="margin-left: 9px; margin-top: 12px;">
+                                @if (comment.ApplicationUser.AppUserName != null)
+                                {
+                                    <a href="" style="margin-left: 5px; font-weight: bold; font-size: 13px;"> @comment.ApplicationUser.AppUserName </a>
+                                }
+
+                                @if (comment.ParentMessage.Parusername != null)
+                                {
+                                    <span class="glyphicon glyphicon-time" aria-hidden="true" style=" margin-top: 0px;margin-left:3px;"></span>
+                                    <time class="timeago" style="margin-top: 27px; font-size: 13px; color: black;  margin-left: 1px;">@comment.CommentedDate</time>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <tr style="@style">
+                        <td>
+                            <div style="width:800px;margin-left:30px;">
+                                <div class="col-md-2" style="width: 18.5%;">
+                                    <div class="userProfil" style="margin-left: 9px; margin-top: 12px;">
+                                           @if (comment.ParentMessage.Parusername != null)
+                                           {
+                                               if (comment.Status == 0)
+                                               {
+                                                <a href="#" style="margin-left: 5px; font-weight: bold; font-size: 13px;"> @comment.ParentMessage.Parusername </a>
+                                               }
+                                           }
+                                    </div>
+                                </div>
+
+                                <div  style="width: 59%;">
+                                    <div class="commentDetails">
+                                        @if (comment.ParentMessage.Parusername != null)
+                                        {
+                                            if (comment.Status == 0)
+                                            {
+                                                <p style="margin-top: 12px; font-size: 13px; color: black"> @comment.ParentMessage.Parmessage </p>
+                                            }                                            
+                                        }
+                                        else
+                                        {
+                                            if (comment.Status == 1)
+                                            {
+                                                <p style="margin-top: 12px; font-size: 13px; color: #675e5e;font:bold;font-style:italic">Comment under moderation</p>
+                                            }
+                                            else
+                                            {
+                                                <p style="margin-top: 12px; font-size: 13px; color: black;"> @comment.CommentMsg </p>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                                <div  style="width: 22%;">
+                                    <div class="commentDate" style="padding-top:12px;">
+                                        @if (comment.ParentMessage.Parusername != null)
+                                        {
+                                            if (comment.Status == 0 && @comment.ParentMessage.Pardate!=null)
+                                            {
+                                                <span class="glyphicon glyphicon-time" aria-hidden="true" style=" margin-top: 0px;display:block;"></span>
+                                                <time class="timeago" style="margin-top: 27px; font-size: 13px; color: black; margin-left: 1px;">@comment.ParentMessage.Pardate</time>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (comment.ParentMessage.ParId != 0)
+                                            {
+                                                <span class="glyphicon glyphicon-time" aria-hidden="true" style=" margin-top: 18px;"></span>
+                                                <time class="timeago" style="margin-top: 27px; font-size: 13px; color: black;  margin-left: 1px;">@comment.CommentedDate</time>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div style="width: 14.5%;">
+                                <div class="userProfil" style="margin-left: 9px; margin-top: 12px;">
+                                    @*@if (comment.ParentMessage.Parusername != null)
+                                        {
+                                            <a href="#" style="margin-left: 5px; font-weight: bold; font-size: 13px;"> @comment.Users.Username </a>
+                                        }*@
+                                </div>
+                            </div>
+
+                            <div class="" style="width: 60%;">
+                                <div class="commentDetails">
+                                    @if (comment.ParentMessage.Parusername != null)
+                                    {
+                                        if (comment.Status == 1)
+                                        {
+                                            <p style="margin-top: 15px; font-size: 13px; color: #675e5e;font-style:italic">Comment under moderation</p>
+                                        }
+                                        else
+                                        {
+                                            <p style="margin-top: 15px; font-size: 13px; color: black;">  @comment.CommentMsg </p>
+                                        }
+                                    }
+
+                                    @if (comment.Status == 0)
+                                    {
+                                        <a href="#" class="Reply" style="padding-top:10px;font-size:13px;" data-id="@comment.ComID">Reply</a>
+                                    }
+                                    
+                                    <div class="@string.Format("{0}_{1}", "ReplayComments", comment.ComID)" style="display:none;">
+                                        <div class="ReplayCommentInput" style="margin-left: 3%;  margin-bottom: 5px; margin-top: 8px;">
+                                            <input type="text" id="txtPostId" data-id="@comment.Posts.PostID" class="form-control" style="display: none;" />
+                                            <input type="text" id="txtLessonId" data-id="@comment.LessonId" class="form-control" style="display: none;" />
+                                            @*<input type="text" id="@string.Format("{0}_{1}", "inputReplay", comment.ComID)" class="form-control" placeholder="Add a Reply ..." style="display: inline;height:60px;" />*@
+                                            @*<textarea name="txtComment" id="@string.Format("{0}_{1}", "inputReplay", comment.ComID)" cols="30" rows="10" placeholder="Add a Reply..."></textarea>
+                                            <button type="button" class="btn btn-default ReplyAddComment" data-id="@comment.ComID" style="margin-left:400px;margin-top:3px;">
+                                                <span class="glyphicon glyphicon-comment" aria-hidden="true" style="display: inline;">Submit</span>
+                                            </button>*@
+                                            <form style="border: none;margin-left:88px;">
+                                                <textarea name="txtComment" id="@string.Format("{0}_{1}", "inputReplay", comment.ComID)" placeholder="Add a Reply..." style="height:60px;width:538px;"></textarea>
+                                                <a class="btnRed CancelComment" style="cursor:pointer;height:30px;" data-id="@comment.ComID">
+                                                    <i class="material-icons" style="margin-right:3px;float:left;margin-top:-6px;">comment</i>Cancel
+                                                </a>
+                                                <a class="btnBlue ReplyAddComment" style="cursor:pointer;height:30px;margin-right:5px;" data-id="@comment.ComID">
+                                                    <i class="material-icons" style="margin-right:3px;float:left;margin-top:-6px;">comment</i>Reply
+                                                </a>
+                                            </form>
+                                            
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="" style="width: 22%;">
+
+                                <div class="pcommentDate">
+                                    @*@if (comment.ParentMessage.Parmessage != null)
+                                    {
+                                        <span class="glyphicon glyphicon-time" aria-hidden="true" style=" margin-top: 18px;"></span>
+                                        <time class="timeago" style="margin-top: 27px; font-size: 13px; color: #9c9898;  margin-left: 1px;">@comment.CommentedDate</time>
+                                    }*@
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+
+
+
+
+
+            <!--
+
+            <div class="col-md-2" style="width: 9.5%;">
+                <div class="userProfil" style="margin-left: 9px; margin-top: 12px;border-bottom: 1px solid #d2cece;">
+                    @*<a href="#" style="margin-left: 5px; font-weight: bold; font-size: 13px;"> @comment.Posts.PostID </a>*@
+                    <a href="#" style="margin-left: 5px; font-weight: bold; font-size: 13px;"> @comment.ParentMessage.Parusername </a>
+                </div>
+                <div class="userProfil" style="margin-left: 9px; margin-top: 12px;">
+                    <a href="#" style="margin-left: 5px; font-weight: bold; font-size: 13px;"> @comment.ApplicationUser.AppUserName </a>
+                </div>
+            </div>
+            <div class="" style="width: 9.5%;">
+            </div>
+            <div class="col-md-7" style="width: 60%;">
+                <div class="commentDetails">
+                    <p style="margin-top: 15px; font-size: 13px; color: #9c9898;">@comment.ParentMessage.Parmessage </p>
+                </div>
+                <div class="commentDetails">
+                    <p style="margin-top: 15px; font-size: 13px; color: #9c9898;">@comment.CommentMsg </p>
+                    <a href="#" class="Reply" data-id="@comment.ComID">Reply</a>
+                    <div class="@string.Format("{0}_{1}", "ReplayComments", comment.ComID)" style="display:none;">
+                        <div class="ReplayCommentInput" style="margin-left: 3%;  margin-bottom: 5px; margin-top: 8px;">
+                            <input type="text" id="txtPostId" data-id="@comment.Posts.PostID" class="form-control" style="display: none;" />
+                            <input type="text" id="@string.Format("{0}_{1}", "inputReplay", comment.ComID)" class="form-control" placeholder="Add a Reply ..." style="display: inline;" />
+                            <button type="button" class="btn btn-default ReplyAddComment" data-id="@comment.ComID"><span class="glyphicon glyphicon-comment" aria-hidden="true">Submit</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1" style="width: 21%;">
+                <div class="commentDate">
+                    <span class="glyphicon glyphicon-time" aria-hidden="true" style=" margin-top: 10px;"></span>
+                    @*<time class="timeago" style="margin-top: 27px; font-size: 13px; color: #9c9898;  margin-left: 4px;" datetime="@comment.CommentedDate">@comment.CommentedDate</time>*@
+                    <time class="timeago" style="margin-top: 27px; font-size: 13px; color: #9c9898; margin-left: 4px;">@comment.ParentMessage.Pardate</time>
+                </div>
+                <div class="pcommentDate">
+                    <span class="glyphicon glyphicon-time" aria-hidden="true" style=" margin-top: 18px;"></span>
+                    @*<time class="timeago" style="margin-top: 27px; font-size: 13px; color: #9c9898;  margin-left: 4px;" datetime="@comment.CommentedDate">@comment.CommentedDate</time>*@
+                    <time class="timeago" style="margin-top: 27px; font-size: 13px; color: #9c9898;  margin-left: 4px;">@comment.CommentedDate</time>
+                </div>
+            </div>
+
+                -->
+        </div>
+    }
+}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+       
+        postId = 0;
+        //Get All ReplyComment
+        $('.Reply').on('click', function () {
+            var ComID = $(this).attr('data-id');
+            $('.ReplayComments_' + ComID).show();
+        });
+
+        $('.CancelComment').on('click', function () {
+            var ComID = $(this).attr('data-id');
+            $('.ReplayComments_' + ComID).hide();
+        });
+
+        //Add Reply Comment
+        $('.ReplyAddComment').on('click', function () {
+            var ComID = $(this).attr('data-id');
+            var CommentMsg = $('#inputReplay_' + ComID).val();
+
+            postId = $('#txtPostId').attr('data-id');
+            var currLessonId = $('#txtLessonId').attr('data-id'); 
+            var id = postId;//$(this).attr("data-id");
+            var allCommentsArea = $('<div>').addClass('allComments_' + id);
+
+            var dateTimeNow = new Date();
+
+            if (CommentMsg != "") {
+
+                var comment = {
+                    CommentMsg: CommentMsg,
+                    CommentedDate: dateTimeNow.toLocaleString(),
+                    ParentId: ComID,
+                    LessonId: currLessonId
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("AddSubComment", "Course")',
+                    data: { comment, postId },
+                    success: function (response) {
+                        if ($('div').hasClass('allComments_' + id + '')) {
+                            $('div[class=allComments_' + id + ']').remove();
+                        }
+
+                        allCommentsArea.html(response);
+                        allCommentsArea.prependTo('#commentsBlock_' + id);
+                    },
+                    error: function (response) {
+                        alert('error');
+                    }
+                });
+            } else {
+                alert('Message cannot be blank');
+            }
+        });
+
+        jQuery("time.timeago").timeago();
+
+
+    });
+
+
+</script>

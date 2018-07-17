@@ -1,0 +1,274 @@
+﻿@using SterlingBankLMS.Web.Utilities
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>@ViewBag.Title - Learning Management System</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/l&d.css" rel="stylesheet" />
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/css/jquery-confirm.css" rel="stylesheet" />
+
+    @RenderSection("head", required: false)
+
+    <style>
+        ul, ol {
+            margin: 0;
+            padding: 0
+        }
+
+        .menuTab1 ul li {
+            width: 100%;
+            list-style: none;
+        }
+
+        .menuTab1 li.link-active {
+            background: #AB192D;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="lms-loader" data-lms-loader="" style="display:none">
+        <h2 class="animated infinite fadeOut center">Please wait...</h2>
+    </div>
+    <!-- Messages Popup -->
+    <div class="msgBox popBox">
+        <div class="hD">Messages</div>
+        <div class="bD">
+
+            <!-- INfo Tab -->
+            <div class="infoTab">
+                <b>Admin</b>
+                <a href="#">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </a>
+                <div class="infoAct">Mark as read</div>
+            </div>
+            <!-- end of InfoTab -->
+            <!-- INfo Tab -->
+            <div class="infoTab">
+                <b>Admin</b>
+                <a href="#">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </a>
+                <div class="infoAct">Mark as read</div>
+            </div>
+            <!-- end of InfoTab -->
+            <!-- INfo Tab -->
+            <div class="infoTab">
+                <b>Admin</b>
+                <a href="#">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </a>
+                <div class="infoAct">Mark as read</div>
+            </div>
+            <!-- end of InfoTab -->
+            <!-- INfo Tab -->
+            <div class="infoTab">
+                <b>Admin</b>
+                <a href="#">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </a>
+                <div class="infoAct">Mark as read</div>
+            </div>
+            <!-- end of InfoTab -->
+            <!-- INfo Tab -->
+            <div class="infoTab">
+                <b>Admin</b>
+                <a href="#">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </a>
+                <div class="infoAct">Mark as read</div>
+            </div>
+            <!-- end of InfoTab -->
+            <!-- INfo Tab -->
+            <div class="infoTab">
+                <b>Admin</b>
+                <a href="#">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </a>
+                <div class="infoAct">Mark as read</div>
+            </div>
+            <!-- end of InfoTab -->
+
+
+
+
+        </div>
+
+        <a class="eD" href="#">
+            View All Messages
+        </a>
+    </div>
+    <!-- end of Messages Popup -->
+    <!-- Notification Popup -->
+
+    <div class="notyBox popBox">
+        <div class="hD">Notification</div>
+        <div class="bD">
+
+            <!-- INfo Tab -->
+            <div class="infoTab">
+                <a href="#">
+                    <p>You have just <b>3 days</b> to complete your <b>Employment Changes in Tech</b> Course</p>
+                </a>
+                <div class="infoAct">View</div>
+            </div>
+            <!-- end of InfoTab -->
+
+
+
+        </div>
+
+        <a class="eD" href="#">
+            View All Notifications
+        </a>
+    </div>
+
+    <!-- end of Notification Popup -->
+    <!-- profile box -->
+
+    <div class="probBox">
+        <a href="profile">
+            <span class="probTab">Profile</span>
+        </a>
+
+        <a href="javascript:lo('lf');">
+            <span class="probTab">Logout</span>
+        </a>
+        <form id="lf" action="~/authentication/logout" method="post" style="display:none">
+            @Html.AntiForgeryToken()
+        </form>
+        <script>function lo(e) { document.getElementById(e).submit(); }</script>
+    </div>
+
+    <!-- end of profile box -->
+
+
+    <header class="second">
+        <i class="material-icons menuBtn1">menu</i>
+        <a href="~/" title="Dashboard">
+            <img src="~/Content/img/retro.png" />
+            <img src="~/Content/img/logo.png" class="marginImg" />
+        </a>
+        <ul>
+            @*<li class="msg">
+                <i class="material-icons">email</i><span class="redBackground">2</span>
+            </li>*@
+            <li class="noty">
+                <i class="material-icons">notifications_none</i><span>19</span>
+            </li>
+            <li class="user">
+                <i class="material-icons">person</i>
+                <h6>Welcome <b>@CurrentUser.FirstName, @CurrentUser.LastName</b></h6>  <i class="material-icons">arrow_drop_down</i>
+            </li>
+        </ul>
+    </header>
+
+    <div class="menuTab1">
+        <ul class="loop">
+
+            @*<a href="javascript:;">
+                <li class="pageTab1 fallDown">
+                    <i class="material-icons">people_outline</i>
+                    <span>Employee Records <i class="material-icons" style="float: right;">arrow_drop_down</i></span>
+
+
+                    <ul>
+                        <li><a href="~/HumanResources/employeerecords/listemployees"><i class="material-icons">people</i><span>All Employees</span></a></li>
+                        <li><a href="~/HumanResources/employeerecords/NewEmployee"><i class="material-icons">note_add</i><span>New Employee</span></a></li>
+                        <li><a href="~/HumanResources/employeerecords/EmployeeBulkUpload"><i class="material-icons">file_upload</i><span>Bulk Employee Upload</span></a></li>
+                        <li><a href="@Url.Action("NewEmployeeCertificate","employeerecords",new { area="HumanResources"})"><i class="material-icons">add_circle_outline</i><span>New Certificate</span></a></li>
+                        <li><a href="~/HumanResources/employeerecords/UpdateNewEmployees"><i class="material-icons">update</i><span>Update New Employee</span></a></li>
+                    </ul>
+                </li>
+            </a>*@
+
+            <li class="pageTab1">
+                <a href="~/humanresources/generalmgt">
+                    <i class="material-icons">perm_data_setting</i>
+                    <span>General</span>
+                </a>
+            </li>
+
+            <li class="pageTab1">
+                <a href="~/HumanResources/employeerecords/NewEmployee">
+                    <i class="material-icons">person</i>
+                    <span>Create Employee</span>
+                </a>
+            </li>
+
+            <li class="pageTab1">
+                <a href="~/HumanResources/employeerecords/listemployees">
+                    <i class="material-icons">person</i>
+                    <span>Employee List</span>
+                </a>
+            </li>
+
+            <a href="javascript:;">
+                <li class="pageTab1 fallDown">
+                    <i class="material-icons">list</i>
+                    <span>Reports <i class="material-icons" style="float: right;">arrow_drop_down</i></span>
+
+
+                    <ul>
+                        <li><a href="generatereport"><i class="material-icons">list</i><span>Generate Report</span></a></li>
+
+                        <li><a href="@Url.Action("NewReport","ReportManagement",new { area="Admin"})"><i class="material-icons">add_box</i><span>New Report</span></a></li>
+                    </ul>
+                </li>
+            </a>
+        </ul>
+
+    </div>
+
+    <div class="pallete1">
+
+        @RenderBody()
+    </div>
+
+
+    <footer>
+        <div class="foot">&copy;<span id="CopyrightYear"></span> - LEARNING MANAGEMENT SYSTEM</div>
+        @*<div class="power"><img src="~/Content/img/sbsc.png" alt=""><span>Powered by: </span></div>*@
+    </footer>
+    <script src="~/Content/js/jquery.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Content/js/main.js"></script>
+    <script src="~/Content/js/mustache.js"></script>
+    <script src="~/Content/js/moment.min.js"></script>
+    <script src="~/Content/js/jquery-confirm.js"></script>
+
+
+    <div id="PartialTemplates">
+        <script id="ResponseMessageTemplate" type="x-tmpl-mustache">
+            <div class="messageText {{#HasError}}error{{/HasError}} {{^HasError}}success{{/HasError}}">
+                <i class="fa {{#HasError}}fa-times{{/HasError}} {{^HasError}}fa-check-circle{{/HasError}}"></i>
+                <p>{{Message}}</p>
+            </div>
+
+        </script>
+    </div>
+    <script>
+        $(document).ready(function () {
+            var ticketcount = $('#ticketcount');
+            $.ajax({
+                url: "@Url.Action("NewTicketCount","SupportManagement",new { area="Admin"})",
+                type: "GET",
+                success: function (data) {
+                    ticketcount.html(data);
+                }
+            });
+
+        })
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

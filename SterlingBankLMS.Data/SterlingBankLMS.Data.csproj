@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7FC465B8-D02F-4C86-9935-6EFAC91C2F5F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>SterlingBankLMS.Data</RootNamespace>
+    <AssemblyName>SterlingBankLMS.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging|AnyCPU'">
+    <OutputPath>bin\Staging\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Live|AnyCPU'">
+    <OutputPath>bin\Live\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="Z.EntityFramework.Plus.EF6, Version=1.7.14.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Z.EntityFramework.Plus.EF6.1.7.14\lib\net45\Z.EntityFramework.Plus.EF6.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Database\BaseContext.cs" />
+    <Compile Include="Database\IDbContext.cs" />
+    <Compile Include="Mapping\AdBannerMap.cs" />
+    <Compile Include="Mapping\BranchMap.cs" />
+    <Compile Include="Mapping\CommentsMap.cs" />
+    <Compile Include="Mapping\CourseLikeMap.cs" />
+    <Compile Include="Mapping\CourseReviewMap.cs" />
+    <Compile Include="Mapping\ExaminationAttemptMap.cs" />
+    <Compile Include="Mapping\LearningGroupSurveyMap.cs" />
+    <Compile Include="Mapping\FAQMap.cs" />
+    <Compile Include="Mapping\ForumDiscussionMap.cs" />
+    <Compile Include="Mapping\DepartmentMap.cs" />
+    <Compile Include="Mapping\DepartmentBudgetMap.cs" />
+    <Compile Include="Mapping\ErrorLogMap.cs" />
+    <Compile Include="Mapping\ExaminationMap.cs" />
+    <Compile Include="Mapping\ExaminationQuestionMap.cs" />
+    <Compile Include="Mapping\ExaminationQuestionOptionMap.cs" />
+    <Compile Include="Mapping\ExaminationQuizResponseMap.cs" />
+    <Compile Include="Mapping\ForumTopicsMap.cs" />
+    <Compile Include="Mapping\GradeMap.cs" />
+    <Compile Include="Mapping\GroupMap.cs" />
+    <Compile Include="Mapping\HrmsMap.cs" />
+    <Compile Include="Mapping\LearningAreaMap.cs" />
+    <Compile Include="Mapping\LearningGroupExamMap.cs" />
+    <Compile Include="Mapping\LearningGroupCourseMap.cs" />
+    <Compile Include="Mapping\LearningGroupTagMap.cs" />
+    <Compile Include="Mapping\ForumCategoryMap.cs" />
+    <Compile Include="Mapping\LessonMap.cs" />
+    <Compile Include="Mapping\LessonProgressMap.cs" />
+    <Compile Include="Mapping\LineManagerMap.cs" />
+    <Compile Include="Mapping\MailAlertUsersMap.cs" />
+    <Compile Include="Mapping\NotificationHubMap.cs" />
+    <Compile Include="Mapping\MailExemptedUsersMap.cs" />
+    <Compile Include="Mapping\MailsMap.cs" />
+    <Compile Include="Mapping\NotificationMap.cs" />
+    <Compile Include="Mapping\NotificationTypesMap.cs" />
+    <Compile Include="Mapping\PostsMap.cs" />
+    <Compile Include="Mapping\QuizQuestionMap.cs" />
+    <Compile Include="Mapping\QuizQuestionOptionMap.cs" />
+    <Compile Include="Mapping\QuizResponseMap.cs" />
+    <Compile Include="Mapping\RegionMap.cs" />
+    <Compile Include="Mapping\ReplacementsMap.cs" />
+    <Compile Include="Mapping\ReportMap.cs" />
+    <Compile Include="Mapping\RunStatusMap.cs" />
+    <Compile Include="Mapping\SurveyMap.cs" />
+    <Compile Include="Mapping\SurveyQuestionMap.cs" />
+    <Compile Include="Mapping\SurveyQuestionOptionsMap.cs" />
+    <Compile Include="Mapping\SurveyTemplateMap.cs" />
+    <Compile Include="Mapping\SurveyQuestionResponseMap.cs" />
+    <Compile Include="Mapping\TicketMap.cs" />
+    <Compile Include="Mapping\TrainingBudgetExpenditureMap.cs" />
+    <Compile Include="Mapping\LearningGroupTrainingMap.cs" />
+    <Compile Include="Mapping\TrainingPeriodMap.cs" />
+    <Compile Include="Mapping\TrainingRequestMap.cs" />
+    <Compile Include="Mapping\TrainingVideoMap.cs" />
+    <Compile Include="Mapping\UserExaminationMap.cs" />
+    <Compile Include="Mapping\UserSurveyMap.cs" />
+    <Compile Include="Mapping\UserLessonQuizMap.cs" />
+    <Compile Include="Mapping\UserCertificateMap.cs" />
+    <Compile Include="Mapping\UserMap.cs" />
+    <Compile Include="Mapping\NotificationRoleUsersMap.cs" />
+    <Compile Include="Mapping\MessageQueueMap.cs" />
+    <Compile Include="Mapping\UserTrainingMap.cs" />
+    <Compile Include="Mapping\UserCourseMap.cs" />
+    <Compile Include="Mapping\TrainingMap.cs" />
+    <Compile Include="Mapping\OrganizationMap.cs" />
+    <Compile Include="Mapping\LearningGroupMap.cs" />
+    <Compile Include="Mapping\ModuleMap.cs" />
+    <Compile Include="Mapping\CourseMap.cs" />
+    <Compile Include="Mapping\CertificateMap.cs" />
+    <Compile Include="Mapping\AdvertMap.cs" />
+    <Compile Include="Models\AdBanner.cs" />
+    <Compile Include="Models\Comments.cs" />
+    <Compile Include="Models\CourseLike.cs" />
+    <Compile Include="Models\CourseReview.cs" />
+    <Compile Include="Models\Enums\AdvertLocation.cs" />
+    <Compile Include="Models\Enums\CertificateApprovalStatus.cs" />
+    <Compile Include="Models\Enums\LearningGroupTagType.cs" />
+    <Compile Include="Models\Enums\CourseLikeStatus.cs" />
+    <Compile Include="Models\Enums\LinemanagerTrainingApprovalStatus.cs" />
+    <Compile Include="Models\Enums\MailType.cs" />
+    <Compile Include="Models\Enums\OrganizationalStatus.cs" />
+    <Compile Include="Models\Enums\ReportGenerationFrequency.cs" />
+    <Compile Include="Models\Enums\TicketStatus.cs" />
+    <Compile Include="Models\LearningGroupExam.cs" />
+    <Compile Include="Models\ExaminationAttempt.cs" />
+    <Compile Include="Models\MailAlertUsers.cs" />
+    <Compile Include="Models\NotificationTypes.cs" />
+    <Compile Include="Models\Posts.cs" />
+    <Compile Include="Models\Replacements.cs" />
+    <Compile Include="Models\ReportSchedule.cs" />
+    <Compile Include="Models\ReportsFieldSort.cs" />
+    <Compile Include="Models\ReportUsers.cs" />
+    <Compile Include="Models\LearningGroupSurvey.cs" />
+    <Compile Include="Models\FAQ.cs" />
+    <Compile Include="Models\ForumDiscussion.cs" />
+    <Compile Include="Models\ForumTopics.cs" />
+    <Compile Include="Models\ForumCategory.cs" />
+    <Compile Include="Models\BaseEntity.cs" />
+    <Compile Include="Models\Advert.cs" />
+    <Compile Include="Models\Branch.cs" />
+    <Compile Include="Models\Certificate.cs" />
+    <Compile Include="Models\LessonProgress.cs" />
+    <Compile Include="Models\LineManager.cs" />
+    <Compile Include="Models\MailExemptedUsers.cs" />
+    <Compile Include="Models\Mails.cs" />
+    <Compile Include="Models\MessageQueue.cs" />
+    <Compile Include="Models\Module.cs" />
+    <Compile Include="Models\NotificationHub.cs" />
+    <Compile Include="Models\NotificationRoleUsers.cs" />
+    <Compile Include="Models\Report.cs" />
+    <Compile Include="Models\RunStatus.cs" />
+    <Compile Include="Models\SurveyTemplate.cs" />
+    <Compile Include="Models\Ticket.cs" />
+    <Compile Include="Models\TrainingBudgetExpenditure.cs" />
+    <Compile Include="Models\Enums\TrainingGroupTagType.cs" />
+    <Compile Include="Models\LearningGroupTraining.cs" />
+    <Compile Include="Models\TrainingPeriod.cs" />
+    <Compile Include="Models\TrainingRequest.cs" />
+    <Compile Include="Models\QuizQuestion.cs" />
+    <Compile Include="Models\QuizQuestionOption.cs" />
+    <Compile Include="Models\QuizResponse.cs" />
+    <Compile Include="Models\TrainingVideo.cs" />
+    <Compile Include="Models\UserCertificate.cs" />
+    <Compile Include="Models\UserExamination.cs" />
+    <Compile Include="Models\UserSurvey.cs" />
+    <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\Enums\Gender.cs" />
+    <Compile Include="Models\Enums\TrainingCategory.cs" />
+    <Compile Include="Models\ErrorLog.cs" />
+    <Compile Include="Models\Grade.cs" />
+    <Compile Include="Models\Group.cs" />
+    <Compile Include="Models\Hrms.cs" />
+    <Compile Include="Models\LearningGroupCourse.cs" />
+    <Compile Include="Models\LearningGroupTag.cs" />
+    <Compile Include="Models\Notification.cs" />
+    <Compile Include="Models\Region.cs" />
+    <Compile Include="Models\SurveyQuestionResponse.cs" />
+    <Compile Include="Models\SurveyQuestionOptions.cs" />
+    <Compile Include="Models\SurveyQuestion.cs" />
+    <Compile Include="Models\ModuleProgress.cs" />
+    <Compile Include="Models\Survey.cs" />
+    <Compile Include="Models\ExaminationQuizResponse.cs" />
+    <Compile Include="Models\ExaminationQuestion.cs" />
+    <Compile Include="Models\ExaminationQuestionOption.cs" />
+    <Compile Include="Models\Examination.cs" />
+    <Compile Include="Models\DepartmentBudget.cs" />
+    <Compile Include="Models\LearningGroup.cs" />
+    <Compile Include="Models\LearningArea.cs" />
+    <Compile Include="Models\Lesson.cs" />
+    <Compile Include="Models\Organization.cs" />
+    <Compile Include="Models\Enums\AdvertSections.cs" />
+    <Compile Include="Models\Enums\AnswerType.cs" />
+    <Compile Include="Models\Enums\CourseApprovalStatus.cs" />
+    <Compile Include="Models\Enums\ExaminationType.cs" />
+    <Compile Include="Models\Enums\LessonContentType.cs" />
+    <Compile Include="Models\Enums\NotificationType.cs" />
+    <Compile Include="Models\Enums\SurveyType.cs" />
+    <Compile Include="Models\Enums\TrainingType.cs" />
+    <Compile Include="Models\Enums\TrainingApprovalStatus.cs" />
+    <Compile Include="Models\Enums\TrainingAvailability.cs" />
+    <Compile Include="Models\Enums\UserCourseAvailability.cs" />
+    <Compile Include="Models\Enums\UserCourseApprovalStatus.cs" />
+    <Compile Include="Models\Enums\UserCourseStatus.cs" />
+    <Compile Include="Models\Enums\UserType.cs" />
+    <Compile Include="Models\Training.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserCourse.cs" />
+    <Compile Include="Models\UserLessonQuiz.cs" />
+    <Compile Include="Models\UserTraining.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\GenericRepository.cs" />
+    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Service\IService.cs" />
+    <Compile Include="Service\GenericService.cs" />
+    <Compile Include="UnitofWork\IUnitofWork.cs" />
+    <Compile Include="UnitofWork\UnitofWork.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

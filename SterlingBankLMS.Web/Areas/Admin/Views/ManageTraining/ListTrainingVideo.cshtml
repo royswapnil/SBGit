@@ -1,0 +1,400 @@
+﻿
+@{
+    ViewBag.Title = "ListTrainingVideo";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .tanHP {
+        background: #fff;
+        border-radius: 0;
+    }
+
+    .searchT {
+        border: 1px solid #eee;
+    }
+
+    .pinA select {
+        border: 1px solid #ddd;
+    }
+
+    .pinA span {
+        font-weight: bold;
+        margin-top: 3px;
+    }
+
+
+    table.courselist {
+        width: 100%;
+        font-size: 13px;
+        border: 1px solid #eaeaea !important;
+    }
+
+    .courselist thead {
+        width: 100%;
+        color: #19535f;
+        font-weight: bold;
+        font-size: 13px;
+        border-top: 0px solid transparent;
+        background: #ddd;
+        font-weight: bold;
+        font-size: 13px;
+        border-bottom: 2px solid #28A7BE;
+    }
+
+    .courselist tbody {
+        width: 100%;
+    }
+
+    .courselist tr {
+        width: 100%;
+    }
+
+    .courselist tbody tr:last-child {
+        border: none;
+    }
+
+    .courselist tr td {
+        padding: 10px;
+    }
+
+        .courselist tr td:nth-child(1) {
+            width: 25% !important;
+        }
+
+        .courselist tr td:nth-child(2) {
+            width: 20% !important;
+        }
+
+
+
+    .courselist tbody tr td:nth-child(1) {
+        border-right: 2px solid #f0f3f5;
+    }
+
+    .courselist tr td a {
+        color: #00d7ff;
+    }
+
+    .courselist tr td:nth-child(3), .courselist tr td:nth-child(4), .courselist tr td:nth-child(5), .courselist tr td:nth-child(6) {
+        width: 7.9% !important;
+    }
+
+    .courselist tr td:nth-child(7) {
+        width: 15% !important;
+    }
+
+    .courselist tbody tr {
+        margin-top: 0px;
+        border-bottom: 2px solid #f0f3f5;
+    }
+
+        .courselist tbody tr td a button {
+            margin: 0;
+        }
+
+    .counter {
+        padding: 10px;
+        float: right;
+        font-size: 15px;
+        background: #ddd;
+        width: 100%;
+    }
+
+        .counter i {
+            background: #fff;
+            color: #000;
+        }
+
+    .alert.alert-danger, .alert.alert-success, .alert.alert-info, .alert.alert-warning {
+        width: 70%;
+        margin-top: 20px;
+    }
+
+    .formArea {
+        width: 100%;
+        margin-top: 20px;
+        padding-bottom: 60px;
+        float: left;
+    }
+
+    .formBox1 .label {
+        width: 100%;
+        margin-bottom: 10px;
+        font-weight: bold;
+        font-size: 13px;
+        float: left;
+    }
+
+    .formBox1 input, .formBox1 textarea, .formBox1 select {
+        width: 100%;
+        height: 30px;
+        padding: 5px;
+        font-size: 15px;
+        border: 1px solid rgba(0, 0, 0, 0.39);
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        float: left;
+    }
+
+    .formBox1 textarea {
+        height: 100px;
+    }
+
+    .formBox1 button {
+        background: #760f91;
+        border: none;
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        color: #fff;
+        height: 30px;
+        width: 120px;
+        margin-top: -30px;
+        float: right;
+    }
+
+    .bDGreen {
+        border-bottom: 3px solid #2fbf71;
+    }
+
+    .bkGreen {
+        background: #2fbf71;
+    }
+
+    .bkRed {
+        background: #ab192d;
+    }
+    jconfirm div {
+        float: none !important;
+    }
+
+    .jconfirm .jconfirm-holder {
+        margin: 0 40%;
+    }
+
+    .jconfirm-content {
+        padding-top: 20px;
+    }
+
+        .jconfirm-content div {
+            font-weight: 700;
+        }
+
+    .jconfirm-type-orange .jconfirm-content div {
+        color: red;
+    }
+
+    .jconfirm.jconfirm-light .jconfirm-box {
+        padding: 20px 25px 10px 25px;
+    }
+</style>
+<div class="banner1 bkPurple">
+    <i class="material-icons menuBtn1">menu</i>
+    <span class="changetext">Manage Training Video</span>
+</div>
+
+
+<div class="content1">
+
+    <div class="boxHead1" style="border-bottom:none;">
+        <a href="@Url.Action("ListTrainingVideo","ManageTraining",new { area="Admin"})">
+            <button class="btn bkSkyBlue listvideos" style="margin-bottom: 10px; display:none">
+                Back To List<i class="fa fa-backward "></i>
+            </button>
+        </a>
+
+        <a href="@Url.Action("NewTrainingVideo","ManageTraining",new { area="Admin"})">
+            <button class="btn bkSkyBlue addNewBudget" style="margin-bottom: 10px;float: right;">
+                Upload Training Video <i class="fa fa-upload "></i>
+            </button>
+        </a>
+
+    </div>
+    @if (TempData["Success"] != null)
+    {
+        <p style="color:#38C64E;"><i class="material-icons">check_circle</i>@TempData["Success"]</p>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <p style="color:#DA3024;"><i class="material-icons">error</i>@TempData["Error"]</p>
+    }
+
+    <div class="boxBody1" style="padding:0">
+
+        <div id="BudgetTablePanel">
+
+            <div class="tableRanch">
+
+                <table id="VideoTable" class="courselist">
+                    <thead>
+                        <tr>
+                            <td>Training Name</td>
+                            <td>Date Created</td>
+                            <td>Action</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tr class="empty">
+                        <td colspan="4">
+                            Fetching Data <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+        </div>
+        <div class="videplayer" style="display:none;">
+
+            <video id="player" class="col-md-6 col-md-offset-2" width="1425" height="444" frameborder="0" allowfullscreen controls></video>
+
+        </div>
+    </div>
+
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Content/js/datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            //Load the Budget table
+
+            var jqTable = $('#VideoTable').DataTable({
+                dom: '<"tanHead tanHP"f>rt<"counter"lip>',
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    "url": '/api/ManageTraining/GetTrainingVideo',
+                    "type": "GET"
+                },
+                'language': {
+                    'search': '',
+                    'searchPlaceholder': 'Search...'
+                },
+                "fnDrawCallback": function (oSettings) {
+                },
+                "order": [],
+                columns: [
+                    {
+                        bSortable: true,
+                        "render": function (d, i, data) {
+
+                            return data.TrainingVideoName + '<br/><br/>';
+                        }
+                    },
+                    {
+                        "render": function (d, r, data) {
+                            return data.CreatedDateFormat + '<br/><br/>';
+                        }
+                    },
+                    
+                    {
+                        bSortable: false,
+                        className: "action-buttons",
+                        "render": function (d, i, data) {
+
+                            return '<button class="table-play btnSmaller bkGreen" href="javascript:;" style="display:inline-block;"> <i class="fa fa-play table-icon" style=""></i> Play	</button>' +
+                                '<input type="hidden" id="' + data.TrainingVideoName + '" name="' + data.TrainingVideoUrl + '" value="' + data.Id + '"/>';
+                        }
+                    },
+                    {
+                        bSortable: false,
+                        className: "action-buttons",
+                        "render": function (d, i, data) {
+
+                            return '<button class="table-delete btnSmaller bkRed" href="javascript:;" style="display:inline-block;"> <i class="fa fa-times table-icon" style=""></i> <span class="deleteLA">Delete</span> </button>' +
+                                '<input type="hidden" id="' + data.TrainingVideoName + '" name="' + data.TrainingVideoUrl + '" value="' + data.Id + '"/>';
+                        }
+                    }
+                ]
+            });
+
+            jqTable.on('draw', function () {
+
+                $('.tableRanch').find('input[type="search"]').addClass('searchT');
+                // reset();
+            });
+
+            $("#VideoTable tbody").on("click", "td.action-buttons button.table-play", function () {
+                var tr = $(this).closest("tr");
+                var url = $(this).closest("td").find('input').attr("name");
+                var name = $(this).closest("td").find('input').attr("id");
+                $('.content1 .messageText').remove();
+                var $button = $(this);
+                var prev = $button.html();
+                window.location.href = "#playvideo?name=" + name;
+
+
+                console.log(url);
+                $button.attr('disabled', 'disabled');
+                $button.find('i').removeClass('fa-play');
+                $button.find('i').addClass('fa-circle-o-notch fa-spin');
+
+                $('.content1').css("background", "#ffffff");
+                $('.changetext').empty().html('TRAINING VIDEO NAME: ' + name)
+                $("#BudgetTablePanel").fadeOut();
+                $('.videplayer').fadeIn();
+                $('#player').attr("src", url);
+                $('.listvideos').show();
+                $('.addNewBudget').hide();
+
+
+            });
+
+            $("back").on('click', function () {
+                window.history.back();
+            })
+
+            $("#VideoTable tbody").on("click", "td.action-buttons button.table-delete", function () {
+                var tr = $(this).closest("tr");
+                var id = $(this).closest("td").find('input').val();
+
+                $('.content1 .messageText').remove();
+                var $button = $(this);
+                var prev = $button.html();
+
+                if (!parseInt(id) && parseInt(id) <= 0) {
+                    return;
+                }
+                var $confirm = ShowConfirm();
+                $confirm.onAction = function (btnName) {
+
+                    if (btnName == "cancel")
+                        return false;
+                    $button.attr('disabled', 'disabled');
+                    $button.find('i').removeClass('fa-times');
+                    $button.find('i').addClass('fa-circle-o-notch fa-spin');
+
+                    $.ajax({
+                        cache: false,
+                        async: true,
+                        type: "Delete",
+                        url: "/api/ManageTraining/DeleteVideo?Id=" + id,
+
+                        success: function (data) {
+                            jqTable.row(tr).remove().draw(false);
+                            ShowNotie(data);
+                        },
+
+                        error: function (data) {
+                            var output = LoadPageError({ HasError: true, Message: data.responseJSON });
+                            $('.boxBody1').prepend(output);
+                            $button.removeAttr('disabled');
+                            $button.html(prev);
+                        }
+                    });
+                }
+                return false;
+            });
+
+        });
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+}

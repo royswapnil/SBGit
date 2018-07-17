@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "AllReports";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+    <link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />
+
+    <div class="banner1 bkPurple">
+        <i class="material-icons menuBtn1">menu</i>
+        <span>All Reports</span>
+    </div>
+
+
+
+    <div class="content1">
+        <div class="boxed1">
+
+            <div class="boxHead1">
+                <div class="boxHeader1 bDOrange">All Reports</div>
+            </div>
+
+
+            <div class="boxBody1">
+
+
+                <div class="row">
+
+                    <div class="col-md-8">
+                        <form action="">
+                            <input type="text" id="txtReportName" class="form-control" placeholder="Search field">
+                        </form>
+                    </div>
+                    <div class="col-md-4">
+                        <button id="btnClick" class="btn col-md-6 offset-md-6 btn-info">Add New Report</button>
+                    </div>
+                </div>
+                <div class="row" style="padding: 30px;">
+                    <div class="tableRanch">
+                        <table id="tblReportList">
+                            <thead>
+                                <tr>
+                                    <td>Report Title</td>
+                                    <td>Fields</td>
+                                    <td>Actions</td>
+                                </tr>
+                            </thead>
+                            <tr class="empty">
+                                <td colspan="7">
+                                    Fetching Data <br><br><i class="fa fa-spinner fa-pulse fa-2x fa-fw nofloat"></i>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @section Scripts{
+        <script src="~/Content/js/datatables.min.js"></script>
+        <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+        <script src="~/Content/PageJs/AllReports.js"></script>
+        <script src="~/Content/js/bootstrap-datepicker.min.js"></script>
+        <script src="~/Content/js/select2.min.js"></script>
+    }

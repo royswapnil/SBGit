@@ -1,0 +1,423 @@
+﻿@model CourseLmaDetailsModel
+@{
+    Layout = null;
+
+    var currentContentApiUrl = $"~/api/courselearningarea/getcoursemodule?courseId={Model.CourseId}";
+
+    if (Model.ModuleId != null) {
+        currentContentApiUrl += $"&moduleId={Model.ModuleId}";
+
+        if (Model.LessonId != null) {
+            currentContentApiUrl += $"&lessonId={Model.LessonId}";
+        }
+    }
+}
+<html>
+<head>
+    <title data-ng-bind="pageTitle">Course Learning Area - Learning Management System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="~/Content/css/main.css" rel="stylesheet" />
+    <link href="~/Content/css/common-layout.css" rel="stylesheet" />
+    <link href="~/Content/css/jquery-confirm.css" rel="stylesheet" />
+    <link href="~/Content/PageCss/common.css" rel="stylesheet" />
+    <link href="~/Content/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/PageCss/course_learning_area.css" rel="stylesheet" />
+    <link href="~/Content/css/video-js.min.css" rel="stylesheet" />
+    <base href="~/course/learn/lma/">
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" />
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <div class="lms-loader" data-lms-loader="" style="display:none">
+        <h2 class="animated infinite fadeOut center">Please wait...</h2>
+    </div>
+
+    <header>
+        <i class="material-icons menuBtn">menu</i>
+        <a href="~/">
+            <img src="~/Content/img/retro.png" alt="">
+            <img src="~/Content/img/logo.png" class="marginImg" alt="">
+        </a>
+
+        <ul>
+            @*<li class="msg"><i class="material-icons">email</i><span class="redBackground">2</span></li>*@
+            <li class="noty"><i class="material-icons">notifications_none</i><span></span></li>
+            <li class="user"><i class="material-icons">person</i><h6>Welcome <b>@CurrentUser.FirstName, @CurrentUser.LastName</b></h6></li>
+            <li>
+                @if (CurrentUser.IsInRole(AppConstants.Role.Admin))
+                {
+                    <a href="~/admin/managecourse"><i class="material-icons">settings</i> <h6>Admin</h6></a>
+                }
+            </li>
+        </ul>
+    </header>
+
+    <div class="open">
+        <i class="material-icons">menu</i>
+    </div>
+
+    <div class="wrapper" ng-cloak="" style="margin-top: 40px;" ng-controller="lma as vm" ng-init="vm.getCourseInformation('@Url.Content($"~/api/courselearningarea/getcoursedetails?courseId={Model.CourseId}")')">
+        <div class="videoTab">
+            <div class="col99 show">
+                <div class="videoTopic">
+                    <button class="btn btnRed">Go Back</button>
+                    <div class="topicTop" ng-bind="currentLesson.Name" style="color:#354C98;"></div>
+                    <div class="topicBtm" style="color:#444;font-size: 14px;">From: Course Name</div>
+                    <div class="topicTop1" ng-bind="currentLesson.Id" style="color:#354C98;display:none"></div>
+                </div>
+
+                @*<div class="vTopic">Do you like this course?</div>
+                <div class="hightlight">
+
+
+                        <div class="vLike">
+                            <i class="material-icons">thumb_up</i>
+                            <span>32</span>
+                            <i class="material-icons">thumb_down</i>
+                            <span>3</span>
+                        </div>
+                    </div>*@
+
+                <ui-view ng-cloak="">
+                </ui-view>
+
+                <div class="botm">
+                    <button class="btn btnMedium btnBlack" ng-show="hasNextLesson() && currentLesson.LessonContentType!=='Quiz'" ng-click="nextLesson()" style="margin-left:30px;"><span>Next</span><i class="material-icons">navigate_next</i></button>
+                    <button class="btn btnMedium btnBlack" ng-show="vm.hasPreviousLesson()" ng-click="vm.previousLesson()"><i class="material-icons">navigate_before</i><span>Previous</span> </button>
+                </div>
+
+                @*<div class="addComment" style="float: left; width: auto;">
+                    <span style="color: #E11DD2;" ng-click="vm.focusCommentBox('#comment-textArea')">
+                        Contribute to this course
+                    </span><i class="material-icons pink">comments</i> &emsp;  &emsp;
+                </div>*@
+
+                <button ng-show="vm.showSaveProgressBtn()" ng-click="vm.uploadLessonProgress()" class="btnPink btnHerd"><span>Mark as completed</span><i class="material-icons">check</i></button>
+                <button ng-show="vm.showCompleteCourseBtn()" ng-click="finishCourse()" class="btnPink btnHerd"><span>Complete Course</span><i class="material-icons">check</i></button>
+            </div>
+
+            <!-- end of text section -->
+
+            <div class="courseMenu">
+                <div class="closer"> X </div>
+
+                <div class="courseMod" ng-class="{'drop': module.Id===currentLesson.ModuleId}" ng-repeat="module in vm.modules" ng-init="m=($index+1)">
+
+                    <div class="hitman" ng-attr-title="{{module.Name}}">
+                        <div class="cercu"></div><span class="hold" ng-bind="module.Name"></span>
+                    </div>
+                    <!-- lesson tab -->
+                    <div class="lessonTab" ng-repeat="lesson in module.Lessons" ng-class="{'active':currentLesson.Id===lesson.Id}" ng-attr-title="{{lesson.Name}}">
+                        <div class="module" ng-bind="m + '.' + ($index +1)"></div>
+                        <div class="moduleTp">
+                            <div class="moduleT" ng-click="vm.gotoNextLesson(lesson.Id)" ng-cloak="">
+                                <i ng-show="lesson.IsCompleted" class="material-icons" style="position:absolute;color:green;">check</i> {{lesson.Name}} &emsp;
+                                <i ng-bind="lesson.LessonContentType"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end of lesson tab -->
+                </div>
+            </div>
+        </div>
+
+        @*<div class="content">
+            <div class="shaggy col9" style="border:none;">
+                <div class="panel panel-default" style="width: 80%;">
+                    <div class="panel-body">
+                        <div class="avatar">
+                            <span> <a href="" style="font-weight:bold"></a> </span><br />
+                            <p style="margin-left: 60px; margin-top: -5px;">
+                                <span class="" aria-hidden="true"></span>
+                            </p>
+                        </div>
+                        <div class="postMessage" style="margin-top: 11px; margin-left: 9px;"></div>
+                    </div>
+                    <div class="panel-footer">
+                        <button type="button" class="btn btn-default Comment" data-id="1" value="Comment">
+                            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> View Comments
+                        </button>
+                    </div>
+                    <div id="@string.Format("{0}_{1}","commentsBlock", 1)">
+                        <div class="AddComment" style="margin-left: 8%;  margin-bottom: 5px; margin-top: 8px;height:100px;padding-top: 52px;">
+                            <label id="lblAddNewComment">Add New Comment</label>
+                            <input type="text" id="@string.Format("{0}_{1}", "comment", 1)" class="form-control" placeholder="Add a Comment ..." style="display: inline;height:50px" />
+                            <button type="button" class="btn btn-default addComments" data-id=1><span class="glyphicon glyphicon-comment" aria-hidden="true">Submit</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+        <div class="content">
+            <div class="shaggy col9" style="border:none;">
+                <div class="case">
+                    <div class="long">
+                        <div class="line borderBottomBlue">Course Forum</div>
+                    </div>
+                    <div class="panel-footer" style="background:white;border-top:0px;">
+                        <button type="button" class="btn btn-default btn-Comment" data-id="1" value="Comment" style="background:#45c7c05e;margin-bottom:1px;">
+                            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> View Comments
+                        </button>
+                    </div>
+                    <div class="caseBody">
+                        <div class="comment" style="display:none;"></div>
+                        <div class="comment viewcomments hideviewcomments" id="@string.Format("{0}_{1}","commentsBlock", 1)" style="padding-bottom:10px;"></div>
+                        <form style="border: none;margin-left:88px;" class="viewcomments hideviewcomments">
+                            <textarea name="txtComment" id="@string.Format("{0}_{1}", "comment", 1)" cols="30" rows="10" placeholder="Leave a comment..."></textarea>
+                            <a class="btnBlue addComments" style="cursor:pointer" data-id="1">
+                                <i class="material-icons">comment</i>Post comment
+                            </a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+
+    <footer>
+        <div class="foot">&copy;<span id="CopyrightYear"></span>@(DateTime.Now.Year) - LEARNING MANAGEMENT SYSTEM</div>
+    </footer>
+
+    <script src="~/Content/js/jquery.js"></script>
+    <script src="~/Content/js/main.js"></script>
+    <script src="~/Content/pagejs/common_layout.js"></script>
+    <script src="~/Content/js/jquery-confirm.js"></script>
+    <script src="~/Content/js/video.min.js"></script>
+    <script src="~/content/js/angular.min.js"></script>
+    <script src="~/Content/js/httpservice.js"></script>
+    <script src="~/Content/js/angular-ui-router.min.js"></script>
+    <script src="~/Content/js/angular-sanitize.min.js"></script>
+    <script src="~/Content/js/webviewer/lib/WebViewer.min.js"></script>
+    <script src="~/Content/js/lodash.min.js"></script>
+    <script src="~/Content/js/serializeJson.js"></script>
+    <script src="~/Scripts/jquery.timeago.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            //Click Comment
+            $('.btn-Comment').on('click', function () {
+                //alert($(".topicTop1").html());
+                if ($(".viewcomments") != null) {
+                    $(".viewcomments").removeClass("hideviewcomments");
+                }
+
+                var id = $(this).attr("data-id");
+                var allCommentsArea = $('<div>').addClass('allComments_' + id);
+                var currLessonId = $(".topicTop1").html();
+              
+
+                //function that allow us to get all comments related to post id
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("GetComments", "Course")',
+                    data: { postId: id, currLessonId: currLessonId },
+                    success: function (response) {
+                        if ($('div').hasClass('allComments_' + id + '')) {
+                            $('div[class=allComments_' + id + ']').remove();
+                        }
+                        allCommentsArea.html(response);
+                        allCommentsArea.prependTo('#commentsBlock_' + id);
+                    },
+                    error: function (response) {
+                        alert('Sorry: Comments cannot be loaded !');
+                    }
+                });
+            });
+
+            //Add New Comment
+            $('.addComments').on('click', function () {
+                var postId = $(this).attr('data-id');
+                var commentMsg = $('#comment_' + postId).val();
+                var dateTimeNow = new Date();
+                var currLessonId = $(".topicTop1").html();
+                
+                var comment = {
+                    CommentMsg: commentMsg,
+                    CommentedDate: dateTimeNow.toLocaleString()
+                };
+
+                if (commentMsg != "") {
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("AddComment", "Course")',
+                        data: { comment, postId, currLessonId },
+                        success: function (response) {
+                            $('div[class=allComments_' + postId + ']').remove();
+
+                            var allCommentsArea = $('<div>').addClass('allComments_' + postId);
+                            allCommentsArea.html(response);
+
+                            allCommentsArea.prependTo('#commentsBlock_' + postId);
+                            $('#comment_' + postId).val("");
+                        },
+                        error: function (response) {
+                            alert('AddComments: Error');
+                        }
+
+                    });
+                } else {
+                    alert('Message cannot be blank');
+                }               
+
+            });
+
+            jQuery("time.timeago").timeago();
+
+        });
+
+    </script>
+
+    <script>
+
+        $(document).on("click", ".hitman", function () {
+            $(this).parent("div").toggleClass("drop");
+        });
+
+        $(document).on("click", ".open", function () {
+            $(".courseMenu").addClass("pop");
+        });
+
+        $(document).on("click", ".closer", function () {
+            $(".courseMenu").removeClass("pop");
+        });
+
+    </script>
+    <script>
+        var didScroll;
+        var lastScrollTop = 0;
+        var delta = 5;
+        var navbarHeight = $('header').outerHeight();
+
+        $(window).scroll(function (event) {
+            didScroll = true;
+        });
+
+        setInterval(function () {
+            if (didScroll) {
+                hasScrolled();
+                didScroll = false;
+            }
+        }, 250);
+
+        function hasScrolled() {
+            var st = $(this).scrollTop();
+
+            // Make sure they scroll more than delta
+            if (Math.abs(lastScrollTop - st) <= delta)
+                return;
+
+            // If they scrolled down and are past the navbar, add class .header_up.
+            // This is necessary so you never see what is "behind" the navbar.
+            if (st > lastScrollTop && st > navbarHeight) {
+                // Scroll Down
+
+                $('header').addClass('header_up');
+            } else {
+                // Scroll Up
+                if (st + $(window).height() < $(document).height()) {
+                    $('header').removeClass('header_up');
+
+                }
+            }
+
+            lastScrollTop = st;
+        }
+        //end of sticky headers
+
+        //menu Button
+
+        $('.menuBtn').click(function () {
+            $('.menuTab').toggleClass("show");
+            $(this).toggleClass("inside");
+        });
+
+        $('.long i').click(function () {
+            $('.hideTab').toggleClass("shown");
+            $(this).toggleClass("down");
+        });
+
+        $('.tabs .tab-links a').on('click', function (e) {
+            var currentAttrValue = $(this).attr('href');
+
+            // Show/Hide Tabs
+            $('.tabs ' + currentAttrValue).slideDown(400).siblings().slideUp(400);
+
+            // Change/remove current tab to active
+            $(this).parent('li').addClass('active').siblings().removeClass('active');
+
+            e.preventDefault();
+        });
+
+        $(document).on('click', '.som1', function () {
+            alert('hello');
+            $('.som1').css("color", "#f4cc00");
+            $('.som2, .som3, .som4, .som5').css("color", "#fff");
+            $('.starB').val("1");
+        });
+
+        $(document).on('click', '.som2', function () {
+            $('.som1, .som2').css("color", "#f4cc00");
+            $('.som3, .som4, .som5').css("color", "#fff");
+            $('.starB').val("2");
+        });
+        $(document).on('click', '.som3', function () {
+            $('.som1, .som2, .som3').css("color", "#f4cc00");
+            $('.som4, .som5').css("color", "#fff");
+            $('.starB').val("3");
+        });
+        $(document).on('click', '.som4', function () {
+            $('.som1, .som2, .som3, .som4').css("color", "#f4cc00");
+            $(' .som5').css("color", "#fff");
+            $('.starB').val("4");
+        });
+        $(document).on('click', '.som5', function () {
+            $('.som1, .som2, .som3, .som4, .som5').css("color", "#f4cc00");
+            $('.starB').val("5");
+        });
+
+    </script>
+    <script>
+            var basePath = '@Url.Content("~/")';
+            var appConfig = {
+                loginUrl: '@Url.Content("~/auth/login?returnurl=")',
+                baseUrl: basePath,
+                lms: {
+                    claApiUrl: basePath + 'api/courselearningarea/',
+                    userProgressUrl: basePath +  'api/courselearningarea/saveprogress',
+                    quizStampUrl: basePath + 'api/courselearningarea/stampcurrentlocation',
+                    lessonContentUrl: basePath + 'api/courselearningarea/getlessoncontent',
+                    officeViewerUrl: 'https://view.officeapps.live.com/op/view.aspx?src=',
+                    currentContentUrl: '@Html.Raw(Url.Content(currentContentApiUrl))'
+                },
+                errors: [{ HasError: !0, Message: 'Sorry, an error occured. Please try again or contact admin.'}],
+            };
+
+        mainApp.init(appConfig, jQuery);
+
+                var window_height = $(window).height();
+                $(window).scroll(function () {
+                    var scrollMiddle = $(window).scrollTop() + (window_height / 2);
+                    $('li[id^="scroll_"]').each(function () {
+                        elTop = $(this).offset().top;
+                        elBtm = elTop + $(this).height();
+                        if (elTop < scrollMiddle && elBtm > scrollMiddle) {
+                            $(this).css('opacity', "1");
+                        } else {
+                            $(this).css('opacity', "0.3");
+                        }
+                    });
+                });
+    </script>
+
+    <script src="~/Content/PageJs/Course_Learning_Area.js"></script>
+    <script>
+        angular.element(function () {
+            angular.bootstrap(document, ['sterlinglms']);
+        });
+    </script>
+</body>
+</html>

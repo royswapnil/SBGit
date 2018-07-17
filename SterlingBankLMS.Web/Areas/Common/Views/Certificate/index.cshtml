@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "View Certificates";
+    Layout = "~/Areas/Common/Views/Shared/_CommonLayout.cshtml";
+}
+@section head {
+    <link href="~/Content/css/pagination.css" rel="stylesheet" />
+    <style>
+        .searchArea {
+            background: #6f6caa;
+        }
+        .paginationjs.paginationjs-theme-blue .paginationjs-pages li.active > a {
+            background: #6f6caa;
+        }
+        .paginationjs.paginationjs-theme-blue .paginationjs-go-input > input[type=text], .paginationjs.paginationjs-theme-blue .paginationjs-pages li {
+            border-color: #6f6caa;
+        }
+            .paginationjs.paginationjs-theme-blue .paginationjs-pages li > a {
+                color: #6f6caa;
+            }
+
+    </style>
+}
+
+
+<div class="wrapper">
+
+
+    <div class="breadcrum" style="background-image: url('/Content/img/certificate (1).jpg')">
+        <div class="col8">
+
+        </div>
+
+        <div class="col4">
+            <div class="headcrum">@CurrentUser.Function.ToUpper()</div>
+            <div class="bodycrum"><i class="material-icons">room</i> <i>@CurrentUser.BranchName.ToUpper()</i></div>
+            <div class="bodycrum"><i style="font-size: 12px;margin-top: 3px;">Staff ID: </i> <b>@CurrentUser.StaffId</b></div>
+
+        </div>
+    </div>
+
+
+    <div class="searchArea">
+        <div class="searchbox white">
+            <input type="text" placeholder="Search Courses" />
+            <i class="material-icons">search</i>
+        </div>
+    </div>
+
+
+    <div class="content">
+        <div class="col9">
+
+
+            <div class="boxed" style="padding:15px">
+                <div class="long">
+                    <div class="line borderBottomBlue">
+                        My Completed Courses
+                    </div>
+                </div>
+
+
+                <div class="change">
+                    @*<span>SORT BY</span>
+                        <select>
+                            <option value="">most recent</option>
+                            <option value="">course length</option>
+                            <option value="">certificate type</option>
+                        </select>*@
+                </div>
+                <div id="CertificateContainer" style="width:100%">
+                    <div id="CertificateItems" style="width:100%;margin-bottom:15px">
+
+                    </div>
+                </div>
+            </div>
+
+         
+        </div>
+
+        @Html.Action("employeesidebar", "home")
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Content/js/jquery-confirm.js"></script>
+    <script src="~/Content/js/pagination.min.js"></script>
+    <script src="~/Content/PageJs/Common_Certificate.js"></script>
+}
+
+
+
+

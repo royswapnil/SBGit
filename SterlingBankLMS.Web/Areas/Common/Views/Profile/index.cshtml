@@ -1,0 +1,137 @@
+﻿@model EmployeeProfileModel
+@{
+    ViewBag.Title = "Employee Profile";
+    Layout = "~/Areas/Common/Views/Shared/_CommonLayout.cshtml";
+}
+
+
+<style>
+    .searchbox.white input::placeholder {
+        color: #fff;
+    }
+    input[disabled] {
+         background: #fbfbfb;
+         border: 1px solid rgba(0,0,0,0.14);
+    }
+</style>
+<div class="wrapper">
+
+    <div class="breadcrum" style="background-image: url('/Content/img/profile (1).jpg')">
+        <div class="col8">
+            <div class="headcrum">Employee Profile</div>
+        </div>
+
+        <div class="col4">
+            <div class="headcrum">@CurrentUser.Function.ToUpper()</div>
+            <div class="bodycrum"><i class="material-icons">room</i> <i>@CurrentUser.BranchName.ToUpper()</i></div>
+            <div class="bodycrum"><i style="font-size: 12px;margin-top: 3px;">Staff ID: </i> <b>@(CurrentUser.StaffId)</b></div>
+        </div>
+
+    </div>
+
+    <div class="searchArea" style="background:#b1cecd">
+        <div class="searchbox white">
+            <form action="~/common/course/courses" method="get">
+                <input type="text" placeholder="Search Courses" name="q" style="color:#fff;font-size:14px;"/>
+                <button type="submit" class="SearchBtn"><i class="material-icons" style="cursor:pointer;color:#fff">search</i></button>
+            </form>
+        </div>
+    </div>
+
+    <div class="content">
+
+        <div class="col12">
+
+            <div class="long">
+                <div class="line borderBottomBlue" style="border-bottom: 4px solid #0a9cb7;">My Personal Information</div>
+            </div>
+
+            <div class="profile">
+                <div class="prob">
+                    <div class="label">Staff ID:</div>
+                    <label class="halfer nofloat">@Model.StaffId</label>
+                  
+                </div>
+
+                <div class="prob">
+                    <div class="label">First Name:</div>
+                    <label class="halfer nofloat">@Model.FirstName</label>
+                   
+                </div>
+
+                <div class="prob">
+                    <div class="label">Last Name:</div>
+                    <label class="halfer nofloat">@Model.LastName</label>
+                  
+                </div>
+
+                <div class="prob">
+                    <div class="label">Gender:</div>
+                    <label class="halfer nofloat">@Model.Gender</label>
+                 
+                </div>
+
+                <div class="prob">
+                    <div class="label">Username:</div>
+                    <label class="halfer nofloat">@Model.UserName</label>
+                   
+                </div>
+
+                <div class="prob">
+                    <div class="label">Email:</div>
+                    <label class="halfer nofloat">@Model.Email</label>
+                
+                </div>
+
+                <div class="prob">
+                    <div class="label">Phone:</div>
+                    <label class="halfer nofloat">@Model.Phone</label>
+                    
+                </div>
+                
+                <div class="prob">
+                    <div class="label">Date of Employment:</div>
+                    <label class="halfer nofloat">@Model.DateOfEmployment</label>
+                   
+                </div>
+
+                <div class="prob">
+                    <div class="label">Date of Birth:</div>
+                    <label class="halfer nofloat">@Model.DateOfBirth</label>
+               
+                </div>
+
+                <div class="prob">
+                    <div class="label">Country:</div>
+                    <label class="halfer nofloat">Nigeria</label>
+                   
+                </div>
+
+                <div class="prob">
+                    <div class="label">Location:</div>
+                    <label class="halfer nofloat">@Model.Branch</label>
+                 
+                </div>
+
+                <div class="prob">
+                    <div class="label">Department:</div>
+                    <label class="halfer nofloat">@Model.Department</label>
+                  
+                </div>
+
+
+                <div class="prob">
+                    <div class="label">Job Title:</div>
+                    <label class="halfer nofloat">@Model.Function</label>
+                   
+                </div>
+
+                <div class="prob">
+                    <div class="label">Grade:</div>
+                    <label class="halfer nofloat">@Model.Grade</label>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

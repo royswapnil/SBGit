@@ -1,0 +1,9 @@
+﻿<Project ToolsVersion="4.0"
+         xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ExcludeFromPackageFolders Include="Migrations;3rdParties">
+    </ExcludeFromPackageFolders>
+    <ExcludeFromPackageFiles Include="App_Data\dbo.sql;App_Data\cdc.sql;App_Data\tempuser.sql;App_Data\kenny.sql">
+    </ExcludeFromPackageFiles>
+  </ItemGroup>
+</Project>
