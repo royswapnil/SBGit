@@ -563,6 +563,7 @@
     <Content Include="Areas\Common\Views\Course\_text.cshtml" />
     <Content Include="Areas\Common\Views\Course\_video.cshtml" />
     <Content Include="Areas\Common\Views\Course\_MyComments.cshtml" />
+    <Content Include="bin\MultipartDataMediaFormatter.dll" />
     <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\datepicker.css" />
     <Content Include="Content\css\bootstrap-timepicker.css" />
